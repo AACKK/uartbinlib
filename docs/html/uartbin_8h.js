@@ -1,0 +1,43 @@
+var uartbin_8h =
+[
+    [ "uartbin_packet", "structuartbin__packet.html", "structuartbin__packet" ],
+    [ "uartbin_config", "structuartbin__config.html", "structuartbin__config" ],
+    [ "uartbin", "structuartbin.html", "structuartbin" ],
+    [ "UARTBIN_CRC_SIZE", "uartbin_8h.html#a50fbffbdad369a60ed01bf7003c7d31a", null ],
+    [ "UARTBIN_HEADER_SIZE", "uartbin_8h.html#a2eca460bac3c257ac1b3d992894a1331", null ],
+    [ "UARTBIN_MAX_FRAME_OVERHEAD", "uartbin_8h.html#a02dde34a333b47fcc0bd146757edfeb0", null ],
+    [ "UARTBIN_SOF0", "uartbin_8h.html#a3bd0a539c23bdaf94a00f3e55f543dd0", null ],
+    [ "UARTBIN_SOF1", "uartbin_8h.html#a5e38a11867c5f996b1631237a63f2d26", null ],
+    [ "UARTBIN_VERSION", "uartbin_8h.html#aaadad2de473e2ec806bc8fb890cfe75b", null ],
+    [ "uartbin_config_t", "uartbin_8h.html#a107f60d9a8a0f2e59486e389942ff008", null ],
+    [ "uartbin_error_fn", "uartbin_8h.html#a24b38e0bdf02dbb9c34d6abb6cd90417", null ],
+    [ "uartbin_error_t", "uartbin_8h.html#a2c22b7247ec8a8d95bd0243612d9262f", null ],
+    [ "uartbin_packet_fn", "uartbin_8h.html#a0c92ef7808fae89c228963934fdbf830", null ],
+    [ "uartbin_packet_t", "uartbin_8h.html#aca4d71fa02a9351ae8b2afb910abac2b", null ],
+    [ "uartbin_status_t", "uartbin_8h.html#a379f669ac732e3fc6e7629c2e93bde4c", null ],
+    [ "uartbin_t", "uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1", null ],
+    [ "uartbin_write_fn", "uartbin_8h.html#aa1ad30b8276f1d2ab4a64ce57bb6aed3", null ],
+    [ "uartbin_error", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27", [
+      [ "UARTBIN_ERROR_BAD_VERSION", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a511dd8bdfda2c1c25759e9127f118c8a", null ],
+      [ "UARTBIN_ERROR_BAD_LENGTH", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a6036c89d26a87104d29d0fd4c47a01f7", null ],
+      [ "UARTBIN_ERROR_CRC", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27aa1b71630db0c15f4631715a76c58c169", null ],
+      [ "UARTBIN_ERROR_RX_OVERFLOW", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27ac484c8b27677076e8b488a19afcd9151", null ],
+      [ "UARTBIN_ERROR_TIMEOUT", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27ab4aec92056b3ef0c514838590df95fc4", null ]
+    ] ],
+    [ "uartbin_status", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cad", [
+      [ "UARTBIN_OK", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada4665c1bc3c4b78e9b27d558883dd8d32", null ],
+      [ "UARTBIN_EINVAL", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada89dda8596dab52196eb60010ebaf6f67", null ],
+      [ "UARTBIN_EWRITE", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada1bcbf954584fdf2d9c8aa94634cd9608", null ],
+      [ "UARTBIN_EPAYLOAD_TOO_LONG", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cadac9d8e5665f315ceb2c7883ee07d8f1c0", null ],
+      [ "UARTBIN_ENO_BUFFER", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada75b1988291f3d6acf21c5632d3cc1fff", null ]
+    ] ],
+    [ "uartbin_crc16_ccitt", "uartbin_8h.html#a6ecd9aa1ae31f9af93487d79b7b158a1", null ],
+    [ "uartbin_feed", "uartbin_8h.html#adae56dc79286796f68e851fa337f1779", null ],
+    [ "uartbin_feed_at", "uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b", null ],
+    [ "uartbin_feed_byte", "uartbin_8h.html#a0b7e981f8f366c641f0686a448168f5a", null ],
+    [ "uartbin_feed_byte_at", "uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0", null ],
+    [ "uartbin_init", "uartbin_8h.html#a09e736b97567456af7144d1eb8f3edec", null ],
+    [ "uartbin_poll", "uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e", null ],
+    [ "uartbin_reset", "uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9", null ],
+    [ "uartbin_send", "uartbin_8h.html#a105423f2609e98a85f2d062df2b84ff4", null ]
+];

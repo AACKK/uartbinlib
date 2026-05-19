@@ -1,0 +1,10 @@
+^C:\USERS\KURTU\ONEDRIVE\BELGELER\UARTBINLIB\BUILD\CMAKEFILES\1610E865991E36A8A7212C2E5C18E051\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/kurtu/OneDrive/Belgeler/uartbinlib -BC:/Users/kurtu/OneDrive/Belgeler/uartbinlib/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/kurtu/OneDrive/Belgeler/uartbinlib/build/uartbinlib.sln
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
