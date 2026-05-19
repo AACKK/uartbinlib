@@ -35,6 +35,7 @@
  * @endcode
  */
 #include "uartbin.h"
+#include <string.h>
 
 /**
  * STM32 HAL DMA + idle-line RX example.
@@ -169,6 +170,7 @@ void stm32_uartbin_dma_init(stm32_uartbin_dma_t *port,
     port->hal_rx_errors = 0u;
     port->protocol_errors = 0u;
 
+    memset(&cfg, 0, sizeof(cfg));
     cfg.write = stm32_uartbin_dma_write;
     cfg.on_packet = stm32_uartbin_dma_on_packet;
     cfg.on_error = stm32_uartbin_dma_on_error;

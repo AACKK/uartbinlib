@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['integration_0',['STM32 Integration',['../uartbin_8h.html#uartbin_h_stm32',1,'']]],
-  ['integration_20sketch_1',['STM32 Integration Sketch',['../index.html#autotoc_md6',1,'']]]
+  ['guide_0',['Guide',['../guide_api_usage.html',1,'API Usage Guide'],['../guide_api_usage.html#autotoc_md11',1,'API Usage Guide'],['../guide_porting.html',1,'Porting Guide'],['../guide_porting.html#autotoc_md17',1,'Porting Guide']]]
 ];

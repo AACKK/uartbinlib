@@ -35,6 +35,40 @@ var NAVTREE =
     [ "Timeout", "index.html#autotoc_md8", null ],
     [ "Build", "index.html#autotoc_md9", null ],
     [ "Documentation", "index.html#autotoc_md10", null ],
+    [ "API Usage Guide", "guide_api_usage.html", [
+      [ "API Usage Guide", "guide_api_usage.html#autotoc_md11", [
+        [ "Basic Setup", "guide_api_usage.html#autotoc_md12", null ],
+        [ "Sending Messages", "guide_api_usage.html#autotoc_md13", null ],
+        [ "Receiving Bytes", "guide_api_usage.html#autotoc_md14", null ],
+        [ "Reliable Message Rules", "guide_api_usage.html#autotoc_md15", null ],
+        [ "Packet Lifetime", "guide_api_usage.html#autotoc_md16", null ]
+      ] ]
+    ] ],
+    [ "Porting Guide", "guide_porting.html", [
+      [ "Porting Guide", "guide_porting.html#autotoc_md17", [
+        [ "Porting Checklist", "guide_porting.html#autotoc_md18", null ],
+        [ "Write Hook Contract", "guide_porting.html#autotoc_md19", null ],
+        [ "Timing", "guide_porting.html#autotoc_md20", null ],
+        [ "Error Handling", "guide_porting.html#autotoc_md21", null ],
+        [ "Multi-UART Systems", "guide_porting.html#autotoc_md22", null ]
+      ] ]
+    ] ],
+    [ "Ring Buffer TX Port", "guide_ring_buffer.html", [
+      [ "Ring Buffer TX Port", "guide_ring_buffer.html#autotoc_md23", [
+        [ "Minimal Ring Buffer Shape", "guide_ring_buffer.html#autotoc_md24", null ],
+        [ "uartbin Write Hook", "guide_ring_buffer.html#autotoc_md25", null ],
+        [ "TX Interrupt Side", "guide_ring_buffer.html#autotoc_md26", null ],
+        [ "Practical Notes", "guide_ring_buffer.html#autotoc_md27", null ]
+      ] ]
+    ] ],
+    [ "STM32 Interrupt and DMA Usage", "guide_stm32_transport.html", [
+      [ "STM32 Interrupt and DMA Usage", "guide_stm32_transport.html#autotoc_md28", [
+        [ "Interrupt RX", "guide_stm32_transport.html#autotoc_md29", null ],
+        [ "DMA Idle-Line RX", "guide_stm32_transport.html#autotoc_md30", null ],
+        [ "TX Choices", "guide_stm32_transport.html#autotoc_md31", null ],
+        [ "Retry With STM32", "guide_stm32_transport.html#autotoc_md32", null ]
+      ] ]
+    ] ],
     [ "Data Structures", "annotated.html", [
       [ "Data Structures", "annotated.html", "annotated_dup" ],
       [ "Data Structure Index", "classes.html", null ],

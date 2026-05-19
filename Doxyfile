@@ -5,7 +5,7 @@ PROJECT_BRIEF          = "Platform-independent binary UART framing library"
 OUTPUT_DIRECTORY       = docs
 CREATE_SUBDIRS         = NO
 
-INPUT                  = README.md include src examples
+INPUT                  = README.md include src examples guides
 USE_MDFILE_AS_MAINPAGE = README.md
 RECURSIVE              = YES
 FILE_PATTERNS          = *.h *.c *.md

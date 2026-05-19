@@ -314,6 +314,60 @@ static int test_reliable_request_busy_until_response(void)
     return failed;
 }
 
+static int test_retry_config_error_does_not_advance_sequence(void)
+{
+    test_bus_t bus;
+    uartbin_t link = make_link(&bus);
+    int failed = 0;
+
+    link.cfg.tx_retry_timeout_ms = 50u;
+    link.cfg.tx_retry_max_retries = 3u;
+
+    failed |= expect(uartbin_send_request(&link, 0x60, 0, NULL, 0) == UARTBIN_ENO_BUFFER,
+                     "retry without buffer should be rejected");
+    failed |= expect(link.tx_seq == 0u, "failed retry config should not advance sequence");
+    failed |= expect(bus.tx_len == 0u, "failed retry config should not transmit");
+
+    link.cfg.tx_retry_buffer = bus.retry_frame;
+    link.cfg.tx_retry_capacity = 4u;
+
+    failed |= expect(uartbin_send_event(&link, 0x61, 0, NULL, 0) == UARTBIN_EPAYLOAD_TOO_LONG,
+                     "retry buffer too small should be rejected");
+    failed |= expect(link.tx_seq == 0u, "small retry buffer should not advance sequence");
+    failed |= expect(bus.tx_len == 0u, "small retry buffer should not transmit");
+
+    return failed;
+}
+
+static int test_rx_feed_does_not_drive_tx_retry(void)
+{
+    test_bus_t bus;
+    uartbin_t link = make_link(&bus);
+    size_t first_frame_len;
+    int failed = 0;
+
+    link.cfg.tx_retry_buffer = bus.retry_frame;
+    link.cfg.tx_retry_capacity = sizeof(bus.retry_frame);
+    link.cfg.tx_retry_timeout_ms = 50u;
+    link.cfg.tx_retry_max_retries = 3u;
+
+    failed |= expect(uartbin_send_request(&link, 0x70, 0, NULL, 0) == UARTBIN_OK,
+                     "reliable request should send before rx feed retry test");
+    first_frame_len = bus.tx_len;
+    bus.tx_len = 0u;
+
+    uartbin_feed_byte_at(&link, 0x00, 100u);
+    uartbin_feed_byte_at(&link, 0x00, 200u);
+
+    failed |= expect(bus.tx_len == 0u, "rx feed should not retransmit pending reliable frame");
+    uartbin_poll(&link, 200u);
+    failed |= expect(bus.tx_len == 0u, "first explicit poll should arm retry timer");
+    uartbin_poll(&link, 250u);
+    failed |= expect(bus.tx_len == first_frame_len, "explicit poll should drive tx retry");
+
+    return failed;
+}
+
 int main(void)
 {
     int failed = 0;
@@ -328,6 +382,8 @@ int main(void)
     failed |= test_reliable_request_retries_and_exhausts();
     failed |= test_response_clears_reliable_request();
     failed |= test_reliable_request_busy_until_response();
+    failed |= test_retry_config_error_does_not_advance_sequence();
+    failed |= test_rx_feed_does_not_drive_tx_retry();
 
     if (failed != 0) {
         return 1;

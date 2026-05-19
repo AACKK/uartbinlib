@@ -234,7 +234,7 @@ Functions</h2></td></tr>
 <tr class="memitem:a992904ee32447ec8edd21f131fae72f0" id="r_a992904ee32447ec8edd21f131fae72f0"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#a992904ee32447ec8edd21f131fae72f0">uartbin_feed_byte_at</a> (<a class="el" href="#a84d23cbe88d74beb43fa5234dcddb4d1">uartbin_t</a> *ctx, uint8_t byte, uint32_t now_ms)</td></tr>
 <tr class="memdesc:a992904ee32447ec8edd21f131fae72f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Feed one received byte with the current application timestamp.  <br /></td></tr>
 <tr class="memitem:ac772ed6c266ea60e13df4a1c28d9622e" id="r_ac772ed6c266ea60e13df4a1c28d9622e"><td class="memItemLeft">void&#160;</td><td class="memItemRight"><a class="el" href="#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a> (<a class="el" href="#a84d23cbe88d74beb43fa5234dcddb4d1">uartbin_t</a> *ctx, uint32_t now_ms)</td></tr>
-<tr class="memdesc:ac772ed6c266ea60e13df4a1c28d9622e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Check for RX timeout and reset the parser if needed.  <br /></td></tr>
+<tr class="memdesc:ac772ed6c266ea60e13df4a1c28d9622e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Service RX timeout and optional TX retry timing.  <br /></td></tr>
 <tr class="memitem:a6ecd9aa1ae31f9af93487d79b7b158a1" id="r_a6ecd9aa1ae31f9af93487d79b7b158a1"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a6ecd9aa1ae31f9af93487d79b7b158a1">uartbin_crc16_ccitt</a> (const uint8_t *data, size_t len, uint16_t seed)</td></tr>
 <tr class="memdesc:a6ecd9aa1ae31f9af93487d79b7b158a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Update CRC-16/CCITT-FALSE.  <br /></td></tr>
 </table>
@@ -260,7 +260,7 @@ Memory Model</h1>
 </ul>
 <h1 class="doxsection"><a class="anchor" id="uartbin_h_timing"></a>
 Timeout Model</h1>
-<p>Set <a class="el" href="structuartbin__config.html#a4966d201d37393c6560120f7af2da53e" title="RX timeout in milliseconds.">uartbin_config::rx_timeout_ms</a> to a non-zero value and call <a class="el" href="#ac772ed6c266ea60e13df4a1c28d9622e" title="Check for RX timeout and reset the parser if needed.">uartbin_poll()</a> periodically. The timestamped feed functions also check the RX timeout before accepting each byte/block. The same <a class="el" href="#ac772ed6c266ea60e13df4a1c28d9622e" title="Check for RX timeout and reset the parser if needed.">uartbin_poll()</a> call drives optional TX retry timing when <a class="el" href="structuartbin__config.html#a1e2d699576229d1e22c2a52441be876c" title="Retry timeout for automatic request/event sends.">uartbin_config::tx_retry_timeout_ms</a> is configured.</p>
+<p>Set <a class="el" href="structuartbin__config.html#a4966d201d37393c6560120f7af2da53e" title="RX timeout in milliseconds.">uartbin_config::rx_timeout_ms</a> to a non-zero value and call <a class="el" href="#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a> periodically. The timestamped feed functions also check the RX timeout before accepting each byte/block. The same <a class="el" href="#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a> call drives optional TX retry timing when <a class="el" href="structuartbin__config.html#a1e2d699576229d1e22c2a52441be876c" title="Retry timeout for automatic request/event sends.">uartbin_config::tx_retry_timeout_ms</a> is configured.</p>
 <h1 class="doxsection"><a class="anchor" id="uartbin_h_stm32"></a>
 STM32 Integration</h1>
 <p>The portable core does not include STM32 headers. See the files in <code>examples/</code> for interrupt and DMA idle-line adapter patterns, including HAL error recovery. </p>
@@ -283,7 +283,7 @@ STM32 Integration</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00078">78</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00306">uartbin_send()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
 </div>
 </div>
@@ -339,7 +339,7 @@ STM32 Integration</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00100">100</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00420">uartbin_send_event()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>.</p>
 
 </div>
 </div>
@@ -359,7 +359,7 @@ STM32 Integration</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00094">94</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00366">uartbin_send_request()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
 
 </div>
 </div>
@@ -379,7 +379,7 @@ STM32 Integration</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00097">97</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00401">uartbin_send_response()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00435">uartbin_send_response()</a>.</p>
 
 </div>
 </div>
@@ -399,7 +399,7 @@ STM32 Integration</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00075">75</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00306">uartbin_send()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
 </div>
 </div>
@@ -439,7 +439,7 @@ STM32 Integration</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00069">69</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00306">uartbin_send()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
 </div>
 </div>
@@ -459,7 +459,7 @@ STM32 Integration</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00072">72</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00306">uartbin_send()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
 </div>
 </div>
@@ -479,7 +479,7 @@ STM32 Integration</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00066">66</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00306">uartbin_send()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
 </div>
 </div>
@@ -584,7 +584,7 @@ STM32 Integration</h1>
 </div><div class="memdoc">
 
 <p>CRC-checked packet delivered to the application. </p>
-<p>The payload pointer aliases <a class="el" href="structuartbin__config.html#a9ba07c9627b3932126f96d51d791d78c" title="Static payload buffer owned by the application.">uartbin_config::rx_payload_buffer</a>. It is valid only until the next call to <a class="el" href="#adae56dc79286796f68e851fa337f1779" title="Feed received bytes without timeout timestamp updates.">uartbin_feed()</a>, <a class="el" href="#ab9da003f689bb5d95d54752a907cf19b" title="Feed received bytes with the current application timestamp.">uartbin_feed_at()</a>, <a class="el" href="#a0b7e981f8f366c641f0686a448168f5a" title="Feed one received byte without timeout timestamp updates.">uartbin_feed_byte()</a>, <a class="el" href="#a992904ee32447ec8edd21f131fae72f0" title="Feed one received byte with the current application timestamp.">uartbin_feed_byte_at()</a>, <a class="el" href="#ac772ed6c266ea60e13df4a1c28d9622e" title="Check for RX timeout and reset the parser if needed.">uartbin_poll()</a>, or <a class="el" href="#a4b93b42268b8eeb37a0e9a66b88561e9" title="Reset only the RX parser state.">uartbin_reset()</a> on the same context. </p>
+<p>The payload pointer aliases <a class="el" href="structuartbin__config.html#a9ba07c9627b3932126f96d51d791d78c" title="Static payload buffer owned by the application.">uartbin_config::rx_payload_buffer</a>. It is valid only until the next call to <a class="el" href="#adae56dc79286796f68e851fa337f1779" title="Feed received bytes without timeout timestamp updates.">uartbin_feed()</a>, <a class="el" href="#ab9da003f689bb5d95d54752a907cf19b" title="Feed received bytes with the current application timestamp.">uartbin_feed_at()</a>, <a class="el" href="#a0b7e981f8f366c641f0686a448168f5a" title="Feed one received byte without timeout timestamp updates.">uartbin_feed_byte()</a>, <a class="el" href="#a992904ee32447ec8edd21f131fae72f0" title="Feed one received byte with the current application timestamp.">uartbin_feed_byte_at()</a>, <a class="el" href="#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a>, or <a class="el" href="#a4b93b42268b8eeb37a0e9a66b88561e9" title="Reset only the RX parser state.">uartbin_reset()</a> on the same context. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#_a26">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#_a23">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
@@ -745,7 +745,7 @@ STM32 Integration</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00281">281</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00313">313</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>.</p>
 
@@ -787,9 +787,9 @@ STM32 Integration</h1>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Updated CRC value. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00288">288</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00320">320</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00306">uartbin_send()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
 </div>
 </div>
@@ -828,9 +828,9 @@ STM32 Integration</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00455">455</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00490">490</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00466">uartbin_feed_byte()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00501">uartbin_feed_byte()</a>.</p>
 
 </div>
 </div>
@@ -876,11 +876,11 @@ STM32 Integration</h1>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a38">stm32_hal_dma_idle.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00471">471</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00506">506</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00194">stm32_uartbin_dma_rx_event_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00196">stm32_uartbin_dma_rx_event_callback()</a>.</p>
 
 </div>
 </div>
@@ -913,11 +913,11 @@ STM32 Integration</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00466">466</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00501">501</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00290">uartbin::last_rx_time_ms</a>, and <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00290">uartbin::last_rx_time_ms</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00455">uartbin_feed()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00490">uartbin_feed()</a>.</p>
 
 </div>
 </div>
@@ -960,11 +960,11 @@ STM32 Integration</h1>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a36">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00508">508</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00533">533</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00263">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00287">uartbin::crc</a>, <a class="el" href="uartbin_8h_source.html#l00281">uartbin::crc_bytes</a>, <a class="el" href="uartbin_8h_source.html#l00284">uartbin::crc_pos</a>, <a class="el" href="uartbin_8h_source.html#l00164">uartbin_packet::flags</a>, <a class="el" href="uartbin_8h_source.html#l00269">uartbin::header</a>, <a class="el" href="uartbin_8h_source.html#l00272">uartbin::header_pos</a>, <a class="el" href="uartbin_8h_source.html#l00290">uartbin::last_rx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00218">uartbin_config::on_packet</a>, <a class="el" href="uartbin_8h_source.html#l00170">uartbin_packet::payload</a>, <a class="el" href="uartbin_8h_source.html#l00278">uartbin::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00173">uartbin_packet::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00275">uartbin::payload_pos</a>, <a class="el" href="uartbin_8h_source.html#l00296">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00305">uartbin::retry_seq</a>, <a class="el" href="uartbin_8h_source.html#l00227">uartbin_config::rx_payload_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00230">uartbin_config::rx_payload_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00167">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00266">uartbin::state</a>, <a class="el" href="uartbin_8h_source.html#l00161">uartbin_packet::type</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00288">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00078">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00133">UARTBIN_ERROR_BAD_LENGTH</a>, <a class="el" href="uartbin_8h_source.html#l00130">UARTBIN_ERROR_BAD_VERSION</a>, <a class="el" href="uartbin_8h_source.html#l00136">UARTBIN_ERROR_CRC</a>, <a class="el" href="uartbin_8h_source.html#l00139">UARTBIN_ERROR_RX_OVERFLOW</a>, <a class="el" href="uartbin_8h_source.html#l00097">UARTBIN_FLAG_RESPONSE</a>, <a class="el" href="uartbin_8c_source.html#l00047">uartbin_get_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00075">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8c_source.html#l00482">uartbin_poll()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, <a class="el" href="uartbin_8h_source.html#l00069">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00072">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8c_source.html#l00038">UARTBIN_STATE_CRC</a>, <a class="el" href="uartbin_8c_source.html#l00032">UARTBIN_STATE_HEADER</a>, <a class="el" href="uartbin_8c_source.html#l00035">UARTBIN_STATE_PAYLOAD</a>, <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>, <a class="el" href="uartbin_8c_source.html#l00029">UARTBIN_STATE_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00066">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8h_source.html#l00224">uartbin_config::user</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00263">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00287">uartbin::crc</a>, <a class="el" href="uartbin_8h_source.html#l00281">uartbin::crc_bytes</a>, <a class="el" href="uartbin_8h_source.html#l00284">uartbin::crc_pos</a>, <a class="el" href="uartbin_8h_source.html#l00164">uartbin_packet::flags</a>, <a class="el" href="uartbin_8h_source.html#l00269">uartbin::header</a>, <a class="el" href="uartbin_8h_source.html#l00272">uartbin::header_pos</a>, <a class="el" href="uartbin_8h_source.html#l00290">uartbin::last_rx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00218">uartbin_config::on_packet</a>, <a class="el" href="uartbin_8h_source.html#l00170">uartbin_packet::payload</a>, <a class="el" href="uartbin_8h_source.html#l00278">uartbin::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00173">uartbin_packet::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00275">uartbin::payload_pos</a>, <a class="el" href="uartbin_8h_source.html#l00296">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00305">uartbin::retry_seq</a>, <a class="el" href="uartbin_8h_source.html#l00227">uartbin_config::rx_payload_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00230">uartbin_config::rx_payload_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00167">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00266">uartbin::state</a>, <a class="el" href="uartbin_8h_source.html#l00161">uartbin_packet::type</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00078">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00133">UARTBIN_ERROR_BAD_LENGTH</a>, <a class="el" href="uartbin_8h_source.html#l00130">UARTBIN_ERROR_BAD_VERSION</a>, <a class="el" href="uartbin_8h_source.html#l00136">UARTBIN_ERROR_CRC</a>, <a class="el" href="uartbin_8h_source.html#l00139">UARTBIN_ERROR_RX_OVERFLOW</a>, <a class="el" href="uartbin_8h_source.html#l00097">UARTBIN_FLAG_RESPONSE</a>, <a class="el" href="uartbin_8c_source.html#l00047">uartbin_get_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00075">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, <a class="el" href="uartbin_8h_source.html#l00069">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00072">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8c_source.html#l00038">UARTBIN_STATE_CRC</a>, <a class="el" href="uartbin_8c_source.html#l00032">UARTBIN_STATE_HEADER</a>, <a class="el" href="uartbin_8c_source.html#l00035">UARTBIN_STATE_PAYLOAD</a>, <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>, <a class="el" href="uartbin_8c_source.html#l00029">UARTBIN_STATE_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00066">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8h_source.html#l00224">uartbin_config::user</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00186">stm32_uartbin_it_rx_complete_callback()</a>, <a class="el" href="uartbin_8c_source.html#l00471">uartbin_feed_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00466">uartbin_feed_byte()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00188">stm32_uartbin_it_rx_complete_callback()</a>, <a class="el" href="uartbin_8c_source.html#l00506">uartbin_feed_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00501">uartbin_feed_byte()</a>.</p>
 
 </div>
 </div>
@@ -998,11 +998,11 @@ STM32 Integration</h1>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a37">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#a35">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00263">263</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00295">295</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00263">uartbin::cfg</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00161">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00159">stm32_uartbin_it_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00162">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">stm32_uartbin_it_init()</a>.</p>
 
 </div>
 </div>
@@ -1031,11 +1031,11 @@ STM32 Integration</h1>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Next sequence number, or 0 if <code class="param">ctx</code> is NULL. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00352">352</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00385">385</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00293">uartbin::tx_seq</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00420">uartbin_send_event()</a>, and <a class="el" href="uartbin_8c_source.html#l00366">uartbin_send_request()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, and <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
 
 </div>
 </div>
@@ -1058,8 +1058,8 @@ STM32 Integration</h1>
       </table>
 </div><div class="memdoc">
 
-<p>Check for RX timeout and reset the parser if needed. </p>
-<p>Call this periodically from the main loop or a scheduler when <a class="el" href="structuartbin__config.html#a4966d201d37393c6560120f7af2da53e" title="RX timeout in milliseconds.">uartbin_config::rx_timeout_ms</a> is non-zero.</p>
+<p>Service RX timeout and optional TX retry timing. </p>
+<p>Call this periodically from the main loop or a scheduler when <a class="el" href="structuartbin__config.html#a4966d201d37393c6560120f7af2da53e" title="RX timeout in milliseconds.">uartbin_config::rx_timeout_ms</a> or <a class="el" href="structuartbin__config.html#a1e2d699576229d1e22c2a52441be876c" title="Retry timeout for automatic request/event sends.">uartbin_config::tx_retry_timeout_ms</a> is non-zero. Feed functions only service RX timeout; automatic TX retry is driven by this explicit poll call.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ctx</td><td>Initialized context. </td></tr>
@@ -1070,11 +1070,11 @@ STM32 Integration</h1>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a40">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#a38">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00482">482</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00517">517</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00263">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00290">uartbin::last_rx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00239">uartbin_config::rx_timeout_ms</a>, <a class="el" href="uartbin_8h_source.html#l00142">UARTBIN_ERROR_TIMEOUT</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, and <a class="el" href="uartbin_8c_source.html#l00123">uartbin_rx_active()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00234">stm32_uartbin_dma_poll()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00231">stm32_uartbin_it_poll()</a>, and <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00236">stm32_uartbin_dma_poll()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00233">stm32_uartbin_it_poll()</a>.</p>
 
 </div>
 </div>
@@ -1104,11 +1104,11 @@ STM32 Integration</h1>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a39">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#a37">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00274">274</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00306">306</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00219">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00194">stm32_uartbin_dma_rx_event_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00203">stm32_uartbin_it_error_callback()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00186">stm32_uartbin_it_rx_complete_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00221">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00196">stm32_uartbin_dma_rx_event_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00205">stm32_uartbin_it_error_callback()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00188">stm32_uartbin_it_rx_complete_callback()</a>.</p>
 
 </div>
 </div>
@@ -1165,11 +1165,11 @@ STM32 Integration</h1>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="#a69fbe7d8d1488b2530eaab2ce3c10cada4665c1bc3c4b78e9b27d558883dd8d32" title="Operation completed successfully.">UARTBIN_OK</a> on success, otherwise an error status. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00306">306</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00339">339</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00288">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00078">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00110">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00075">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00107">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00058">uartbin_put_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00069">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00072">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00066">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00078">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00110">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00075">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00107">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00058">uartbin_put_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00069">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00072">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00066">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00420">uartbin_send_event()</a>, <a class="el" href="uartbin_8c_source.html#l00366">uartbin_send_request()</a>, and <a class="el" href="uartbin_8c_source.html#l00401">uartbin_send_response()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>, and <a class="el" href="uartbin_8c_source.html#l00435">uartbin_send_response()</a>.</p>
 
 </div>
 </div>
@@ -1221,9 +1221,9 @@ STM32 Integration</h1>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="#a69fbe7d8d1488b2530eaab2ce3c10cada4665c1bc3c4b78e9b27d558883dd8d32" title="Operation completed successfully.">UARTBIN_OK</a> on success, otherwise an error status. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00420">420</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00454">454</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00296">uartbin::retry_active</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00122">UARTBIN_EBUSY</a>, <a class="el" href="uartbin_8h_source.html#l00110">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00100">UARTBIN_FLAG_EVENT</a>, <a class="el" href="uartbin_8c_source.html#l00352">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00107">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>, <a class="el" href="uartbin_8c_source.html#l00306">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00110">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00100">UARTBIN_FLAG_EVENT</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00107">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -1275,9 +1275,9 @@ STM32 Integration</h1>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="#a69fbe7d8d1488b2530eaab2ce3c10cada4665c1bc3c4b78e9b27d558883dd8d32" title="Operation completed successfully.">UARTBIN_OK</a> on success, otherwise an error status. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00366">366</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00399">399</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00296">uartbin::retry_active</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00122">UARTBIN_EBUSY</a>, <a class="el" href="uartbin_8h_source.html#l00110">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00094">UARTBIN_FLAG_REQUEST</a>, <a class="el" href="uartbin_8c_source.html#l00352">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00107">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>, <a class="el" href="uartbin_8c_source.html#l00306">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00110">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00094">UARTBIN_FLAG_REQUEST</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00107">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -1335,9 +1335,9 @@ STM32 Integration</h1>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><a class="el" href="#a69fbe7d8d1488b2530eaab2ce3c10cada4665c1bc3c4b78e9b27d558883dd8d32" title="Operation completed successfully.">UARTBIN_OK</a> on success, otherwise an error status. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00401">401</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00435">435</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00167">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00110">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00097">UARTBIN_FLAG_RESPONSE</a>, and <a class="el" href="uartbin_8c_source.html#l00306">uartbin_send()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00167">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00110">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00097">UARTBIN_FLAG_RESPONSE</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
 </div>
 </div>

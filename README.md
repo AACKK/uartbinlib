@@ -207,3 +207,10 @@ doxygen Doxyfile
 ```
 
 Open `docs/html/index.html` in a browser.
+
+Additional Doxygen guide pages:
+
+- API Usage Guide
+- Porting Guide
+- Ring Buffer TX Port
+- STM32 Interrupt and DMA Usage

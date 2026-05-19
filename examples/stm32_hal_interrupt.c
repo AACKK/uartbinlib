@@ -40,6 +40,7 @@
  * @endcode
  */
 #include "uartbin.h"
+#include <string.h>
 
 /**
  * STM32 HAL interrupt RX example.
@@ -164,6 +165,7 @@ void stm32_uartbin_it_init(stm32_uartbin_it_t *port, UART_HandleTypeDef *huart)
     port->hal_rx_errors = 0u;
     port->protocol_errors = 0u;
 
+    memset(&cfg, 0, sizeof(cfg));
     cfg.write = stm32_uartbin_it_write;
     cfg.on_packet = stm32_uartbin_it_on_packet;
     cfg.on_error = stm32_uartbin_it_on_error;

@@ -115,7 +115,7 @@ typedef enum uartbin_status {
     /** Reserved for applications that add stricter TX payload limits. */
     UARTBIN_EPAYLOAD_TOO_LONG = -3,
 
-/** Reserved for configurations without a required buffer. */
+    /** Reserved for configurations without a required buffer. */
     UARTBIN_ENO_BUFFER = -4,
 
     /** A reliable request/event is already waiting for a response. */
@@ -470,10 +470,12 @@ void uartbin_feed_at(uartbin_t *ctx, const uint8_t *data, size_t len, uint32_t n
 void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms);
 
 /**
- * @brief Check for RX timeout and reset the parser if needed.
+ * @brief Service RX timeout and optional TX retry timing.
  *
  * Call this periodically from the main loop or a scheduler when
- * ::uartbin_config::rx_timeout_ms is non-zero.
+ * ::uartbin_config::rx_timeout_ms or ::uartbin_config::tx_retry_timeout_ms is
+ * non-zero. Feed functions only service RX timeout; automatic TX retry is
+ * driven by this explicit poll call.
  *
  * @param ctx Initialized context.
  * @param now_ms Monotonic millisecond timestamp.

@@ -1,2 +1,2 @@
-uartbin_tests 10 0.00313462
+uartbin_tests 13 0.00299614
 ---

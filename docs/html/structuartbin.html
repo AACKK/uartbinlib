@@ -153,7 +153,7 @@ Data Fields</h2></td></tr>
 <tr class="memitem:a0155be8528ac55178eabf063c63bd609" id="r_a0155be8528ac55178eabf063c63bd609"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a0155be8528ac55178eabf063c63bd609">retry_active</a></td></tr>
 <tr class="memdesc:a0155be8528ac55178eabf063c63bd609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-zero while a reliable request/event is waiting for a response.  <br /></td></tr>
 <tr class="memitem:a0924011a7881b5508851cc2df116c270" id="r_a0924011a7881b5508851cc2df116c270"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a0924011a7881b5508851cc2df116c270">retry_timer_started</a></td></tr>
-<tr class="memdesc:a0924011a7881b5508851cc2df116c270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-zero after retry timing has been armed by <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Check for RX timeout and reset the parser if needed.">uartbin_poll()</a>.  <br /></td></tr>
+<tr class="memdesc:a0924011a7881b5508851cc2df116c270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-zero after retry timing has been armed by <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a>.  <br /></td></tr>
 <tr class="memitem:a92b7bbe8cda0c1f63fc640f4eebc64fe" id="r_a92b7bbe8cda0c1f63fc640f4eebc64fe"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a92b7bbe8cda0c1f63fc640f4eebc64fe">retry_count</a></td></tr>
 <tr class="memdesc:a92b7bbe8cda0c1f63fc640f4eebc64fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of retransmits already attempted for the pending frame.  <br /></td></tr>
 <tr class="memitem:a7af84ee31bb3cf150abc5617f3630576" id="r_a7af84ee31bb3cf150abc5617f3630576"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a7af84ee31bb3cf150abc5617f3630576">retry_seq</a></td></tr>
@@ -185,7 +185,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00263">263</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00263">uartbin_init()</a>, <a class="el" href="uartbin_8c_source.html#l00482">uartbin_poll()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>, <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00295">uartbin_init()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>, <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
 
 </div>
 </div>
@@ -205,7 +205,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00287">287</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 </div>
 </div>
@@ -225,7 +225,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00281">281</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
 </div>
 </div>
@@ -245,7 +245,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00284">284</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 </div>
 </div>
@@ -265,7 +265,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00269">269</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
 </div>
 </div>
@@ -285,7 +285,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00272">272</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 </div>
 </div>
@@ -305,7 +305,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00290">290</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00466">uartbin_feed_byte()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00482">uartbin_poll()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00501">uartbin_feed_byte()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>.</p>
 
 </div>
 </div>
@@ -325,7 +325,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00278">278</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 </div>
 </div>
@@ -345,7 +345,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00275">275</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 </div>
 </div>
@@ -365,7 +365,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00296">296</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00420">uartbin_send_event()</a>, <a class="el" href="uartbin_8c_source.html#l00366">uartbin_send_request()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -385,7 +385,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00302">302</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -405,7 +405,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00308">308</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -425,7 +425,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00311">311</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -445,7 +445,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00305">305</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -461,11 +461,11 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Non-zero after retry timing has been armed by <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Check for RX timeout and reset the parser if needed.">uartbin_poll()</a>. </p>
+<p>Non-zero after retry timing has been armed by <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a>. </p>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00299">299</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -485,7 +485,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00266">266</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, and <a class="el" href="uartbin_8c_source.html#l00123">uartbin_rx_active()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, and <a class="el" href="uartbin_8c_source.html#l00123">uartbin_rx_active()</a>.</p>
 
 </div>
 </div>
@@ -505,7 +505,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00293">293</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00352">uartbin_next_seq()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>.</p>
 
 </div>
 </div>

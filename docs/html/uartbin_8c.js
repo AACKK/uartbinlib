@@ -2,6 +2,7 @@ var uartbin_8c =
 [
     [ "uartbin_build_frame", "uartbin_8c.html#a930afead8f815c7ca29d2a9bf0c413be", null ],
     [ "uartbin_cancel_retry", "uartbin_8c.html#a0b688936e31a49a78dff08b0040bfb09", null ],
+    [ "uartbin_check_retry_start", "uartbin_8c.html#af055a93c142f209e4032034979b1812e", null ],
     [ "uartbin_clear_retry", "uartbin_8c.html#a43d23b452c687ed2151dda0c9e44423a", null ],
     [ "uartbin_crc16_ccitt", "uartbin_8c.html#a6ecd9aa1ae31f9af93487d79b7b158a1", null ],
     [ "uartbin_feed", "uartbin_8c.html#adae56dc79286796f68e851fa337f1779", null ],
@@ -14,6 +15,7 @@ var uartbin_8c =
     [ "uartbin_next_seq", "uartbin_8c.html#a0226dd14064c3a24c38295acba27219a", null ],
     [ "uartbin_poll", "uartbin_8c.html#ac772ed6c266ea60e13df4a1c28d9622e", null ],
     [ "uartbin_poll_retry", "uartbin_8c.html#aaa0fc699ea32ce55693a98bccbfd54b9", null ],
+    [ "uartbin_poll_rx_timeout", "uartbin_8c.html#a8ded08b4972de5c95ba0d959c10b7829", null ],
     [ "uartbin_put_u16_le", "uartbin_8c.html#a3e19dd92a5e172d65e1a2f81225bb46b", null ],
     [ "uartbin_report_error", "uartbin_8c.html#aaf05431ab0a8714a4ed577d101fcfb10", null ],
     [ "uartbin_reset", "uartbin_8c.html#a4b93b42268b8eeb37a0e9a66b88561e9", null ],

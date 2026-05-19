@@ -141,7 +141,7 @@ Data Fields</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>CRC-checked packet delivered to the application. </p>
-<p>The payload pointer aliases <a class="el" href="structuartbin__config.html#a9ba07c9627b3932126f96d51d791d78c" title="Static payload buffer owned by the application.">uartbin_config::rx_payload_buffer</a>. It is valid only until the next call to <a class="el" href="uartbin_8h.html#adae56dc79286796f68e851fa337f1779" title="Feed received bytes without timeout timestamp updates.">uartbin_feed()</a>, <a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Feed received bytes with the current application timestamp.">uartbin_feed_at()</a>, <a class="el" href="uartbin_8h.html#a0b7e981f8f366c641f0686a448168f5a" title="Feed one received byte without timeout timestamp updates.">uartbin_feed_byte()</a>, <a class="el" href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0" title="Feed one received byte with the current application timestamp.">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Check for RX timeout and reset the parser if needed.">uartbin_poll()</a>, or <a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Reset only the RX parser state.">uartbin_reset()</a> on the same context. </p>
+<p>The payload pointer aliases <a class="el" href="structuartbin__config.html#a9ba07c9627b3932126f96d51d791d78c" title="Static payload buffer owned by the application.">uartbin_config::rx_payload_buffer</a>. It is valid only until the next call to <a class="el" href="uartbin_8h.html#adae56dc79286796f68e851fa337f1779" title="Feed received bytes without timeout timestamp updates.">uartbin_feed()</a>, <a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Feed received bytes with the current application timestamp.">uartbin_feed_at()</a>, <a class="el" href="uartbin_8h.html#a0b7e981f8f366c641f0686a448168f5a" title="Feed one received byte without timeout timestamp updates.">uartbin_feed_byte()</a>, <a class="el" href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0" title="Feed one received byte with the current application timestamp.">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a>, or <a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Reset only the RX parser state.">uartbin_reset()</a> on the same context. </p>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00159">159</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
@@ -161,7 +161,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00164">164</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
 </div>
 </div>
@@ -181,7 +181,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00170">170</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
 </div>
 </div>
@@ -201,7 +201,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00173">173</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
 </div>
 </div>
@@ -221,7 +221,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00167">167</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00401">uartbin_send_response()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00435">uartbin_send_response()</a>.</p>
 
 </div>
 </div>
@@ -243,7 +243,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00161">161</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00125">stm32_uartbin_it_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00126">stm32_uartbin_it_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
 </div>
 </div>

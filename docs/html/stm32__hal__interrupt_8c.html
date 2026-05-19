@@ -124,6 +124,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('stm32__hal__in
 <p>STM32 HAL interrupt-based RX adapter example for uartbinlib.  
 <a href="#details">More...</a></p>
 <div class="textblock"><code>#include &quot;<a class="el" href="uartbin_8h_source.html">uartbin.h</a>&quot;</code><br />
+<code>#include &lt;string.h&gt;</code><br />
 </div>
 <p><a href="stm32__hal__interrupt_8c_source.html">Go to the source code of this file.</a></p>
 <table class="memberdecls">
@@ -183,7 +184,7 @@ Functions</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00064">64</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00065">65</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
 </div>
 </div>
@@ -257,7 +258,7 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a10">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00203">stm32_uartbin_it_error_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00205">stm32_uartbin_it_error_callback()</a>.</p>
 
 </div>
 </div>
@@ -295,7 +296,7 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a9">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00096">stm32_uartbin_it_start_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00097">stm32_uartbin_it_start_rx()</a>.</p>
 
 </div>
 </div>
@@ -362,9 +363,9 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a5">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00219">219</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00221">221</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stm32__hal__interrupt_8c_source.html#l00072">stm32_uartbin_it::huart</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00096">stm32_uartbin_it_start_rx()</a>.</p>
+<p class="reference">References <a class="el" href="stm32__hal__interrupt_8c_source.html#l00073">stm32_uartbin_it::huart</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00097">stm32_uartbin_it_start_rx()</a>.</p>
 
 </div>
 </div>
@@ -392,9 +393,9 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a4">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00203">203</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00205">205</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stm32__hal__interrupt_8c_source.html#l00084">stm32_uartbin_it::hal_rx_errors</a>, <a class="el" href="#a686a50a81514fbdb35b0f6a34daed682">HAL_UART_AbortReceive_IT()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00072">stm32_uartbin_it::huart</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00075">stm32_uartbin_it::link</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00096">stm32_uartbin_it_start_rx()</a>, and <a class="el" href="uartbin_8c_source.html#l00274">uartbin_reset()</a>.</p>
+<p class="reference">References <a class="el" href="stm32__hal__interrupt_8c_source.html#l00085">stm32_uartbin_it::hal_rx_errors</a>, <a class="el" href="#a686a50a81514fbdb35b0f6a34daed682">HAL_UART_AbortReceive_IT()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00073">stm32_uartbin_it::huart</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00076">stm32_uartbin_it::link</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00097">stm32_uartbin_it_start_rx()</a>, and <a class="el" href="uartbin_8c_source.html#l00306">uartbin_reset()</a>.</p>
 
 </div>
 </div>
@@ -428,9 +429,9 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a1">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00159">159</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">160</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stm32__hal__interrupt_8c_source.html#l00084">stm32_uartbin_it::hal_rx_errors</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00072">stm32_uartbin_it::huart</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00075">stm32_uartbin_it::link</a>, <a class="el" href="uartbin_8h_source.html#l00221">uartbin_config::on_error</a>, <a class="el" href="uartbin_8h_source.html#l00218">uartbin_config::on_packet</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00087">stm32_uartbin_it::protocol_errors</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00081">stm32_uartbin_it::rx_payload</a>, <a class="el" href="uartbin_8h_source.html#l00227">uartbin_config::rx_payload_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00230">uartbin_config::rx_payload_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00239">uartbin_config::rx_timeout_ms</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00145">stm32_uartbin_it_on_error()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00125">stm32_uartbin_it_on_packet()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00096">stm32_uartbin_it_start_rx()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00108">stm32_uartbin_it_write()</a>, <a class="el" href="uartbin_8c_source.html#l00263">uartbin_init()</a>, <a class="el" href="uartbin_8h_source.html#l00224">uartbin_config::user</a>, and <a class="el" href="uartbin_8h_source.html#l00215">uartbin_config::write</a>.</p>
+<p class="reference">References <a class="el" href="stm32__hal__interrupt_8c_source.html#l00085">stm32_uartbin_it::hal_rx_errors</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00073">stm32_uartbin_it::huart</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00076">stm32_uartbin_it::link</a>, <a class="el" href="uartbin_8h_source.html#l00221">uartbin_config::on_error</a>, <a class="el" href="uartbin_8h_source.html#l00218">uartbin_config::on_packet</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00088">stm32_uartbin_it::protocol_errors</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00082">stm32_uartbin_it::rx_payload</a>, <a class="el" href="uartbin_8h_source.html#l00227">uartbin_config::rx_payload_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00230">uartbin_config::rx_payload_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00239">uartbin_config::rx_timeout_ms</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00146">stm32_uartbin_it_on_error()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00126">stm32_uartbin_it_on_packet()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00097">stm32_uartbin_it_start_rx()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00109">stm32_uartbin_it_write()</a>, <a class="el" href="uartbin_8c_source.html#l00295">uartbin_init()</a>, <a class="el" href="uartbin_8h_source.html#l00224">uartbin_config::user</a>, and <a class="el" href="uartbin_8h_source.html#l00215">uartbin_config::write</a>.</p>
 
 </div>
 </div>
@@ -466,11 +467,11 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a25">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00145">145</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00146">146</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stm32__hal__interrupt_8c_source.html#l00087">stm32_uartbin_it::protocol_errors</a>.</p>
+<p class="reference">References <a class="el" href="stm32__hal__interrupt_8c_source.html#l00088">stm32_uartbin_it::protocol_errors</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00159">stm32_uartbin_it_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">stm32_uartbin_it_init()</a>.</p>
 
 </div>
 </div>
@@ -506,11 +507,11 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a22">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00125">125</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00126">126</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00161">uartbin_packet::type</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00159">stm32_uartbin_it_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">stm32_uartbin_it_init()</a>.</p>
 
 </div>
 </div>
@@ -534,9 +535,9 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a6">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00231">231</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00233">233</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00075">stm32_uartbin_it::link</a>, and <a class="el" href="uartbin_8c_source.html#l00482">uartbin_poll()</a>.</p>
+<p class="reference">References <a class="el" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00076">stm32_uartbin_it::link</a>, and <a class="el" href="uartbin_8c_source.html#l00517">uartbin_poll()</a>.</p>
 
 </div>
 </div>
@@ -564,9 +565,9 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a3">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00186">186</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00188">188</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00084">stm32_uartbin_it::hal_rx_errors</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00072">stm32_uartbin_it::huart</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00075">stm32_uartbin_it::link</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00078">stm32_uartbin_it::rx_byte</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00096">stm32_uartbin_it_start_rx()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00274">uartbin_reset()</a>.</p>
+<p class="reference">References <a class="el" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00085">stm32_uartbin_it::hal_rx_errors</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00073">stm32_uartbin_it::huart</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00076">stm32_uartbin_it::link</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00079">stm32_uartbin_it::rx_byte</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00097">stm32_uartbin_it_start_rx()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00306">uartbin_reset()</a>.</p>
 
 </div>
 </div>
@@ -604,11 +605,11 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a19">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00096">96</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00097">97</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00057">HAL_OK</a>, <a class="el" href="#a131991338c4e48a7a48a5b3c0ba9863a">HAL_UART_Receive_IT()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00072">stm32_uartbin_it::huart</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00078">stm32_uartbin_it::rx_byte</a>.</p>
+<p class="reference">References <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00058">HAL_OK</a>, <a class="el" href="#a131991338c4e48a7a48a5b3c0ba9863a">HAL_UART_Receive_IT()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00073">stm32_uartbin_it::huart</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00079">stm32_uartbin_it::rx_byte</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00219">stm32_uartbin_it_abort_complete_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00203">stm32_uartbin_it_error_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00159">stm32_uartbin_it_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00186">stm32_uartbin_it_rx_complete_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00221">stm32_uartbin_it_abort_complete_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00205">stm32_uartbin_it_error_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">stm32_uartbin_it_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00188">stm32_uartbin_it_rx_complete_callback()</a>.</p>
 
 </div>
 </div>
@@ -649,11 +650,11 @@ Functions</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a21">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00108">108</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00109">109</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">References <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00057">HAL_OK</a>, <a class="el" href="stm32__hal__dma__idle_8c.html#a41d654999cc15648093057ee0c6f27e4">HAL_UART_Transmit()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00072">stm32_uartbin_it::huart</a>.</p>
+<p class="reference">References <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00058">HAL_OK</a>, <a class="el" href="stm32__hal__dma__idle_8c.html#a41d654999cc15648093057ee0c6f27e4">HAL_UART_Transmit()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00073">stm32_uartbin_it::huart</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00159">stm32_uartbin_it_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">stm32_uartbin_it_init()</a>.</p>
 
 </div>
 </div>
