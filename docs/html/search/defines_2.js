@@ -10,5 +10,9 @@ var searchData=
   ['uartbin_5fmax_5fframe_5foverhead_7',['UARTBIN_MAX_FRAME_OVERHEAD',['../uartbin_8h.html#a02dde34a333b47fcc0bd146757edfeb0',1,'uartbin.h']]],
   ['uartbin_5fsof0_8',['UARTBIN_SOF0',['../uartbin_8h.html#a3bd0a539c23bdaf94a00f3e55f543dd0',1,'uartbin.h']]],
   ['uartbin_5fsof1_9',['UARTBIN_SOF1',['../uartbin_8h.html#a5e38a11867c5f996b1631237a63f2d26',1,'uartbin.h']]],
-  ['uartbin_5fversion_10',['UARTBIN_VERSION',['../uartbin_8h.html#aaadad2de473e2ec806bc8fb890cfe75b',1,'uartbin.h']]]
+  ['uartbin_5fversion_10',['UARTBIN_VERSION',['../uartbin_8h.html#aaadad2de473e2ec806bc8fb890cfe75b',1,'uartbin.h']]],
+  ['uartbinlib_5fversion_5fmajor_11',['UARTBINLIB_VERSION_MAJOR',['../uartbin_8h.html#af04b84fa3baa0e3e357cc4d860c018ee',1,'uartbin.h']]],
+  ['uartbinlib_5fversion_5fminor_12',['UARTBINLIB_VERSION_MINOR',['../uartbin_8h.html#a065117e3c360de230a14edaa238d480b',1,'uartbin.h']]],
+  ['uartbinlib_5fversion_5fpatch_13',['UARTBINLIB_VERSION_PATCH',['../uartbin_8h.html#a7c22e6731d4cd2e2fbccd2bd2e1745c0',1,'uartbin.h']]],
+  ['uartbinlib_5fversion_5fstring_14',['UARTBINLIB_VERSION_STRING',['../uartbin_8h.html#ae0b337e032ba185b08f3b207a9f1cc45',1,'uartbin.h']]]
 ];

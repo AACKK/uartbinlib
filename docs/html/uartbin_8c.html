@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="uartbinlib_logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">uartbinlib
+   <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.0.0</span>
    </div>
    <div id="projectbrief">developed by Ahmet Cemal Kurtulmuş</div>
   </td>
@@ -298,7 +298,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00133">133</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00115">UARTBIN_EPAYLOAD_TOO_LONG</a>, <a class="el" href="uartbin_8c_source.html#l00128">uartbin_frame_len()</a>, <a class="el" href="uartbin_8h_source.html#l00074">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00058">uartbin_put_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00068">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00071">UARTBIN_SOF1</a>, and <a class="el" href="uartbin_8h_source.html#l00065">UARTBIN_VERSION</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00127">UARTBIN_EPAYLOAD_TOO_LONG</a>, <a class="el" href="uartbin_8c_source.html#l00128">uartbin_frame_len()</a>, <a class="el" href="uartbin_8h_source.html#l00086">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00058">uartbin_put_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00080">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00083">UARTBIN_SOF1</a>, and <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_VERSION</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
@@ -363,7 +363,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00187">187</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00295">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00241">uartbin_config::tx_retry_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00244">uartbin_config::tx_retry_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EBUSY</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_ENO_BUFFER</a>, <a class="el" href="uartbin_8h_source.html#l00115">UARTBIN_EPAYLOAD_TOO_LONG</a>, <a class="el" href="uartbin_8c_source.html#l00128">uartbin_frame_len()</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, and <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00307">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00253">uartbin_config::tx_retry_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00256">uartbin_config::tx_retry_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00133">UARTBIN_EBUSY</a>, <a class="el" href="uartbin_8h_source.html#l00130">UARTBIN_ENO_BUFFER</a>, <a class="el" href="uartbin_8h_source.html#l00127">UARTBIN_EPAYLOAD_TOO_LONG</a>, <a class="el" href="uartbin_8c_source.html#l00128">uartbin_frame_len()</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, and <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
@@ -394,7 +394,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00172">172</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00295">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00301">uartbin::retry_count</a>, <a class="el" href="uartbin_8h_source.html#l00307">uartbin::retry_frame_len</a>, <a class="el" href="uartbin_8h_source.html#l00310">uartbin::retry_last_tx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00304">uartbin::retry_seq</a>, and <a class="el" href="uartbin_8h_source.html#l00298">uartbin::retry_timer_started</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00307">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00313">uartbin::retry_count</a>, <a class="el" href="uartbin_8h_source.html#l00319">uartbin::retry_frame_len</a>, <a class="el" href="uartbin_8h_source.html#l00322">uartbin::retry_last_tx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00316">uartbin::retry_seq</a>, and <a class="el" href="uartbin_8h_source.html#l00310">uartbin::retry_timer_started</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00313">uartbin_cancel_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, and <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
 
@@ -562,7 +562,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00501">501</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00289">uartbin::last_rx_time_ms</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00301">uartbin::last_rx_time_ms</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00490">uartbin_feed()</a>.</p>
 
@@ -607,7 +607,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00533">533</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00286">uartbin::crc</a>, <a class="el" href="uartbin_8h_source.html#l00280">uartbin::crc_bytes</a>, <a class="el" href="uartbin_8h_source.html#l00283">uartbin::crc_pos</a>, <a class="el" href="uartbin_8h_source.html#l00163">uartbin_packet::flags</a>, <a class="el" href="uartbin_8h_source.html#l00268">uartbin::header</a>, <a class="el" href="uartbin_8h_source.html#l00271">uartbin::header_pos</a>, <a class="el" href="uartbin_8h_source.html#l00289">uartbin::last_rx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00217">uartbin_config::on_packet</a>, <a class="el" href="uartbin_8h_source.html#l00169">uartbin_packet::payload</a>, <a class="el" href="uartbin_8h_source.html#l00277">uartbin::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00172">uartbin_packet::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00274">uartbin::payload_pos</a>, <a class="el" href="uartbin_8h_source.html#l00295">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00304">uartbin::retry_seq</a>, <a class="el" href="uartbin_8h_source.html#l00226">uartbin_config::rx_payload_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00229">uartbin_config::rx_payload_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00166">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00265">uartbin::state</a>, <a class="el" href="uartbin_8h_source.html#l00160">uartbin_packet::type</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00132">UARTBIN_ERROR_BAD_LENGTH</a>, <a class="el" href="uartbin_8h_source.html#l00129">UARTBIN_ERROR_BAD_VERSION</a>, <a class="el" href="uartbin_8h_source.html#l00135">UARTBIN_ERROR_CRC</a>, <a class="el" href="uartbin_8h_source.html#l00138">UARTBIN_ERROR_RX_OVERFLOW</a>, <a class="el" href="uartbin_8h_source.html#l00096">UARTBIN_FLAG_RESPONSE</a>, <a class="el" href="uartbin_8c_source.html#l00047">uartbin_get_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00074">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, <a class="el" href="uartbin_8h_source.html#l00068">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00071">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8c_source.html#l00038">UARTBIN_STATE_CRC</a>, <a class="el" href="uartbin_8c_source.html#l00032">UARTBIN_STATE_HEADER</a>, <a class="el" href="uartbin_8c_source.html#l00035">UARTBIN_STATE_PAYLOAD</a>, <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>, <a class="el" href="uartbin_8c_source.html#l00029">UARTBIN_STATE_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00065">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8h_source.html#l00223">uartbin_config::user</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00298">uartbin::crc</a>, <a class="el" href="uartbin_8h_source.html#l00292">uartbin::crc_bytes</a>, <a class="el" href="uartbin_8h_source.html#l00295">uartbin::crc_pos</a>, <a class="el" href="uartbin_8h_source.html#l00175">uartbin_packet::flags</a>, <a class="el" href="uartbin_8h_source.html#l00280">uartbin::header</a>, <a class="el" href="uartbin_8h_source.html#l00283">uartbin::header_pos</a>, <a class="el" href="uartbin_8h_source.html#l00301">uartbin::last_rx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00229">uartbin_config::on_packet</a>, <a class="el" href="uartbin_8h_source.html#l00181">uartbin_packet::payload</a>, <a class="el" href="uartbin_8h_source.html#l00289">uartbin::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00184">uartbin_packet::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00286">uartbin::payload_pos</a>, <a class="el" href="uartbin_8h_source.html#l00307">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00316">uartbin::retry_seq</a>, <a class="el" href="uartbin_8h_source.html#l00238">uartbin_config::rx_payload_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00241">uartbin_config::rx_payload_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00178">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00277">uartbin::state</a>, <a class="el" href="uartbin_8h_source.html#l00172">uartbin_packet::type</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00089">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00144">UARTBIN_ERROR_BAD_LENGTH</a>, <a class="el" href="uartbin_8h_source.html#l00141">UARTBIN_ERROR_BAD_VERSION</a>, <a class="el" href="uartbin_8h_source.html#l00147">UARTBIN_ERROR_CRC</a>, <a class="el" href="uartbin_8h_source.html#l00150">UARTBIN_ERROR_RX_OVERFLOW</a>, <a class="el" href="uartbin_8h_source.html#l00108">UARTBIN_FLAG_RESPONSE</a>, <a class="el" href="uartbin_8c_source.html#l00047">uartbin_get_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00086">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, <a class="el" href="uartbin_8h_source.html#l00080">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00083">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8c_source.html#l00038">UARTBIN_STATE_CRC</a>, <a class="el" href="uartbin_8c_source.html#l00032">UARTBIN_STATE_HEADER</a>, <a class="el" href="uartbin_8c_source.html#l00035">UARTBIN_STATE_PAYLOAD</a>, <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>, <a class="el" href="uartbin_8c_source.html#l00029">UARTBIN_STATE_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8h_source.html#l00235">uartbin_config::user</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>, <a class="el" href="uartbin_8c_source.html#l00506">uartbin_feed_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00501">uartbin_feed_byte()</a>.</p>
 
@@ -638,7 +638,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00128">128</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00080">UARTBIN_MAX_FRAME_OVERHEAD</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00092">UARTBIN_MAX_FRAME_OVERHEAD</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>.</p>
 
@@ -712,7 +712,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00295">295</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00198">linux_uartbin_init()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>.</p>
 
@@ -745,7 +745,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00385">385</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00292">uartbin::tx_seq</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00304">uartbin::tx_seq</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, and <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
 
@@ -817,7 +817,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00244">244</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00295">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00301">uartbin::retry_count</a>, <a class="el" href="uartbin_8h_source.html#l00307">uartbin::retry_frame_len</a>, <a class="el" href="uartbin_8h_source.html#l00310">uartbin::retry_last_tx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00298">uartbin::retry_timer_started</a>, <a class="el" href="uartbin_8h_source.html#l00241">uartbin_config::tx_retry_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00250">uartbin_config::tx_retry_max_retries</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00144">UARTBIN_ERROR_RETRY_EXHAUSTED</a>, <a class="el" href="uartbin_8h_source.html#l00147">UARTBIN_ERROR_RETRY_WRITE</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00307">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00313">uartbin::retry_count</a>, <a class="el" href="uartbin_8h_source.html#l00319">uartbin::retry_frame_len</a>, <a class="el" href="uartbin_8h_source.html#l00322">uartbin::retry_last_tx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00310">uartbin::retry_timer_started</a>, <a class="el" href="uartbin_8h_source.html#l00253">uartbin_config::tx_retry_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00262">uartbin_config::tx_retry_max_retries</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00156">UARTBIN_ERROR_RETRY_EXHAUSTED</a>, <a class="el" href="uartbin_8h_source.html#l00159">UARTBIN_ERROR_RETRY_WRITE</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00517">uartbin_poll()</a>.</p>
 
@@ -852,7 +852,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00279">279</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00289">uartbin::last_rx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00238">uartbin_config::rx_timeout_ms</a>, <a class="el" href="uartbin_8h_source.html#l00141">UARTBIN_ERROR_TIMEOUT</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, and <a class="el" href="uartbin_8c_source.html#l00123">uartbin_rx_active()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00301">uartbin::last_rx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00250">uartbin_config::rx_timeout_ms</a>, <a class="el" href="uartbin_8h_source.html#l00153">UARTBIN_ERROR_TIMEOUT</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, and <a class="el" href="uartbin_8c_source.html#l00123">uartbin_rx_active()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00517">uartbin_poll()</a>.</p>
 
@@ -938,7 +938,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00089">89</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00220">uartbin_config::on_error</a>, and <a class="el" href="uartbin_8h_source.html#l00223">uartbin_config::user</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00232">uartbin_config::on_error</a>, and <a class="el" href="uartbin_8h_source.html#l00235">uartbin_config::user</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>.</p>
 
@@ -1010,7 +1010,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00073">73</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00286">uartbin::crc</a>, <a class="el" href="uartbin_8h_source.html#l00283">uartbin::crc_pos</a>, <a class="el" href="uartbin_8h_source.html#l00271">uartbin::header_pos</a>, <a class="el" href="uartbin_8h_source.html#l00277">uartbin::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00274">uartbin::payload_pos</a>, <a class="el" href="uartbin_8h_source.html#l00265">uartbin::state</a>, and <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00298">uartbin::crc</a>, <a class="el" href="uartbin_8h_source.html#l00295">uartbin::crc_pos</a>, <a class="el" href="uartbin_8h_source.html#l00283">uartbin::header_pos</a>, <a class="el" href="uartbin_8h_source.html#l00289">uartbin::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00286">uartbin::payload_pos</a>, <a class="el" href="uartbin_8h_source.html#l00277">uartbin::state</a>, and <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00295">uartbin_init()</a>, <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>, and <a class="el" href="uartbin_8c_source.html#l00306">uartbin_reset()</a>.</p>
 
@@ -1041,7 +1041,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00182">182</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00250">uartbin_config::tx_retry_max_retries</a>, and <a class="el" href="uartbin_8h_source.html#l00247">uartbin_config::tx_retry_timeout_ms</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00262">uartbin_config::tx_retry_max_retries</a>, and <a class="el" href="uartbin_8h_source.html#l00259">uartbin_config::tx_retry_timeout_ms</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
@@ -1081,7 +1081,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00123">123</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00265">uartbin::state</a>, and <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00277">uartbin::state</a>, and <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>.</p>
 
@@ -1142,7 +1142,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00339">339</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00074">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00058">uartbin_put_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00068">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00071">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00065">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00089">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00086">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00058">uartbin_put_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00080">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00083">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>, and <a class="el" href="uartbin_8c_source.html#l00435">uartbin_send_response()</a>.</p>
 
@@ -1198,7 +1198,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00454">454</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00099">UARTBIN_FLAG_EVENT</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00111">UARTBIN_FLAG_EVENT</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00268">main()</a>.</p>
 
@@ -1254,7 +1254,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00399">399</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00093">UARTBIN_FLAG_REQUEST</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00105">UARTBIN_FLAG_REQUEST</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -1314,7 +1314,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00435">435</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00166">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00096">UARTBIN_FLAG_RESPONSE</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00178">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00108">UARTBIN_FLAG_RESPONSE</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>.</p>
 
@@ -1369,7 +1369,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00205">205</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00295">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00301">uartbin::retry_count</a>, <a class="el" href="uartbin_8h_source.html#l00307">uartbin::retry_frame_len</a>, <a class="el" href="uartbin_8h_source.html#l00310">uartbin::retry_last_tx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00304">uartbin::retry_seq</a>, <a class="el" href="uartbin_8h_source.html#l00298">uartbin::retry_timer_started</a>, <a class="el" href="uartbin_8h_source.html#l00241">uartbin_config::tx_retry_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00244">uartbin_config::tx_retry_capacity</a>, <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, and <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00307">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00313">uartbin::retry_count</a>, <a class="el" href="uartbin_8h_source.html#l00319">uartbin::retry_frame_len</a>, <a class="el" href="uartbin_8h_source.html#l00322">uartbin::retry_last_tx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00316">uartbin::retry_seq</a>, <a class="el" href="uartbin_8h_source.html#l00310">uartbin::retry_timer_started</a>, <a class="el" href="uartbin_8h_source.html#l00253">uartbin_config::tx_retry_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00256">uartbin_config::tx_retry_capacity</a>, <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, and <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, and <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
 
@@ -1420,7 +1420,7 @@ Functions</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00104">104</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00112">UARTBIN_EWRITE</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8h_source.html#l00223">uartbin_config::user</a>, and <a class="el" href="uartbin_8h_source.html#l00214">uartbin_config::write</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00124">UARTBIN_EWRITE</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8h_source.html#l00235">uartbin_config::user</a>, and <a class="el" href="uartbin_8h_source.html#l00226">uartbin_config::write</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 

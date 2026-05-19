@@ -76,5 +76,9 @@ var searchData=
   ['uartbin_5fwrite_5fall_73',['uartbin_write_all',['../uartbin_8c.html#a5b52d166f82db005c2ccf5431d34a906',1,'uartbin.c']]],
   ['uartbin_5fwrite_5ffn_74',['uartbin_write_fn',['../uartbin_8h.html#aa1ad30b8276f1d2ab4a64ce57bb6aed3',1,'uartbin.h']]],
   ['uartbinlib_75',['uartbinlib',['../index.html#autotoc_md1',1,'Neden uartbinlib?'],['../index.html',1,'uartbinlib']]],
-  ['user_76',['user',['../structuartbin__config.html#a6960d772dfcb45fd0b9a24c6d4f10078',1,'uartbin_config']]]
+  ['uartbinlib_5fversion_5fmajor_76',['UARTBINLIB_VERSION_MAJOR',['../uartbin_8h.html#af04b84fa3baa0e3e357cc4d860c018ee',1,'uartbin.h']]],
+  ['uartbinlib_5fversion_5fminor_77',['UARTBINLIB_VERSION_MINOR',['../uartbin_8h.html#a065117e3c360de230a14edaa238d480b',1,'uartbin.h']]],
+  ['uartbinlib_5fversion_5fpatch_78',['UARTBINLIB_VERSION_PATCH',['../uartbin_8h.html#a7c22e6731d4cd2e2fbccd2bd2e1745c0',1,'uartbin.h']]],
+  ['uartbinlib_5fversion_5fstring_79',['UARTBINLIB_VERSION_STRING',['../uartbin_8h.html#ae0b337e032ba185b08f3b207a9f1cc45',1,'uartbin.h']]],
+  ['user_80',['user',['../structuartbin__config.html#a6960d772dfcb45fd0b9a24c6d4f10078',1,'uartbin_config']]]
 ];

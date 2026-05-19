@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="uartbinlib_logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">uartbinlib
+   <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.0.0</span>
    </div>
    <div id="projectbrief">developed by Ahmet Cemal Kurtulmuş</div>
   </td>
@@ -145,7 +145,7 @@ Data Fields</h2></td></tr>
 <div class="textblock"><p>Uygulamaya iletilen CRC kontrolunden gecmis paket. </p>
 <p>Payload pointer <a class="el" href="structuartbin__config.html#a9ba07c9627b3932126f96d51d791d78c" title="Uygulamanin sahip oldugu statik payload buffer.">uartbin_config::rx_payload_buffer</a> alanini isaret eder. Ayni context uzerinde bir sonraki <a class="el" href="uartbin_8h.html#adae56dc79286796f68e851fa337f1779" title="Alinan byte&#39;lari timeout timestamp guncellemesi olmadan besle.">uartbin_feed()</a>, <a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.">uartbin_feed_at()</a>, <a class="el" href="uartbin_8h.html#a0b7e981f8f366c641f0686a448168f5a" title="Tek alinan byte&#39;i timeout timestamp guncellemesi olmadan besle.">uartbin_feed_byte()</a>, <a class="el" href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0" title="Tek alinan byte&#39;i gecerli uygulama timestamp degeri ile besle.">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a> veya <a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Yalnizca RX parser durumunu resetle.">uartbin_reset()</a> cagrimina kadar gecerlidir. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00158">158</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00170">170</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
 <a id="a0306f6e0139800922d2c83a9a0ce8722" name="a0306f6e0139800922d2c83a9a0ce8722"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0306f6e0139800922d2c83a9a0ce8722">&#9670;&#160;</a></span>flags</h2>
@@ -163,7 +163,7 @@ Data Fields</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#a18">linux_posix_serial.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00163">163</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00175">175</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
@@ -183,7 +183,7 @@ Data Fields</h2></td></tr>
 
 <p>CRC dogrulamasi gecmis payload byte'larina pointer. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00169">169</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00181">181</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
@@ -205,7 +205,7 @@ Data Fields</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#a20">linux_posix_serial.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00172">172</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00184">184</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
@@ -227,7 +227,7 @@ Data Fields</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#a19">linux_posix_serial.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00166">166</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00178">178</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00435">uartbin_send_response()</a>.</p>
 
@@ -249,7 +249,7 @@ Data Fields</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#a17">linux_posix_serial.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#a24">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00160">160</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00172">172</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00127">stm32_uartbin_it_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 

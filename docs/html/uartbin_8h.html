@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="uartbinlib_logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">uartbinlib
+   <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.0.0</span>
    </div>
    <div id="projectbrief">developed by Ahmet Cemal Kurtulmuş</div>
   </td>
@@ -141,6 +141,14 @@ Data Structures</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-define-members" class="groupheader"><a id="define-members" name="define-members"></a>
 Macros</h2></td></tr>
+<tr class="memitem:af04b84fa3baa0e3e357cc4d860c018ee" id="r_af04b84fa3baa0e3e357cc4d860c018ee"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#af04b84fa3baa0e3e357cc4d860c018ee">UARTBINLIB_VERSION_MAJOR</a>&#160;&#160;&#160;1u</td></tr>
+<tr class="memdesc:af04b84fa3baa0e3e357cc4d860c018ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kutuphane semantik versiyon major degeri.  <br /></td></tr>
+<tr class="memitem:a065117e3c360de230a14edaa238d480b" id="r_a065117e3c360de230a14edaa238d480b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a065117e3c360de230a14edaa238d480b">UARTBINLIB_VERSION_MINOR</a>&#160;&#160;&#160;0u</td></tr>
+<tr class="memdesc:a065117e3c360de230a14edaa238d480b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kutuphane semantik versiyon minor degeri.  <br /></td></tr>
+<tr class="memitem:a7c22e6731d4cd2e2fbccd2bd2e1745c0" id="r_a7c22e6731d4cd2e2fbccd2bd2e1745c0"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a7c22e6731d4cd2e2fbccd2bd2e1745c0">UARTBINLIB_VERSION_PATCH</a>&#160;&#160;&#160;0u</td></tr>
+<tr class="memdesc:a7c22e6731d4cd2e2fbccd2bd2e1745c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kutuphane semantik versiyon patch degeri.  <br /></td></tr>
+<tr class="memitem:ae0b337e032ba185b08f3b207a9f1cc45" id="r_ae0b337e032ba185b08f3b207a9f1cc45"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#ae0b337e032ba185b08f3b207a9f1cc45">UARTBINLIB_VERSION_STRING</a>&#160;&#160;&#160;&quot;V1.0.0&quot;</td></tr>
+<tr class="memdesc:ae0b337e032ba185b08f3b207a9f1cc45"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kutuphane semantik versiyon metni.  <br /></td></tr>
 <tr class="memitem:aaadad2de473e2ec806bc8fb890cfe75b" id="r_aaadad2de473e2ec806bc8fb890cfe75b"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#aaadad2de473e2ec806bc8fb890cfe75b">UARTBIN_VERSION</a>&#160;&#160;&#160;1u</td></tr>
 <tr class="memdesc:aaadad2de473e2ec806bc8fb890cfe75b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Her cerceve header'inda tasinan protokol surumu.  <br /></td></tr>
 <tr class="memitem:a3bd0a539c23bdaf94a00f3e55f543dd0" id="r_a3bd0a539c23bdaf94a00f3e55f543dd0"><td class="memItemLeft">#define&#160;</td><td class="memItemRight"><a class="el" href="#a3bd0a539c23bdaf94a00f3e55f543dd0">UARTBIN_SOF0</a>&#160;&#160;&#160;0xA5u</td></tr>
@@ -283,7 +291,7 @@ STM32 Entegrasyonu</h1>
 
 <p>CRC alan boyutu, byte cinsinden. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00077">77</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00089">89</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
@@ -305,7 +313,7 @@ STM32 Entegrasyonu</h1>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a40">linux_posix_serial.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00089">89</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00101">101</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00198">linux_uartbin_init()</a>.</p>
 
@@ -327,7 +335,7 @@ STM32 Entegrasyonu</h1>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a38">linux_posix_serial.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00084">84</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00096">96</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00198">linux_uartbin_init()</a>.</p>
 
@@ -349,7 +357,7 @@ STM32 Entegrasyonu</h1>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a23">linux_posix_serial.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00099">99</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00111">111</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>.</p>
 
@@ -371,7 +379,7 @@ STM32 Entegrasyonu</h1>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a21">linux_posix_serial.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00093">93</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00105">105</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
 
@@ -391,7 +399,7 @@ STM32 Entegrasyonu</h1>
 
 <p><a class="el" href="#ac592299b63f2ba89764ab4184da2b8b9" title="Alinan paketteki sira numarasini kullanarak response gonder.">uartbin_send_response()</a> tarafindan set edilen flag biti. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00096">96</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00108">108</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00435">uartbin_send_response()</a>.</p>
 
@@ -411,7 +419,7 @@ STM32 Entegrasyonu</h1>
 
 <p>Iki SOF byte'indan sonraki header boyutu, byte cinsinden. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00074">74</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00086">86</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
@@ -433,7 +441,7 @@ STM32 Entegrasyonu</h1>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a8">linux_posix_serial.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00080">80</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00092">92</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00128">uartbin_frame_len()</a>.</p>
 
@@ -453,7 +461,7 @@ STM32 Entegrasyonu</h1>
 
 <p>Start-of-frame dizisinin ilk byte'i. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00068">68</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00080">80</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
@@ -473,7 +481,7 @@ STM32 Entegrasyonu</h1>
 
 <p>Start-of-frame dizisinin ikinci byte'i. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00071">71</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00083">83</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
@@ -493,9 +501,81 @@ STM32 Entegrasyonu</h1>
 
 <p>Her cerceve header'inda tasinan protokol surumu. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00065">65</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00077">77</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00133">uartbin_build_frame()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
+
+</div>
+</div>
+<a id="af04b84fa3baa0e3e357cc4d860c018ee" name="af04b84fa3baa0e3e357cc4d860c018ee"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af04b84fa3baa0e3e357cc4d860c018ee">&#9670;&#160;</a></span>UARTBINLIB_VERSION_MAJOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UARTBINLIB_VERSION_MAJOR&#160;&#160;&#160;1u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kutuphane semantik versiyon major degeri. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00065">65</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+</div>
+</div>
+<a id="a065117e3c360de230a14edaa238d480b" name="a065117e3c360de230a14edaa238d480b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a065117e3c360de230a14edaa238d480b">&#9670;&#160;</a></span>UARTBINLIB_VERSION_MINOR</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UARTBINLIB_VERSION_MINOR&#160;&#160;&#160;0u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kutuphane semantik versiyon minor degeri. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00068">68</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+</div>
+</div>
+<a id="a7c22e6731d4cd2e2fbccd2bd2e1745c0" name="a7c22e6731d4cd2e2fbccd2bd2e1745c0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7c22e6731d4cd2e2fbccd2bd2e1745c0">&#9670;&#160;</a></span>UARTBINLIB_VERSION_PATCH</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UARTBINLIB_VERSION_PATCH&#160;&#160;&#160;0u</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kutuphane semantik versiyon patch degeri. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00071">71</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+</div>
+</div>
+<a id="ae0b337e032ba185b08f3b207a9f1cc45" name="ae0b337e032ba185b08f3b207a9f1cc45"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae0b337e032ba185b08f3b207a9f1cc45">&#9670;&#160;</a></span>UARTBINLIB_VERSION_STRING</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define UARTBINLIB_VERSION_STRING&#160;&#160;&#160;&quot;V1.0.0&quot;</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Kutuphane semantik versiyon metni. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00074">74</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 </div>
 </div>
@@ -540,7 +620,7 @@ STM32 Entegrasyonu</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00207">207</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00219">219</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 </div>
 </div>
@@ -583,7 +663,7 @@ STM32 Entegrasyonu</h1>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00196">196</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00208">208</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 </div>
 </div>
@@ -665,7 +745,7 @@ STM32 Entegrasyonu</h1>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Basarida 0, hatada sifir disi. </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00188">188</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00200">200</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 </div>
 </div>
@@ -700,7 +780,7 @@ STM32 Entegrasyonu</h1>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00127">127</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00139">139</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 </div>
 </div>
@@ -732,7 +812,7 @@ STM32 Entegrasyonu</h1>
 </td></tr>
 </table>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00104">104</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00116">116</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 </div>
 </div>
@@ -931,7 +1011,7 @@ STM32 Entegrasyonu</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00501">501</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00289">uartbin::last_rx_time_ms</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00301">uartbin::last_rx_time_ms</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00490">uartbin_feed()</a>.</p>
 
@@ -978,7 +1058,7 @@ STM32 Entegrasyonu</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00533">533</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00286">uartbin::crc</a>, <a class="el" href="uartbin_8h_source.html#l00280">uartbin::crc_bytes</a>, <a class="el" href="uartbin_8h_source.html#l00283">uartbin::crc_pos</a>, <a class="el" href="uartbin_8h_source.html#l00163">uartbin_packet::flags</a>, <a class="el" href="uartbin_8h_source.html#l00268">uartbin::header</a>, <a class="el" href="uartbin_8h_source.html#l00271">uartbin::header_pos</a>, <a class="el" href="uartbin_8h_source.html#l00289">uartbin::last_rx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00217">uartbin_config::on_packet</a>, <a class="el" href="uartbin_8h_source.html#l00169">uartbin_packet::payload</a>, <a class="el" href="uartbin_8h_source.html#l00277">uartbin::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00172">uartbin_packet::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00274">uartbin::payload_pos</a>, <a class="el" href="uartbin_8h_source.html#l00295">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00304">uartbin::retry_seq</a>, <a class="el" href="uartbin_8h_source.html#l00226">uartbin_config::rx_payload_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00229">uartbin_config::rx_payload_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00166">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00265">uartbin::state</a>, <a class="el" href="uartbin_8h_source.html#l00160">uartbin_packet::type</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00132">UARTBIN_ERROR_BAD_LENGTH</a>, <a class="el" href="uartbin_8h_source.html#l00129">UARTBIN_ERROR_BAD_VERSION</a>, <a class="el" href="uartbin_8h_source.html#l00135">UARTBIN_ERROR_CRC</a>, <a class="el" href="uartbin_8h_source.html#l00138">UARTBIN_ERROR_RX_OVERFLOW</a>, <a class="el" href="uartbin_8h_source.html#l00096">UARTBIN_FLAG_RESPONSE</a>, <a class="el" href="uartbin_8c_source.html#l00047">uartbin_get_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00074">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, <a class="el" href="uartbin_8h_source.html#l00068">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00071">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8c_source.html#l00038">UARTBIN_STATE_CRC</a>, <a class="el" href="uartbin_8c_source.html#l00032">UARTBIN_STATE_HEADER</a>, <a class="el" href="uartbin_8c_source.html#l00035">UARTBIN_STATE_PAYLOAD</a>, <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>, <a class="el" href="uartbin_8c_source.html#l00029">UARTBIN_STATE_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00065">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8h_source.html#l00223">uartbin_config::user</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00298">uartbin::crc</a>, <a class="el" href="uartbin_8h_source.html#l00292">uartbin::crc_bytes</a>, <a class="el" href="uartbin_8h_source.html#l00295">uartbin::crc_pos</a>, <a class="el" href="uartbin_8h_source.html#l00175">uartbin_packet::flags</a>, <a class="el" href="uartbin_8h_source.html#l00280">uartbin::header</a>, <a class="el" href="uartbin_8h_source.html#l00283">uartbin::header_pos</a>, <a class="el" href="uartbin_8h_source.html#l00301">uartbin::last_rx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00229">uartbin_config::on_packet</a>, <a class="el" href="uartbin_8h_source.html#l00181">uartbin_packet::payload</a>, <a class="el" href="uartbin_8h_source.html#l00289">uartbin::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00184">uartbin_packet::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00286">uartbin::payload_pos</a>, <a class="el" href="uartbin_8h_source.html#l00307">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00316">uartbin::retry_seq</a>, <a class="el" href="uartbin_8h_source.html#l00238">uartbin_config::rx_payload_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00241">uartbin_config::rx_payload_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00178">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00277">uartbin::state</a>, <a class="el" href="uartbin_8h_source.html#l00172">uartbin_packet::type</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00089">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00144">UARTBIN_ERROR_BAD_LENGTH</a>, <a class="el" href="uartbin_8h_source.html#l00141">UARTBIN_ERROR_BAD_VERSION</a>, <a class="el" href="uartbin_8h_source.html#l00147">UARTBIN_ERROR_CRC</a>, <a class="el" href="uartbin_8h_source.html#l00150">UARTBIN_ERROR_RX_OVERFLOW</a>, <a class="el" href="uartbin_8h_source.html#l00108">UARTBIN_FLAG_RESPONSE</a>, <a class="el" href="uartbin_8c_source.html#l00047">uartbin_get_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00086">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, <a class="el" href="uartbin_8h_source.html#l00080">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00083">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8c_source.html#l00038">UARTBIN_STATE_CRC</a>, <a class="el" href="uartbin_8c_source.html#l00032">UARTBIN_STATE_HEADER</a>, <a class="el" href="uartbin_8c_source.html#l00035">UARTBIN_STATE_PAYLOAD</a>, <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>, <a class="el" href="uartbin_8c_source.html#l00029">UARTBIN_STATE_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8h_source.html#l00235">uartbin_config::user</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>, <a class="el" href="uartbin_8c_source.html#l00506">uartbin_feed_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00501">uartbin_feed_byte()</a>.</p>
 
@@ -1016,7 +1096,7 @@ STM32 Entegrasyonu</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00295">295</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00198">linux_uartbin_init()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>.</p>
 
@@ -1049,7 +1129,7 @@ STM32 Entegrasyonu</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00385">385</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00292">uartbin::tx_seq</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00304">uartbin::tx_seq</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, and <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
 
@@ -1183,7 +1263,7 @@ STM32 Entegrasyonu</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00339">339</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00074">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00058">uartbin_put_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00068">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00071">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00065">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00089">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00086">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00058">uartbin_put_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00080">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00083">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>, and <a class="el" href="uartbin_8c_source.html#l00435">uartbin_send_response()</a>.</p>
 
@@ -1241,7 +1321,7 @@ STM32 Entegrasyonu</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00454">454</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00099">UARTBIN_FLAG_EVENT</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00111">UARTBIN_FLAG_EVENT</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00268">main()</a>.</p>
 
@@ -1297,7 +1377,7 @@ STM32 Entegrasyonu</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00399">399</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00093">UARTBIN_FLAG_REQUEST</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00105">UARTBIN_FLAG_REQUEST</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -1359,7 +1439,7 @@ STM32 Entegrasyonu</h1>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00435">435</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
-<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00166">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00096">UARTBIN_FLAG_RESPONSE</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
+<p class="reference">References <a class="el" href="uartbin_8h_source.html#l00178">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00108">UARTBIN_FLAG_RESPONSE</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>.</p>
 

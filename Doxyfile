@@ -1,6 +1,7 @@
 # uartbinlib icin Doxygen konfigurasyonu.
 
 PROJECT_NAME           = "uartbinlib"
+PROJECT_NUMBER         = V1.0.0
 PROJECT_BRIEF          = "developed by Ahmet Cemal Kurtulmuş"
 PROJECT_LOGO           = assets/uartbinlib_logo.svg
 OUTPUT_DIRECTORY       = docs

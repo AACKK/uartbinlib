@@ -61,6 +61,18 @@
 extern "C" {
 #endif
 
+/** @brief Kutuphane semantik versiyon major degeri. */
+#define UARTBINLIB_VERSION_MAJOR 1u
+
+/** @brief Kutuphane semantik versiyon minor degeri. */
+#define UARTBINLIB_VERSION_MINOR 0u
+
+/** @brief Kutuphane semantik versiyon patch degeri. */
+#define UARTBINLIB_VERSION_PATCH 0u
+
+/** @brief Kutuphane semantik versiyon metni. */
+#define UARTBINLIB_VERSION_STRING "V1.0.0"
+
 /** @brief Her cerceve header'inda tasinan protokol surumu. */
 #define UARTBIN_VERSION 1u
 

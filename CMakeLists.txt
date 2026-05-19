@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15)
 
-project(uartbinlib C)
+project(uartbinlib VERSION 1.0.0 LANGUAGES C)
 
 add_library(uartbin STATIC src/uartbin.c)
 target_include_directories(uartbin PUBLIC include)

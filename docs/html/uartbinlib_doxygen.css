@@ -27,7 +27,7 @@
 }
 
 #projectalign::before {
-  content: "AUTO SEQ  |  SOF A5 5A  |  CRC16  |  RETRY  |  EVENT";
+  content: "V1.0.0  |  AUTO SEQ  |  SOF A5 5A  |  CRC16  |  RETRY  |  EVENT";
   display: inline-flex;
   align-self: center;
   margin-right: auto;
