@@ -5,6 +5,8 @@ icin kucuk ve platformdan bagimsiz bir C kutuphanesidir. STM32 gibi gomulu
 hedefler icin tasarlanmistir, fakat cekirdek kod HAL, RTOS, DMA, interrupt veya
 heap bagimliligi tasimaz.
 
+Dokumantasyon: [aackk.github.io/uartbinlib](https://aackk.github.io/uartbinlib/)
+
 ## Neden uartbinlib?
 
 Seri hatlarda farkli framing yaklasimlari, PC tarafinda serial port
