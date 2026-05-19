@@ -4,6 +4,11 @@ var uartbin_8h =
     [ "uartbin_config", "structuartbin__config.html", "structuartbin__config" ],
     [ "uartbin", "structuartbin.html", "structuartbin" ],
     [ "UARTBIN_CRC_SIZE", "uartbin_8h.html#a50fbffbdad369a60ed01bf7003c7d31a", null ],
+    [ "UARTBIN_DEFAULT_RETRY_MAX_RETRIES", "uartbin_8h.html#a6977a0cfc8532504d121983c09148dd3", null ],
+    [ "UARTBIN_DEFAULT_RETRY_TIMEOUT_MS", "uartbin_8h.html#ab47658a8617054b88a7e3fcae065857d", null ],
+    [ "UARTBIN_FLAG_EVENT", "uartbin_8h.html#a2356aef600bb6ecf0cf961b7dff72137", null ],
+    [ "UARTBIN_FLAG_REQUEST", "uartbin_8h.html#a490715f6c89d7e1e3cfc6d3ffc3c44d1", null ],
+    [ "UARTBIN_FLAG_RESPONSE", "uartbin_8h.html#a2521c8c9042c23aeef250648ae766284", null ],
     [ "UARTBIN_HEADER_SIZE", "uartbin_8h.html#a2eca460bac3c257ac1b3d992894a1331", null ],
     [ "UARTBIN_MAX_FRAME_OVERHEAD", "uartbin_8h.html#a02dde34a333b47fcc0bd146757edfeb0", null ],
     [ "UARTBIN_SOF0", "uartbin_8h.html#a3bd0a539c23bdaf94a00f3e55f543dd0", null ],
@@ -22,22 +27,30 @@ var uartbin_8h =
       [ "UARTBIN_ERROR_BAD_LENGTH", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a6036c89d26a87104d29d0fd4c47a01f7", null ],
       [ "UARTBIN_ERROR_CRC", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27aa1b71630db0c15f4631715a76c58c169", null ],
       [ "UARTBIN_ERROR_RX_OVERFLOW", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27ac484c8b27677076e8b488a19afcd9151", null ],
-      [ "UARTBIN_ERROR_TIMEOUT", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27ab4aec92056b3ef0c514838590df95fc4", null ]
+      [ "UARTBIN_ERROR_TIMEOUT", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27ab4aec92056b3ef0c514838590df95fc4", null ],
+      [ "UARTBIN_ERROR_RETRY_EXHAUSTED", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a197538cd1ce50346e338b55684482dd9", null ],
+      [ "UARTBIN_ERROR_RETRY_WRITE", "uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a7ed4d37cc04314e6a6e664f2548236d5", null ]
     ] ],
     [ "uartbin_status", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cad", [
       [ "UARTBIN_OK", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada4665c1bc3c4b78e9b27d558883dd8d32", null ],
       [ "UARTBIN_EINVAL", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada89dda8596dab52196eb60010ebaf6f67", null ],
       [ "UARTBIN_EWRITE", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada1bcbf954584fdf2d9c8aa94634cd9608", null ],
       [ "UARTBIN_EPAYLOAD_TOO_LONG", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cadac9d8e5665f315ceb2c7883ee07d8f1c0", null ],
-      [ "UARTBIN_ENO_BUFFER", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada75b1988291f3d6acf21c5632d3cc1fff", null ]
+      [ "UARTBIN_ENO_BUFFER", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada75b1988291f3d6acf21c5632d3cc1fff", null ],
+      [ "UARTBIN_EBUSY", "uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada6e9ccc2f4f646420f7d069d63ae42860", null ]
     ] ],
+    [ "uartbin_cancel_retry", "uartbin_8h.html#a0b688936e31a49a78dff08b0040bfb09", null ],
     [ "uartbin_crc16_ccitt", "uartbin_8h.html#a6ecd9aa1ae31f9af93487d79b7b158a1", null ],
     [ "uartbin_feed", "uartbin_8h.html#adae56dc79286796f68e851fa337f1779", null ],
     [ "uartbin_feed_at", "uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b", null ],
     [ "uartbin_feed_byte", "uartbin_8h.html#a0b7e981f8f366c641f0686a448168f5a", null ],
     [ "uartbin_feed_byte_at", "uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0", null ],
     [ "uartbin_init", "uartbin_8h.html#a09e736b97567456af7144d1eb8f3edec", null ],
+    [ "uartbin_next_seq", "uartbin_8h.html#a0226dd14064c3a24c38295acba27219a", null ],
     [ "uartbin_poll", "uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e", null ],
     [ "uartbin_reset", "uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9", null ],
-    [ "uartbin_send", "uartbin_8h.html#a105423f2609e98a85f2d062df2b84ff4", null ]
+    [ "uartbin_send", "uartbin_8h.html#a105423f2609e98a85f2d062df2b84ff4", null ],
+    [ "uartbin_send_event", "uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839", null ],
+    [ "uartbin_send_request", "uartbin_8h.html#a25f9d1a61c29eebfbf3dc655b0621b2f", null ],
+    [ "uartbin_send_response", "uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9", null ]
 ];

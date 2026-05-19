@@ -7,6 +7,7 @@ typedef struct test_bus {
     uint8_t tx[512];
     size_t tx_len;
     uint8_t rx_payload[128];
+    uint8_t retry_frame[128];
     uartbin_packet_t last_packet;
     uint8_t last_payload[128];
     unsigned packet_count;
@@ -50,6 +51,7 @@ static uartbin_t make_link(test_bus_t *bus)
     uartbin_config_t cfg;
 
     memset(bus, 0, sizeof(*bus));
+    memset(&cfg, 0, sizeof(cfg));
     cfg.write = test_write;
     cfg.on_packet = test_on_packet;
     cfg.on_error = test_on_error;
@@ -170,6 +172,148 @@ static int test_timeout(void)
     return failed;
 }
 
+static int test_auto_request_and_event_sequences(void)
+{
+    test_bus_t bus;
+    uartbin_t link = make_link(&bus);
+    uint8_t payload[] = { 0x11, 0x22 };
+    int failed = 0;
+
+    failed |= expect(uartbin_send_request(&link, 0x10, 0x80, payload, sizeof(payload)) == UARTBIN_OK,
+                     "auto request send should succeed");
+    uartbin_feed(&link, bus.tx, bus.tx_len);
+
+    failed |= expect(bus.packet_count == 1u, "request should be received");
+    failed |= expect(bus.last_packet.type == 0x10u, "request type should match");
+    failed |= expect((bus.last_packet.flags & UARTBIN_FLAG_REQUEST) != 0u, "request flag should be set");
+    failed |= expect((bus.last_packet.flags & 0x80u) != 0u, "caller flags should be preserved");
+    failed |= expect(bus.last_packet.seq == 1u, "first automatic sequence should be 1");
+
+    bus.tx_len = 0u;
+    failed |= expect(uartbin_send_event(&link, 0x20, 0x40, payload, sizeof(payload)) == UARTBIN_OK,
+                     "auto event send should succeed");
+    uartbin_feed(&link, bus.tx, bus.tx_len);
+
+    failed |= expect(bus.packet_count == 2u, "event should be received");
+    failed |= expect(bus.last_packet.type == 0x20u, "event type should match");
+    failed |= expect((bus.last_packet.flags & UARTBIN_FLAG_EVENT) != 0u, "event flag should be set");
+    failed |= expect((bus.last_packet.flags & 0x40u) != 0u, "event caller flags should be preserved");
+    failed |= expect(bus.last_packet.seq == 2u, "second automatic sequence should be 2");
+
+    return failed;
+}
+
+static int test_auto_response_echoes_sequence(void)
+{
+    test_bus_t bus;
+    uartbin_t link = make_link(&bus);
+    uartbin_packet_t request;
+    uint8_t payload[] = { 0x33 };
+    int failed = 0;
+
+    memset(&request, 0, sizeof(request));
+    request.type = 0x10u;
+    request.flags = UARTBIN_FLAG_REQUEST;
+    request.seq = 0x4567u;
+
+    failed |= expect(uartbin_send_response(&link, &request, 0x11, 0x80, payload, sizeof(payload)) == UARTBIN_OK,
+                     "auto response send should succeed");
+    uartbin_feed(&link, bus.tx, bus.tx_len);
+
+    failed |= expect(bus.packet_count == 1u, "response should be received");
+    failed |= expect(bus.last_packet.type == 0x11u, "response type should match");
+    failed |= expect((bus.last_packet.flags & UARTBIN_FLAG_RESPONSE) != 0u, "response flag should be set");
+    failed |= expect((bus.last_packet.flags & 0x80u) != 0u, "response caller flags should be preserved");
+    failed |= expect(bus.last_packet.seq == 0x4567u, "response should echo request sequence");
+    failed |= expect(link.tx_seq == 0u, "response should not advance automatic sequence");
+
+    return failed;
+}
+
+static int test_reliable_request_retries_and_exhausts(void)
+{
+    test_bus_t bus;
+    uartbin_t link = make_link(&bus);
+    uint8_t payload[] = { 0x55, 0x66 };
+    size_t first_frame_len;
+    int failed = 0;
+
+    link.cfg.tx_retry_buffer = bus.retry_frame;
+    link.cfg.tx_retry_capacity = sizeof(bus.retry_frame);
+    link.cfg.tx_retry_timeout_ms = 50u;
+    link.cfg.tx_retry_max_retries = 1u;
+
+    failed |= expect(uartbin_send_request(&link, 0x30, 0, payload, sizeof(payload)) == UARTBIN_OK,
+                     "reliable request should send");
+    first_frame_len = bus.tx_len;
+    failed |= expect(link.retry_active != 0u, "reliable request should become pending");
+
+    bus.tx_len = 0u;
+    uartbin_poll(&link, 100u);
+    failed |= expect(bus.tx_len == 0u, "first poll should arm retry timer only");
+
+    uartbin_poll(&link, 149u);
+    failed |= expect(bus.tx_len == 0u, "poll before timeout should not retry");
+
+    uartbin_poll(&link, 150u);
+    failed |= expect(bus.tx_len == first_frame_len, "timeout should retransmit pending frame");
+    failed |= expect(link.retry_count == 1u, "retry count should increment");
+
+    bus.tx_len = 0u;
+    uartbin_poll(&link, 200u);
+    failed |= expect(bus.tx_len == 0u, "exhausted retry should not transmit again");
+    failed |= expect(bus.error_count == 1u, "retry exhaustion should report one error");
+    failed |= expect(bus.last_error == UARTBIN_ERROR_RETRY_EXHAUSTED, "error should be retry exhausted");
+    failed |= expect(link.retry_active == 0u, "retry state should clear after exhaustion");
+
+    return failed;
+}
+
+static int test_response_clears_reliable_request(void)
+{
+    test_bus_t bus;
+    uartbin_t link = make_link(&bus);
+    int failed = 0;
+
+    link.cfg.tx_retry_buffer = bus.retry_frame;
+    link.cfg.tx_retry_capacity = sizeof(bus.retry_frame);
+    link.cfg.tx_retry_timeout_ms = 50u;
+    link.cfg.tx_retry_max_retries = 3u;
+
+    failed |= expect(uartbin_send_request(&link, 0x40, 0, NULL, 0) == UARTBIN_OK,
+                     "reliable request should send");
+    failed |= expect(link.retry_active != 0u, "request should be pending");
+
+    bus.tx_len = 0u;
+    failed |= expect(uartbin_send(&link, 0x41, UARTBIN_FLAG_RESPONSE, 1u, NULL, 0) == UARTBIN_OK,
+                     "response frame should send");
+    uartbin_feed(&link, bus.tx, bus.tx_len);
+
+    failed |= expect(link.retry_active == 0u, "matching response should clear retry state");
+    failed |= expect(bus.packet_count == 1u, "response should still be delivered");
+
+    return failed;
+}
+
+static int test_reliable_request_busy_until_response(void)
+{
+    test_bus_t bus;
+    uartbin_t link = make_link(&bus);
+    int failed = 0;
+
+    link.cfg.tx_retry_buffer = bus.retry_frame;
+    link.cfg.tx_retry_capacity = sizeof(bus.retry_frame);
+    link.cfg.tx_retry_timeout_ms = 50u;
+    link.cfg.tx_retry_max_retries = 3u;
+
+    failed |= expect(uartbin_send_request(&link, 0x50, 0, NULL, 0) == UARTBIN_OK,
+                     "first reliable request should send");
+    failed |= expect(uartbin_send_request(&link, 0x51, 0, NULL, 0) == UARTBIN_EBUSY,
+                     "second reliable request should be rejected while pending");
+
+    return failed;
+}
+
 int main(void)
 {
     int failed = 0;
@@ -179,6 +323,11 @@ int main(void)
     failed |= test_noise_resync();
     failed |= test_too_large_payload_is_rejected();
     failed |= test_timeout();
+    failed |= test_auto_request_and_event_sequences();
+    failed |= test_auto_response_echoes_sequence();
+    failed |= test_reliable_request_retries_and_exhausts();
+    failed |= test_response_clears_reliable_request();
+    failed |= test_reliable_request_busy_until_response();
 
     if (failed != 0) {
         return 1;

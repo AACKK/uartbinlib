@@ -1,9 +1,8 @@
 var searchData=
 [
-  ['readme_2emd_0',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
-  ['rx_5fbyte_1',['rx_byte',['../structstm32__uartbin__it.html#a5e82a01184c38249369f502940c2914c',1,'stm32_uartbin_it']]],
-  ['rx_5fpayload_2',['rx_payload',['../structstm32__uartbin__dma.html#a7c81a0ba62392ca2dab077d7d3732f41',1,'stm32_uartbin_dma::rx_payload'],['../structstm32__uartbin__it.html#a8b925dcb35d13c539c8f8847dd126f0f',1,'stm32_uartbin_it::rx_payload']]],
-  ['rx_5fpayload_5fbuffer_3',['rx_payload_buffer',['../structuartbin__config.html#a9ba07c9627b3932126f96d51d791d78c',1,'uartbin_config']]],
-  ['rx_5fpayload_5fcapacity_4',['rx_payload_capacity',['../structuartbin__config.html#a0c006a1746c4c04842a48a892fedb33a',1,'uartbin_config']]],
-  ['rx_5ftimeout_5fms_5',['rx_timeout_ms',['../structuartbin__config.html#a4966d201d37393c6560120f7af2da53e',1,'uartbin_config']]]
+  ['payload_0',['payload',['../structuartbin__packet.html#a5c09c77d40b5513cabf7416c4e05e8c8',1,'uartbin_packet']]],
+  ['payload_5flen_1',['payload_len',['../structuartbin__packet.html#a75e1163ff72f8b6c33b694d575726a07',1,'uartbin_packet::payload_len'],['../structuartbin.html#a97d713ad2e943e696248a70297253d2b',1,'uartbin::payload_len']]],
+  ['payload_5fpos_2',['payload_pos',['../structuartbin.html#a90159895d495d5503cb8df3db8cbe032',1,'uartbin']]],
+  ['payloads_3',['Large Payloads',['../index.html#autotoc_md7',1,'']]],
+  ['protocol_5ferrors_4',['protocol_errors',['../structstm32__uartbin__dma.html#acb07ebeeba786749dacb2bb2f1ce97cf',1,'stm32_uartbin_dma::protocol_errors'],['../structstm32__uartbin__it.html#aabba1f1454ea641ef8ecffaf3b2b0dde',1,'stm32_uartbin_it::protocol_errors']]]
 ];

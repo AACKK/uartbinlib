@@ -125,6 +125,141 @@ static int uartbin_rx_active(const uartbin_t *ctx)
     return ctx->state != UARTBIN_STATE_SOF0;
 }
 
+static size_t uartbin_frame_len(uint16_t payload_len)
+{
+    return (size_t)UARTBIN_MAX_FRAME_OVERHEAD + payload_len;
+}
+
+static uartbin_status_t uartbin_build_frame(uint8_t *frame,
+                                            size_t frame_capacity,
+                                            uint8_t type,
+                                            uint8_t flags,
+                                            uint16_t seq,
+                                            const uint8_t *payload,
+                                            uint16_t payload_len,
+                                            size_t *frame_len)
+{
+    size_t len = uartbin_frame_len(payload_len);
+    uint16_t crc;
+
+    if (frame == 0 || frame_len == 0 || (payload_len > 0u && payload == 0)) {
+        return UARTBIN_EINVAL;
+    }
+    if (len > frame_capacity) {
+        return UARTBIN_EPAYLOAD_TOO_LONG;
+    }
+
+    frame[0] = UARTBIN_SOF0;
+    frame[1] = UARTBIN_SOF1;
+    frame[2] = UARTBIN_VERSION;
+    frame[3] = type;
+    frame[4] = flags;
+    frame[5] = 0u;
+    uartbin_put_u16_le(&frame[6], seq);
+    uartbin_put_u16_le(&frame[8], payload_len);
+    if (payload_len > 0u) {
+        memcpy(&frame[10], payload, payload_len);
+    }
+
+    crc = uartbin_crc16_ccitt(&frame[2], UARTBIN_HEADER_SIZE, 0xFFFFu);
+    crc = uartbin_crc16_ccitt(payload, payload_len, crc);
+    uartbin_put_u16_le(&frame[10u + payload_len], crc);
+
+    *frame_len = len;
+    return UARTBIN_OK;
+}
+
+static void uartbin_clear_retry(uartbin_t *ctx)
+{
+    ctx->retry_active = 0u;
+    ctx->retry_timer_started = 0u;
+    ctx->retry_count = 0u;
+    ctx->retry_seq = 0u;
+    ctx->retry_frame_len = 0u;
+    ctx->retry_last_tx_time_ms = 0u;
+}
+
+static int uartbin_retry_enabled(const uartbin_t *ctx)
+{
+    return ctx->cfg.tx_retry_timeout_ms != 0u && ctx->cfg.tx_retry_max_retries != 0u;
+}
+
+static uartbin_status_t uartbin_start_retry(uartbin_t *ctx,
+                                            uint8_t type,
+                                            uint8_t flags,
+                                            uint16_t seq,
+                                            const uint8_t *payload,
+                                            uint16_t payload_len)
+{
+    size_t frame_len = 0u;
+    uartbin_status_t status;
+
+    if (!uartbin_retry_enabled(ctx)) {
+        return UARTBIN_OK;
+    }
+    if (ctx->retry_active != 0u) {
+        return UARTBIN_EBUSY;
+    }
+    if (ctx->cfg.tx_retry_buffer == 0 || ctx->cfg.tx_retry_capacity == 0u) {
+        return UARTBIN_ENO_BUFFER;
+    }
+
+    status = uartbin_build_frame(ctx->cfg.tx_retry_buffer,
+                                 ctx->cfg.tx_retry_capacity,
+                                 type,
+                                 flags,
+                                 seq,
+                                 payload,
+                                 payload_len,
+                                 &frame_len);
+    if (status != UARTBIN_OK) {
+        return status;
+    }
+
+    ctx->retry_active = 1u;
+    ctx->retry_timer_started = 0u;
+    ctx->retry_count = 0u;
+    ctx->retry_seq = seq;
+    ctx->retry_frame_len = (uint16_t)frame_len;
+    ctx->retry_last_tx_time_ms = 0u;
+    return UARTBIN_OK;
+}
+
+static void uartbin_poll_retry(uartbin_t *ctx, uint32_t now_ms)
+{
+    uint32_t elapsed;
+
+    if (ctx->retry_active == 0u || !uartbin_retry_enabled(ctx)) {
+        return;
+    }
+
+    if (ctx->retry_timer_started == 0u) {
+        ctx->retry_timer_started = 1u;
+        ctx->retry_last_tx_time_ms = now_ms;
+        return;
+    }
+
+    elapsed = now_ms - ctx->retry_last_tx_time_ms;
+    if (elapsed < ctx->cfg.tx_retry_timeout_ms) {
+        return;
+    }
+
+    if (ctx->retry_count >= ctx->cfg.tx_retry_max_retries) {
+        uartbin_report_error(ctx, UARTBIN_ERROR_RETRY_EXHAUSTED);
+        uartbin_clear_retry(ctx);
+        return;
+    }
+
+    if (uartbin_write_all(ctx, ctx->cfg.tx_retry_buffer, ctx->retry_frame_len) != UARTBIN_OK) {
+        uartbin_report_error(ctx, UARTBIN_ERROR_RETRY_WRITE);
+        uartbin_clear_retry(ctx);
+        return;
+    }
+
+    ctx->retry_count++;
+    ctx->retry_last_tx_time_ms = now_ms;
+}
+
 void uartbin_init(uartbin_t *ctx, const uartbin_config_t *config)
 {
     if (ctx == 0 || config == 0) {
@@ -140,6 +275,13 @@ void uartbin_reset(uartbin_t *ctx)
 {
     if (ctx != 0) {
         uartbin_reset_rx(ctx);
+    }
+}
+
+void uartbin_cancel_retry(uartbin_t *ctx)
+{
+    if (ctx != 0) {
+        uartbin_clear_retry(ctx);
     }
 }
 
@@ -207,6 +349,109 @@ uartbin_status_t uartbin_send(uartbin_t *ctx,
     return uartbin_write_all(ctx, crc_bytes, sizeof(crc_bytes));
 }
 
+uint16_t uartbin_next_seq(uartbin_t *ctx)
+{
+    if (ctx == 0) {
+        return 0u;
+    }
+
+    ctx->tx_seq++;
+    if (ctx->tx_seq == 0u) {
+        ctx->tx_seq = 1u;
+    }
+
+    return ctx->tx_seq;
+}
+
+uartbin_status_t uartbin_send_request(uartbin_t *ctx,
+                                      uint8_t type,
+                                      uint8_t flags,
+                                      const uint8_t *payload,
+                                      uint16_t payload_len)
+{
+    uint8_t tx_flags;
+    uint16_t seq;
+    uartbin_status_t status;
+
+    if (ctx == 0) {
+        return UARTBIN_EINVAL;
+    }
+    if (payload_len > 0u && payload == 0) {
+        return UARTBIN_EINVAL;
+    }
+    if (uartbin_retry_enabled(ctx) && ctx->retry_active != 0u) {
+        return UARTBIN_EBUSY;
+    }
+
+    tx_flags = (uint8_t)(flags | UARTBIN_FLAG_REQUEST);
+    seq = uartbin_next_seq(ctx);
+    status = uartbin_start_retry(ctx, type, tx_flags, seq, payload, payload_len);
+    if (status != UARTBIN_OK) {
+        return status;
+    }
+
+    status = uartbin_send(ctx, type, tx_flags, seq, payload, payload_len);
+    if (status != UARTBIN_OK) {
+        uartbin_clear_retry(ctx);
+    }
+
+    return status;
+}
+
+uartbin_status_t uartbin_send_response(uartbin_t *ctx,
+                                       const uartbin_packet_t *request,
+                                       uint8_t type,
+                                       uint8_t flags,
+                                       const uint8_t *payload,
+                                       uint16_t payload_len)
+{
+    if (ctx == 0 || request == 0) {
+        return UARTBIN_EINVAL;
+    }
+
+    return uartbin_send(ctx,
+                        type,
+                        (uint8_t)(flags | UARTBIN_FLAG_RESPONSE),
+                        request->seq,
+                        payload,
+                        payload_len);
+}
+
+uartbin_status_t uartbin_send_event(uartbin_t *ctx,
+                                    uint8_t type,
+                                    uint8_t flags,
+                                    const uint8_t *payload,
+                                    uint16_t payload_len)
+{
+    uint8_t tx_flags;
+    uint16_t seq;
+    uartbin_status_t status;
+
+    if (ctx == 0) {
+        return UARTBIN_EINVAL;
+    }
+    if (payload_len > 0u && payload == 0) {
+        return UARTBIN_EINVAL;
+    }
+    if (uartbin_retry_enabled(ctx) && ctx->retry_active != 0u) {
+        return UARTBIN_EBUSY;
+    }
+
+    tx_flags = (uint8_t)(flags | UARTBIN_FLAG_EVENT);
+    seq = uartbin_next_seq(ctx);
+    status = uartbin_start_retry(ctx, type, tx_flags, seq, payload, payload_len);
+    if (status != UARTBIN_OK) {
+        return status;
+    }
+
+    status = uartbin_send(ctx, type, tx_flags, seq, payload, payload_len);
+    if (status != UARTBIN_OK) {
+        uartbin_clear_retry(ctx);
+    }
+
+    return status;
+}
+
 void uartbin_feed(uartbin_t *ctx, const uint8_t *data, size_t len)
 {
     if (ctx == 0 || data == 0) {
@@ -238,15 +483,19 @@ void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)
 {
     uint32_t elapsed;
 
-    if (ctx == 0 || ctx->cfg.rx_timeout_ms == 0u || !uartbin_rx_active(ctx)) {
+    if (ctx == 0) {
         return;
     }
 
-    elapsed = now_ms - ctx->last_rx_time_ms;
-    if (elapsed >= ctx->cfg.rx_timeout_ms) {
-        uartbin_report_error(ctx, UARTBIN_ERROR_TIMEOUT);
-        uartbin_reset_rx(ctx);
-        ctx->last_rx_time_ms = now_ms;
+    uartbin_poll_retry(ctx, now_ms);
+
+    if (ctx->cfg.rx_timeout_ms != 0u && uartbin_rx_active(ctx)) {
+        elapsed = now_ms - ctx->last_rx_time_ms;
+        if (elapsed >= ctx->cfg.rx_timeout_ms) {
+            uartbin_report_error(ctx, UARTBIN_ERROR_TIMEOUT);
+            uartbin_reset_rx(ctx);
+            ctx->last_rx_time_ms = now_ms;
+        }
     }
 }
 
@@ -329,13 +578,20 @@ void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms)
             uint16_t expected = uartbin_get_u16_le(ctx->crc_bytes);
 
             if (expected == ctx->crc) {
+                uartbin_packet_t packet;
+
+                packet.type = ctx->header[1];
+                packet.flags = ctx->header[2];
+                packet.seq = uartbin_get_u16_le(&ctx->header[4]);
+                packet.payload = ctx->cfg.rx_payload_buffer;
+                packet.payload_len = ctx->payload_len;
+                if ((packet.flags & UARTBIN_FLAG_RESPONSE) != 0u &&
+                    ctx->retry_active != 0u &&
+                    packet.seq == ctx->retry_seq) {
+                    uartbin_clear_retry(ctx);
+                }
+
                 if (ctx->cfg.on_packet != 0) {
-                    uartbin_packet_t packet;
-                    packet.type = ctx->header[1];
-                    packet.flags = ctx->header[2];
-                    packet.seq = uartbin_get_u16_le(&ctx->header[4]);
-                    packet.payload = ctx->cfg.rx_payload_buffer;
-                    packet.payload_len = ctx->payload_len;
                     ctx->cfg.on_packet(&packet, ctx->cfg.user);
                 }
             } else {

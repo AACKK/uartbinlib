@@ -22,12 +22,19 @@
  * validation. This keeps the API simple and makes it suitable for robust
  * embedded command, telemetry, configuration, and firmware-chunk protocols.
  *
+ * Applications can use the low-level uartbin_send() API with an explicit
+ * sequence number, or the higher-level request/response/event helpers. The
+ * helpers keep an automatic per-context sequence counter, echo sequence numbers
+ * for responses, and can optionally retry request/event frames until a matching
+ * response arrives.
+ *
  * @section uartbin_h_no_alloc Memory Model
  *
  * The library never allocates memory. The application provides:
  *
  * - a persistent ::uartbin_t context,
  * - a static RX payload buffer,
+ * - an optional static TX retry frame buffer,
  * - a write hook for TX,
  * - packet and error callbacks.
  *
@@ -35,7 +42,9 @@
  *
  * Set ::uartbin_config::rx_timeout_ms to a non-zero value and call
  * uartbin_poll() periodically. The timestamped feed functions also check the
- * timeout before accepting each byte/block.
+ * RX timeout before accepting each byte/block. The same uartbin_poll() call
+ * drives optional TX retry timing when ::uartbin_config::tx_retry_timeout_ms
+ * is configured.
  *
  * @section uartbin_h_stm32 STM32 Integration
  *
@@ -71,6 +80,25 @@ extern "C" {
 /** @brief Bytes added around each payload: SOF + header + CRC. */
 #define UARTBIN_MAX_FRAME_OVERHEAD (2u + UARTBIN_HEADER_SIZE + UARTBIN_CRC_SIZE)
 
+#ifndef UARTBIN_DEFAULT_RETRY_TIMEOUT_MS
+/** @brief Default retry timeout value applications can use in config. */
+#define UARTBIN_DEFAULT_RETRY_TIMEOUT_MS 100u
+#endif
+
+#ifndef UARTBIN_DEFAULT_RETRY_MAX_RETRIES
+/** @brief Default retry count applications can use in config. */
+#define UARTBIN_DEFAULT_RETRY_MAX_RETRIES 3u
+#endif
+
+/** @brief Flag bit set by uartbin_send_request(). */
+#define UARTBIN_FLAG_REQUEST 0x01u
+
+/** @brief Flag bit set by uartbin_send_response(). */
+#define UARTBIN_FLAG_RESPONSE 0x02u
+
+/** @brief Flag bit set by uartbin_send_event(). */
+#define UARTBIN_FLAG_EVENT 0x04u
+
 /**
  * @brief Return status values for API calls that can fail immediately.
  */
@@ -87,8 +115,11 @@ typedef enum uartbin_status {
     /** Reserved for applications that add stricter TX payload limits. */
     UARTBIN_EPAYLOAD_TOO_LONG = -3,
 
-    /** Reserved for configurations without a required buffer. */
-    UARTBIN_ENO_BUFFER = -4
+/** Reserved for configurations without a required buffer. */
+    UARTBIN_ENO_BUFFER = -4,
+
+    /** A reliable request/event is already waiting for a response. */
+    UARTBIN_EBUSY = -5
 } uartbin_status_t;
 
 /**
@@ -108,7 +139,13 @@ typedef enum uartbin_error {
     UARTBIN_ERROR_RX_OVERFLOW,
 
     /** RX state machine stayed mid-frame longer than rx_timeout_ms. */
-    UARTBIN_ERROR_TIMEOUT
+    UARTBIN_ERROR_TIMEOUT,
+
+    /** Reliable TX retry limit was reached before a response arrived. */
+    UARTBIN_ERROR_RETRY_EXHAUSTED,
+
+    /** Reliable TX retry could not be written by the configured hook. */
+    UARTBIN_ERROR_RETRY_WRITE
 } uartbin_error_t;
 
 /**
@@ -200,6 +237,18 @@ typedef struct uartbin_config {
      * uartbin_poll().
      */
     uint32_t rx_timeout_ms;
+
+    /** Static frame buffer used by automatic request/event retry. Optional. */
+    uint8_t *tx_retry_buffer;
+
+    /** Size of tx_retry_buffer in bytes. */
+    uint16_t tx_retry_capacity;
+
+    /** Retry timeout for automatic request/event sends. 0 disables retry. */
+    uint32_t tx_retry_timeout_ms;
+
+    /** Number of retransmits before UARTBIN_ERROR_RETRY_EXHAUSTED. */
+    uint8_t tx_retry_max_retries;
 } uartbin_config_t;
 
 /**
@@ -239,6 +288,27 @@ typedef struct uartbin {
 
     /** Timestamp of the last accepted RX byte/block. */
     uint32_t last_rx_time_ms;
+
+    /** Sequence counter used by automatic send helpers. */
+    uint16_t tx_seq;
+
+    /** Non-zero while a reliable request/event is waiting for a response. */
+    uint8_t retry_active;
+
+    /** Non-zero after retry timing has been armed by uartbin_poll(). */
+    uint8_t retry_timer_started;
+
+    /** Number of retransmits already attempted for the pending frame. */
+    uint8_t retry_count;
+
+    /** Sequence number of the pending reliable frame. */
+    uint16_t retry_seq;
+
+    /** Number of bytes stored in cfg.tx_retry_buffer. */
+    uint16_t retry_frame_len;
+
+    /** Timestamp used to decide when to retransmit the pending frame. */
+    uint32_t retry_last_tx_time_ms;
 } uartbin_t;
 
 /**
@@ -260,6 +330,16 @@ void uartbin_init(uartbin_t *ctx, const uartbin_config_t *config);
 void uartbin_reset(uartbin_t *ctx);
 
 /**
+ * @brief Cancel any pending automatic retry state.
+ *
+ * This does not reset RX parsing or transmit anything. It is useful when the
+ * application intentionally abandons a request before a response arrives.
+ *
+ * @param ctx Initialized context.
+ */
+void uartbin_cancel_retry(uartbin_t *ctx);
+
+/**
  * @brief Build and transmit one framed packet.
  *
  * @param ctx Initialized context with a valid write hook.
@@ -276,6 +356,78 @@ uartbin_status_t uartbin_send(uartbin_t *ctx,
                               uint16_t seq,
                               const uint8_t *payload,
                               uint16_t payload_len);
+
+/**
+ * @brief Return the next non-zero TX sequence number for this context.
+ *
+ * This is mainly useful for applications that need to track an automatically
+ * generated request before sending. The request/event helper functions call
+ * this internally, so most applications do not need to use it directly.
+ *
+ * @param ctx Initialized context.
+ * @return Next sequence number, or 0 if @p ctx is NULL.
+ */
+uint16_t uartbin_next_seq(uartbin_t *ctx);
+
+/**
+ * @brief Send a new request with an automatically generated sequence number.
+ *
+ * The helper ORs ::UARTBIN_FLAG_REQUEST into @p flags and uses the context's
+ * internal sequence counter. Use the response helper to answer this packet.
+ *
+ * @param ctx Initialized context with a valid write hook.
+ * @param type Application-defined request type.
+ * @param flags Application-defined flags to combine with request flag.
+ * @param payload Payload bytes, or NULL when @p payload_len is 0.
+ * @param payload_len Number of payload bytes.
+ * @return ::UARTBIN_OK on success, otherwise an error status.
+ */
+uartbin_status_t uartbin_send_request(uartbin_t *ctx,
+                                      uint8_t type,
+                                      uint8_t flags,
+                                      const uint8_t *payload,
+                                      uint16_t payload_len);
+
+/**
+ * @brief Send a response using the sequence number from a received packet.
+ *
+ * The helper ORs ::UARTBIN_FLAG_RESPONSE into @p flags and echoes
+ * @p request->seq. It does not advance the context sequence counter.
+ *
+ * @param ctx Initialized context with a valid write hook.
+ * @param request Packet being answered.
+ * @param type Application-defined response type.
+ * @param flags Application-defined flags to combine with response flag.
+ * @param payload Payload bytes, or NULL when @p payload_len is 0.
+ * @param payload_len Number of payload bytes.
+ * @return ::UARTBIN_OK on success, otherwise an error status.
+ */
+uartbin_status_t uartbin_send_response(uartbin_t *ctx,
+                                       const uartbin_packet_t *request,
+                                       uint8_t type,
+                                       uint8_t flags,
+                                       const uint8_t *payload,
+                                       uint16_t payload_len);
+
+/**
+ * @brief Send an unsolicited event with an automatically generated sequence.
+ *
+ * The helper ORs ::UARTBIN_FLAG_EVENT into @p flags and uses the context's
+ * internal sequence counter. If the peer acknowledges the event, it should echo
+ * this packet's sequence number in a response.
+ *
+ * @param ctx Initialized context with a valid write hook.
+ * @param type Application-defined event type.
+ * @param flags Application-defined flags to combine with event flag.
+ * @param payload Payload bytes, or NULL when @p payload_len is 0.
+ * @param payload_len Number of payload bytes.
+ * @return ::UARTBIN_OK on success, otherwise an error status.
+ */
+uartbin_status_t uartbin_send_event(uartbin_t *ctx,
+                                    uint8_t type,
+                                    uint8_t flags,
+                                    const uint8_t *payload,
+                                    uint16_t payload_len);
 
 /**
  * @brief Feed received bytes without timeout timestamp updates.

@@ -168,9 +168,15 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('globals.html',
 
 <h3 class="doxsection"><a id="index_u" name="index_u"></a>- u -</h3><ul>
 <li>UART_HandleTypeDef&#160;:&#160;<a class="el" href="stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590">stm32_hal_dma_idle.c</a></li>
+<li>uartbin_build_frame()&#160;:&#160;<a class="el" href="uartbin_8c.html#a930afead8f815c7ca29d2a9bf0c413be">uartbin.c</a></li>
+<li>uartbin_cancel_retry()&#160;:&#160;<a class="el" href="uartbin_8h.html#a0b688936e31a49a78dff08b0040bfb09">uartbin.h</a>, <a class="el" href="uartbin_8c.html#a0b688936e31a49a78dff08b0040bfb09">uartbin.c</a></li>
+<li>uartbin_clear_retry()&#160;:&#160;<a class="el" href="uartbin_8c.html#a43d23b452c687ed2151dda0c9e44423a">uartbin.c</a></li>
 <li>uartbin_config_t&#160;:&#160;<a class="el" href="uartbin_8h.html#a107f60d9a8a0f2e59486e389942ff008">uartbin.h</a></li>
 <li>uartbin_crc16_ccitt()&#160;:&#160;<a class="el" href="uartbin_8h.html#a6ecd9aa1ae31f9af93487d79b7b158a1">uartbin.h</a>, <a class="el" href="uartbin_8c.html#a6ecd9aa1ae31f9af93487d79b7b158a1">uartbin.c</a></li>
 <li>UARTBIN_CRC_SIZE&#160;:&#160;<a class="el" href="uartbin_8h.html#a50fbffbdad369a60ed01bf7003c7d31a">uartbin.h</a></li>
+<li>UARTBIN_DEFAULT_RETRY_MAX_RETRIES&#160;:&#160;<a class="el" href="uartbin_8h.html#a6977a0cfc8532504d121983c09148dd3">uartbin.h</a></li>
+<li>UARTBIN_DEFAULT_RETRY_TIMEOUT_MS&#160;:&#160;<a class="el" href="uartbin_8h.html#ab47658a8617054b88a7e3fcae065857d">uartbin.h</a></li>
+<li>UARTBIN_EBUSY&#160;:&#160;<a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada6e9ccc2f4f646420f7d069d63ae42860">uartbin.h</a></li>
 <li>UARTBIN_EINVAL&#160;:&#160;<a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada89dda8596dab52196eb60010ebaf6f67">uartbin.h</a></li>
 <li>UARTBIN_ENO_BUFFER&#160;:&#160;<a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada75b1988291f3d6acf21c5632d3cc1fff">uartbin.h</a></li>
 <li>UARTBIN_EPAYLOAD_TOO_LONG&#160;:&#160;<a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cadac9d8e5665f315ceb2c7883ee07d8f1c0">uartbin.h</a></li>
@@ -179,6 +185,8 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('globals.html',
 <li>UARTBIN_ERROR_BAD_VERSION&#160;:&#160;<a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a511dd8bdfda2c1c25759e9127f118c8a">uartbin.h</a></li>
 <li>UARTBIN_ERROR_CRC&#160;:&#160;<a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27aa1b71630db0c15f4631715a76c58c169">uartbin.h</a></li>
 <li>uartbin_error_fn&#160;:&#160;<a class="el" href="uartbin_8h.html#a24b38e0bdf02dbb9c34d6abb6cd90417">uartbin.h</a></li>
+<li>UARTBIN_ERROR_RETRY_EXHAUSTED&#160;:&#160;<a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a197538cd1ce50346e338b55684482dd9">uartbin.h</a></li>
+<li>UARTBIN_ERROR_RETRY_WRITE&#160;:&#160;<a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a7ed4d37cc04314e6a6e664f2548236d5">uartbin.h</a></li>
 <li>UARTBIN_ERROR_RX_OVERFLOW&#160;:&#160;<a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27ac484c8b27677076e8b488a19afcd9151">uartbin.h</a></li>
 <li>uartbin_error_t&#160;:&#160;<a class="el" href="uartbin_8h.html#a2c22b7247ec8a8d95bd0243612d9262f">uartbin.h</a></li>
 <li>UARTBIN_ERROR_TIMEOUT&#160;:&#160;<a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27ab4aec92056b3ef0c514838590df95fc4">uartbin.h</a></li>
@@ -187,22 +195,33 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('globals.html',
 <li>uartbin_feed_at()&#160;:&#160;<a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin.h</a>, <a class="el" href="uartbin_8c.html#ab9da003f689bb5d95d54752a907cf19b">uartbin.c</a></li>
 <li>uartbin_feed_byte()&#160;:&#160;<a class="el" href="uartbin_8h.html#a0b7e981f8f366c641f0686a448168f5a">uartbin.h</a>, <a class="el" href="uartbin_8c.html#a0b7e981f8f366c641f0686a448168f5a">uartbin.c</a></li>
 <li>uartbin_feed_byte_at()&#160;:&#160;<a class="el" href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0">uartbin.h</a>, <a class="el" href="uartbin_8c.html#a992904ee32447ec8edd21f131fae72f0">uartbin.c</a></li>
+<li>UARTBIN_FLAG_EVENT&#160;:&#160;<a class="el" href="uartbin_8h.html#a2356aef600bb6ecf0cf961b7dff72137">uartbin.h</a></li>
+<li>UARTBIN_FLAG_REQUEST&#160;:&#160;<a class="el" href="uartbin_8h.html#a490715f6c89d7e1e3cfc6d3ffc3c44d1">uartbin.h</a></li>
+<li>UARTBIN_FLAG_RESPONSE&#160;:&#160;<a class="el" href="uartbin_8h.html#a2521c8c9042c23aeef250648ae766284">uartbin.h</a></li>
+<li>uartbin_frame_len()&#160;:&#160;<a class="el" href="uartbin_8c.html#aff0f8ab98f1ece206e7675a221d2e106">uartbin.c</a></li>
 <li>uartbin_get_u16_le()&#160;:&#160;<a class="el" href="uartbin_8c.html#a379b0a6c6d6f99ccae9f97d75c5619ee">uartbin.c</a></li>
 <li>UARTBIN_HEADER_SIZE&#160;:&#160;<a class="el" href="uartbin_8h.html#a2eca460bac3c257ac1b3d992894a1331">uartbin.h</a></li>
 <li>uartbin_init()&#160;:&#160;<a class="el" href="uartbin_8h.html#a09e736b97567456af7144d1eb8f3edec">uartbin.h</a>, <a class="el" href="uartbin_8c.html#a09e736b97567456af7144d1eb8f3edec">uartbin.c</a></li>
 <li>UARTBIN_MAX_FRAME_OVERHEAD&#160;:&#160;<a class="el" href="uartbin_8h.html#a02dde34a333b47fcc0bd146757edfeb0">uartbin.h</a></li>
+<li>uartbin_next_seq()&#160;:&#160;<a class="el" href="uartbin_8h.html#a0226dd14064c3a24c38295acba27219a">uartbin.h</a>, <a class="el" href="uartbin_8c.html#a0226dd14064c3a24c38295acba27219a">uartbin.c</a></li>
 <li>UARTBIN_OK&#160;:&#160;<a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada4665c1bc3c4b78e9b27d558883dd8d32">uartbin.h</a></li>
 <li>uartbin_packet_fn&#160;:&#160;<a class="el" href="uartbin_8h.html#a0c92ef7808fae89c228963934fdbf830">uartbin.h</a></li>
 <li>uartbin_packet_t&#160;:&#160;<a class="el" href="uartbin_8h.html#aca4d71fa02a9351ae8b2afb910abac2b">uartbin.h</a></li>
 <li>uartbin_poll()&#160;:&#160;<a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin.h</a>, <a class="el" href="uartbin_8c.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin.c</a></li>
+<li>uartbin_poll_retry()&#160;:&#160;<a class="el" href="uartbin_8c.html#aaa0fc699ea32ce55693a98bccbfd54b9">uartbin.c</a></li>
 <li>uartbin_put_u16_le()&#160;:&#160;<a class="el" href="uartbin_8c.html#a3e19dd92a5e172d65e1a2f81225bb46b">uartbin.c</a></li>
 <li>uartbin_report_error()&#160;:&#160;<a class="el" href="uartbin_8c.html#aaf05431ab0a8714a4ed577d101fcfb10">uartbin.c</a></li>
 <li>uartbin_reset()&#160;:&#160;<a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9">uartbin.h</a>, <a class="el" href="uartbin_8c.html#a4b93b42268b8eeb37a0e9a66b88561e9">uartbin.c</a></li>
 <li>uartbin_reset_rx()&#160;:&#160;<a class="el" href="uartbin_8c.html#a0574af2c601ea6c3ffd4190fe4a7f373">uartbin.c</a></li>
+<li>uartbin_retry_enabled()&#160;:&#160;<a class="el" href="uartbin_8c.html#ab5491795a7b7787598e48578563d52b0">uartbin.c</a></li>
 <li>uartbin_rx_active()&#160;:&#160;<a class="el" href="uartbin_8c.html#ac88214c90ba0bed65bb561db02acb499">uartbin.c</a></li>
 <li>uartbin_send()&#160;:&#160;<a class="el" href="uartbin_8h.html#a105423f2609e98a85f2d062df2b84ff4">uartbin.h</a>, <a class="el" href="uartbin_8c.html#a105423f2609e98a85f2d062df2b84ff4">uartbin.c</a></li>
+<li>uartbin_send_event()&#160;:&#160;<a class="el" href="uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839">uartbin.h</a>, <a class="el" href="uartbin_8c.html#a8ab7553326a5e1db2c5d8c08dab4f839">uartbin.c</a></li>
+<li>uartbin_send_request()&#160;:&#160;<a class="el" href="uartbin_8h.html#a25f9d1a61c29eebfbf3dc655b0621b2f">uartbin.h</a>, <a class="el" href="uartbin_8c.html#a25f9d1a61c29eebfbf3dc655b0621b2f">uartbin.c</a></li>
+<li>uartbin_send_response()&#160;:&#160;<a class="el" href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9">uartbin.h</a>, <a class="el" href="uartbin_8c.html#ac592299b63f2ba89764ab4184da2b8b9">uartbin.c</a></li>
 <li>UARTBIN_SOF0&#160;:&#160;<a class="el" href="uartbin_8h.html#a3bd0a539c23bdaf94a00f3e55f543dd0">uartbin.h</a></li>
 <li>UARTBIN_SOF1&#160;:&#160;<a class="el" href="uartbin_8h.html#a5e38a11867c5f996b1631237a63f2d26">uartbin.h</a></li>
+<li>uartbin_start_retry()&#160;:&#160;<a class="el" href="uartbin_8c.html#a322cbcf04ecea7e1d485ae2e62bf3d64">uartbin.c</a></li>
 <li>UARTBIN_STATE_CRC&#160;:&#160;<a class="el" href="uartbin_8c.html#ab55a5e95769472d242fbff64c58bad22a9e23fe4f9cca9c714813c468611bbabb">uartbin.c</a></li>
 <li>UARTBIN_STATE_HEADER&#160;:&#160;<a class="el" href="uartbin_8c.html#ab55a5e95769472d242fbff64c58bad22ae14982e50a36a7706f72a23708239095">uartbin.c</a></li>
 <li>UARTBIN_STATE_PAYLOAD&#160;:&#160;<a class="el" href="uartbin_8c.html#ab55a5e95769472d242fbff64c58bad22aa3433e1b011a8a9a05922e10d92a0c4a">uartbin.c</a></li>

@@ -148,12 +148,26 @@ Data Fields</h2></td></tr>
 <tr class="memdesc:ace32a758a2c81a6189144da4513fcce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Running CRC over header and payload.  <br /></td></tr>
 <tr class="memitem:a396c6db7a4edfe0e92032d29370f3c16" id="r_a396c6db7a4edfe0e92032d29370f3c16"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a396c6db7a4edfe0e92032d29370f3c16">last_rx_time_ms</a></td></tr>
 <tr class="memdesc:a396c6db7a4edfe0e92032d29370f3c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestamp of the last accepted RX byte/block.  <br /></td></tr>
+<tr class="memitem:ab859bb6a8de1f931045fcd6ec43af538" id="r_ab859bb6a8de1f931045fcd6ec43af538"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#ab859bb6a8de1f931045fcd6ec43af538">tx_seq</a></td></tr>
+<tr class="memdesc:ab859bb6a8de1f931045fcd6ec43af538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence counter used by automatic send helpers.  <br /></td></tr>
+<tr class="memitem:a0155be8528ac55178eabf063c63bd609" id="r_a0155be8528ac55178eabf063c63bd609"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a0155be8528ac55178eabf063c63bd609">retry_active</a></td></tr>
+<tr class="memdesc:a0155be8528ac55178eabf063c63bd609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-zero while a reliable request/event is waiting for a response.  <br /></td></tr>
+<tr class="memitem:a0924011a7881b5508851cc2df116c270" id="r_a0924011a7881b5508851cc2df116c270"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a0924011a7881b5508851cc2df116c270">retry_timer_started</a></td></tr>
+<tr class="memdesc:a0924011a7881b5508851cc2df116c270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-zero after retry timing has been armed by <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Check for RX timeout and reset the parser if needed.">uartbin_poll()</a>.  <br /></td></tr>
+<tr class="memitem:a92b7bbe8cda0c1f63fc640f4eebc64fe" id="r_a92b7bbe8cda0c1f63fc640f4eebc64fe"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a92b7bbe8cda0c1f63fc640f4eebc64fe">retry_count</a></td></tr>
+<tr class="memdesc:a92b7bbe8cda0c1f63fc640f4eebc64fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of retransmits already attempted for the pending frame.  <br /></td></tr>
+<tr class="memitem:a7af84ee31bb3cf150abc5617f3630576" id="r_a7af84ee31bb3cf150abc5617f3630576"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a7af84ee31bb3cf150abc5617f3630576">retry_seq</a></td></tr>
+<tr class="memdesc:a7af84ee31bb3cf150abc5617f3630576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence number of the pending reliable frame.  <br /></td></tr>
+<tr class="memitem:a13bc97e96467888eb1ea46712c78abb3" id="r_a13bc97e96467888eb1ea46712c78abb3"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a13bc97e96467888eb1ea46712c78abb3">retry_frame_len</a></td></tr>
+<tr class="memdesc:a13bc97e96467888eb1ea46712c78abb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bytes stored in cfg.tx_retry_buffer.  <br /></td></tr>
+<tr class="memitem:a7694fb72c74c4d81839fcce5f5b233b1" id="r_a7694fb72c74c4d81839fcce5f5b233b1"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a7694fb72c74c4d81839fcce5f5b233b1">retry_last_tx_time_ms</a></td></tr>
+<tr class="memdesc:a7694fb72c74c4d81839fcce5f5b233b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestamp used to decide when to retransmit the pending frame.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Runtime state for one uartbin link. </p>
 <p>Allocate one context per UART/protocol link. The fields are public so the type can be stack/static allocated without hidden allocation, but application code should treat them as internal implementation details. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00212">212</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00261">261</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
 <a id="ae2473572661c6d3ca93b0e547402a724" name="ae2473572661c6d3ca93b0e547402a724"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae2473572661c6d3ca93b0e547402a724">&#9670;&#160;</a></span>cfg</h2>
@@ -169,9 +183,9 @@ Data Fields</h2></td></tr>
 
 <p>Copy of the user configuration. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00214">214</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00263">263</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00259">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00128">uartbin_init()</a>, <a class="el" href="uartbin_8c_source.html#l00237">uartbin_poll()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00263">uartbin_init()</a>, <a class="el" href="uartbin_8c_source.html#l00482">uartbin_poll()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>, <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
 
 </div>
 </div>
@@ -189,9 +203,9 @@ Data Fields</h2></td></tr>
 
 <p>Running CRC over header and payload. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00238">238</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00287">287</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00259">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 </div>
 </div>
@@ -209,9 +223,9 @@ Data Fields</h2></td></tr>
 
 <p>Internal received CRC bytes. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00232">232</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00281">281</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00259">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
 
 </div>
 </div>
@@ -229,9 +243,9 @@ Data Fields</h2></td></tr>
 
 <p>Number of CRC bytes received so far. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00235">235</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00284">284</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00259">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 </div>
 </div>
@@ -249,9 +263,9 @@ Data Fields</h2></td></tr>
 
 <p>Internal frame header buffer. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00220">220</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00269">269</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00259">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>.</p>
 
 </div>
 </div>
@@ -269,9 +283,9 @@ Data Fields</h2></td></tr>
 
 <p>Number of header bytes received so far. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00223">223</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00272">272</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00259">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 </div>
 </div>
@@ -289,9 +303,9 @@ Data Fields</h2></td></tr>
 
 <p>Timestamp of the last accepted RX byte/block. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00241">241</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00290">290</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00221">uartbin_feed_byte()</a>, <a class="el" href="uartbin_8c_source.html#l00259">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00237">uartbin_poll()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00466">uartbin_feed_byte()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00482">uartbin_poll()</a>.</p>
 
 </div>
 </div>
@@ -309,9 +323,9 @@ Data Fields</h2></td></tr>
 
 <p>Payload length decoded from the current frame header. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00229">229</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00278">278</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00259">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
 </div>
 </div>
@@ -329,9 +343,129 @@ Data Fields</h2></td></tr>
 
 <p>Number of payload bytes received so far. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00226">226</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00275">275</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00259">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
+
+</div>
+</div>
+<a id="a0155be8528ac55178eabf063c63bd609" name="a0155be8528ac55178eabf063c63bd609"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0155be8528ac55178eabf063c63bd609">&#9670;&#160;</a></span>retry_active</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t uartbin::retry_active</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Non-zero while a reliable request/event is waiting for a response. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00296">296</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00420">uartbin_send_event()</a>, <a class="el" href="uartbin_8c_source.html#l00366">uartbin_send_request()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+
+</div>
+</div>
+<a id="a92b7bbe8cda0c1f63fc640f4eebc64fe" name="a92b7bbe8cda0c1f63fc640f4eebc64fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a92b7bbe8cda0c1f63fc640f4eebc64fe">&#9670;&#160;</a></span>retry_count</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t uartbin::retry_count</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of retransmits already attempted for the pending frame. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00302">302</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+
+</div>
+</div>
+<a id="a13bc97e96467888eb1ea46712c78abb3" name="a13bc97e96467888eb1ea46712c78abb3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a13bc97e96467888eb1ea46712c78abb3">&#9670;&#160;</a></span>retry_frame_len</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t uartbin::retry_frame_len</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Number of bytes stored in cfg.tx_retry_buffer. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00308">308</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+
+</div>
+</div>
+<a id="a7694fb72c74c4d81839fcce5f5b233b1" name="a7694fb72c74c4d81839fcce5f5b233b1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7694fb72c74c4d81839fcce5f5b233b1">&#9670;&#160;</a></span>retry_last_tx_time_ms</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint32_t uartbin::retry_last_tx_time_ms</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Timestamp used to decide when to retransmit the pending frame. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00311">311</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+
+</div>
+</div>
+<a id="a7af84ee31bb3cf150abc5617f3630576" name="a7af84ee31bb3cf150abc5617f3630576"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7af84ee31bb3cf150abc5617f3630576">&#9670;&#160;</a></span>retry_seq</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t uartbin::retry_seq</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sequence number of the pending reliable frame. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00305">305</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
+
+</div>
+</div>
+<a id="a0924011a7881b5508851cc2df116c270" name="a0924011a7881b5508851cc2df116c270"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0924011a7881b5508851cc2df116c270">&#9670;&#160;</a></span>retry_timer_started</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t uartbin::retry_timer_started</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Non-zero after retry timing has been armed by <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Check for RX timeout and reset the parser if needed.">uartbin_poll()</a>. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00299">299</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00228">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00187">uartbin_start_retry()</a>.</p>
 
 </div>
 </div>
@@ -349,9 +483,29 @@ Data Fields</h2></td></tr>
 
 <p>Internal parser state. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00217">217</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00266">266</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00259">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, and <a class="el" href="uartbin_8c_source.html#l00123">uartbin_rx_active()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00508">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, and <a class="el" href="uartbin_8c_source.html#l00123">uartbin_rx_active()</a>.</p>
+
+</div>
+</div>
+<a id="ab859bb6a8de1f931045fcd6ec43af538" name="ab859bb6a8de1f931045fcd6ec43af538"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab859bb6a8de1f931045fcd6ec43af538">&#9670;&#160;</a></span>tx_seq</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint16_t uartbin::tx_seq</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Sequence counter used by automatic send helpers. </p>
+
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00293">293</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00352">uartbin_next_seq()</a>.</p>
 
 </div>
 </div>

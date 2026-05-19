@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['memory_20model_0',['Memory Model',['../uartbin_8h.html#uartbin_h_no_alloc',1,'']]],
-  ['minimal_20usage_1',['Minimal Usage',['../index.html#autotoc_md3',1,'']]],
-  ['model_2',['Model',['../uartbin_8h.html#uartbin_h_no_alloc',1,'Memory Model'],['../uartbin_8h.html#uartbin_h_timing',1,'Timeout Model']]]
+  ['large_20payloads_0',['Large Payloads',['../index.html#autotoc_md7',1,'']]],
+  ['last_5frx_5ftime_5fms_1',['last_rx_time_ms',['../structuartbin.html#a396c6db7a4edfe0e92032d29370f3c16',1,'uartbin']]],
+  ['link_2',['link',['../structstm32__uartbin__dma.html#a4d6532bb56f78b8f644e85d13eae7783',1,'stm32_uartbin_dma::link'],['../structstm32__uartbin__it.html#aa10605cdf41d1af0156534c8d52b06ed',1,'stm32_uartbin_it::link']]]
 ];
