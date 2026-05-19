@@ -1,0 +1,67 @@
+#titlearea table {
+  width: 100%;
+}
+
+#titlearea {
+  min-height: 88px;
+}
+
+#projectrow {
+  display: flex;
+  align-items: stretch;
+  height: 88px;
+}
+
+#projectname {
+  display: none;
+}
+
+#projectalign {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 0 24px 17px 16px;
+  text-align: right;
+  gap: 18px;
+}
+
+#projectalign::before {
+  content: "AUTO SEQ  |  SOF A5 5A  |  CRC16  |  RETRY  |  EVENT";
+  display: inline-flex;
+  align-self: center;
+  margin-right: auto;
+  margin-left: clamp(24px, 7vw, 160px);
+  padding: 8px 16px;
+  border: 1px solid rgba(45, 212, 191, .55);
+  border-radius: 999px;
+  background:
+    radial-gradient(circle at 12% 50%, rgba(45, 212, 191, .28), transparent 18%),
+    linear-gradient(90deg, rgba(8, 47, 73, .78), rgba(15, 23, 42, .58));
+  box-shadow: 0 0 18px rgba(34, 211, 238, .18);
+  color: #dffcff;
+  font-family: Consolas, Menlo, monospace;
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  white-space: nowrap;
+}
+
+#projectbrief {
+  color: #dbeafe;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+#projectlogo img {
+  width: auto;
+  height: 76px;
+  max-width: 390px;
+}
+
+@media (max-width: 1050px) {
+  #projectalign::before {
+    display: none;
+  }
+}
