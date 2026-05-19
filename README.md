@@ -170,6 +170,17 @@ Bak:
 - `examples/stm32_hal_interrupt.c`
 - `examples/stm32_hal_dma_idle.c`
 
+## Linux POSIX Serial Ozeti
+
+Linux uzerinde STM32 HAL yerine POSIX serial port kullanilir. `termios` ile port
+raw 8N1 moda alinir, RX icin `poll(POLLIN)` ve `read()`, TX icin `write()` veya
+uygulama kuyrugu kullanilir.
+
+Bak:
+
+- `examples/linux_posix_serial.c`
+- Doxygen icinde Linux POSIX Serial Kullanimi
+
 ## Buyuk Payloadlar
 
 Daha buyuk paketler icin daha buyuk statik RX payload buffer'i ayir. Bu API'yi
@@ -227,3 +238,4 @@ Ek Doxygen rehber sayfalari:
 - Port Etme Rehberi
 - Halka Buffer TX Portu
 - STM32 Interrupt ve DMA Kullanimi
+- Linux POSIX Serial Kullanimi

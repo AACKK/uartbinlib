@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('guide_stm32_tr
   <div class="headertitle"><div class="title">STM32 Interrupt ve DMA Kullanimi </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
 STM32 Interrupt ve DMA Kullanimi</h1>
 <p>Portable kutuphane STM32 HAL'e bagimli degildir, fakat repo iki adapter ornegi icerir:</p>
 <ul>
@@ -128,7 +128,7 @@ STM32 Interrupt ve DMA Kullanimi</h1>
 <li><span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html" title="uartbinlib icin STM32 HAL DMA idle-line RX adapter ornegi.">examples/stm32_hal_dma_idle.c</a></span></li>
 </ul>
 <p>Bunlari zorunlu kutuphane kodu gibi degil, kalip olarak kullan.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
 Interrupt RX</h2>
 <p>Tek byte interrupt RX basit ve guvenilirdir:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> HAL_UART_RxCpltCallback(<a class="code hl_typedef" href="stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590">UART_HandleTypeDef</a> *huart)</div>
@@ -149,7 +149,7 @@ Interrupt RX</h2>
 <li>Retry'yi <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> sursun; RX callback'leri yalnizca gelen byte'lari beslesin.</li>
 </ul>
 <p>Bu model debug etmesi kolaydir ve orta baud rate'lerde iyi calisir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
 DMA Idle-Line RX</h2>
 <p>DMA idle-line RX blok alir ve uartbinlib'e besler:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> HAL_UARTEx_RxEventCallback(<a class="code hl_typedef" href="stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590">UART_HandleTypeDef</a> *huart, uint16_t size)</div>
@@ -168,7 +168,7 @@ DMA Idle-Line RX</h2>
 <li>HAL UART hatalarinda DMA'i abort/restart et ve <span class="tt"><a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Yalnizca RX parser durumunu resetle.">uartbin_reset()</a></span> cagir.</li>
 </ul>
 <p>Bu model yuksek baud rate veya burst tarzi trafik icin daha uygundur.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md40"></a>
 TX Secenekleri</h2>
 <p>STM32 ornekleri blocking <span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html#a41d654999cc15648093057ee0c6f27e4">HAL_UART_Transmit()</a></span> kullanir; cunku bu, write hook sozlesmesini en az kodla saglar. Production projelerde bunu genelde sunlardan biriyle degistirirsin:</p>
 <ul>
@@ -177,7 +177,7 @@ TX Secenekleri</h2>
 <li>UART task tarafindan bosaltilan RTOS stream buffer.</li>
 </ul>
 <p>Bu ucu de gecerlidir; tek sart write hook'un basari dondurmeden once tum byte'lari kopyalamasi veya kabul etmesidir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
 STM32 ile Retry</h2>
 <p>Otomatik retry icin <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> duzenli cagrilmalidir:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> main_loop(<span class="keywordtype">void</span>)</div>

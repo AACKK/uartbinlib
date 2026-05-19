@@ -1,20 +1,11 @@
 var searchData=
 [
-  ['stm32_5fuartbin_5fdma_5ferror_5fcallback_0',['stm32_uartbin_dma_error_callback',['../stm32__hal__dma__idle_8c.html#af9b0dbf51f8f60976ea724aa1928f00f',1,'stm32_hal_dma_idle.c']]],
-  ['stm32_5fuartbin_5fdma_5finit_1',['stm32_uartbin_dma_init',['../stm32__hal__dma__idle_8c.html#aa9c3d4014f43ab1b6f3a900bb433ef9b',1,'stm32_hal_dma_idle.c']]],
-  ['stm32_5fuartbin_5fdma_5fon_5ferror_2',['stm32_uartbin_dma_on_error',['../stm32__hal__dma__idle_8c.html#afdbe456e6968eda5c66495be2704881e',1,'stm32_hal_dma_idle.c']]],
-  ['stm32_5fuartbin_5fdma_5fon_5fpacket_3',['stm32_uartbin_dma_on_packet',['../stm32__hal__dma__idle_8c.html#a43d3ae7978d56adb7172d49c993d259a',1,'stm32_hal_dma_idle.c']]],
-  ['stm32_5fuartbin_5fdma_5fpoll_4',['stm32_uartbin_dma_poll',['../stm32__hal__dma__idle_8c.html#a1391d7b89f610184a1ca25b2d3dca696',1,'stm32_hal_dma_idle.c']]],
-  ['stm32_5fuartbin_5fdma_5frx_5fevent_5fcallback_5',['stm32_uartbin_dma_rx_event_callback',['../stm32__hal__dma__idle_8c.html#a5df98fc13df249969dd1b9d55820be8e',1,'stm32_hal_dma_idle.c']]],
-  ['stm32_5fuartbin_5fdma_5fstart_5frx_6',['stm32_uartbin_dma_start_rx',['../stm32__hal__dma__idle_8c.html#acbdeab0ad14323ca15bde283d0d3e7fe',1,'stm32_hal_dma_idle.c']]],
-  ['stm32_5fuartbin_5fdma_5fwrite_7',['stm32_uartbin_dma_write',['../stm32__hal__dma__idle_8c.html#ac2eb859ec21799f536f87290343de782',1,'stm32_hal_dma_idle.c']]],
-  ['stm32_5fuartbin_5fit_5fabort_5fcomplete_5fcallback_8',['stm32_uartbin_it_abort_complete_callback',['../stm32__hal__interrupt_8c.html#a5f6783838c1f9e02d6b7bf6a9feae3a7',1,'stm32_hal_interrupt.c']]],
-  ['stm32_5fuartbin_5fit_5ferror_5fcallback_9',['stm32_uartbin_it_error_callback',['../stm32__hal__interrupt_8c.html#a911d8f2c5dc61b3953d1f55c2bf95f49',1,'stm32_hal_interrupt.c']]],
-  ['stm32_5fuartbin_5fit_5finit_10',['stm32_uartbin_it_init',['../stm32__hal__interrupt_8c.html#a64bfe19205c65cb06237c111a2b7dcd5',1,'stm32_hal_interrupt.c']]],
-  ['stm32_5fuartbin_5fit_5fon_5ferror_11',['stm32_uartbin_it_on_error',['../stm32__hal__interrupt_8c.html#a66e3e0a53cf234f3502d012710fc52b7',1,'stm32_hal_interrupt.c']]],
-  ['stm32_5fuartbin_5fit_5fon_5fpacket_12',['stm32_uartbin_it_on_packet',['../stm32__hal__interrupt_8c.html#a40787a23e784a13c027eedffbd457270',1,'stm32_hal_interrupt.c']]],
-  ['stm32_5fuartbin_5fit_5fpoll_13',['stm32_uartbin_it_poll',['../stm32__hal__interrupt_8c.html#a9263e343f69fc9021aff4e6d3a80ebf6',1,'stm32_hal_interrupt.c']]],
-  ['stm32_5fuartbin_5fit_5frx_5fcomplete_5fcallback_14',['stm32_uartbin_it_rx_complete_callback',['../stm32__hal__interrupt_8c.html#a50119271304bc0269036e2f12be313b4',1,'stm32_hal_interrupt.c']]],
-  ['stm32_5fuartbin_5fit_5fstart_5frx_15',['stm32_uartbin_it_start_rx',['../stm32__hal__interrupt_8c.html#a8bc2a1d1194ec5127ca512d2a9651347',1,'stm32_hal_interrupt.c']]],
-  ['stm32_5fuartbin_5fit_5fwrite_16',['stm32_uartbin_it_write',['../stm32__hal__interrupt_8c.html#aafb210745632890fdc62b0a9ef4b12ef',1,'stm32_hal_interrupt.c']]]
+  ['linux_5fbaud_5fto_5fspeed_0',['linux_baud_to_speed',['../linux__posix__serial_8c.html#a24d6a87bc3284aa70d2f321a47c5de73',1,'linux_posix_serial.c']]],
+  ['linux_5fmillis_1',['linux_millis',['../linux__posix__serial_8c.html#a07858180adb30590846fe690358adc3d',1,'linux_posix_serial.c']]],
+  ['linux_5fserial_5fconfigure_2',['linux_serial_configure',['../linux__posix__serial_8c.html#ac81caae4a2883c8434b7c7d594285477',1,'linux_posix_serial.c']]],
+  ['linux_5fuartbin_5finit_3',['linux_uartbin_init',['../linux__posix__serial_8c.html#aa9e66bb677fb587d7d659b81c20c535c',1,'linux_posix_serial.c']]],
+  ['linux_5fuartbin_5fon_5ferror_4',['linux_uartbin_on_error',['../linux__posix__serial_8c.html#abfd453f601f9784dbbaef0d2fca2c491',1,'linux_posix_serial.c']]],
+  ['linux_5fuartbin_5fon_5fpacket_5',['linux_uartbin_on_packet',['../linux__posix__serial_8c.html#a49fadd655da3e7051e5a9437ba21a550',1,'linux_posix_serial.c']]],
+  ['linux_5fuartbin_5frun_6',['linux_uartbin_run',['../linux__posix__serial_8c.html#a97755331ef5aa15c2fafddfda0b68425',1,'linux_posix_serial.c']]],
+  ['linux_5fuartbin_5fwrite_7',['linux_uartbin_write',['../linux__posix__serial_8c.html#aa67ca417e4a883c51056c9081eaf2c97',1,'linux_posix_serial.c']]]
 ];

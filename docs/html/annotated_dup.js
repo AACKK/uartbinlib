@@ -1,5 +1,6 @@
 var annotated_dup =
 [
+    [ "linux_uartbin", "structlinux__uartbin.html", "structlinux__uartbin" ],
     [ "stm32_uartbin_dma", "structstm32__uartbin__dma.html", "structstm32__uartbin__dma" ],
     [ "stm32_uartbin_it", "structstm32__uartbin__it.html", "structstm32__uartbin__it" ],
     [ "uartbin", "structuartbin.html", "structuartbin" ],

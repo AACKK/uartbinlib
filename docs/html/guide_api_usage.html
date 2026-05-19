@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('guide_api_usag
   <div class="headertitle"><div class="title">API Kullanim Rehberi </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
 API Kullanim Rehberi</h1>
 <p>uartbinlib iki katmandan olusur:</p>
 <ul>
@@ -128,7 +128,7 @@ API Kullanim Rehberi</h1>
 <li>Guvenilir mesaj katmani: <span class="tt"><a class="el" href="uartbin_8h.html#a25f9d1a61c29eebfbf3dc655b0621b2f" title="Otomatik uretilen sira numarasi ile yeni request gonder.">uartbin_send_request()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9" title="Alinan paketteki sira numarasini kullanarak response gonder.">uartbin_send_response()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839" title="Otomatik uretilen sira numarasi ile unsolicited event gonder.">uartbin_send_event()</a></span>.</li>
 </ul>
 <p>Cogu uygulama guvenilir yardimcilari kullanmali, <span class="tt"><a class="el" href="uartbin_8h.html#a105423f2609e98a85f2d062df2b84ff4" title="Tek cerceveli paketi olustur ve gonder.">uartbin_send()</a></span> fonksiyonunu yalnizca acik sira numarasi gereken ozel durumlar icin saklamalidir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
 Temel Kurulum</h2>
 <p>Her UART linki icin bir <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> ayir. Her link kendi RX parser durumunu, otomatik TX sira sayacini ve opsiyonel retry durumunu tasir.</p>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code hl_typedef" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1">uartbin_t</a> link;</div>
@@ -196,7 +196,7 @@ Temel Kurulum</h2>
 <div class="ttc" id="auartbin_8h_html_ab47658a8617054b88a7e3fcae065857d"><div class="ttname"><a href="uartbin_8h.html#ab47658a8617054b88a7e3fcae065857d">UARTBIN_DEFAULT_RETRY_TIMEOUT_MS</a></div><div class="ttdeci">#define UARTBIN_DEFAULT_RETRY_TIMEOUT_MS</div><div class="ttdoc">Uygulamalarin config icinde kullanabilecegi varsayilan retry timeout.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8h_source.html#l00084">uartbin.h:84</a></div></div>
 <div class="ttc" id="auartbin_8h_html_ac592299b63f2ba89764ab4184da2b8b9"><div class="ttname"><a href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9">uartbin_send_response</a></div><div class="ttdeci">uartbin_status_t uartbin_send_response(uartbin_t *ctx, const uartbin_packet_t *request, uint8_t type, uint8_t flags, const uint8_t *payload, uint16_t payload_len)</div><div class="ttdoc">Alinan paketteki sira numarasini kullanarak response gonder.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00435">uartbin.c:435</a></div></div>
 <div class="ttc" id="auartbin_8h_html_aca4d71fa02a9351ae8b2afb910abac2b"><div class="ttname"><a href="uartbin_8h.html#aca4d71fa02a9351ae8b2afb910abac2b">uartbin_packet_t</a></div><div class="ttdeci">struct uartbin_packet uartbin_packet_t</div><div class="ttdoc">Uygulamaya iletilen CRC kontrolunden gecmis paket.</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md13"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
 Mesaj Gonderme</h2>
 <p>Bu cihaz peer'dan bir is istiyorsa request kullan:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#a25f9d1a61c29eebfbf3dc655b0621b2f">uartbin_send_request</a>(&amp;link, MSG_DALI_SET_LEVEL, 0, payload, payload_len);</div>
@@ -206,7 +206,7 @@ Mesaj Gonderme</h2>
 </div><!-- fragment --><p>Modulun DALI bus event'i raporlamasi gibi kendiliginden olusan veri icin event kullan:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839">uartbin_send_event</a>(&amp;link, MSG_DALI_BUS_EVENT, 0, event, event_len);</div>
 <div class="ttc" id="auartbin_8h_html_a8ab7553326a5e1db2c5d8c08dab4f839"><div class="ttname"><a href="uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839">uartbin_send_event</a></div><div class="ttdeci">uartbin_status_t uartbin_send_event(uartbin_t *ctx, uint8_t type, uint8_t flags, const uint8_t *payload, uint16_t payload_len)</div><div class="ttdoc">Otomatik uretilen sira numarasi ile unsolicited event gonder.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00454">uartbin.c:454</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
 Byte Alma</h2>
 <p>Alinan her byte'i veya blogu monotonic milisaniye timestamp ile parser'a besle:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a>(&amp;link, rx_data, rx_len, platform_millis());</div>
@@ -215,7 +215,7 @@ Byte Alma</h2>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a>(&amp;link, platform_millis());</div>
 <div class="ttc" id="auartbin_8h_html_ac772ed6c266ea60e13df4a1c28d9622e"><div class="ttname"><a href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a></div><div class="ttdeci">void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)</div><div class="ttdoc">RX timeout ve opsiyonel TX retry zamanlamasini servis et.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00517">uartbin.c:517</a></div></div>
 </div><!-- fragment --><p>Feed fonksiyonlari byte kabul etmeden once yalnizca RX parser timeout kontrolu yapar. Pending reliable mesajlari yeniden gondermez. TX retry yazmalarinin UART RX interrupt veya DMA callback icinde beklenmedik sekilde calismamasi icin retry yolunu acik <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> cagrinda tut.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
 Guvenilir Mesaj Kurallari</h2>
 <p>Retry acikken:</p>
 <ul>
@@ -225,7 +225,7 @@ Guvenilir Mesaj Kurallari</h2>
 <li>Her <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> icin ayni anda yalnizca bir reliable request/event pending olabilir; baska bir gonderim <span class="tt"><a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada6e9ccc2f4f646420f7d069d63ae42860" title="Guvenilir request/event zaten response bekliyor.">UARTBIN_EBUSY</a></span> dondurur.</li>
 </ul>
 <p>Peer, reliable request/event paketlerine <span class="tt"><a class="el" href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9" title="Alinan paketteki sira numarasini kullanarak response gonder.">uartbin_send_response()</a></span> ile cevap vermelidir. Bu fonksiyon gelen sira numarasini otomatik olarak geri yazar.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
 Packet Omru</h2>
 <p><span class="tt">packet-&gt;payload</span>, ayarlanan RX payload buffer'ini isaret eder. Ayni context uzerinde bir sonraki feed, poll, reset veya parser islemine kadar gecerlidir. Daha uzun sure saklanacaksa payload'u <span class="tt">on_packet()</span> icinde kopyala. </p>
 </div></div><!-- contents -->

@@ -274,11 +274,19 @@ STM32 Entegrasyon Ozeti</h1>
 <li><span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html" title="uartbinlib icin STM32 HAL DMA idle-line RX adapter ornegi.">examples/stm32_hal_dma_idle.c</a></span></li>
 </ul>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+Linux POSIX Serial Ozeti</h1>
+<p>Linux uzerinde STM32 HAL yerine POSIX serial port kullanilir. <span class="tt">termios</span> ile port raw 8N1 moda alinir, RX icin <span class="tt">poll(POLLIN)</span> ve <span class="tt">read()</span>, TX icin <span class="tt">write()</span> veya uygulama kuyrugu kullanilir.</p>
+<p>Bak:</p>
+<ul>
+<li><span class="tt"><a class="el" href="linux__posix__serial_8c.html" title="uartbinlib icin Linux POSIX serial port ornegi.">examples/linux_posix_serial.c</a></span></li>
+<li>Doxygen icinde Linux POSIX Serial Kullanimi</li>
+</ul>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 Buyuk Payloadlar</h1>
 <p>Daha buyuk paketler icin daha buyuk statik RX payload buffer'i ayir. Bu API'yi basit tutar ve uygulamanin veriyi sadece CRC basarili olduktan sonra gormesini saglar.</p>
 <div class="fragment"><div class="line"><span class="keyword">static</span> uint8_t rx_payload[4096];</div>
 </div><!-- fragment --><p>Gelen cerceve <span class="tt">rx_payload_capacity</span> degerinden buyuk payload ilan ederse parser paketi <span class="tt"><a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a6036c89d26a87104d29d0fd4c47a01f7" title="Payload uzunlugu ayarlanan RX payload buffer&#39;dan buyuk.">UARTBIN_ERROR_BAD_LENGTH</a></span> ile reddeder ve yeniden senkron aramaya doner.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
 Zaman Asimi</h1>
 <p><span class="tt">rx_timeout_ms</span> ayarla ve <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll</a>(&amp;link, now_ms)</span> fonksiyonunu periyodik cagir. <span class="tt">_at</span> feed fonksiyonlari da her byte/block kabul etmeden once RX zaman asimi kontrolu yapar:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a>(&amp;link, dma_data, dma_len, <a class="code hl_function" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick</a>());</div>
@@ -287,14 +295,14 @@ Zaman Asimi</h1>
 <div class="ttc" id="auartbin_8h_html_ab9da003f689bb5d95d54752a907cf19b"><div class="ttname"><a href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a></div><div class="ttdeci">void uartbin_feed_at(uartbin_t *ctx, const uint8_t *data, size_t len, uint32_t now_ms)</div><div class="ttdoc">Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00506">uartbin.c:506</a></div></div>
 <div class="ttc" id="auartbin_8h_html_ac772ed6c266ea60e13df4a1c28d9622e"><div class="ttname"><a href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a></div><div class="ttdeci">void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)</div><div class="ttdoc">RX timeout ve opsiyonel TX retry zamanlamasini servis et.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00517">uartbin.c:517</a></div></div>
 </div><!-- fragment --><p>STM32 HAL UART hatalarinda parser'i resetle, RX yolunu abort/restart et ve hata sayaci tut. Ornek adapter'lar bu kalibi gosterir.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
 Derleme</h1>
 <div class="fragment"><div class="line">cmake -S . -B build</div>
 <div class="line">cmake --build build</div>
 <div class="line">ctest --test-dir build</div>
 </div><!-- fragment --><p>Visual Studio gibi multi-config generator'larda CTest'e config ver:</p>
 <div class="fragment"><div class="line">ctest --test-dir build -C Debug</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
 Dokumantasyon</h1>
 <p>HTML dokumantasyonu Doxygen ile uret:</p>
 <div class="fragment"><div class="line">doxygen Doxyfile</div>
@@ -304,7 +312,8 @@ Dokumantasyon</h1>
 <li>API Kullanim Rehberi</li>
 <li>Port Etme Rehberi</li>
 <li>Halka Buffer TX Portu</li>
-<li>STM32 Interrupt ve DMA Kullanimi </li>
+<li>STM32 Interrupt ve DMA Kullanimi</li>
+<li>Linux POSIX Serial Kullanimi </li>
 </ul>
 </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>

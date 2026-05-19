@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('guide_porting.
   <div class="headertitle"><div class="title">Port Etme Rehberi </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
 Port Etme Rehberi</h1>
 <p>uartbinlib platformdan bagimsizdir. Bir porta yalnizca dort sey gerekir:</p>
 <ul>
@@ -129,7 +129,7 @@ Port Etme Rehberi</h1>
 <li>Verilen tum byte'lari kabul eden bir write hook.</li>
 <li>RX byte/block besleme ve <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> cagirma yolu.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md27"></a>
 Port Etme Kontrol Listesi</h2>
 <ol type="1">
 <li>Her UART/protokol linki icin bir context ayir.</li>
@@ -140,7 +140,7 @@ Port Etme Kontrol Listesi</h2>
 <li><span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> fonksiyonunu periyodik cagir.</li>
 <li>UART framing/noise/overrun hatalarinda parser'i <span class="tt"><a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Yalnizca RX parser durumunu resetle.">uartbin_reset()</a></span> ile resetle ve platform RX yolunu yeniden baslat.</li>
 </ol>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
 Write Hook Sozlesmesi</h2>
 <p>Write hook, donmeden once tum byte'lari gondermeli veya uygulama tarafindan sahip olunan TX kuyruguna kopyalamalidir. Byte'lar guvende degilken basari dondurmek cerceveleri bozabilir; cunku kutuphane tek paket icin hook'u birden fazla kez cagirabilir.</p>
 <p>Bloklayan TX basittir:</p>
@@ -155,14 +155,14 @@ Write Hook Sozlesmesi</h2>
 <div class="ttc" id="astm32__hal__dma__idle_8c_html_a345d4bf6e67fe2036ee84560373dafb7"><div class="ttname"><a href="stm32__hal__dma__idle_8c.html#a345d4bf6e67fe2036ee84560373dafb7">HAL_OK</a></div><div class="ttdeci">#define HAL_OK</div><div class="ttdef"><b>Definition</b> <a href="stm32__hal__dma__idle_8c_source.html#l00059">stm32_hal_dma_idle.c:59</a></div></div>
 <div class="ttc" id="astm32__hal__dma__idle_8c_html_a41d654999cc15648093057ee0c6f27e4"><div class="ttname"><a href="stm32__hal__dma__idle_8c.html#a41d654999cc15648093057ee0c6f27e4">HAL_UART_Transmit</a></div><div class="ttdeci">int HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *data, uint16_t size, uint32_t timeout)</div></div>
 </div><!-- fragment --><p>Interrupt/RTOS sistemlerinde queued TX daha iyidir, fakat queue push islemi donmeden once tum byte araligini kopyalamalidir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
 Zamanlama</h2>
 <p>Tum <span class="tt">_at</span> feed cagrilari ve <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> icin monotonic milisaniye tick kullan. Hedefte unsigned subtraction dogru calisiyorsa tick wrap edebilir.</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a>(&amp;link, data, len, platform_millis());</div>
 <div class="line"><a class="code hl_function" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a>(&amp;link, platform_millis());</div>
 <div class="ttc" id="auartbin_8h_html_ab9da003f689bb5d95d54752a907cf19b"><div class="ttname"><a href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a></div><div class="ttdeci">void uartbin_feed_at(uartbin_t *ctx, const uint8_t *data, size_t len, uint32_t now_ms)</div><div class="ttdoc">Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00506">uartbin.c:506</a></div></div>
 <div class="ttc" id="auartbin_8h_html_ac772ed6c266ea60e13df4a1c28d9622e"><div class="ttname"><a href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a></div><div class="ttdeci">void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)</div><div class="ttdoc">RX timeout ve opsiyonel TX retry zamanlamasini servis et.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00517">uartbin.c:517</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
 Hata Yonetimi</h2>
 <p>Parser ve reliable-TX hatalari <span class="tt">on_error</span> ile gelir:</p>
 <ul>
@@ -175,7 +175,7 @@ Hata Yonetimi</h2>
 <li><span class="tt"><a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a7ed4d37cc04314e6a6e664f2548236d5" title="Guvenilir TX retry ayarlanan hook ile yazilamadi.">UARTBIN_ERROR_RETRY_WRITE</a></span>: retry write hook basarisiz oldu.</li>
 </ul>
 <p>Protokol hatalarini platform UART hatalarindan ayri tut. Platform hatalari UART peripheral'i yeniden baslatmali ve <span class="tt"><a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Yalnizca RX parser durumunu resetle.">uartbin_reset()</a></span> cagirmalidir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md22"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
 Coklu UART Sistemleri</h2>
 <p>Her UART linki icin bir <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span>, bir RX payload buffer ve opsiyonel bir TX retry buffer kullan. Otomatik sira sayaci ve retry durumu <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> icinde yasadigi icin linkler birbirinin durumunu paylasmaz. </p>
 </div></div><!-- contents -->

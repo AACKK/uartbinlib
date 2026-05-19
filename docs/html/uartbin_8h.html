@@ -300,8 +300,12 @@ STM32 Entegrasyonu</h1>
 </div><div class="memdoc">
 
 <p>Uygulamalarin config icinde kullanabilecegi varsayilan retry sayisi. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a40">linux_posix_serial.c</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00089">89</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00198">linux_uartbin_init()</a>.</p>
 
 </div>
 </div>
@@ -318,8 +322,12 @@ STM32 Entegrasyonu</h1>
 </div><div class="memdoc">
 
 <p>Uygulamalarin config icinde kullanabilecegi varsayilan retry timeout. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a38">linux_posix_serial.c</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00084">84</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00198">linux_uartbin_init()</a>.</p>
 
 </div>
 </div>
@@ -336,10 +344,12 @@ STM32 Entegrasyonu</h1>
 </div><div class="memdoc">
 
 <p><a class="el" href="#a8ab7553326a5e1db2c5d8c08dab4f839" title="Otomatik uretilen sira numarasi ile unsolicited event gonder.">uartbin_send_event()</a> tarafindan set edilen flag biti. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a23">linux_posix_serial.c</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00099">99</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>.</p>
 
 </div>
 </div>
@@ -356,10 +366,12 @@ STM32 Entegrasyonu</h1>
 </div><div class="memdoc">
 
 <p><a class="el" href="#a25f9d1a61c29eebfbf3dc655b0621b2f" title="Otomatik uretilen sira numarasi ile yeni request gonder.">uartbin_send_request()</a> tarafindan set edilen flag biti. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a21">linux_posix_serial.c</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00093">93</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
 
 </div>
 </div>
@@ -416,6 +428,8 @@ STM32 Entegrasyonu</h1>
 </div><div class="memdoc">
 
 <p>Her payload etrafina eklenen byte'lar: SOF + header + CRC. </p>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a8">linux_posix_serial.c</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00080">80</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
@@ -497,7 +511,7 @@ STM32 Entegrasyonu</h1>
 </div><div class="memdoc">
 
 <p>uartbin context baslatmak icin kullanilan konfigurasyon. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#_a29">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#_a27">stm32_hal_interrupt.c</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a27">linux_posix_serial.c</a>, <a class="el" href="stm32_hal_dma_idle_8c-example.html#_a29">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#_a27">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 </div>
@@ -541,7 +555,7 @@ STM32 Entegrasyonu</h1>
 </div><div class="memdoc">
 
 <p><a class="el" href="#a24b38e0bdf02dbb9c34d6abb6cd90417" title="Parser protokol hatasi veya timeout algiladiginda cagrilir.">uartbin_error_fn</a> ile iletilen parser/runtime hatalari. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#_a28">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#_a26">stm32_hal_interrupt.c</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a25">linux_posix_serial.c</a>, <a class="el" href="stm32_hal_dma_idle_8c-example.html#_a28">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#_a26">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 </div>
@@ -585,7 +599,7 @@ STM32 Entegrasyonu</h1>
 
 <p>Uygulamaya iletilen CRC kontrolunden gecmis paket. </p>
 <p>Payload pointer <a class="el" href="structuartbin__config.html#a9ba07c9627b3932126f96d51d791d78c" title="Uygulamanin sahip oldugu statik payload buffer.">uartbin_config::rx_payload_buffer</a> alanini isaret eder. Ayni context uzerinde bir sonraki <a class="el" href="#adae56dc79286796f68e851fa337f1779" title="Alinan byte&#39;lari timeout timestamp guncellemesi olmadan besle.">uartbin_feed()</a>, <a class="el" href="#ab9da003f689bb5d95d54752a907cf19b" title="Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.">uartbin_feed_at()</a>, <a class="el" href="#a0b7e981f8f366c641f0686a448168f5a" title="Tek alinan byte&#39;i timeout timestamp guncellemesi olmadan besle.">uartbin_feed_byte()</a>, <a class="el" href="#a992904ee32447ec8edd21f131fae72f0" title="Tek alinan byte&#39;i gecerli uygulama timestamp degeri ile besle.">uartbin_feed_byte_at()</a>, <a class="el" href="#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a> veya <a class="el" href="#a4b93b42268b8eeb37a0e9a66b88561e9" title="Yalnizca RX parser durumunu resetle.">uartbin_reset()</a> cagrimina kadar gecerlidir. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#_a26">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#_a23">stm32_hal_interrupt.c</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a16">linux_posix_serial.c</a>, <a class="el" href="stm32_hal_dma_idle_8c-example.html#_a26">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#_a23">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 </div>
@@ -620,7 +634,7 @@ STM32 Entegrasyonu</h1>
 
 <p>Tek uartbin linki icin runtime durum. </p>
 <p>Her UART/protokol linki icin bir context ayir. Alanlar gizli allocation olmadan stack/statik ayirmaya izin vermek icin public'tir; fakat uygulama kodu bunlari internal detay gibi kabul etmelidir. </p>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#_a15">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#_a13">stm32_hal_interrupt.c</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#_a3">linux_posix_serial.c</a>, <a class="el" href="stm32_hal_dma_idle_8c-example.html#_a15">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#_a13">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 </div>
@@ -873,14 +887,14 @@ STM32 Entegrasyonu</h1>
   </table>
   </dd>
 </dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a38">stm32_hal_dma_idle.c</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#a43">linux_posix_serial.c</a>, and <a class="el" href="stm32_hal_dma_idle_8c-example.html#a38">stm32_hal_dma_idle.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00506">506</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>.</p>
 
 </div>
 </div>
@@ -995,14 +1009,14 @@ STM32 Entegrasyonu</h1>
   </table>
   </dd>
 </dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a37">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#a35">stm32_hal_interrupt.c</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#a41">linux_posix_serial.c</a>, <a class="el" href="stm32_hal_dma_idle_8c-example.html#a37">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#a35">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00295">295</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00198">linux_uartbin_init()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>.</p>
 
 </div>
 </div>
@@ -1067,14 +1081,14 @@ STM32 Entegrasyonu</h1>
   </table>
   </dd>
 </dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a40">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#a38">stm32_hal_interrupt.c</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#a45">linux_posix_serial.c</a>, <a class="el" href="stm32_hal_dma_idle_8c-example.html#a40">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#a38">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00517">517</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00238">stm32_uartbin_dma_poll()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00235">stm32_uartbin_it_poll()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00238">stm32_uartbin_dma_poll()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00235">stm32_uartbin_it_poll()</a>.</p>
 
 </div>
 </div>
@@ -1101,14 +1115,14 @@ STM32 Entegrasyonu</h1>
   </table>
   </dd>
 </dl>
-<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a39">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#a37">stm32_hal_interrupt.c</a>.</dd>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#a44">linux_posix_serial.c</a>, <a class="el" href="stm32_hal_dma_idle_8c-example.html#a39">stm32_hal_dma_idle.c</a>, and <a class="el" href="stm32_hal_interrupt_8c-example.html#a37">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00306">306</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00223">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00207">stm32_uartbin_it_error_callback()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00223">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00207">stm32_uartbin_it_error_callback()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>.</p>
 
 </div>
 </div>
@@ -1220,10 +1234,14 @@ STM32 Entegrasyonu</h1>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Basarida <a class="el" href="#a69fbe7d8d1488b2530eaab2ce3c10cada4665c1bc3c4b78e9b27d558883dd8d32" title="Islem basariyla tamamlandi.">UARTBIN_OK</a>, aksi halde hata durumu. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#a47">linux_posix_serial.c</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00454">454</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00099">UARTBIN_FLAG_EVENT</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00268">main()</a>.</p>
 
 </div>
 </div>
@@ -1334,10 +1352,14 @@ STM32 Entegrasyonu</h1>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>Basarida <a class="el" href="#a69fbe7d8d1488b2530eaab2ce3c10cada4665c1bc3c4b78e9b27d558883dd8d32" title="Islem basariyla tamamlandi.">UARTBIN_OK</a>, aksi halde hata durumu. </dd></dl>
+<dl class="section examples"><dt>Examples</dt><dd><a class="el" href="linux_posix_serial_8c-example.html#a22">linux_posix_serial.c</a>.</dd>
+</dl>
 
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00435">435</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00166">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00096">UARTBIN_FLAG_RESPONSE</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>.</p>
 
 </div>
 </div>

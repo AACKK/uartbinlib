@@ -525,7 +525,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>.</p>
 
 </div>
 </div>
@@ -712,7 +712,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00262">uartbin::cfg</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00198">linux_uartbin_init()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>.</p>
 
 </div>
 </div>
@@ -782,7 +782,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00238">stm32_uartbin_dma_poll()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00235">stm32_uartbin_it_poll()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00238">stm32_uartbin_dma_poll()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00235">stm32_uartbin_it_poll()</a>.</p>
 
 </div>
 </div>
@@ -970,7 +970,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00223">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00207">stm32_uartbin_it_error_callback()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00223">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00207">stm32_uartbin_it_error_callback()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>.</p>
 
 </div>
 </div>
@@ -1198,6 +1198,8 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00099">UARTBIN_FLAG_EVENT</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00106">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00268">main()</a>.</p>
+
 </div>
 </div>
 <a id="a25f9d1a61c29eebfbf3dc655b0621b2f" name="a25f9d1a61c29eebfbf3dc655b0621b2f"></a>
@@ -1311,6 +1313,8 @@ Functions</h2></td></tr>
 <p class="definition">Definition at line <a class="el" href="uartbin_8c_source.html#l00435">435</a> of file <a class="el" href="uartbin_8c_source.html">uartbin.c</a>.</p>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00166">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00109">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00096">UARTBIN_FLAG_RESPONSE</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
+
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>.</p>
 
 </div>
 </div>
