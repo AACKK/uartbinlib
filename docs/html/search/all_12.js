@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['tarafi_0',['TX Interrupt Tarafi',['../guide_ring_buffer.html#autotoc_md36',1,'']]],
+  ['tarafi_0',['TX Interrupt Tarafi',['../guide_ring_buffer.html#autotoc_md37',1,'']]],
   ['tasarim_1',['Tasarim',['../index.html#autotoc_md3',1,'']]],
-  ['temel_20kurulum_2',['Temel Kurulum',['../guide_api_usage.html#autotoc_md14',1,'']]],
-  ['termios_20ayari_3',['termios Ayari',['../guide_linux_usage.html#autotoc_md21',1,'']]],
-  ['tx_20interrupt_20tarafi_4',['TX Interrupt Tarafi',['../guide_ring_buffer.html#autotoc_md36',1,'']]],
-  ['tx_20portu_5',['TX Portu',['../guide_ring_buffer.html',1,'Halka Buffer TX Portu'],['../guide_ring_buffer.html#autotoc_md33',1,'Halka Buffer TX Portu']]],
-  ['tx_20secenekleri_6',['TX Secenekleri',['../guide_stm32_transport.html#autotoc_md41',1,'']]],
+  ['temel_20kurulum_2',['Temel Kurulum',['../guide_api_usage.html#autotoc_md15',1,'']]],
+  ['termios_20ayari_3',['termios Ayari',['../guide_linux_usage.html#autotoc_md22',1,'']]],
+  ['tx_20interrupt_20tarafi_4',['TX Interrupt Tarafi',['../guide_ring_buffer.html#autotoc_md37',1,'']]],
+  ['tx_20portu_5',['TX Portu',['../guide_ring_buffer.html',1,'Halka Buffer TX Portu'],['../guide_ring_buffer.html#autotoc_md34',1,'Halka Buffer TX Portu']]],
+  ['tx_20secenekleri_6',['TX Secenekleri',['../guide_stm32_transport.html#autotoc_md42',1,'']]],
   ['tx_5fretry_5fbuffer_7',['tx_retry_buffer',['../structuartbin__config.html#ab90f35e45d30c7598342ebe37a8ad93d',1,'uartbin_config']]],
   ['tx_5fretry_5fcapacity_8',['tx_retry_capacity',['../structuartbin__config.html#a1e71034639756ac266531be42344ec21',1,'uartbin_config']]],
   ['tx_5fretry_5fframe_9',['tx_retry_frame',['../structlinux__uartbin.html#a5e1a41970a42c47e18b360b02b2dbc4c',1,'linux_uartbin']]],

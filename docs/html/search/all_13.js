@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['uart_20sistemleri_0',['Coklu UART Sistemleri',['../guide_porting.html#autotoc_md32',1,'']]],
+  ['uart_20sistemleri_0',['Coklu UART Sistemleri',['../guide_porting.html#autotoc_md33',1,'']]],
   ['uart_5fhandletypedef_1',['UART_HandleTypeDef',['../stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590',1,'stm32_hal_dma_idle.c']]],
   ['uartbin_2',['uartbin',['../structuartbin.html',1,'']]],
-  ['uartbin_20write_20hook_3',['uartbin Write Hook',['../guide_ring_buffer.html#autotoc_md35',1,'']]],
+  ['uartbin_20write_20hook_3',['uartbin Write Hook',['../guide_ring_buffer.html#autotoc_md36',1,'']]],
   ['uartbin_2ec_4',['uartbin.c',['../uartbin_8c.html',1,'']]],
   ['uartbin_2eh_5',['uartbin.h',['../uartbin_8h.html',1,'']]],
   ['uartbin_5fbuild_5fframe_6',['uartbin_build_frame',['../uartbin_8c.html#a930afead8f815c7ca29d2a9bf0c413be',1,'uartbin.c']]],

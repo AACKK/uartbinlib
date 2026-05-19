@@ -130,6 +130,49 @@ Her `uartbin_t` kendi sira sayacini tasir. Bu yuzden birden fazla UART linki
 birbirinin durumunu etkilemez. Daha ozel durumlarda acik `seq` vermek icin
 daha dusuk seviye `uartbin_send()` API'si kullanilabilir.
 
+## Haberlesme Akislari
+
+Temel kullanimda uygulama yalnizca mesaj tipini, flag degerlerini ve payload'u
+verir. `uartbinlib` cerceveleme, CRC, otomatik sira numarasi ve opsiyonel retry
+durumunu link context'i icinde yonetir.
+
+```mermaid
+flowchart LR
+    APP["Uygulama\nType + Flags + Payload"]
+    API["uartbin_send_request/event/response"]
+    FRAME["SOF + Header + Payload + CRC16"]
+    UART["UART / byte stream"]
+    RX["uartbin_feed_at"]
+    CB["on_packet / on_error"]
+
+    APP --> API --> FRAME --> UART --> RX --> CB
+```
+
+Request/response akisi ayni `seq` uzerinden eslesir. Response tarafinda gelen
+paketin sira numarasi otomatik olarak geri yazilir.
+
+```mermaid
+sequenceDiagram
+    participant Host
+    participant Device
+    Host->>Device: REQUEST type=CMD seq=42 payload
+    Device->>Device: CRC OK, type isle
+    Device-->>Host: RESPONSE type=RESULT seq=42 payload
+    Host->>Host: seq=42 pending retry kapanir
+```
+
+Event akisi kendiliginden olusan durumlar icin kullanilir. Istenirse event de
+ACK/response ile guvenilir hale getirilebilir.
+
+```mermaid
+sequenceDiagram
+    participant Device
+    participant Host
+    Device->>Host: EVENT type=STATUS seq=77 payload
+    Host->>Host: event'i isle
+    Host-->>Device: RESPONSE type=ACK seq=77
+```
+
 ## Otomatik Retry
 
 Otomatik retry opsiyoneldir. Her link icin statik bir TX retry buffer'i ve retry
@@ -176,6 +219,30 @@ uartbin_send_response(&link, packet, MSG_DEVICE_RESULT, 0, result, result_len);
 /* Iki taraf da event yayinlayip ACK tarzi cevap bekleyebilir. */
 uartbin_send_event(&link, MSG_DEVICE_EVENT, 0, event, event_len);
 uartbin_send_response(&link, packet, MSG_ACK, 0, NULL, 0);
+```
+
+Retry akisi `uartbin_poll()` ile surulur. Timeout dolarsa ayni frame yeniden
+gonderilir; eslesen response gelirse pending durum kapanir.
+
+```mermaid
+flowchart TD
+    SEND["Request/Event gonder"]
+    SAVE["Frame retry buffer'a kaydedilir"]
+    WAIT["Response bekle"]
+    OK{"Ayni seq ile\nRESPONSE geldi mi?"}
+    TIME{"Timeout doldu mu?"}
+    LIMIT{"Retry limiti doldu mu?"}
+    RESEND["Ayni frame yeniden gonder"]
+    DONE["Basarili: retry kapanir"]
+    ERR["Hata: UARTBIN_ERROR_RETRY_EXHAUSTED"]
+
+    SEND --> SAVE --> WAIT --> OK
+    OK -- Evet --> DONE
+    OK -- Hayir --> TIME
+    TIME -- Hayir --> WAIT
+    TIME -- Evet --> LIMIT
+    LIMIT -- Hayir --> RESEND --> WAIT
+    LIMIT -- Evet --> ERR
 ```
 
 ## STM32 Entegrasyon Ozeti

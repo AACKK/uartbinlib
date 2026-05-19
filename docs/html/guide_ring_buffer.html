@@ -122,10 +122,10 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('guide_ring_buf
   <div class="headertitle"><div class="title">Halka Buffer TX Portu </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
 Halka Buffer TX Portu</h1>
 <p>Halka buffer, <span class="tt">write</span> hook'unu non-blocking yapmak icin yaygin yoldur. Hook, byte'lari statik TX halkasi icine kopyalar ve UART TX-empty interrupt veya DMA TX yolunu etkinlestirir. Basariyi yalnizca her byte kabul edildiyse dondurur.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
 Minimal Halka Buffer Yapisi</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define TX_RING_SIZE 512u</span></div>
 <div class="line"> </div>
@@ -154,7 +154,7 @@ Minimal Halka Buffer Yapisi</h2>
 <div class="line">    ring-&gt;head = next;</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
 uartbin Write Hook</h2>
 <p>Hook, TX interrupt'a gore atomic olmalidir. Byte kopyalarken ilgili UART TX interrupt'unu kapat veya kisa bir critical section kullan.</p>
 <p>Kopyalamadan once bos alani kontrol et; hook all-or-nothing davranmalidir. Cercevenin yalnizca bir kismini kuyruga alip hata dondurmek hatta bozuk partial cerceve cikmasina neden olabilir.</p>
@@ -191,7 +191,7 @@ uartbin Write Hook</h2>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Halka buffer yeterli bos alana sahip degilse non-zero dondur. Send API <span class="tt"><a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada1bcbf954584fdf2d9c8aa94634cd9608" title="Ayarlanan write hook TX hatasi bildirdi.">UARTBIN_EWRITE</a></span> dondurur; retry sirasindaki yazma hatasinda ise <span class="tt"><a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a7ed4d37cc04314e6a6e664f2548236d5" title="Guvenilir TX retry ayarlanan hook ile yazilamadi.">UARTBIN_ERROR_RETRY_WRITE</a></span> bildirilir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
 TX Interrupt Tarafi</h2>
 <p>UART TX-empty interrupt icinde:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> UART_TX_IRQHandler(<span class="keywordtype">void</span>)</div>
@@ -204,7 +204,7 @@ TX Interrupt Tarafi</h2>
 <div class="line">    platform_uart_write_data_register(tx_ring.data[tx_ring.tail]);</div>
 <div class="line">    tx_ring.tail = ring_next(tx_ring.tail);</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
 Pratik Notlar</h2>
 <ul>
 <li>Ring boyutunu bekledigin en buyuk burst'e gore sec.</li>
