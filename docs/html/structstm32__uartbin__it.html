@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
   <td id="projectalign">
    <div id="projectname">uartbinlib
    </div>
-   <div id="projectbrief">Platform-independent binary UART framing library</div>
+   <div id="projectbrief">Platformdan bagimsiz binary UART cerceveleme kutuphanesi</div>
   </td>
  </tr>
  </tbody>
@@ -121,26 +121,26 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structstm32__u
 </div><!--header-->
 <div class="contents">
 
-<p>Application-side state for one interrupt-driven uartbin UART.  
+<p>Tek interrupt-driven uartbin UART icin uygulama tarafi durum.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a7828daef1d1176716e653ae198a60954" id="r_a7828daef1d1176716e653ae198a60954"><td class="memItemLeft"><a class="el" href="stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590">UART_HandleTypeDef</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a7828daef1d1176716e653ae198a60954">huart</a></td></tr>
-<tr class="memdesc:a7828daef1d1176716e653ae198a60954"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL UART handle associated with this adapter.  <br /></td></tr>
+<tr class="memdesc:a7828daef1d1176716e653ae198a60954"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bu adapter ile iliskili HAL UART handle.  <br /></td></tr>
 <tr class="memitem:aa10605cdf41d1af0156534c8d52b06ed" id="r_aa10605cdf41d1af0156534c8d52b06ed"><td class="memItemLeft"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1">uartbin_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#aa10605cdf41d1af0156534c8d52b06ed">link</a></td></tr>
 <tr class="memdesc:aa10605cdf41d1af0156534c8d52b06ed"><td class="mdescLeft">&#160;</td><td class="mdescRight">Portable uartbin parser/sender context.  <br /></td></tr>
 <tr class="memitem:a5e82a01184c38249369f502940c2914c" id="r_a5e82a01184c38249369f502940c2914c"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a5e82a01184c38249369f502940c2914c">rx_byte</a></td></tr>
-<tr class="memdesc:a5e82a01184c38249369f502940c2914c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Single-byte RX storage used by HAL_UART_Receive_IT.  <br /></td></tr>
+<tr class="memdesc:a5e82a01184c38249369f502940c2914c"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL_UART_Receive_IT tarafindan kullanilan tek byte RX alani.  <br /></td></tr>
 <tr class="memitem:a8b925dcb35d13c539c8f8847dd126f0f" id="r_a8b925dcb35d13c539c8f8847dd126f0f"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a8b925dcb35d13c539c8f8847dd126f0f">rx_payload</a> [4096]</td></tr>
-<tr class="memdesc:a8b925dcb35d13c539c8f8847dd126f0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete packet payload buffer.  <br /></td></tr>
+<tr class="memdesc:a8b925dcb35d13c539c8f8847dd126f0f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Tam paket payload buffer'i.  <br /></td></tr>
 <tr class="memitem:aea3233364011facde6eef19839b5600d" id="r_aea3233364011facde6eef19839b5600d"><td class="memItemLeft">volatile uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#aea3233364011facde6eef19839b5600d">hal_rx_errors</a></td></tr>
-<tr class="memdesc:aea3233364011facde6eef19839b5600d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of HAL-level RX/start/abort errors observed by the adapter.  <br /></td></tr>
+<tr class="memdesc:aea3233364011facde6eef19839b5600d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapter'in gordugu HAL seviyeli RX/start/abort hata sayisi.  <br /></td></tr>
 <tr class="memitem:aabba1f1454ea641ef8ecffaf3b2b0dde" id="r_aabba1f1454ea641ef8ecffaf3b2b0dde"><td class="memItemLeft">volatile uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#aabba1f1454ea641ef8ecffaf3b2b0dde">protocol_errors</a></td></tr>
-<tr class="memdesc:aabba1f1454ea641ef8ecffaf3b2b0dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of protocol-level parser errors reported by uartbinlib.  <br /></td></tr>
+<tr class="memdesc:aabba1f1454ea641ef8ecffaf3b2b0dde"><td class="mdescLeft">&#160;</td><td class="mdescRight">uartbinlib tarafindan bildirilen protokol seviyeli parser hata sayisi.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Application-side state for one interrupt-driven uartbin UART. </p>
+<div class="textblock"><p>Tek interrupt-driven uartbin UART icin uygulama tarafi durum. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#_a11">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
@@ -158,13 +158,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Count of HAL-level RX/start/abort errors observed by the adapter. </p>
+<p>Adapter'in gordugu HAL seviyeli RX/start/abort hata sayisi. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a17">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00085">85</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00205">stm32_uartbin_it_error_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">stm32_uartbin_it_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00188">stm32_uartbin_it_rx_complete_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00207">stm32_uartbin_it_error_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>.</p>
 
 </div>
 </div>
@@ -180,13 +180,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>HAL UART handle associated with this adapter. </p>
+<p>Bu adapter ile iliskili HAL UART handle. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a12">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00073">73</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00221">stm32_uartbin_it_abort_complete_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00205">stm32_uartbin_it_error_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">stm32_uartbin_it_init()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00188">stm32_uartbin_it_rx_complete_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00097">stm32_uartbin_it_start_rx()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00109">stm32_uartbin_it_write()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00223">stm32_uartbin_it_abort_complete_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00207">stm32_uartbin_it_error_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00097">stm32_uartbin_it_start_rx()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00109">stm32_uartbin_it_write()</a>.</p>
 
 </div>
 </div>
@@ -208,7 +208,7 @@ Data Fields</h2></td></tr>
 
 <p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00076">76</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00205">stm32_uartbin_it_error_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">stm32_uartbin_it_init()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00233">stm32_uartbin_it_poll()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00188">stm32_uartbin_it_rx_complete_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00207">stm32_uartbin_it_error_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00235">stm32_uartbin_it_poll()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>.</p>
 
 </div>
 </div>
@@ -224,13 +224,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Count of protocol-level parser errors reported by uartbinlib. </p>
+<p>uartbinlib tarafindan bildirilen protokol seviyeli parser hata sayisi. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a18">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00088">88</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">stm32_uartbin_it_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00146">stm32_uartbin_it_on_error()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00148">stm32_uartbin_it_on_error()</a>.</p>
 
 </div>
 </div>
@@ -246,13 +246,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Single-byte RX storage used by HAL_UART_Receive_IT. </p>
+<p>HAL_UART_Receive_IT tarafindan kullanilan tek byte RX alani. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a15">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00079">79</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00188">stm32_uartbin_it_rx_complete_callback()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00097">stm32_uartbin_it_start_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00097">stm32_uartbin_it_start_rx()</a>.</p>
 
 </div>
 </div>
@@ -268,14 +268,14 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Complete packet payload buffer. </p>
-<p>Increase/decrease for your product. </p>
+<p>Tam paket payload buffer'i. </p>
+<p>Urunune gore buyut/kucult. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a16">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
 <p class="definition">Definition at line <a class="el" href="stm32__hal__interrupt_8c_source.html#l00082">82</a> of file <a class="el" href="stm32__hal__interrupt_8c_source.html">stm32_hal_interrupt.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00160">stm32_uartbin_it_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>.</p>
 
 </div>
 </div>

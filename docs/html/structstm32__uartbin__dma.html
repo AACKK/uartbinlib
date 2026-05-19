@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
   <td id="projectalign">
    <div id="projectname">uartbinlib
    </div>
-   <div id="projectbrief">Platform-independent binary UART framing library</div>
+   <div id="projectbrief">Platformdan bagimsiz binary UART cerceveleme kutuphanesi</div>
   </td>
  </tr>
  </tbody>
@@ -121,32 +121,32 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structstm32__u
 </div><!--header-->
 <div class="contents">
 
-<p>Application-side state for one DMA idle-line uartbin UART.  
+<p>Tek DMA idle-line uartbin UART icin uygulama tarafi durum.  
  <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:a110f05945987cfe4e3cb47c3d6bf99a1" id="r_a110f05945987cfe4e3cb47c3d6bf99a1"><td class="memItemLeft"><a class="el" href="stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590">UART_HandleTypeDef</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a110f05945987cfe4e3cb47c3d6bf99a1">huart</a></td></tr>
-<tr class="memdesc:a110f05945987cfe4e3cb47c3d6bf99a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL UART handle associated with this adapter.  <br /></td></tr>
+<tr class="memdesc:a110f05945987cfe4e3cb47c3d6bf99a1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Bu adapter ile iliskili HAL UART handle.  <br /></td></tr>
 <tr class="memitem:a9e7f971479df6278a5c2ecfe5e45c0c8" id="r_a9e7f971479df6278a5c2ecfe5e45c0c8"><td class="memItemLeft"><a class="el" href="stm32__hal__dma__idle_8c.html#a3711e76f78e413e04900cdef931374f4">DMA_HandleTypeDef</a> *&#160;</td><td class="memItemRight"><a class="el" href="#a9e7f971479df6278a5c2ecfe5e45c0c8">hdma_rx</a></td></tr>
-<tr class="memdesc:a9e7f971479df6278a5c2ecfe5e45c0c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">HAL DMA RX handle used to disable half-transfer interrupts.  <br /></td></tr>
+<tr class="memdesc:a9e7f971479df6278a5c2ecfe5e45c0c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Half-transfer interrupt'larini kapatmak icin kullanilan HAL DMA RX handle.  <br /></td></tr>
 <tr class="memitem:a4d6532bb56f78b8f644e85d13eae7783" id="r_a4d6532bb56f78b8f644e85d13eae7783"><td class="memItemLeft"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1">uartbin_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#a4d6532bb56f78b8f644e85d13eae7783">link</a></td></tr>
 <tr class="memdesc:a4d6532bb56f78b8f644e85d13eae7783"><td class="mdescLeft">&#160;</td><td class="mdescRight">Portable uartbin parser/sender context.  <br /></td></tr>
 <tr class="memitem:ae4c31876d9b7ff5b4e14b82345d6dd9f" id="r_ae4c31876d9b7ff5b4e14b82345d6dd9f"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ae4c31876d9b7ff5b4e14b82345d6dd9f">dma_rx_buffer</a> [256]</td></tr>
-<tr class="memdesc:ae4c31876d9b7ff5b4e14b82345d6dd9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">DMA transport buffer; it does not need to fit a whole packet.  <br /></td></tr>
+<tr class="memdesc:ae4c31876d9b7ff5b4e14b82345d6dd9f"><td class="mdescLeft">&#160;</td><td class="mdescRight">DMA transport buffer; tam paket sigdirmasi gerekmez.  <br /></td></tr>
 <tr class="memitem:a7c81a0ba62392ca2dab077d7d3732f41" id="r_a7c81a0ba62392ca2dab077d7d3732f41"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a7c81a0ba62392ca2dab077d7d3732f41">rx_payload</a> [4096]</td></tr>
-<tr class="memdesc:a7c81a0ba62392ca2dab077d7d3732f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">Complete packet payload buffer used by uartbinlib.  <br /></td></tr>
+<tr class="memdesc:a7c81a0ba62392ca2dab077d7d3732f41"><td class="mdescLeft">&#160;</td><td class="mdescRight">uartbinlib tarafindan kullanilan tam paket payload buffer'i.  <br /></td></tr>
 <tr class="memitem:a329990b66919193e8782f3dde55cd919" id="r_a329990b66919193e8782f3dde55cd919"><td class="memItemLeft">volatile uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a329990b66919193e8782f3dde55cd919">hal_rx_errors</a></td></tr>
-<tr class="memdesc:a329990b66919193e8782f3dde55cd919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of HAL-level RX/start/abort errors observed by the adapter.  <br /></td></tr>
+<tr class="memdesc:a329990b66919193e8782f3dde55cd919"><td class="mdescLeft">&#160;</td><td class="mdescRight">Adapter'in gordugu HAL seviyeli RX/start/abort hata sayisi.  <br /></td></tr>
 <tr class="memitem:acb07ebeeba786749dacb2bb2f1ce97cf" id="r_acb07ebeeba786749dacb2bb2f1ce97cf"><td class="memItemLeft">volatile uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#acb07ebeeba786749dacb2bb2f1ce97cf">protocol_errors</a></td></tr>
-<tr class="memdesc:acb07ebeeba786749dacb2bb2f1ce97cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Count of protocol-level parser errors reported by uartbinlib.  <br /></td></tr>
+<tr class="memdesc:acb07ebeeba786749dacb2bb2f1ce97cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">uartbinlib tarafindan bildirilen protokol seviyeli parser hata sayisi.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Application-side state for one DMA idle-line uartbin UART. </p>
+<div class="textblock"><p>Tek DMA idle-line uartbin UART icin uygulama tarafi durum. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#_a12">stm32_hal_dma_idle.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00068">68</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00069">69</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
 <a id="ae4c31876d9b7ff5b4e14b82345d6dd9f" name="ae4c31876d9b7ff5b4e14b82345d6dd9f"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae4c31876d9b7ff5b4e14b82345d6dd9f">&#9670;&#160;</a></span>dma_rx_buffer</h2>
@@ -160,13 +160,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>DMA transport buffer; it does not need to fit a whole packet. </p>
+<p>DMA transport buffer; tam paket sigdirmasi gerekmez. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a17">stm32_hal_dma_idle.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00079">79</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00080">80</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00196">stm32_uartbin_dma_rx_event_callback()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00098">stm32_uartbin_dma_start_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00100">stm32_uartbin_dma_start_rx()</a>.</p>
 
 </div>
 </div>
@@ -182,13 +182,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Count of HAL-level RX/start/abort errors observed by the adapter. </p>
+<p>Adapter'in gordugu HAL seviyeli RX/start/abort hata sayisi. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a19">stm32_hal_dma_idle.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00085">85</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00086">86</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00221">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00162">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00196">stm32_uartbin_dma_rx_event_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00223">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>.</p>
 
 </div>
 </div>
@@ -204,13 +204,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>HAL DMA RX handle used to disable half-transfer interrupts. </p>
+<p>Half-transfer interrupt'larini kapatmak icin kullanilan HAL DMA RX handle. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a14">stm32_hal_dma_idle.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00073">73</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00074">74</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00162">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00098">stm32_uartbin_dma_start_rx()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00100">stm32_uartbin_dma_start_rx()</a>.</p>
 
 </div>
 </div>
@@ -226,13 +226,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>HAL UART handle associated with this adapter. </p>
+<p>Bu adapter ile iliskili HAL UART handle. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a13">stm32_hal_dma_idle.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00070">70</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00071">71</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00221">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00162">stm32_uartbin_dma_init()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00196">stm32_uartbin_dma_rx_event_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00098">stm32_uartbin_dma_start_rx()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00117">stm32_uartbin_dma_write()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00223">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00100">stm32_uartbin_dma_start_rx()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00119">stm32_uartbin_dma_write()</a>.</p>
 
 </div>
 </div>
@@ -252,9 +252,9 @@ Data Fields</h2></td></tr>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a16">stm32_hal_dma_idle.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00076">76</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00077">77</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00221">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00162">stm32_uartbin_dma_init()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00236">stm32_uartbin_dma_poll()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00196">stm32_uartbin_dma_rx_event_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00223">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00238">stm32_uartbin_dma_poll()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>.</p>
 
 </div>
 </div>
@@ -270,13 +270,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Count of protocol-level parser errors reported by uartbinlib. </p>
+<p>uartbinlib tarafindan bildirilen protokol seviyeli parser hata sayisi. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a20">stm32_hal_dma_idle.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00088">88</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00089">89</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00162">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00147">stm32_uartbin_dma_on_error()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00149">stm32_uartbin_dma_on_error()</a>.</p>
 
 </div>
 </div>
@@ -292,13 +292,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Complete packet payload buffer used by uartbinlib. </p>
+<p>uartbinlib tarafindan kullanilan tam paket payload buffer'i. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_dma_idle_8c-example.html#a18">stm32_hal_dma_idle.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00082">82</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
+<p class="definition">Definition at line <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00083">83</a> of file <a class="el" href="stm32__hal__dma__idle_8c_source.html">stm32_hal_dma_idle.c</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00162">stm32_uartbin_dma_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>.</p>
 
 </div>
 </div>

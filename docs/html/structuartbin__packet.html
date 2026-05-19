@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
   <td id="projectalign">
    <div id="projectname">uartbinlib
    </div>
-   <div id="projectbrief">Platform-independent binary UART framing library</div>
+   <div id="projectbrief">Platformdan bagimsiz binary UART cerceveleme kutuphanesi</div>
   </td>
  </tr>
  </tbody>
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structuartbin_
 </div><!--header-->
 <div class="contents">
 
-<p>CRC-checked packet delivered to the application.  
+<p>Uygulamaya iletilen CRC kontrolunden gecmis paket.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="uartbin_8h_source.html">uartbin.h</a>&gt;</code></p>
@@ -129,21 +129,21 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structuartbin_
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:acedf1ab64a16b37e755aa61c4b6ed568" id="r_acedf1ab64a16b37e755aa61c4b6ed568"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#acedf1ab64a16b37e755aa61c4b6ed568">type</a></td></tr>
-<tr class="memdesc:acedf1ab64a16b37e755aa61c4b6ed568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application-defined packet type.  <br /></td></tr>
+<tr class="memdesc:acedf1ab64a16b37e755aa61c4b6ed568"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uygulama tarafindan tanimlanan paket tipi.  <br /></td></tr>
 <tr class="memitem:a0306f6e0139800922d2c83a9a0ce8722" id="r_a0306f6e0139800922d2c83a9a0ce8722"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a0306f6e0139800922d2c83a9a0ce8722">flags</a></td></tr>
-<tr class="memdesc:a0306f6e0139800922d2c83a9a0ce8722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application-defined flag bits.  <br /></td></tr>
+<tr class="memdesc:a0306f6e0139800922d2c83a9a0ce8722"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uygulama tarafindan tanimlanan flag bitleri.  <br /></td></tr>
 <tr class="memitem:a345c538f02aefc9fdeb7f26331c5feeb" id="r_a345c538f02aefc9fdeb7f26331c5feeb"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a345c538f02aefc9fdeb7f26331c5feeb">seq</a></td></tr>
-<tr class="memdesc:a345c538f02aefc9fdeb7f26331c5feeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Application-defined sequence number, useful for request/response flows.  <br /></td></tr>
+<tr class="memdesc:a345c538f02aefc9fdeb7f26331c5feeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Uygulama sira numarasi; request/response akislari icin kullanislidir.  <br /></td></tr>
 <tr class="memitem:a5c09c77d40b5513cabf7416c4e05e8c8" id="r_a5c09c77d40b5513cabf7416c4e05e8c8"><td class="memItemLeft">const uint8_t *&#160;</td><td class="memItemRight"><a class="el" href="#a5c09c77d40b5513cabf7416c4e05e8c8">payload</a></td></tr>
-<tr class="memdesc:a5c09c77d40b5513cabf7416c4e05e8c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the CRC-validated payload bytes.  <br /></td></tr>
+<tr class="memdesc:a5c09c77d40b5513cabf7416c4e05e8c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">CRC dogrulamasi gecmis payload byte'larina pointer.  <br /></td></tr>
 <tr class="memitem:a75e1163ff72f8b6c33b694d575726a07" id="r_a75e1163ff72f8b6c33b694d575726a07"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a75e1163ff72f8b6c33b694d575726a07">payload_len</a></td></tr>
-<tr class="memdesc:a75e1163ff72f8b6c33b694d575726a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of valid bytes at the payload pointer.  <br /></td></tr>
+<tr class="memdesc:a75e1163ff72f8b6c33b694d575726a07"><td class="mdescLeft">&#160;</td><td class="mdescRight">Payload pointer'indaki gecerli byte sayisi.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>CRC-checked packet delivered to the application. </p>
-<p>The payload pointer aliases <a class="el" href="structuartbin__config.html#a9ba07c9627b3932126f96d51d791d78c" title="Static payload buffer owned by the application.">uartbin_config::rx_payload_buffer</a>. It is valid only until the next call to <a class="el" href="uartbin_8h.html#adae56dc79286796f68e851fa337f1779" title="Feed received bytes without timeout timestamp updates.">uartbin_feed()</a>, <a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Feed received bytes with the current application timestamp.">uartbin_feed_at()</a>, <a class="el" href="uartbin_8h.html#a0b7e981f8f366c641f0686a448168f5a" title="Feed one received byte without timeout timestamp updates.">uartbin_feed_byte()</a>, <a class="el" href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0" title="Feed one received byte with the current application timestamp.">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a>, or <a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Reset only the RX parser state.">uartbin_reset()</a> on the same context. </p>
+<div class="textblock"><p>Uygulamaya iletilen CRC kontrolunden gecmis paket. </p>
+<p>Payload pointer <a class="el" href="structuartbin__config.html#a9ba07c9627b3932126f96d51d791d78c" title="Uygulamanin sahip oldugu statik payload buffer.">uartbin_config::rx_payload_buffer</a> alanini isaret eder. Ayni context uzerinde bir sonraki <a class="el" href="uartbin_8h.html#adae56dc79286796f68e851fa337f1779" title="Alinan byte&#39;lari timeout timestamp guncellemesi olmadan besle.">uartbin_feed()</a>, <a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.">uartbin_feed_at()</a>, <a class="el" href="uartbin_8h.html#a0b7e981f8f366c641f0686a448168f5a" title="Tek alinan byte&#39;i timeout timestamp guncellemesi olmadan besle.">uartbin_feed_byte()</a>, <a class="el" href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0" title="Tek alinan byte&#39;i gecerli uygulama timestamp degeri ile besle.">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a> veya <a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Yalnizca RX parser durumunu resetle.">uartbin_reset()</a> cagrimina kadar gecerlidir. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00159">159</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00158">158</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
 <a id="a0306f6e0139800922d2c83a9a0ce8722" name="a0306f6e0139800922d2c83a9a0ce8722"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a0306f6e0139800922d2c83a9a0ce8722">&#9670;&#160;</a></span>flags</h2>
@@ -157,9 +157,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Application-defined flag bits. </p>
+<p>Uygulama tarafindan tanimlanan flag bitleri. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00164">164</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00163">163</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
@@ -177,9 +177,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Pointer to the CRC-validated payload bytes. </p>
+<p>CRC dogrulamasi gecmis payload byte'larina pointer. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00170">170</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00169">169</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
@@ -197,9 +197,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Number of valid bytes at the payload pointer. </p>
+<p>Payload pointer'indaki gecerli byte sayisi. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00173">173</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00172">172</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
@@ -217,9 +217,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Application-defined sequence number, useful for request/response flows. </p>
+<p>Uygulama sira numarasi; request/response akislari icin kullanislidir. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00167">167</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00166">166</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00435">uartbin_send_response()</a>.</p>
 
@@ -237,13 +237,13 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Application-defined packet type. </p>
+<p>Uygulama tarafindan tanimlanan paket tipi. </p>
 <dl class="section examples"><dt>Examples</dt><dd><a class="el" href="stm32_hal_interrupt_8c-example.html#a24">stm32_hal_interrupt.c</a>.</dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00161">161</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00160">160</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00126">stm32_uartbin_it_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00127">stm32_uartbin_it_on_packet()</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
 </div>
 </div>

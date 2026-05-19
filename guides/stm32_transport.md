@@ -1,18 +1,18 @@
-\page guide_stm32_transport STM32 Interrupt and DMA Usage
+\page guide_stm32_transport STM32 Interrupt ve DMA Kullanimi
 
-# STM32 Interrupt and DMA Usage
+# STM32 Interrupt ve DMA Kullanimi
 
-The portable library does not depend on STM32 HAL, but the repository includes
-two adapter examples:
+Portable kutuphane STM32 HAL'e bagimli degildir, fakat repo iki adapter ornegi
+icerir:
 
 - `examples/stm32_hal_interrupt.c`
 - `examples/stm32_hal_dma_idle.c`
 
-Use these as patterns, not as mandatory library code.
+Bunlari zorunlu kutuphane kodu gibi degil, kalip olarak kullan.
 
 ## Interrupt RX
 
-One-byte interrupt RX is simple and robust:
+Tek byte interrupt RX basit ve guvenilirdir:
 
 ```c
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
@@ -22,19 +22,20 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)
 }
 ```
 
-Recommended behavior:
+Onerilen davranis:
 
-- Arm the next byte immediately after feeding the current one.
-- Call `uartbin_reset()` after HAL noise/framing/parity/overrun errors.
-- Restart RX after abort/error recovery.
-- Call `uartbin_poll()` from the main loop or scheduler.
-- Let `uartbin_poll()` drive retry; RX callbacks only feed received bytes.
+- Gecerli byte'i besledikten hemen sonra sonraki byte RX'i arm et.
+- HAL noise/framing/parity/overrun hatalarindan sonra `uartbin_reset()` cagir.
+- Abort/error recovery sonrasinda RX'i yeniden baslat.
+- `uartbin_poll()` fonksiyonunu main loop veya scheduler icinden cagir.
+- Retry'yi `uartbin_poll()` sursun; RX callback'leri yalnizca gelen byte'lari
+  beslesin.
 
-This model is easy to debug and works well at moderate baud rates.
+Bu model debug etmesi kolaydir ve orta baud rate'lerde iyi calisir.
 
 ## DMA Idle-Line RX
 
-DMA idle-line RX receives blocks and feeds them to uartbinlib:
+DMA idle-line RX blok alir ve uartbinlib'e besler:
 
 ```c
 void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t size)
@@ -44,32 +45,32 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t size)
 }
 ```
 
-Recommended behavior:
+Onerilen davranis:
 
-- The DMA buffer does not need to hold a complete uartbin frame.
-- Feed only valid newly received bytes.
-- Restart `HAL_UARTEx_ReceiveToIdle_DMA()` after each idle event.
-- Disable DMA half-transfer interrupts unless your adapter tracks offsets.
-- On HAL UART errors, abort/restart DMA and call `uartbin_reset()`.
+- DMA buffer'in tam bir uartbin cercevesi tasimasi gerekmez.
+- Yalnizca yeni alinmis gecerli byte'lari besle.
+- Her idle event sonrasinda `HAL_UARTEx_ReceiveToIdle_DMA()` yeniden baslat.
+- Adapter offset takip etmiyorsa DMA half-transfer interrupt'larini kapat.
+- HAL UART hatalarinda DMA'i abort/restart et ve `uartbin_reset()` cagir.
 
-This model is better for high baud rates or bursty traffic.
+Bu model yuksek baud rate veya burst tarzi trafik icin daha uygundur.
 
-## TX Choices
+## TX Secenekleri
 
-The STM32 examples use blocking `HAL_UART_Transmit()` because it satisfies the
-write hook contract with minimal code. Production projects often replace this
-with:
+STM32 ornekleri blocking `HAL_UART_Transmit()` kullanir; cunku bu, write hook
+sozlesmesini en az kodla saglar. Production projelerde bunu genelde sunlardan
+biriyle degistirirsin:
 
-- A UART TX ring buffer driven by TX-empty interrupt.
-- A DMA TX queue.
-- An RTOS stream buffer drained by a UART task.
+- TX-empty interrupt ile surulen UART TX ring buffer.
+- DMA TX queue.
+- UART task tarafindan bosaltilan RTOS stream buffer.
 
-All three are valid as long as the write hook copies or accepts all bytes before
-returning success.
+Bu ucu de gecerlidir; tek sart write hook'un basari dondurmeden once tum
+byte'lari kopyalamasi veya kabul etmesidir.
 
-## Retry With STM32
+## STM32 ile Retry
 
-Automatic retry needs regular calls to `uartbin_poll()`:
+Otomatik retry icin `uartbin_poll()` duzenli cagrilmalidir:
 
 ```c
 void main_loop(void)
@@ -78,10 +79,10 @@ void main_loop(void)
 }
 ```
 
-For RTOS systems, a 1 ms to 10 ms periodic task is usually enough. Choose
-`tx_retry_timeout_ms` larger than the normal round-trip time of the peer plus
-the expected DALI operation delay if the response is sent after the DALI action
-completes.
+RTOS sistemlerinde 1 ms ile 10 ms arasi periyodik task genelde yeterlidir.
+`tx_retry_timeout_ms` degerini peer'in normal round-trip suresinden ve cevap
+DALI islemi bittikten sonra gonderiliyorsa beklenen DALI islem gecikmesinden
+buyuk sec.
 
-Do not rely on RX callbacks to drive retry timing. Feed callbacks only service
-RX parser timeout; TX retry runs from the explicit poll path.
+Retry zamanlamasi icin RX callback'lere guvenme. Feed callback'leri yalnizca RX
+parser timeout kontrolu yapar; TX retry acik poll yolunda calisir.

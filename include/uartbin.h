@@ -1,56 +1,55 @@
 /**
  * @file uartbin.h
- * @brief Platform-independent binary UART framing library.
+ * @brief Platformdan bagimsiz binary UART cerceveleme kutuphanesi.
  *
- * uartbinlib provides a small C API for sending and receiving variable-length
- * binary packets over byte streams such as UART. The core library has no HAL,
- * RTOS, interrupt, DMA, or dynamic allocation dependency. The application owns
- * all buffers and connects the library to the target platform through hooks and
- * callbacks.
+ * uartbinlib, UART gibi byte akislari uzerinden degisken uzunluklu binary
+ * paket gonderip almak icin kucuk bir C API sunar. Cekirdek kutuphane HAL,
+ * RTOS, interrupt, DMA veya dinamik bellek bagimliligi tasimaz. Tum buffer'lar
+ * uygulamaya aittir; kutuphane hedef platforma hook ve callback'lerle baglanir.
  *
- * @section uartbin_h_overview Overview
+ * @section uartbin_h_overview Genel Bakis
  *
- * uartbinlib frames binary payloads as:
+ * uartbinlib binary payload'lari su sekilde cerceveler:
  *
  * @code
  * SOF(2) | version(1) | type(1) | flags(1) | reserved(1) |
  * seq(2) | payload_len(2) | payload(N) | crc16(2)
  * @endcode
  *
- * The receiver stores the complete payload in a user-provided static buffer.
- * The packet callback is called only after the complete frame has passed CRC
- * validation. This keeps the API simple and makes it suitable for robust
- * embedded command, telemetry, configuration, and firmware-chunk protocols.
+ * Alici, tam payload'u kullanicinin verdigi statik buffer icinde saklar. Paket
+ * callback'i yalnizca tum cerceve CRC dogrulamasindan gectikten sonra cagrilir.
+ * Bu tasarim API'yi basit tutar ve gomulu komut, telemetri, konfigurasyon ve
+ * firmware parca protokolleri icin uygun hale getirir.
  *
- * Applications can use the low-level uartbin_send() API with an explicit
- * sequence number, or the higher-level request/response/event helpers. The
- * helpers keep an automatic per-context sequence counter, echo sequence numbers
- * for responses, and can optionally retry request/event frames until a matching
- * response arrives.
+ * Uygulamalar acik sira numarasi ile dusuk seviye uartbin_send() API'sini veya
+ * daha ust seviye request/response/event yardimcilarini kullanabilir.
+ * Yardimcilar context basina otomatik sira sayaci tutar, response icin sira
+ * numarasini geri yazar ve opsiyonel olarak eslesen response gelene kadar
+ * request/event cercevelerini retry edebilir.
  *
- * @section uartbin_h_no_alloc Memory Model
+ * @section uartbin_h_no_alloc Bellek Modeli
  *
- * The library never allocates memory. The application provides:
+ * Kutuphane bellek ayirmaz. Uygulama sunlari verir:
  *
- * - a persistent ::uartbin_t context,
- * - a static RX payload buffer,
- * - an optional static TX retry frame buffer,
- * - a write hook for TX,
- * - packet and error callbacks.
+ * - kalici bir ::uartbin_t context,
+ * - statik RX payload buffer,
+ * - opsiyonel statik TX retry frame buffer,
+ * - TX icin write hook,
+ * - packet ve error callback'leri.
  *
- * @section uartbin_h_timing Timeout Model
+ * @section uartbin_h_timing Zaman Asimi Modeli
  *
- * Set ::uartbin_config::rx_timeout_ms to a non-zero value and call
- * uartbin_poll() periodically. The timestamped feed functions also check the
- * RX timeout before accepting each byte/block. The same uartbin_poll() call
- * drives optional TX retry timing when ::uartbin_config::tx_retry_timeout_ms
- * is configured.
+ * ::uartbin_config::rx_timeout_ms degerini sifir disi ayarla ve uartbin_poll()
+ * fonksiyonunu periyodik cagir. Timestamp alan feed fonksiyonlari da her
+ * byte/block kabul etmeden once RX timeout kontrolu yapar. Ayni uartbin_poll()
+ * cagrisi, ::uartbin_config::tx_retry_timeout_ms ayarlandiginda opsiyonel TX
+ * retry zamanlamasini surer.
  *
- * @section uartbin_h_stm32 STM32 Integration
+ * @section uartbin_h_stm32 STM32 Entegrasyonu
  *
- * The portable core does not include STM32 headers. See the files in
- * @c examples/ for interrupt and DMA idle-line adapter patterns, including HAL
- * error recovery.
+ * Portable cekirdek STM32 header'lari icermez. Interrupt ve DMA idle-line
+ * adapter kaliplari ile HAL hata recovery icin @c examples/ altindaki dosyalara
+ * bak.
  */
 #ifndef UARTBIN_H
 #define UARTBIN_H
@@ -62,293 +61,293 @@
 extern "C" {
 #endif
 
-/** @brief Protocol version stored in every frame header. */
+/** @brief Her cerceve header'inda tasinan protokol surumu. */
 #define UARTBIN_VERSION 1u
 
-/** @brief First start-of-frame byte. */
+/** @brief Start-of-frame dizisinin ilk byte'i. */
 #define UARTBIN_SOF0 0xA5u
 
-/** @brief Second start-of-frame byte. */
+/** @brief Start-of-frame dizisinin ikinci byte'i. */
 #define UARTBIN_SOF1 0x5Au
 
-/** @brief Header size after the two SOF bytes, in bytes. */
+/** @brief Iki SOF byte'indan sonraki header boyutu, byte cinsinden. */
 #define UARTBIN_HEADER_SIZE 8u
 
-/** @brief CRC field size, in bytes. */
+/** @brief CRC alan boyutu, byte cinsinden. */
 #define UARTBIN_CRC_SIZE 2u
 
-/** @brief Bytes added around each payload: SOF + header + CRC. */
+/** @brief Her payload etrafina eklenen byte'lar: SOF + header + CRC. */
 #define UARTBIN_MAX_FRAME_OVERHEAD (2u + UARTBIN_HEADER_SIZE + UARTBIN_CRC_SIZE)
 
 #ifndef UARTBIN_DEFAULT_RETRY_TIMEOUT_MS
-/** @brief Default retry timeout value applications can use in config. */
+/** @brief Uygulamalarin config icinde kullanabilecegi varsayilan retry timeout. */
 #define UARTBIN_DEFAULT_RETRY_TIMEOUT_MS 100u
 #endif
 
 #ifndef UARTBIN_DEFAULT_RETRY_MAX_RETRIES
-/** @brief Default retry count applications can use in config. */
+/** @brief Uygulamalarin config icinde kullanabilecegi varsayilan retry sayisi. */
 #define UARTBIN_DEFAULT_RETRY_MAX_RETRIES 3u
 #endif
 
-/** @brief Flag bit set by uartbin_send_request(). */
+/** @brief uartbin_send_request() tarafindan set edilen flag biti. */
 #define UARTBIN_FLAG_REQUEST 0x01u
 
-/** @brief Flag bit set by uartbin_send_response(). */
+/** @brief uartbin_send_response() tarafindan set edilen flag biti. */
 #define UARTBIN_FLAG_RESPONSE 0x02u
 
-/** @brief Flag bit set by uartbin_send_event(). */
+/** @brief uartbin_send_event() tarafindan set edilen flag biti. */
 #define UARTBIN_FLAG_EVENT 0x04u
 
 /**
- * @brief Return status values for API calls that can fail immediately.
+ * @brief Hemen basarisiz olabilen API cagrilari icin donus durumlari.
  */
 typedef enum uartbin_status {
-    /** Operation completed successfully. */
+    /** Islem basariyla tamamlandi. */
     UARTBIN_OK = 0,
 
-    /** Invalid argument, such as a NULL context or missing payload pointer. */
+    /** Gecersiz arguman; NULL context veya eksik payload pointer gibi. */
     UARTBIN_EINVAL = -1,
 
-    /** The configured write hook reported a TX failure. */
+    /** Ayarlanan write hook TX hatasi bildirdi. */
     UARTBIN_EWRITE = -2,
 
-    /** Reserved for applications that add stricter TX payload limits. */
+    /** Daha kati TX payload limiti ekleyen uygulamalar icin ayrildi. */
     UARTBIN_EPAYLOAD_TOO_LONG = -3,
 
-    /** Reserved for configurations without a required buffer. */
+    /** Gerekli buffer'i olmayan konfigurasyonlar icin ayrildi. */
     UARTBIN_ENO_BUFFER = -4,
 
-    /** A reliable request/event is already waiting for a response. */
+    /** Guvenilir request/event zaten response bekliyor. */
     UARTBIN_EBUSY = -5
 } uartbin_status_t;
 
 /**
- * @brief Parser/runtime errors delivered through ::uartbin_error_fn.
+ * @brief ::uartbin_error_fn ile iletilen parser/runtime hatalari.
  */
 typedef enum uartbin_error {
-    /** A frame used an unsupported protocol version. */
+    /** Cerceve desteklenmeyen protokol surumu kullandi. */
     UARTBIN_ERROR_BAD_VERSION = 1,
 
-    /** Payload length is larger than the configured RX payload buffer. */
+    /** Payload uzunlugu ayarlanan RX payload buffer'dan buyuk. */
     UARTBIN_ERROR_BAD_LENGTH,
 
-    /** Frame CRC did not match the received header and payload. */
+    /** Cerceve CRC degeri alinan header ve payload ile eslesmedi. */
     UARTBIN_ERROR_CRC,
 
-    /** A payload was received but no RX payload buffer was configured. */
+    /** Payload alindi fakat RX payload buffer ayarlanmamis. */
     UARTBIN_ERROR_RX_OVERFLOW,
 
-    /** RX state machine stayed mid-frame longer than rx_timeout_ms. */
+    /** RX state machine rx_timeout_ms suresinden uzun sure cerceve icinde kaldi. */
     UARTBIN_ERROR_TIMEOUT,
 
-    /** Reliable TX retry limit was reached before a response arrived. */
+    /** Response gelmeden guvenilir TX retry limitine ulasildi. */
     UARTBIN_ERROR_RETRY_EXHAUSTED,
 
-    /** Reliable TX retry could not be written by the configured hook. */
+    /** Guvenilir TX retry ayarlanan hook ile yazilamadi. */
     UARTBIN_ERROR_RETRY_WRITE
 } uartbin_error_t;
 
 /**
- * @brief CRC-checked packet delivered to the application.
+ * @brief Uygulamaya iletilen CRC kontrolunden gecmis paket.
  *
- * The payload pointer aliases ::uartbin_config::rx_payload_buffer. It is
- * valid only until the next call to uartbin_feed(), uartbin_feed_at(),
- * uartbin_feed_byte(), uartbin_feed_byte_at(), uartbin_poll(), or
- * uartbin_reset() on the same context.
+ * Payload pointer ::uartbin_config::rx_payload_buffer alanini isaret eder.
+ * Ayni context uzerinde bir sonraki uartbin_feed(), uartbin_feed_at(),
+ * uartbin_feed_byte(), uartbin_feed_byte_at(), uartbin_poll() veya
+ * uartbin_reset() cagrimina kadar gecerlidir.
  */
 typedef struct uartbin_packet {
-    /** Application-defined packet type. */
+    /** Uygulama tarafindan tanimlanan paket tipi. */
     uint8_t type;
 
-    /** Application-defined flag bits. */
+    /** Uygulama tarafindan tanimlanan flag bitleri. */
     uint8_t flags;
 
-    /** Application-defined sequence number, useful for request/response flows. */
+    /** Uygulama sira numarasi; request/response akislari icin kullanislidir. */
     uint16_t seq;
 
-    /** Pointer to the CRC-validated payload bytes. */
+    /** CRC dogrulamasi gecmis payload byte'larina pointer. */
     const uint8_t *payload;
 
-    /** Number of valid bytes at the payload pointer. */
+    /** Payload pointer'indaki gecerli byte sayisi. */
     uint16_t payload_len;
 } uartbin_packet_t;
 
 /**
- * @brief Platform write hook used by uartbin_send().
+ * @brief uartbin_send() tarafindan kullanilan platform write hook'u.
  *
- * The hook must write or copy all @p len bytes before returning. This is
- * important because uartbin_send() may call the hook multiple times for one
- * frame. For non-blocking UART TX, make this hook copy into an application TX
- * queue and return only if the bytes were accepted.
+ * Hook, donmeden once @p len byte'in tamamini yazmali veya kopyalamalidir.
+ * Bu onemlidir; cunku uartbin_send() tek cerceve icin hook'u birden fazla kez
+ * cagirabilir. Non-blocking UART TX icin bu hook'u uygulama TX kuyruguna
+ * kopyalayacak ve byte'lar kabul edildiyse basari dondurecek sekilde yaz.
  *
- * @param data Bytes to transmit.
- * @param len Number of bytes to transmit.
- * @param user User pointer from ::uartbin_config.
- * @return 0 on success, non-zero on failure.
+ * @param data Gonderilecek byte'lar.
+ * @param len Gonderilecek byte sayisi.
+ * @param user ::uartbin_config icinden gelen kullanici pointer'i.
+ * @return Basarida 0, hatada sifir disi.
  */
 typedef int (*uartbin_write_fn)(const uint8_t *data, size_t len, void *user);
 
 /**
- * @brief Called when a complete frame passes CRC validation.
+ * @brief Tam cerceve CRC dogrulamasindan gecince cagrilir.
  *
- * @param packet CRC-checked packet metadata and payload pointer.
- * @param user User pointer from ::uartbin_config.
+ * @param packet CRC kontrolunden gecmis paket metadata ve payload pointer'i.
+ * @param user ::uartbin_config icinden gelen kullanici pointer'i.
  */
 typedef void (*uartbin_packet_fn)(const uartbin_packet_t *packet, void *user);
 
 /**
- * @brief Called when the parser detects a protocol error or timeout.
+ * @brief Parser protokol hatasi veya timeout algiladiginda cagrilir.
  *
- * After reporting an error, the parser resets to SOF search state and attempts
- * to resynchronize on subsequent bytes.
+ * Hata bildirildikten sonra parser SOF arama durumuna resetlenir ve sonraki
+ * byte'larda yeniden senkron olmaya calisir.
  *
- * @param error Error code.
- * @param user User pointer from ::uartbin_config.
+ * @param error Hata kodu.
+ * @param user ::uartbin_config icinden gelen kullanici pointer'i.
  */
 typedef void (*uartbin_error_fn)(uartbin_error_t error, void *user);
 
 /**
- * @brief Configuration used to initialize a uartbin context.
+ * @brief uartbin context baslatmak icin kullanilan konfigurasyon.
  */
 typedef struct uartbin_config {
-    /** TX hook used by uartbin_send(). May be NULL if the context is RX-only. */
+    /** uartbin_send() tarafindan kullanilan TX hook. Context RX-only ise NULL olabilir. */
     uartbin_write_fn write;
 
-    /** Packet callback called after CRC succeeds. May be NULL. */
+    /** CRC basarili olduktan sonra cagrilan packet callback. NULL olabilir. */
     uartbin_packet_fn on_packet;
 
-    /** Error callback called for parser errors and timeouts. May be NULL. */
+    /** Parser hatalari ve timeout icin cagrilan error callback. NULL olabilir. */
     uartbin_error_fn on_error;
 
-    /** Opaque application pointer passed to hooks and callbacks. */
+    /** Hook ve callback'lere iletilen opaque uygulama pointer'i. */
     void *user;
 
-    /** Static payload buffer owned by the application. */
+    /** Uygulamanin sahip oldugu statik payload buffer. */
     uint8_t *rx_payload_buffer;
 
-    /** Size of rx_payload_buffer in bytes. This is the max RX payload. */
+    /** rx_payload_buffer boyutu. Maksimum RX payload degeridir. */
     uint16_t rx_payload_capacity;
 
     /**
-     * @brief RX timeout in milliseconds.
+     * @brief Milisaniye cinsinden RX timeout.
      *
-     * Set to 0 to disable timeout handling. The timestamp source is supplied by
-     * the application through uartbin_feed_at(), uartbin_feed_byte_at(), and
-     * uartbin_poll().
+     * Zaman asimi yonetimini kapatmak icin 0 yap. Timestamp kaynagi uygulama
+     * tarafindan uartbin_feed_at(), uartbin_feed_byte_at() ve uartbin_poll()
+     * cagrilari ile verilir.
      */
     uint32_t rx_timeout_ms;
 
-    /** Static frame buffer used by automatic request/event retry. Optional. */
+    /** Otomatik request/event retry icin kullanilan statik frame buffer. Opsiyonel. */
     uint8_t *tx_retry_buffer;
 
-    /** Size of tx_retry_buffer in bytes. */
+    /** tx_retry_buffer boyutu, byte cinsinden. */
     uint16_t tx_retry_capacity;
 
-    /** Retry timeout for automatic request/event sends. 0 disables retry. */
+    /** Otomatik request/event gonderimleri icin retry timeout. 0 retry kapatir. */
     uint32_t tx_retry_timeout_ms;
 
-    /** Number of retransmits before UARTBIN_ERROR_RETRY_EXHAUSTED. */
+    /** UARTBIN_ERROR_RETRY_EXHAUSTED oncesi yeniden gonderim sayisi. */
     uint8_t tx_retry_max_retries;
 } uartbin_config_t;
 
 /**
- * @brief Runtime state for one uartbin link.
+ * @brief Tek uartbin linki icin runtime durum.
  *
- * Allocate one context per UART/protocol link. The fields are public so the
- * type can be stack/static allocated without hidden allocation, but application
- * code should treat them as internal implementation details.
+ * Her UART/protokol linki icin bir context ayir. Alanlar gizli allocation
+ * olmadan stack/statik ayirmaya izin vermek icin public'tir; fakat uygulama
+ * kodu bunlari internal detay gibi kabul etmelidir.
  */
 typedef struct uartbin {
-    /** Copy of the user configuration. */
+    /** Kullanici konfigurasyonunun kopyasi. */
     uartbin_config_t cfg;
 
-    /** Internal parser state. */
+    /** Internal parser durumu. */
     uint8_t state;
 
-    /** Internal frame header buffer. */
+    /** Internal cerceve header buffer'i. */
     uint8_t header[UARTBIN_HEADER_SIZE];
 
-    /** Number of header bytes received so far. */
+    /** Su ana kadar alinan header byte sayisi. */
     uint8_t header_pos;
 
-    /** Number of payload bytes received so far. */
+    /** Su ana kadar alinan payload byte sayisi. */
     uint16_t payload_pos;
 
-    /** Payload length decoded from the current frame header. */
+    /** Gecerli cerceve header'indan cozulmus payload uzunlugu. */
     uint16_t payload_len;
 
-    /** Internal received CRC bytes. */
+    /** Internal alinan CRC byte'lari. */
     uint8_t crc_bytes[UARTBIN_CRC_SIZE];
 
-    /** Number of CRC bytes received so far. */
+    /** Su ana kadar alinan CRC byte sayisi. */
     uint8_t crc_pos;
 
-    /** Running CRC over header and payload. */
+    /** Header ve payload uzerinde akan CRC. */
     uint16_t crc;
 
-    /** Timestamp of the last accepted RX byte/block. */
+    /** Son kabul edilen RX byte/block timestamp degeri. */
     uint32_t last_rx_time_ms;
 
-    /** Sequence counter used by automatic send helpers. */
+    /** Otomatik send yardimcilari tarafindan kullanilan sira sayaci. */
     uint16_t tx_seq;
 
-    /** Non-zero while a reliable request/event is waiting for a response. */
+    /** Guvenilir request/event response beklerken sifir disidir. */
     uint8_t retry_active;
 
-    /** Non-zero after retry timing has been armed by uartbin_poll(). */
+    /** Retry zamanlayicisi uartbin_poll() ile arm edildikten sonra sifir disidir. */
     uint8_t retry_timer_started;
 
-    /** Number of retransmits already attempted for the pending frame. */
+    /** Pending cerceve icin denenmis yeniden gonderim sayisi. */
     uint8_t retry_count;
 
-    /** Sequence number of the pending reliable frame. */
+    /** Pending guvenilir cercevenin sira numarasi. */
     uint16_t retry_seq;
 
-    /** Number of bytes stored in cfg.tx_retry_buffer. */
+    /** cfg.tx_retry_buffer icinde saklanan byte sayisi. */
     uint16_t retry_frame_len;
 
-    /** Timestamp used to decide when to retransmit the pending frame. */
+    /** Pending cercevenin ne zaman tekrar gonderilecegini belirleyen timestamp. */
     uint32_t retry_last_tx_time_ms;
 } uartbin_t;
 
 /**
- * @brief Initialize a uartbin context.
+ * @brief uartbin context baslat.
  *
- * @param ctx Context to initialize. Must remain valid while the link is used.
- * @param config Configuration copied into @p ctx.
+ * @param ctx Baslatilacak context. Link kullanildigi surece gecerli kalmalidir.
+ * @param config @p ctx icine kopyalanacak konfigurasyon.
  */
 void uartbin_init(uartbin_t *ctx, const uartbin_config_t *config);
 
 /**
- * @brief Reset only the RX parser state.
+ * @brief Yalnizca RX parser durumunu resetle.
  *
- * Use this after platform UART errors, manual aborts, or link recovery events.
- * The configuration and callbacks are preserved.
+ * Platform UART hatalari, manuel abort veya link recovery olaylarindan sonra
+ * kullan. Konfigurasyon ve callback'ler korunur.
  *
- * @param ctx Context to reset.
+ * @param ctx Resetlenecek context.
  */
 void uartbin_reset(uartbin_t *ctx);
 
 /**
- * @brief Cancel any pending automatic retry state.
+ * @brief Pending otomatik retry durumunu iptal et.
  *
- * This does not reset RX parsing or transmit anything. It is useful when the
- * application intentionally abandons a request before a response arrives.
+ * RX parsing resetlenmez ve bir sey gonderilmez. Uygulama response gelmeden
+ * bir istegi bilincli olarak terk etmek istediginde kullanislidir.
  *
- * @param ctx Initialized context.
+ * @param ctx Baslatilmis context.
  */
 void uartbin_cancel_retry(uartbin_t *ctx);
 
 /**
- * @brief Build and transmit one framed packet.
+ * @brief Tek cerceveli paketi olustur ve gonder.
  *
- * @param ctx Initialized context with a valid write hook.
- * @param type Application-defined packet type.
- * @param flags Application-defined flags.
- * @param seq Application-defined sequence number.
- * @param payload Payload bytes, or NULL when @p payload_len is 0.
- * @param payload_len Number of payload bytes.
- * @return ::UARTBIN_OK on success, otherwise an error status.
+ * @param ctx Gecerli write hook'a sahip baslatilmis context.
+ * @param type Uygulama tarafindan tanimlanan paket tipi.
+ * @param flags Uygulama tarafindan tanimlanan flag'ler.
+ * @param seq Uygulama tarafindan tanimlanan sira numarasi.
+ * @param payload Payload byte'lari; @p payload_len 0 ise NULL olabilir.
+ * @param payload_len Payload byte sayisi.
+ * @return Basarida ::UARTBIN_OK, aksi halde hata durumu.
  */
 uartbin_status_t uartbin_send(uartbin_t *ctx,
                               uint8_t type,
@@ -358,29 +357,29 @@ uartbin_status_t uartbin_send(uartbin_t *ctx,
                               uint16_t payload_len);
 
 /**
- * @brief Return the next non-zero TX sequence number for this context.
+ * @brief Bu context icin sonraki sifir olmayan TX sira numarasini dondur.
  *
- * This is mainly useful for applications that need to track an automatically
- * generated request before sending. The request/event helper functions call
- * this internally, so most applications do not need to use it directly.
+ * Bu daha cok otomatik uretilecek request'i gondermeden once takip etmek
+ * isteyen uygulamalar icin kullanislidir. Request/event yardimcilari bunu
+ * internal olarak cagirir; cogu uygulamanin dogrudan kullanmasi gerekmez.
  *
- * @param ctx Initialized context.
- * @return Next sequence number, or 0 if @p ctx is NULL.
+ * @param ctx Baslatilmis context.
+ * @return Sonraki sira numarasi; @p ctx NULL ise 0.
  */
 uint16_t uartbin_next_seq(uartbin_t *ctx);
 
 /**
- * @brief Send a new request with an automatically generated sequence number.
+ * @brief Otomatik uretilen sira numarasi ile yeni request gonder.
  *
- * The helper ORs ::UARTBIN_FLAG_REQUEST into @p flags and uses the context's
- * internal sequence counter. Use the response helper to answer this packet.
+ * Yardimci @p flags icine ::UARTBIN_FLAG_REQUEST OR eder ve context'in internal
+ * sira sayacini kullanir. Bu paketi cevaplamak icin response yardimcisini kullan.
  *
- * @param ctx Initialized context with a valid write hook.
- * @param type Application-defined request type.
- * @param flags Application-defined flags to combine with request flag.
- * @param payload Payload bytes, or NULL when @p payload_len is 0.
- * @param payload_len Number of payload bytes.
- * @return ::UARTBIN_OK on success, otherwise an error status.
+ * @param ctx Gecerli write hook'a sahip baslatilmis context.
+ * @param type Uygulama tarafindan tanimlanan request tipi.
+ * @param flags Request flag'i ile birlestirilecek uygulama flag'leri.
+ * @param payload Payload byte'lari; @p payload_len 0 ise NULL olabilir.
+ * @param payload_len Payload byte sayisi.
+ * @return Basarida ::UARTBIN_OK, aksi halde hata durumu.
  */
 uartbin_status_t uartbin_send_request(uartbin_t *ctx,
                                       uint8_t type,
@@ -389,18 +388,18 @@ uartbin_status_t uartbin_send_request(uartbin_t *ctx,
                                       uint16_t payload_len);
 
 /**
- * @brief Send a response using the sequence number from a received packet.
+ * @brief Alinan paketteki sira numarasini kullanarak response gonder.
  *
- * The helper ORs ::UARTBIN_FLAG_RESPONSE into @p flags and echoes
- * @p request->seq. It does not advance the context sequence counter.
+ * Yardimci @p flags icine ::UARTBIN_FLAG_RESPONSE OR eder ve @p request->seq
+ * degerini geri yazar. Context sira sayacini ilerletmez.
  *
- * @param ctx Initialized context with a valid write hook.
- * @param request Packet being answered.
- * @param type Application-defined response type.
- * @param flags Application-defined flags to combine with response flag.
- * @param payload Payload bytes, or NULL when @p payload_len is 0.
- * @param payload_len Number of payload bytes.
- * @return ::UARTBIN_OK on success, otherwise an error status.
+ * @param ctx Gecerli write hook'a sahip baslatilmis context.
+ * @param request Cevaplanan paket.
+ * @param type Uygulama tarafindan tanimlanan response tipi.
+ * @param flags Response flag'i ile birlestirilecek uygulama flag'leri.
+ * @param payload Payload byte'lari; @p payload_len 0 ise NULL olabilir.
+ * @param payload_len Payload byte sayisi.
+ * @return Basarida ::UARTBIN_OK, aksi halde hata durumu.
  */
 uartbin_status_t uartbin_send_response(uartbin_t *ctx,
                                        const uartbin_packet_t *request,
@@ -410,18 +409,18 @@ uartbin_status_t uartbin_send_response(uartbin_t *ctx,
                                        uint16_t payload_len);
 
 /**
- * @brief Send an unsolicited event with an automatically generated sequence.
+ * @brief Otomatik uretilen sira numarasi ile unsolicited event gonder.
  *
- * The helper ORs ::UARTBIN_FLAG_EVENT into @p flags and uses the context's
- * internal sequence counter. If the peer acknowledges the event, it should echo
- * this packet's sequence number in a response.
+ * Yardimci @p flags icine ::UARTBIN_FLAG_EVENT OR eder ve context'in internal
+ * sira sayacini kullanir. Peer event'i ACK'liyorsa response icinde bu paketin
+ * sira numarasini geri yazmalidir.
  *
- * @param ctx Initialized context with a valid write hook.
- * @param type Application-defined event type.
- * @param flags Application-defined flags to combine with event flag.
- * @param payload Payload bytes, or NULL when @p payload_len is 0.
- * @param payload_len Number of payload bytes.
- * @return ::UARTBIN_OK on success, otherwise an error status.
+ * @param ctx Gecerli write hook'a sahip baslatilmis context.
+ * @param type Uygulama tarafindan tanimlanan event tipi.
+ * @param flags Event flag'i ile birlestirilecek uygulama flag'leri.
+ * @param payload Payload byte'lari; @p payload_len 0 ise NULL olabilir.
+ * @param payload_len Payload byte sayisi.
+ * @return Basarida ::UARTBIN_OK, aksi halde hata durumu.
  */
 uartbin_status_t uartbin_send_event(uartbin_t *ctx,
                                     uint8_t type,
@@ -430,67 +429,67 @@ uartbin_status_t uartbin_send_event(uartbin_t *ctx,
                                     uint16_t payload_len);
 
 /**
- * @brief Feed received bytes without timeout timestamp updates.
+ * @brief Alinan byte'lari timeout timestamp guncellemesi olmadan besle.
  *
- * Prefer uartbin_feed_at() when timeout handling is enabled.
+ * Zaman asimi yonetimi acikken uartbin_feed_at() tercih edilmelidir.
  *
- * @param ctx Initialized context.
- * @param data Received byte buffer.
- * @param len Number of received bytes.
+ * @param ctx Baslatilmis context.
+ * @param data Alinan byte buffer'i.
+ * @param len Alinan byte sayisi.
  */
 void uartbin_feed(uartbin_t *ctx, const uint8_t *data, size_t len);
 
 /**
- * @brief Feed one received byte without timeout timestamp updates.
+ * @brief Tek alinan byte'i timeout timestamp guncellemesi olmadan besle.
  *
- * Prefer uartbin_feed_byte_at() when timeout handling is enabled.
+ * Zaman asimi yonetimi acikken uartbin_feed_byte_at() tercih edilmelidir.
  *
- * @param ctx Initialized context.
- * @param byte Received byte.
+ * @param ctx Baslatilmis context.
+ * @param byte Alinan byte.
  */
 void uartbin_feed_byte(uartbin_t *ctx, uint8_t byte);
 
 /**
- * @brief Feed received bytes with the current application timestamp.
+ * @brief Alinan byte'lari gecerli uygulama timestamp degeri ile besle.
  *
- * @param ctx Initialized context.
- * @param data Received byte buffer.
- * @param len Number of received bytes.
- * @param now_ms Monotonic millisecond timestamp, such as HAL_GetTick().
+ * @param ctx Baslatilmis context.
+ * @param data Alinan byte buffer'i.
+ * @param len Alinan byte sayisi.
+ * @param now_ms HAL_GetTick() gibi monotonic milisaniye timestamp.
  */
 void uartbin_feed_at(uartbin_t *ctx, const uint8_t *data, size_t len, uint32_t now_ms);
 
 /**
- * @brief Feed one received byte with the current application timestamp.
+ * @brief Tek alinan byte'i gecerli uygulama timestamp degeri ile besle.
  *
- * @param ctx Initialized context.
- * @param byte Received byte.
- * @param now_ms Monotonic millisecond timestamp, such as HAL_GetTick().
+ * @param ctx Baslatilmis context.
+ * @param byte Alinan byte.
+ * @param now_ms HAL_GetTick() gibi monotonic milisaniye timestamp.
  */
 void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms);
 
 /**
- * @brief Service RX timeout and optional TX retry timing.
+ * @brief RX timeout ve opsiyonel TX retry zamanlamasini servis et.
  *
- * Call this periodically from the main loop or a scheduler when
- * ::uartbin_config::rx_timeout_ms or ::uartbin_config::tx_retry_timeout_ms is
- * non-zero. Feed functions only service RX timeout; automatic TX retry is
- * driven by this explicit poll call.
+ * ::uartbin_config::rx_timeout_ms veya ::uartbin_config::tx_retry_timeout_ms
+ * sifir disi oldugunda bunu main loop veya scheduler icinden periyodik cagir.
+ * Feed fonksiyonlari yalnizca RX timeout servis eder; otomatik TX retry bu
+ * acik poll cagrisi ile surulur.
  *
- * @param ctx Initialized context.
- * @param now_ms Monotonic millisecond timestamp.
+ * @param ctx Baslatilmis context.
+ * @param now_ms Monotonic milisaniye timestamp.
  */
 void uartbin_poll(uartbin_t *ctx, uint32_t now_ms);
 
 /**
- * @brief Update CRC-16/CCITT-FALSE.
+ * @brief CRC-16/CCITT-FALSE degerini guncelle.
  *
- * Polynomial: 0x1021. The library uses seed 0xFFFF for frames.
+ * Polynomial: 0x1021. Kutuphane cerceveler icin 0xFFFF seed kullanir.
  *
- * @param data Input bytes. May be NULL only when @p len is 0.
- * @param len Number of input bytes.
- * @param seed Initial/running CRC value.
- * @return Updated CRC value.
+ * @param data Giris byte'lari. Yalnizca @p len 0 iken NULL olabilir.
+ * @param len Giris byte sayisi.
+ * @param seed Baslangic/akan CRC degeri.
+ * @return Guncellenmis CRC degeri.
  */
 uint16_t uartbin_crc16_ccitt(const uint8_t *data, size_t len, uint16_t seed);
 

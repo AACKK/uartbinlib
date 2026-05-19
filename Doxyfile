@@ -1,7 +1,7 @@
-# Doxygen configuration for uartbinlib.
+# uartbinlib icin Doxygen konfigurasyonu.
 
 PROJECT_NAME           = "uartbinlib"
-PROJECT_BRIEF          = "Platform-independent binary UART framing library"
+PROJECT_BRIEF          = "Platformdan bagimsiz binary UART cerceveleme kutuphanesi"
 OUTPUT_DIRECTORY       = docs
 CREATE_SUBDIRS         = NO
 

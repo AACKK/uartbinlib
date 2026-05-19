@@ -1,20 +1,20 @@
-\page guide_api_usage API Usage Guide
+\page guide_api_usage API Kullanim Rehberi
 
-# API Usage Guide
+# API Kullanim Rehberi
 
-uartbinlib has two layers:
+uartbinlib iki katmandan olusur:
 
-- The framing layer: `uartbin_send()`, `uartbin_feed_at()`, `uartbin_poll()`.
-- The reliable message layer: `uartbin_send_request()`,
+- Cerceve katmani: `uartbin_send()`, `uartbin_feed_at()`, `uartbin_poll()`.
+- Guvenilir mesaj katmani: `uartbin_send_request()`,
   `uartbin_send_response()`, `uartbin_send_event()`.
 
-Most applications should use the reliable helpers and keep `uartbin_send()` for
-special cases that need an explicit sequence number.
+Cogu uygulama guvenilir yardimcilari kullanmali, `uartbin_send()` fonksiyonunu
+yalnizca acik sira numarasi gereken ozel durumlar icin saklamalidir.
 
-## Basic Setup
+## Temel Kurulum
 
-Allocate one `uartbin_t` per UART link. Each link owns its RX parser state,
-automatic TX sequence counter, and optional retry state.
+Her UART linki icin bir `uartbin_t` ayir. Her link kendi RX parser durumunu,
+otomatik TX sira sayacini ve opsiyonel retry durumunu tasir.
 
 ```c
 static uartbin_t link;
@@ -23,7 +23,7 @@ static uint8_t tx_retry_frame[UARTBIN_MAX_FRAME_OVERHEAD + 256];
 
 static int uart_write(const uint8_t *data, size_t len, void *user)
 {
-    /* Write all bytes now, or copy all bytes into a TX queue. */
+    /* Tum byte'lari simdi gonder veya bir TX kuyruguna kopyala. */
     return platform_uart_write(data, len, user) == 0 ? 0 : -1;
 }
 
@@ -33,12 +33,12 @@ static void on_packet(const uartbin_packet_t *packet, void *user)
 
     switch (packet->type) {
     case MSG_DALI_COMMAND:
-        /* Validate/process, then answer with the same sequence number. */
+        /* Dogrula/isle ve ayni sira numarasi ile cevapla. */
         uartbin_send_response(&link, packet, MSG_DALI_RESULT, 0, NULL, 0);
         break;
 
     case MSG_DALI_EVENT:
-        /* Event received from peer; acknowledge it. */
+        /* Peer tarafindan event geldi; ACK ile cevapla. */
         uartbin_send_response(&link, packet, MSG_ACK, 0, NULL, 0);
         break;
 
@@ -51,7 +51,7 @@ static void on_packet(const uartbin_packet_t *packet, void *user)
 static void on_error(uartbin_error_t error, void *user)
 {
     (void)user;
-    /* Count, log, notify supervisor, or reset the higher-level session. */
+    /* Say, logla, supervisor'a bildir veya ust seviye session'i resetle. */
 }
 
 void protocol_init(void)
@@ -74,65 +74,64 @@ void protocol_init(void)
 }
 ```
 
-## Sending Messages
+## Mesaj Gonderme
 
-Use a request when this device is asking the peer to do something:
+Bu cihaz peer'dan bir is istiyorsa request kullan:
 
 ```c
 uartbin_send_request(&link, MSG_DALI_SET_LEVEL, 0, payload, payload_len);
 ```
 
-Use a response when answering a received packet:
+Alinan paketi cevaplarken response kullan:
 
 ```c
 uartbin_send_response(&link, packet, MSG_DALI_RESULT, 0, result, result_len);
 ```
 
-Use an event for unsolicited data, such as a DALI bus event reported by the
-module:
+Modulun DALI bus event'i raporlamasi gibi kendiliginden olusan veri icin event
+kullan:
 
 ```c
 uartbin_send_event(&link, MSG_DALI_BUS_EVENT, 0, event, event_len);
 ```
 
-## Receiving Bytes
+## Byte Alma
 
-Feed every received byte or block to the parser with a monotonic millisecond
-timestamp:
+Alinan her byte'i veya blogu monotonic milisaniye timestamp ile parser'a besle:
 
 ```c
 uartbin_feed_at(&link, rx_data, rx_len, platform_millis());
 ```
 
-Call `uartbin_poll()` periodically from a main loop, scheduler tick, or RTOS
-task. It handles RX parser timeouts and TX retry timing:
+`uartbin_poll()` fonksiyonunu main loop, scheduler tick veya RTOS task icinden
+periyodik cagir. Bu fonksiyon RX parser timeout ve TX retry zamanlamasini
+yonetir:
 
 ```c
 uartbin_poll(&link, platform_millis());
 ```
 
-The feed functions only check RX parser timeout before accepting bytes. They do
-not retransmit pending reliable messages. Keep TX retry in your explicit
-`uartbin_poll()` path so retry writes do not unexpectedly run inside UART RX
-interrupt or DMA callbacks.
+Feed fonksiyonlari byte kabul etmeden once yalnizca RX parser timeout kontrolu
+yapar. Pending reliable mesajlari yeniden gondermez. TX retry yazmalarinin UART
+RX interrupt veya DMA callback icinde beklenmedik sekilde calismamasi icin
+retry yolunu acik `uartbin_poll()` cagrinda tut.
 
-## Reliable Message Rules
+## Guvenilir Mesaj Kurallari
 
-When retry is enabled:
+Retry acikken:
 
-- `uartbin_send_request()` and `uartbin_send_event()` store the encoded frame.
-- If no matching `UARTBIN_FLAG_RESPONSE` arrives with the same `seq`, the frame
-  is retransmitted by `uartbin_poll()`.
-- When the retry count is exhausted, `on_error` receives
-  `UARTBIN_ERROR_RETRY_EXHAUSTED`.
-- Only one reliable request/event can be pending per `uartbin_t`; another send
-  returns `UARTBIN_EBUSY`.
+- `uartbin_send_request()` ve `uartbin_send_event()` kodlanmis cerceveyi saklar.
+- Ayni `seq` degerine sahip `UARTBIN_FLAG_RESPONSE` gelmezse cerceve
+  `uartbin_poll()` tarafindan yeniden gonderilir.
+- Retry sayisi biterse `on_error`, `UARTBIN_ERROR_RETRY_EXHAUSTED` alir.
+- Her `uartbin_t` icin ayni anda yalnizca bir reliable request/event pending
+  olabilir; baska bir gonderim `UARTBIN_EBUSY` dondurur.
 
-The peer must answer reliable requests/events using `uartbin_send_response()`.
-That function echoes the incoming sequence number automatically.
+Peer, reliable request/event paketlerine `uartbin_send_response()` ile cevap
+vermelidir. Bu fonksiyon gelen sira numarasini otomatik olarak geri yazar.
 
-## Packet Lifetime
+## Packet Omru
 
-`packet->payload` points into the configured RX payload buffer. It remains valid
-only until the next feed, poll, reset, or parser operation on the same context.
-Copy the payload in `on_packet()` if it must be kept longer.
+`packet->payload`, ayarlanan RX payload buffer'ini isaret eder. Ayni context
+uzerinde bir sonraki feed, poll, reset veya parser islemine kadar gecerlidir.
+Daha uzun sure saklanacaksa payload'u `on_packet()` icinde kopyala.

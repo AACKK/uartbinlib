@@ -1,14 +1,14 @@
 /**
  * @file stm32_hal_interrupt.c
- * @brief STM32 HAL interrupt-based RX adapter example for uartbinlib.
+ * @brief uartbinlib icin STM32 HAL interrupt tabanli RX adapter ornegi.
  *
  * @example stm32_hal_interrupt.c
  *
- * This example shows a conservative, robust way to connect uartbinlib to an
- * STM32 UART using one-byte receive interrupts. It is intentionally written as
- * an adapter sketch instead of portable library code.
+ * Bu ornek, uartbinlib'i tek byte receive interrupt kullanarak STM32 UART'a
+ * baglamanin temkinli ve robust bir yolunu gosterir. Portable kutuphane kodu
+ * degil, bilincli olarak adapter taslagi seklinde yazilmistir.
  *
- * Typical Cube/HAL wiring:
+ * Tipik Cube/HAL baglantisi:
  *
  * @code
  * static stm32_uartbin_it_t g_uartbin;
@@ -43,16 +43,16 @@
 #include <string.h>
 
 /**
- * STM32 HAL interrupt RX example.
+ * STM32 HAL interrupt RX ornegi.
  *
- * In a real project include your device HAL header, for example:
+ * Gercek projede cihaz HAL header'ini include et, ornegin:
  * @code
  * #include "stm32f4xx_hal.h"
  * @endcode
  *
- * TX note: uartbin_send calls the write hook more than once per frame. The
- * write hook must finish the write or copy bytes into a TX queue before
- * returning. This example uses blocking HAL_UART_Transmit for that reason.
+ * TX notu: uartbin_send tek cerceve icin write hook'u birden fazla kez cagirir.
+ * Write hook donmeden once yazmayi bitirmeli veya byte'lari TX kuyruguna
+ * kopyalamalidir. Bu ornek bu nedenle blocking HAL_UART_Transmit kullanir.
  */
 
 typedef struct UART_HandleTypeDef UART_HandleTypeDef;
@@ -66,33 +66,33 @@ extern int HAL_UART_AbortReceive_IT(UART_HandleTypeDef *huart);
 #endif
 
 /**
- * @brief Application-side state for one interrupt-driven uartbin UART.
+ * @brief Tek interrupt-driven uartbin UART icin uygulama tarafi durum.
  */
 typedef struct stm32_uartbin_it {
-    /** HAL UART handle associated with this adapter. */
+    /** Bu adapter ile iliskili HAL UART handle. */
     UART_HandleTypeDef *huart;
 
     /** Portable uartbin parser/sender context. */
     uartbin_t link;
 
-    /** Single-byte RX storage used by HAL_UART_Receive_IT. */
+    /** HAL_UART_Receive_IT tarafindan kullanilan tek byte RX alani. */
     uint8_t rx_byte;
 
-    /** Complete packet payload buffer. Increase/decrease for your product. */
+    /** Tam paket payload buffer'i. Urunune gore buyut/kucult. */
     uint8_t rx_payload[4096];
 
-    /** Count of HAL-level RX/start/abort errors observed by the adapter. */
+    /** Adapter'in gordugu HAL seviyeli RX/start/abort hata sayisi. */
     volatile uint32_t hal_rx_errors;
 
-    /** Count of protocol-level parser errors reported by uartbinlib. */
+    /** uartbinlib tarafindan bildirilen protokol seviyeli parser hata sayisi. */
     volatile uint32_t protocol_errors;
 } stm32_uartbin_it_t;
 
 /**
- * @brief Start the next one-byte interrupt receive operation.
+ * @brief Sonraki tek byte interrupt receive islemini baslat.
  *
  * @param port Adapter instance.
- * @return 0 when HAL accepted the RX request, otherwise -1.
+ * @return HAL RX istegini kabul ettiyse 0, aksi halde -1.
  */
 static int stm32_uartbin_it_start_rx(stm32_uartbin_it_t *port)
 {
@@ -100,11 +100,11 @@ static int stm32_uartbin_it_start_rx(stm32_uartbin_it_t *port)
 }
 
 /**
- * @brief uartbin TX hook using blocking HAL transmit.
+ * @brief Blocking HAL transmit kullanan uartbin TX hook.
  *
- * Blocking transmit is used because uartbin_send() may call the write hook
- * multiple times per frame. For non-blocking TX, replace this hook with a
- * static application TX queue.
+ * uartbin_send() tek cerceve icin write hook'u birden fazla kez cagirabilecegi
+ * icin blocking transmit kullanilir. Non-blocking TX icin bu hook'u statik
+ * uygulama TX kuyrugu ile degistir.
  */
 static int stm32_uartbin_it_write(const uint8_t *data, size_t len, void *user)
 {
@@ -118,18 +118,20 @@ static int stm32_uartbin_it_write(const uint8_t *data, size_t len, void *user)
 }
 
 /**
- * @brief Application packet handler.
+ * @brief Uygulama packet handler'i.
  *
- * This function is called only after the frame CRC succeeds. Firmware update
- * code should process or copy @p packet here, not before CRC validation.
+ * Bu fonksiyon yalnizca cerceve CRC basarili olduktan sonra cagrilir. Firmware
+ * update kodu @p packet verisini CRC dogrulamasindan once degil burada islemeli
+ * veya kopyalamalidir.
  */
 static void stm32_uartbin_it_on_packet(const uartbin_packet_t *packet, void *user)
 {
     (void)user;
 
     /*
-     * packet->payload is CRC-checked and valid until the next uartbin_feed call.
-     * For firmware/update commands, copy/process it here after CRC passes.
+     * packet->payload CRC kontrolunden gecmistir ve sonraki uartbin_feed
+     * cagrimina kadar gecerlidir. Firmware/update komutlari icin CRC basarili
+     * olduktan sonra burada kopyala/isle.
      */
     switch (packet->type) {
     default:
@@ -138,10 +140,10 @@ static void stm32_uartbin_it_on_packet(const uartbin_packet_t *packet, void *use
 }
 
 /**
- * @brief Protocol error callback.
+ * @brief Protokol hata callback'i.
  *
- * Typical production code increments counters, records diagnostics, and may
- * notify a supervisory task. The parser has already reset itself.
+ * Tipik production kod sayaclari artirir, diagnostik kaydeder ve gerekirse
+ * supervisor task'i bilgilendirir. Parser kendini zaten resetlemistir.
  */
 static void stm32_uartbin_it_on_error(uartbin_error_t error, void *user)
 {
@@ -152,9 +154,9 @@ static void stm32_uartbin_it_on_error(uartbin_error_t error, void *user)
 }
 
 /**
- * @brief Initialize the interrupt adapter and arm the first RX byte.
+ * @brief Interrupt adapter'i baslat ve ilk RX byte'i arm et.
  *
- * @param port Adapter instance owned by the application.
+ * @param port Uygulamanin sahip oldugu adapter instance.
  * @param huart STM32 HAL UART handle.
  */
 void stm32_uartbin_it_init(stm32_uartbin_it_t *port, UART_HandleTypeDef *huart)
@@ -179,11 +181,11 @@ void stm32_uartbin_it_init(stm32_uartbin_it_t *port, UART_HandleTypeDef *huart)
 }
 
 /**
- * @brief Forward HAL_UART_RxCpltCallback() into uartbinlib.
+ * @brief HAL_UART_RxCpltCallback() cagrimini uartbinlib'e ilet.
  *
- * The function feeds the received byte, then immediately arms the next byte.
- * If re-arming fails, it resets the protocol parser so no partial frame leaks
- * into the next successful receive operation.
+ * Fonksiyon alinan byte'i besler ve hemen sonraki byte'i arm eder. Re-arm
+ * basarisiz olursa protokol parser'i resetlenir; boylece partial cerceve
+ * sonraki basarili receive islemine sizmaz.
  */
 void stm32_uartbin_it_rx_complete_callback(stm32_uartbin_it_t *port, UART_HandleTypeDef *huart)
 {
@@ -197,10 +199,10 @@ void stm32_uartbin_it_rx_complete_callback(stm32_uartbin_it_t *port, UART_Handle
 }
 
 /**
- * @brief Forward HAL_UART_ErrorCallback() into the adapter.
+ * @brief HAL_UART_ErrorCallback() cagrimini adapter'a ilet.
  *
- * On parity/framing/noise/overrun errors, discard the partial protocol frame,
- * abort the HAL receive path, and try to arm reception again.
+ * Parity/framing/noise/overrun hatalarinda partial protokol cercevesini at,
+ * HAL receive yolunu abort et ve reception'i tekrar arm etmeyi dene.
  */
 void stm32_uartbin_it_error_callback(stm32_uartbin_it_t *port, UART_HandleTypeDef *huart)
 {
@@ -213,10 +215,10 @@ void stm32_uartbin_it_error_callback(stm32_uartbin_it_t *port, UART_HandleTypeDe
 }
 
 /**
- * @brief Forward HAL_UART_AbortReceiveCpltCallback() into the adapter.
+ * @brief HAL_UART_AbortReceiveCpltCallback() cagrimini adapter'a ilet.
  *
- * Some HAL versions complete abort asynchronously. This callback ensures RX is
- * re-armed after the abort path finishes.
+ * Bazi HAL surumleri abort islemini asynchronous tamamlar. Bu callback, abort
+ * yolu bittikten sonra RX'in tekrar arm edilmesini saglar.
  */
 void stm32_uartbin_it_abort_complete_callback(stm32_uartbin_it_t *port, UART_HandleTypeDef *huart)
 {
@@ -226,9 +228,9 @@ void stm32_uartbin_it_abort_complete_callback(stm32_uartbin_it_t *port, UART_Han
 }
 
 /**
- * @brief Periodic timeout service for the protocol parser.
+ * @brief Protokol parser icin periyodik timeout servisi.
  *
- * Call this from a main loop, RTOS task, or periodic timer context.
+ * Bunu main loop, RTOS task veya periyodik timer context icinden cagir.
  */
 void stm32_uartbin_it_poll(stm32_uartbin_it_t *port)
 {

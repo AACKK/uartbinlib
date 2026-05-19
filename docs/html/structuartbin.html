@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
   <td id="projectalign">
    <div id="projectname">uartbinlib
    </div>
-   <div id="projectbrief">Platform-independent binary UART framing library</div>
+   <div id="projectbrief">Platformdan bagimsiz binary UART cerceveleme kutuphanesi</div>
   </td>
  </tr>
  </tbody>
@@ -121,7 +121,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structuartbin.
 </div><!--header-->
 <div class="contents">
 
-<p>Runtime state for one uartbin link.  
+<p>Tek uartbin linki icin runtime durum.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="uartbin_8h_source.html">uartbin.h</a>&gt;</code></p>
@@ -129,45 +129,45 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('structuartbin.
 <tr class="heading"><td colspan="2"><h2 id="header-pub-attribs" class="groupheader"><a id="pub-attribs" name="pub-attribs"></a>
 Data Fields</h2></td></tr>
 <tr class="memitem:ae2473572661c6d3ca93b0e547402a724" id="r_ae2473572661c6d3ca93b0e547402a724"><td class="memItemLeft"><a class="el" href="uartbin_8h.html#a107f60d9a8a0f2e59486e389942ff008">uartbin_config_t</a>&#160;</td><td class="memItemRight"><a class="el" href="#ae2473572661c6d3ca93b0e547402a724">cfg</a></td></tr>
-<tr class="memdesc:ae2473572661c6d3ca93b0e547402a724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy of the user configuration.  <br /></td></tr>
+<tr class="memdesc:ae2473572661c6d3ca93b0e547402a724"><td class="mdescLeft">&#160;</td><td class="mdescRight">Kullanici konfigurasyonunun kopyasi.  <br /></td></tr>
 <tr class="memitem:aa73bb7333b4bdf4300085f735d122d85" id="r_aa73bb7333b4bdf4300085f735d122d85"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#aa73bb7333b4bdf4300085f735d122d85">state</a></td></tr>
-<tr class="memdesc:aa73bb7333b4bdf4300085f735d122d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal parser state.  <br /></td></tr>
+<tr class="memdesc:aa73bb7333b4bdf4300085f735d122d85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal parser durumu.  <br /></td></tr>
 <tr class="memitem:a8aba05980e9b7a6a37a018cf7884c16f" id="r_a8aba05980e9b7a6a37a018cf7884c16f"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a8aba05980e9b7a6a37a018cf7884c16f">header</a> [<a class="el" href="uartbin_8h.html#a2eca460bac3c257ac1b3d992894a1331">UARTBIN_HEADER_SIZE</a>]</td></tr>
-<tr class="memdesc:a8aba05980e9b7a6a37a018cf7884c16f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal frame header buffer.  <br /></td></tr>
+<tr class="memdesc:a8aba05980e9b7a6a37a018cf7884c16f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal cerceve header buffer'i.  <br /></td></tr>
 <tr class="memitem:a9b2168954e88bddcdd2df560da854a22" id="r_a9b2168954e88bddcdd2df560da854a22"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a9b2168954e88bddcdd2df560da854a22">header_pos</a></td></tr>
-<tr class="memdesc:a9b2168954e88bddcdd2df560da854a22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of header bytes received so far.  <br /></td></tr>
+<tr class="memdesc:a9b2168954e88bddcdd2df560da854a22"><td class="mdescLeft">&#160;</td><td class="mdescRight">Su ana kadar alinan header byte sayisi.  <br /></td></tr>
 <tr class="memitem:a90159895d495d5503cb8df3db8cbe032" id="r_a90159895d495d5503cb8df3db8cbe032"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a90159895d495d5503cb8df3db8cbe032">payload_pos</a></td></tr>
-<tr class="memdesc:a90159895d495d5503cb8df3db8cbe032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of payload bytes received so far.  <br /></td></tr>
+<tr class="memdesc:a90159895d495d5503cb8df3db8cbe032"><td class="mdescLeft">&#160;</td><td class="mdescRight">Su ana kadar alinan payload byte sayisi.  <br /></td></tr>
 <tr class="memitem:a97d713ad2e943e696248a70297253d2b" id="r_a97d713ad2e943e696248a70297253d2b"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a97d713ad2e943e696248a70297253d2b">payload_len</a></td></tr>
-<tr class="memdesc:a97d713ad2e943e696248a70297253d2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Payload length decoded from the current frame header.  <br /></td></tr>
+<tr class="memdesc:a97d713ad2e943e696248a70297253d2b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gecerli cerceve header'indan cozulmus payload uzunlugu.  <br /></td></tr>
 <tr class="memitem:ada2b544981aefac543c321f8bf1b6896" id="r_ada2b544981aefac543c321f8bf1b6896"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#ada2b544981aefac543c321f8bf1b6896">crc_bytes</a> [<a class="el" href="uartbin_8h.html#a50fbffbdad369a60ed01bf7003c7d31a">UARTBIN_CRC_SIZE</a>]</td></tr>
-<tr class="memdesc:ada2b544981aefac543c321f8bf1b6896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal received CRC bytes.  <br /></td></tr>
+<tr class="memdesc:ada2b544981aefac543c321f8bf1b6896"><td class="mdescLeft">&#160;</td><td class="mdescRight">Internal alinan CRC byte'lari.  <br /></td></tr>
 <tr class="memitem:a9cc42b137a22e61f18058782df65271c" id="r_a9cc42b137a22e61f18058782df65271c"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a9cc42b137a22e61f18058782df65271c">crc_pos</a></td></tr>
-<tr class="memdesc:a9cc42b137a22e61f18058782df65271c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of CRC bytes received so far.  <br /></td></tr>
+<tr class="memdesc:a9cc42b137a22e61f18058782df65271c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Su ana kadar alinan CRC byte sayisi.  <br /></td></tr>
 <tr class="memitem:ace32a758a2c81a6189144da4513fcce7" id="r_ace32a758a2c81a6189144da4513fcce7"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#ace32a758a2c81a6189144da4513fcce7">crc</a></td></tr>
-<tr class="memdesc:ace32a758a2c81a6189144da4513fcce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Running CRC over header and payload.  <br /></td></tr>
+<tr class="memdesc:ace32a758a2c81a6189144da4513fcce7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Header ve payload uzerinde akan CRC.  <br /></td></tr>
 <tr class="memitem:a396c6db7a4edfe0e92032d29370f3c16" id="r_a396c6db7a4edfe0e92032d29370f3c16"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a396c6db7a4edfe0e92032d29370f3c16">last_rx_time_ms</a></td></tr>
-<tr class="memdesc:a396c6db7a4edfe0e92032d29370f3c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestamp of the last accepted RX byte/block.  <br /></td></tr>
+<tr class="memdesc:a396c6db7a4edfe0e92032d29370f3c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Son kabul edilen RX byte/block timestamp degeri.  <br /></td></tr>
 <tr class="memitem:ab859bb6a8de1f931045fcd6ec43af538" id="r_ab859bb6a8de1f931045fcd6ec43af538"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#ab859bb6a8de1f931045fcd6ec43af538">tx_seq</a></td></tr>
-<tr class="memdesc:ab859bb6a8de1f931045fcd6ec43af538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence counter used by automatic send helpers.  <br /></td></tr>
+<tr class="memdesc:ab859bb6a8de1f931045fcd6ec43af538"><td class="mdescLeft">&#160;</td><td class="mdescRight">Otomatik send yardimcilari tarafindan kullanilan sira sayaci.  <br /></td></tr>
 <tr class="memitem:a0155be8528ac55178eabf063c63bd609" id="r_a0155be8528ac55178eabf063c63bd609"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a0155be8528ac55178eabf063c63bd609">retry_active</a></td></tr>
-<tr class="memdesc:a0155be8528ac55178eabf063c63bd609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-zero while a reliable request/event is waiting for a response.  <br /></td></tr>
+<tr class="memdesc:a0155be8528ac55178eabf063c63bd609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Guvenilir request/event response beklerken sifir disidir.  <br /></td></tr>
 <tr class="memitem:a0924011a7881b5508851cc2df116c270" id="r_a0924011a7881b5508851cc2df116c270"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a0924011a7881b5508851cc2df116c270">retry_timer_started</a></td></tr>
-<tr class="memdesc:a0924011a7881b5508851cc2df116c270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Non-zero after retry timing has been armed by <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a>.  <br /></td></tr>
+<tr class="memdesc:a0924011a7881b5508851cc2df116c270"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retry zamanlayicisi <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a> ile arm edildikten sonra sifir disidir.  <br /></td></tr>
 <tr class="memitem:a92b7bbe8cda0c1f63fc640f4eebc64fe" id="r_a92b7bbe8cda0c1f63fc640f4eebc64fe"><td class="memItemLeft">uint8_t&#160;</td><td class="memItemRight"><a class="el" href="#a92b7bbe8cda0c1f63fc640f4eebc64fe">retry_count</a></td></tr>
-<tr class="memdesc:a92b7bbe8cda0c1f63fc640f4eebc64fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of retransmits already attempted for the pending frame.  <br /></td></tr>
+<tr class="memdesc:a92b7bbe8cda0c1f63fc640f4eebc64fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pending cerceve icin denenmis yeniden gonderim sayisi.  <br /></td></tr>
 <tr class="memitem:a7af84ee31bb3cf150abc5617f3630576" id="r_a7af84ee31bb3cf150abc5617f3630576"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a7af84ee31bb3cf150abc5617f3630576">retry_seq</a></td></tr>
-<tr class="memdesc:a7af84ee31bb3cf150abc5617f3630576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sequence number of the pending reliable frame.  <br /></td></tr>
+<tr class="memdesc:a7af84ee31bb3cf150abc5617f3630576"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pending guvenilir cercevenin sira numarasi.  <br /></td></tr>
 <tr class="memitem:a13bc97e96467888eb1ea46712c78abb3" id="r_a13bc97e96467888eb1ea46712c78abb3"><td class="memItemLeft">uint16_t&#160;</td><td class="memItemRight"><a class="el" href="#a13bc97e96467888eb1ea46712c78abb3">retry_frame_len</a></td></tr>
-<tr class="memdesc:a13bc97e96467888eb1ea46712c78abb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of bytes stored in cfg.tx_retry_buffer.  <br /></td></tr>
+<tr class="memdesc:a13bc97e96467888eb1ea46712c78abb3"><td class="mdescLeft">&#160;</td><td class="mdescRight">cfg.tx_retry_buffer icinde saklanan byte sayisi.  <br /></td></tr>
 <tr class="memitem:a7694fb72c74c4d81839fcce5f5b233b1" id="r_a7694fb72c74c4d81839fcce5f5b233b1"><td class="memItemLeft">uint32_t&#160;</td><td class="memItemRight"><a class="el" href="#a7694fb72c74c4d81839fcce5f5b233b1">retry_last_tx_time_ms</a></td></tr>
-<tr class="memdesc:a7694fb72c74c4d81839fcce5f5b233b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Timestamp used to decide when to retransmit the pending frame.  <br /></td></tr>
+<tr class="memdesc:a7694fb72c74c4d81839fcce5f5b233b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pending cercevenin ne zaman tekrar gonderilecegini belirleyen timestamp.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Runtime state for one uartbin link. </p>
-<p>Allocate one context per UART/protocol link. The fields are public so the type can be stack/static allocated without hidden allocation, but application code should treat them as internal implementation details. </p>
+<div class="textblock"><p>Tek uartbin linki icin runtime durum. </p>
+<p>Her UART/protokol linki icin bir context ayir. Alanlar gizli allocation olmadan stack/statik ayirmaya izin vermek icin public'tir; fakat uygulama kodu bunlari internal detay gibi kabul etmelidir. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00261">261</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00260">260</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 </div><a name="doc-variable-members" id="doc-variable-members"></a><h2 id="header-doc-variable-members" class="groupheader">Field Documentation</h2>
 <a id="ae2473572661c6d3ca93b0e547402a724" name="ae2473572661c6d3ca93b0e547402a724"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ae2473572661c6d3ca93b0e547402a724">&#9670;&#160;</a></span>cfg</h2>
@@ -181,9 +181,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Copy of the user configuration. </p>
+<p>Kullanici konfigurasyonunun kopyasi. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00263">263</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00262">262</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00295">uartbin_init()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00182">uartbin_retry_enabled()</a>, <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
 
@@ -201,9 +201,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Running CRC over header and payload. </p>
+<p>Header ve payload uzerinde akan CRC. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00287">287</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00286">286</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
@@ -221,9 +221,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Internal received CRC bytes. </p>
+<p>Internal alinan CRC byte'lari. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00281">281</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00280">280</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
@@ -241,9 +241,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Number of CRC bytes received so far. </p>
+<p>Su ana kadar alinan CRC byte sayisi. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00284">284</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00283">283</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
@@ -261,9 +261,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Internal frame header buffer. </p>
+<p>Internal cerceve header buffer'i. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00269">269</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00268">268</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
@@ -281,9 +281,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Number of header bytes received so far. </p>
+<p>Su ana kadar alinan header byte sayisi. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00272">272</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00271">271</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
@@ -301,9 +301,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Timestamp of the last accepted RX byte/block. </p>
+<p>Son kabul edilen RX byte/block timestamp degeri. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00290">290</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00289">289</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00501">uartbin_feed_byte()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>.</p>
 
@@ -321,9 +321,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Payload length decoded from the current frame header. </p>
+<p>Gecerli cerceve header'indan cozulmus payload uzunlugu. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00278">278</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00277">277</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
@@ -341,9 +341,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Number of payload bytes received so far. </p>
+<p>Su ana kadar alinan payload byte sayisi. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00275">275</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00274">274</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
@@ -361,9 +361,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Non-zero while a reliable request/event is waiting for a response. </p>
+<p>Guvenilir request/event response beklerken sifir disidir. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00296">296</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00295">295</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
@@ -381,9 +381,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Number of retransmits already attempted for the pending frame. </p>
+<p>Pending cerceve icin denenmis yeniden gonderim sayisi. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00302">302</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00301">301</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
@@ -401,9 +401,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Number of bytes stored in cfg.tx_retry_buffer. </p>
+<p>cfg.tx_retry_buffer icinde saklanan byte sayisi. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00308">308</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00307">307</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
@@ -421,9 +421,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Timestamp used to decide when to retransmit the pending frame. </p>
+<p>Pending cercevenin ne zaman tekrar gonderilecegini belirleyen timestamp. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00311">311</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00310">310</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
@@ -441,9 +441,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sequence number of the pending reliable frame. </p>
+<p>Pending guvenilir cercevenin sira numarasi. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00305">305</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00304">304</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
@@ -461,9 +461,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Non-zero after retry timing has been armed by <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a>. </p>
+<p>Retry zamanlayicisi <a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a> ile arm edildikten sonra sifir disidir. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00299">299</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00298">298</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
@@ -481,9 +481,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Internal parser state. </p>
+<p>Internal parser durumu. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00266">266</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00265">265</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, and <a class="el" href="uartbin_8c_source.html#l00123">uartbin_rx_active()</a>.</p>
 
@@ -501,9 +501,9 @@ Data Fields</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Sequence counter used by automatic send helpers. </p>
+<p>Otomatik send yardimcilari tarafindan kullanilan sira sayaci. </p>
 
-<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00293">293</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
+<p class="definition">Definition at line <a class="el" href="uartbin_8h_source.html#l00292">292</a> of file <a class="el" href="uartbin_8h_source.html">uartbin.h</a>.</p>
 
 <p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>.</p>
 

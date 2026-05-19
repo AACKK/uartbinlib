@@ -1,8 +1,10 @@
 var searchData=
 [
-  ['large_20payloads_0',['Large Payloads',['../index.html#autotoc_md7',1,'']]],
-  ['last_5frx_5ftime_5fms_1',['last_rx_time_ms',['../structuartbin.html#a396c6db7a4edfe0e92032d29370f3c16',1,'uartbin']]],
-  ['lifetime_2',['Packet Lifetime',['../guide_api_usage.html#autotoc_md16',1,'']]],
-  ['line_20rx_3',['DMA Idle-Line RX',['../guide_stm32_transport.html#autotoc_md30',1,'']]],
-  ['link_4',['link',['../structstm32__uartbin__dma.html#a4d6532bb56f78b8f644e85d13eae7783',1,'stm32_uartbin_dma::link'],['../structstm32__uartbin__it.html#aa10605cdf41d1af0156534c8d52b06ed',1,'stm32_uartbin_it::link']]]
+  ['kontrol_20listesi_0',['Port Etme Kontrol Listesi',['../guide_porting.html#autotoc_md18',1,'']]],
+  ['kucuk_20kullanim_1',['En Kucuk Kullanim',['../index.html#autotoc_md3',1,'']]],
+  ['kullanim_2',['En Kucuk Kullanim',['../index.html#autotoc_md3',1,'']]],
+  ['kullanim_20rehberi_3',['Kullanim Rehberi',['../guide_api_usage.html',1,'API Kullanim Rehberi'],['../guide_api_usage.html#autotoc_md11',1,'API Kullanim Rehberi']]],
+  ['kullanimi_4',['Kullanimi',['../guide_stm32_transport.html',1,'STM32 Interrupt ve DMA Kullanimi'],['../guide_stm32_transport.html#autotoc_md28',1,'STM32 Interrupt ve DMA Kullanimi']]],
+  ['kurallari_5',['Guvenilir Mesaj Kurallari',['../guide_api_usage.html#autotoc_md15',1,'']]],
+  ['kurulum_6',['Temel Kurulum',['../guide_api_usage.html#autotoc_md12',1,'']]]
 ];

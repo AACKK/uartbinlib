@@ -1,14 +1,15 @@
 /**
  * @file stm32_hal_dma_idle.c
- * @brief STM32 HAL DMA idle-line RX adapter example for uartbinlib.
+ * @brief uartbinlib icin STM32 HAL DMA idle-line RX adapter ornegi.
  *
  * @example stm32_hal_dma_idle.c
  *
- * This example shows how to feed uartbinlib from HAL_UARTEx_ReceiveToIdle_DMA.
- * DMA receives bytes into a small transport buffer; uartbinlib then copies each
- * validated frame payload into the larger application RX payload buffer.
+ * Bu ornek uartbinlib'in HAL_UARTEx_ReceiveToIdle_DMA ile nasil beslenecegini
+ * gosterir. DMA byte'lari kucuk bir transport buffer'ina alir; uartbinlib ise
+ * dogrulanmis her cerceve payload'unu daha buyuk uygulama RX payload buffer'ina
+ * kopyalar.
  *
- * Typical Cube/HAL wiring:
+ * Tipik Cube/HAL baglantisi:
  *
  * @code
  * static stm32_uartbin_dma_t g_uartbin;
@@ -38,12 +39,12 @@
 #include <string.h>
 
 /**
- * STM32 HAL DMA + idle-line RX example.
+ * STM32 HAL DMA + idle-line RX ornegi.
  *
- * Uses HAL_UARTEx_ReceiveToIdle_DMA and feeds each received block to uartbin.
- * TX uses blocking HAL_UART_Transmit because uartbin_send calls the write hook
- * several times per frame. Replace it with your own TX queue if you need
- * non-blocking transmit.
+ * HAL_UARTEx_ReceiveToIdle_DMA kullanir ve alinan her blogu uartbin'e besler.
+ * TX, blocking HAL_UART_Transmit kullanir; cunku uartbin_send tek cerceve icin
+ * write hook'u birkac kez cagirir. Non-blocking transmit gerekiyorsa bunu kendi
+ * TX queue yapin ile degistir.
  */
 
 typedef struct UART_HandleTypeDef UART_HandleTypeDef;
@@ -63,37 +64,38 @@ extern void __HAL_DMA_DISABLE_IT(DMA_HandleTypeDef *hdma, uint32_t interrupt);
 #endif
 
 /**
- * @brief Application-side state for one DMA idle-line uartbin UART.
+ * @brief Tek DMA idle-line uartbin UART icin uygulama tarafi durum.
  */
 typedef struct stm32_uartbin_dma {
-    /** HAL UART handle associated with this adapter. */
+    /** Bu adapter ile iliskili HAL UART handle. */
     UART_HandleTypeDef *huart;
 
-    /** HAL DMA RX handle used to disable half-transfer interrupts. */
+    /** Half-transfer interrupt'larini kapatmak icin kullanilan HAL DMA RX handle. */
     DMA_HandleTypeDef *hdma_rx;
 
     /** Portable uartbin parser/sender context. */
     uartbin_t link;
 
-    /** DMA transport buffer; it does not need to fit a whole packet. */
+    /** DMA transport buffer; tam paket sigdirmasi gerekmez. */
     uint8_t dma_rx_buffer[256];
 
-    /** Complete packet payload buffer used by uartbinlib. */
+    /** uartbinlib tarafindan kullanilan tam paket payload buffer'i. */
     uint8_t rx_payload[4096];
 
-    /** Count of HAL-level RX/start/abort errors observed by the adapter. */
+    /** Adapter'in gordugu HAL seviyeli RX/start/abort hata sayisi. */
     volatile uint32_t hal_rx_errors;
 
-    /** Count of protocol-level parser errors reported by uartbinlib. */
+    /** uartbinlib tarafindan bildirilen protokol seviyeli parser hata sayisi. */
     volatile uint32_t protocol_errors;
 } stm32_uartbin_dma_t;
 
 /**
- * @brief Start or restart ReceiveToIdle DMA reception.
+ * @brief ReceiveToIdle DMA reception baslat veya yeniden baslat.
  *
- * Half-transfer interrupts are disabled because this adapter only wants idle or
- * buffer-complete events. If your application needs half-transfer events, feed
- * only the newly received bytes and track DMA offsets carefully.
+ * Bu adapter yalnizca idle veya buffer-complete event istedigi icin
+ * half-transfer interrupt'lari kapatilir. Uygulamanin half-transfer event'e
+ * ihtiyaci varsa yalnizca yeni alinan byte'lari besle ve DMA offset'lerini
+ * dikkatli takip et.
  */
 static int stm32_uartbin_dma_start_rx(stm32_uartbin_dma_t *port)
 {
@@ -109,10 +111,10 @@ static int stm32_uartbin_dma_start_rx(stm32_uartbin_dma_t *port)
 }
 
 /**
- * @brief uartbin TX hook using blocking HAL transmit.
+ * @brief Blocking HAL transmit kullanan uartbin TX hook.
  *
- * Blocking transmit is used for correctness with uartbin_send()'s multi-call
- * write contract. Replace with a static TX queue for non-blocking systems.
+ * uartbin_send() coklu write sozlesmesi ile dogru calismasi icin blocking
+ * transmit kullanilir. Non-blocking sistemlerde statik TX queue ile degistir.
  */
 static int stm32_uartbin_dma_write(const uint8_t *data, size_t len, void *user)
 {
@@ -126,23 +128,23 @@ static int stm32_uartbin_dma_write(const uint8_t *data, size_t len, void *user)
 }
 
 /**
- * @brief Application packet handler.
+ * @brief Uygulama packet handler'i.
  *
- * This is called after a complete frame passed CRC. The payload pointer aliases
- * the adapter RX payload buffer and remains valid until the next feed.
+ * Tam cerceve CRC'den gectikten sonra cagrilir. Payload pointer adapter RX
+ * payload buffer'ini isaret eder ve sonraki feed'e kadar gecerlidir.
  */
 static void stm32_uartbin_dma_on_packet(const uartbin_packet_t *packet, void *user)
 {
     (void)packet;
     (void)user;
-    /* Payload is complete and CRC-checked here. */
+    /* Payload burada tamamlanmis ve CRC kontrolunden gecmistir. */
 }
 
 /**
- * @brief Protocol error callback.
+ * @brief Protokol hata callback'i.
  *
- * Use this for diagnostics, counters, and optional link-level recovery policy.
- * HAL recovery is handled by stm32_uartbin_dma_error_callback().
+ * Bunu diagnostik, sayaclar ve opsiyonel link-level recovery politikasi icin
+ * kullan. HAL recovery, stm32_uartbin_dma_error_callback() ile yapilir.
  */
 static void stm32_uartbin_dma_on_error(uartbin_error_t error, void *user)
 {
@@ -153,11 +155,11 @@ static void stm32_uartbin_dma_on_error(uartbin_error_t error, void *user)
 }
 
 /**
- * @brief Initialize the DMA idle-line adapter and arm DMA RX.
+ * @brief DMA idle-line adapter'i baslat ve DMA RX'i arm et.
  *
- * @param port Adapter instance owned by the application.
+ * @param port Uygulamanin sahip oldugu adapter instance.
  * @param huart STM32 HAL UART handle.
- * @param hdma_rx STM32 HAL DMA handle for UART RX.
+ * @param hdma_rx UART RX icin STM32 HAL DMA handle.
  */
 void stm32_uartbin_dma_init(stm32_uartbin_dma_t *port,
                             UART_HandleTypeDef *huart,
@@ -184,14 +186,14 @@ void stm32_uartbin_dma_init(stm32_uartbin_dma_t *port,
 }
 
 /**
- * @brief Forward HAL_UARTEx_RxEventCallback() into uartbinlib.
+ * @brief HAL_UARTEx_RxEventCallback() cagrimini uartbinlib'e ilet.
  *
  * @param port Adapter instance.
- * @param huart UART handle passed by HAL.
- * @param size Number of valid bytes in dma_rx_buffer.
+ * @param huart HAL tarafindan verilen UART handle.
+ * @param size dma_rx_buffer icindeki gecerli byte sayisi.
  *
- * The size check protects against unexpected HAL/user misuse. After feeding the
- * block, the function immediately restarts ReceiveToIdle DMA.
+ * Size kontrolu beklenmeyen HAL/kullanici hatalarina karsi korur. Blok
+ * beslendikten sonra fonksiyon ReceiveToIdle DMA'i hemen yeniden baslatir.
  */
 void stm32_uartbin_dma_rx_event_callback(stm32_uartbin_dma_t *port,
                                          UART_HandleTypeDef *huart,
@@ -213,10 +215,10 @@ void stm32_uartbin_dma_rx_event_callback(stm32_uartbin_dma_t *port,
 }
 
 /**
- * @brief Forward HAL_UART_ErrorCallback() into the DMA adapter.
+ * @brief HAL_UART_ErrorCallback() cagrimini DMA adapter'a ilet.
  *
- * On UART noise/framing/parity/overrun errors, discard any partial protocol
- * frame, abort the HAL receive path, and restart DMA idle-line reception.
+ * UART noise/framing/parity/overrun hatalarinda partial protokol cercevesini
+ * at, HAL receive yolunu abort et ve DMA idle-line reception'i yeniden baslat.
  */
 void stm32_uartbin_dma_error_callback(stm32_uartbin_dma_t *port, UART_HandleTypeDef *huart)
 {
@@ -229,9 +231,9 @@ void stm32_uartbin_dma_error_callback(stm32_uartbin_dma_t *port, UART_HandleType
 }
 
 /**
- * @brief Periodic timeout service for the protocol parser.
+ * @brief Protokol parser icin periyodik timeout servisi.
  *
- * Call this from a main loop, RTOS task, or periodic timer context.
+ * Bunu main loop, RTOS task veya periyodik timer context icinden cagir.
  */
 void stm32_uartbin_dma_poll(stm32_uartbin_dma_t *port)
 {

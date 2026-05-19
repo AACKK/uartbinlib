@@ -1,10 +1,7 @@
 var searchData=
 [
-  ['memory_20model_0',['Memory Model',['../uartbin_8h.html#uartbin_h_no_alloc',1,'']]],
-  ['message_20rules_1',['Reliable Message Rules',['../guide_api_usage.html#autotoc_md15',1,'']]],
-  ['messages_2',['Sending Messages',['../guide_api_usage.html#autotoc_md13',1,'']]],
-  ['minimal_20ring_20buffer_20shape_3',['Minimal Ring Buffer Shape',['../guide_ring_buffer.html#autotoc_md24',1,'']]],
-  ['minimal_20usage_4',['Minimal Usage',['../index.html#autotoc_md3',1,'']]],
-  ['model_5',['Model',['../uartbin_8h.html#uartbin_h_no_alloc',1,'Memory Model'],['../uartbin_8h.html#uartbin_h_timing',1,'Timeout Model']]],
-  ['multi_20uart_20systems_6',['Multi-UART Systems',['../guide_porting.html#autotoc_md22',1,'']]]
+  ['last_5frx_5ftime_5fms_0',['last_rx_time_ms',['../structuartbin.html#a396c6db7a4edfe0e92032d29370f3c16',1,'uartbin']]],
+  ['line_20rx_1',['DMA Idle-Line RX',['../guide_stm32_transport.html#autotoc_md30',1,'']]],
+  ['link_2',['link',['../structstm32__uartbin__dma.html#a4d6532bb56f78b8f644e85d13eae7783',1,'stm32_uartbin_dma::link'],['../structstm32__uartbin__it.html#aa10605cdf41d1af0156534c8d52b06ed',1,'stm32_uartbin_it::link']]],
+  ['listesi_3',['Port Etme Kontrol Listesi',['../guide_porting.html#autotoc_md18',1,'']]]
 ];

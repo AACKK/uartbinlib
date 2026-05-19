@@ -6,7 +6,7 @@ add_library(uartbin STATIC src/uartbin.c)
 target_include_directories(uartbin PUBLIC include)
 target_compile_features(uartbin PUBLIC c_std_99)
 
-option(UARTBIN_BUILD_TESTS "Build uartbin host tests" ON)
+option(UARTBIN_BUILD_TESTS "uartbin host testlerini build et" ON)
 
 if(UARTBIN_BUILD_TESTS)
     enable_testing()

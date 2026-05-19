@@ -1,48 +1,48 @@
 /**
  * @file uartbin.c
- * @brief Implementation of the uartbin binary UART framing parser and sender.
+ * @brief uartbin binary UART cerceve parser ve sender implementasyonu.
  *
- * The implementation is intentionally small and deterministic:
+ * Implementasyon bilerek kucuk ve deterministik tutulmustur:
  *
- * - no dynamic allocation,
- * - no platform calls,
- * - single-pass RX parser,
- * - CRC is updated as payload bytes arrive,
- * - the application sees a packet only after CRC succeeds.
+ * - dinamik bellek yok,
+ * - platform cagrisi yok,
+ * - tek gecisli RX parser,
+ * - payload byte'lari geldikce CRC guncellenir,
+ * - uygulama paketi yalnizca CRC basarili olduktan sonra gorur.
  */
 #include "uartbin.h"
 
 #include <string.h>
 
 /**
- * @brief Internal RX parser states.
+ * @brief Ic RX parser durumlari.
  *
- * The parser searches for a two-byte SOF sequence, then receives the fixed
- * header, payload, and CRC fields. On any parse error it resets to SOF search
- * state so that later bytes can resynchronize the link.
+ * Parser iki byte'lik SOF dizisini arar, sonra sabit header, payload ve CRC
+ * alanlarini alir. Her parse hatasinda SOF arama durumuna resetlenir; boylece
+ * sonraki byte'lar linki yeniden senkronlayabilir.
  */
 enum {
-    /** Waiting for UARTBIN_SOF0. */
+    /** UARTBIN_SOF0 bekleniyor. */
     UARTBIN_STATE_SOF0 = 0,
 
-    /** Waiting for UARTBIN_SOF1 after UARTBIN_SOF0 was seen. */
+    /** UARTBIN_SOF0 gorulduktan sonra UARTBIN_SOF1 bekleniyor. */
     UARTBIN_STATE_SOF1,
 
-    /** Receiving the fixed-size header. */
+    /** Sabit boyutlu header aliniyor. */
     UARTBIN_STATE_HEADER,
 
-    /** Receiving payload bytes into the user RX buffer. */
+    /** Payload byte'lari kullanici RX buffer'ina aliniyor. */
     UARTBIN_STATE_PAYLOAD,
 
-    /** Receiving the two-byte CRC field. */
+    /** Iki byte'lik CRC alani aliniyor. */
     UARTBIN_STATE_CRC
 };
 
 /**
- * @brief Read a little-endian 16-bit value.
+ * @brief Little-endian 16-bit deger oku.
  *
- * @param data Pointer to at least two bytes.
- * @return Decoded 16-bit value.
+ * @param data En az iki byte'a pointer.
+ * @return Cozulmus 16-bit deger.
  */
 static uint16_t uartbin_get_u16_le(const uint8_t *data)
 {
@@ -50,10 +50,10 @@ static uint16_t uartbin_get_u16_le(const uint8_t *data)
 }
 
 /**
- * @brief Write a little-endian 16-bit value.
+ * @brief Little-endian 16-bit deger yaz.
  *
- * @param data Pointer to at least two writable bytes.
- * @param value Value to encode.
+ * @param data En az iki yazilabilir byte'a pointer.
+ * @param value Kodlanacak deger.
  */
 static void uartbin_put_u16_le(uint8_t *data, uint16_t value)
 {
@@ -62,13 +62,13 @@ static void uartbin_put_u16_le(uint8_t *data, uint16_t value)
 }
 
 /**
- * @brief Reset parser bookkeeping to SOF search state.
+ * @brief Parser bookkeeping durumunu SOF arama durumuna resetle.
  *
- * This does not change user configuration or clear the application payload
- * buffer. The buffer contents are considered invalid until the next successful
- * packet callback.
+ * Kullanici konfigurasyonunu degistirmez ve uygulama payload buffer'ini
+ * temizlemez. Buffer icerigi bir sonraki basarili packet callback'e kadar
+ * gecersiz kabul edilir.
  *
- * @param ctx Context whose RX state is reset.
+ * @param ctx RX durumu resetlenecek context.
  */
 static void uartbin_reset_rx(uartbin_t *ctx)
 {
@@ -81,10 +81,10 @@ static void uartbin_reset_rx(uartbin_t *ctx)
 }
 
 /**
- * @brief Deliver a parser error if the application registered a callback.
+ * @brief Uygulama callback kaydettiyse parser hatasini ilet.
  *
- * @param ctx Context that detected the error.
- * @param error Error code to report.
+ * @param ctx Hatayi algilayan context.
+ * @param error Bildirilecek hata kodu.
  */
 static void uartbin_report_error(uartbin_t *ctx, uartbin_error_t error)
 {
@@ -94,12 +94,12 @@ static void uartbin_report_error(uartbin_t *ctx, uartbin_error_t error)
 }
 
 /**
- * @brief Call the configured write hook for one contiguous byte range.
+ * @brief Ayarlanan write hook'u tek bitisik byte araligi icin cagir.
  *
- * @param ctx Initialized context.
- * @param data Data to write.
- * @param len Number of bytes to write.
- * @return UARTBIN_OK on success or an immediate write/configuration error.
+ * @param ctx Baslatilmis context.
+ * @param data Yazilacak veri.
+ * @param len Yazilacak byte sayisi.
+ * @return Basarida UARTBIN_OK veya anlik write/konfigurasyon hatasi.
  */
 static uartbin_status_t uartbin_write_all(uartbin_t *ctx, const uint8_t *data, size_t len)
 {
@@ -115,10 +115,10 @@ static uartbin_status_t uartbin_write_all(uartbin_t *ctx, const uint8_t *data, s
 }
 
 /**
- * @brief Test whether the RX parser is currently inside a frame.
+ * @brief RX parser'in su anda cerceve icinde olup olmadigini test et.
  *
- * @param ctx Context to inspect.
- * @return Non-zero if timeout handling should consider the parser active.
+ * @param ctx Incelenecek context.
+ * @return Zaman asimi yonetimi parser'i aktif kabul etmeli ise sifir disi.
  */
 static int uartbin_rx_active(const uartbin_t *ctx)
 {
@@ -525,10 +525,10 @@ void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)
 }
 
 /**
- * @brief Feed one byte into the RX state machine.
+ * @brief RX state machine'e tek byte besle.
  *
- * This internal state machine is the heart of the parser. The public function
- * keeps all logic in one place so block and byte feed paths behave identically.
+ * Bu internal state machine parser'in merkezidir. Public fonksiyon tum mantigi
+ * tek yerde tutar; boylece block ve byte feed yollari ayni davranir.
  */
 void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms)
 {
@@ -541,7 +541,7 @@ void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms)
 
     switch (ctx->state) {
     case UARTBIN_STATE_SOF0:
-        /* Ignore noise until the first start-of-frame byte appears. */
+        /* Ilk start-of-frame byte'i gorunene kadar noise ignore edilir. */
         if (byte == UARTBIN_SOF0) {
             ctx->state = UARTBIN_STATE_SOF1;
         }
@@ -549,8 +549,8 @@ void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms)
 
     case UARTBIN_STATE_SOF1:
         /*
-         * A repeated SOF0 keeps us ready for SOF1. This helps resync on byte
-         * streams such as A5 A5 5A without throwing away the second A5.
+         * Tekrarlanan SOF0 bizi SOF1 icin hazir tutar. Bu, A5 A5 5A gibi byte
+         * akislarinda ikinci A5'i atmadan yeniden senkron olmaya yardim eder.
          */
         if (byte == UARTBIN_SOF1) {
             ctx->state = UARTBIN_STATE_HEADER;
@@ -562,7 +562,7 @@ void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms)
         break;
 
     case UARTBIN_STATE_HEADER:
-        /* Header is fixed-size, so length and version can be validated early. */
+        /* Header sabit boyutludur; uzunluk ve surum erken dogrulanabilir. */
         ctx->header[ctx->header_pos++] = byte;
         if (ctx->header_pos == UARTBIN_HEADER_SIZE) {
             ctx->crc = uartbin_crc16_ccitt(ctx->header, UARTBIN_HEADER_SIZE, ctx->crc);
@@ -586,7 +586,7 @@ void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms)
         break;
 
     case UARTBIN_STATE_PAYLOAD:
-        /* Length was validated before entering this state, so the write is safe. */
+        /* Bu duruma girmeden uzunluk dogrulandigi icin yazma guvenlidir. */
         ctx->cfg.rx_payload_buffer[ctx->payload_pos] = byte;
         ctx->payload_pos++;
         ctx->crc = uartbin_crc16_ccitt(&byte, 1u, ctx->crc);
@@ -597,7 +597,7 @@ void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms)
         break;
 
     case UARTBIN_STATE_CRC:
-        /* The packet callback is called only after the received CRC matches. */
+        /* Packet callback yalnizca alinan CRC eslestikten sonra cagrilir. */
         ctx->crc_bytes[ctx->crc_pos++] = byte;
         if (ctx->crc_pos == UARTBIN_CRC_SIZE) {
             uint16_t expected = uartbin_get_u16_le(ctx->crc_bytes);

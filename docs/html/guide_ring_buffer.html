@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>uartbinlib: Ring Buffer TX Port</title>
+<title>uartbinlib: Halka Buffer TX Portu</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="codefolding.js"></script>
@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
   <td id="projectalign">
    <div id="projectname">uartbinlib
    </div>
-   <div id="projectbrief">Platform-independent binary UART framing library</div>
+   <div id="projectbrief">Platformdan bagimsiz binary UART cerceveleme kutuphanesi</div>
   </td>
  </tr>
  </tbody>
@@ -117,14 +117,14 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('guide_ring_buf
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">Ring Buffer TX Port </div></div>
+  <div class="headertitle"><div class="title">Halka Buffer TX Portu </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md23"></a>
-Ring Buffer TX Port</h1>
-<p>A ring buffer is the usual way to make the <span class="tt">write</span> hook non-blocking. The hook copies bytes into a static TX ring and enables the UART TX-empty interrupt or DMA transmitter. It returns success only if every byte was accepted.</p>
+Halka Buffer TX Portu</h1>
+<p>Halka buffer, <span class="tt">write</span> hook'unu non-blocking yapmak icin yaygin yoldur. Hook, byte'lari statik TX halkasi icine kopyalar ve UART TX-empty interrupt veya DMA TX yolunu etkinlestirir. Basariyi yalnizca her byte kabul edildiyse dondurur.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md24"></a>
-Minimal Ring Buffer Shape</h2>
+Minimal Halka Buffer Yapisi</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#define TX_RING_SIZE 512u</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">typedef</span> <span class="keyword">struct </span>{</div>
@@ -134,7 +134,7 @@ Minimal Ring Buffer Shape</h2>
 <div class="line">} tx_ring_t;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">static</span> tx_ring_t tx_ring;</div>
-</div><!-- fragment --><p>Keep one slot empty so full and empty are distinct:</p>
+</div><!-- fragment --><p>Full ve empty durumlarini ayirmak icin bir slot bos birak:</p>
 <div class="fragment"><div class="line"><span class="keyword">static</span> uint16_t ring_next(uint16_t index)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">return</span> (uint16_t)((index + 1u) % TX_RING_SIZE);</div>
@@ -154,8 +154,8 @@ Minimal Ring Buffer Shape</h2>
 <div class="line">}</div>
 </div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
 uartbin Write Hook</h2>
-<p>The hook must be atomic with respect to the TX interrupt. Disable the relevant UART TX interrupt or enter a short critical section while pushing bytes.</p>
-<p>Check free space before copying so the hook is all-or-nothing. Returning an error after only part of a frame was queued can put a corrupted partial frame on the wire.</p>
+<p>Hook, TX interrupt'a gore atomic olmalidir. Byte kopyalarken ilgili UART TX interrupt'unu kapat veya kisa bir critical section kullan.</p>
+<p>Kopyalamadan once bos alani kontrol et; hook all-or-nothing davranmalidir. Cercevenin yalnizca bir kismini kuyruga alip hata dondurmek hatta bozuk partial cerceve cikmasina neden olabilir.</p>
 <div class="fragment"><div class="line"><span class="keyword">static</span> uint16_t ring_used(<span class="keyword">const</span> tx_ring_t *ring)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">if</span> (ring-&gt;head &gt;= ring-&gt;tail) {</div>
@@ -188,10 +188,10 @@ uartbin Write Hook</h2>
 <div class="line">    platform_tx_unlock();</div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><p>If the ring does not have enough space, return non-zero. The send API will return <span class="tt"><a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada1bcbf954584fdf2d9c8aa94634cd9608" title="The configured write hook reported a TX failure.">UARTBIN_EWRITE</a></span>, or retry logic will report <span class="tt"><a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a7ed4d37cc04314e6a6e664f2548236d5" title="Reliable TX retry could not be written by the configured hook.">UARTBIN_ERROR_RETRY_WRITE</a></span> during retransmission.</p>
+</div><!-- fragment --><p>Halka buffer yeterli bos alana sahip degilse non-zero dondur. Send API <span class="tt"><a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada1bcbf954584fdf2d9c8aa94634cd9608" title="Ayarlanan write hook TX hatasi bildirdi.">UARTBIN_EWRITE</a></span> dondurur; retry sirasindaki yazma hatasinda ise <span class="tt"><a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a7ed4d37cc04314e6a6e664f2548236d5" title="Guvenilir TX retry ayarlanan hook ile yazilamadi.">UARTBIN_ERROR_RETRY_WRITE</a></span> bildirilir.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md26"></a>
-TX Interrupt Side</h2>
-<p>In the UART TX-empty interrupt:</p>
+TX Interrupt Tarafi</h2>
+<p>UART TX-empty interrupt icinde:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> UART_TX_IRQHandler(<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
 <div class="line">    <span class="keywordflow">if</span> (tx_ring.tail == tx_ring.head) {</div>
@@ -203,13 +203,13 @@ TX Interrupt Side</h2>
 <div class="line">    tx_ring.tail = ring_next(tx_ring.tail);</div>
 <div class="line">}</div>
 </div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md27"></a>
-Practical Notes</h2>
+Pratik Notlar</h2>
 <ul>
-<li>Size the ring for the largest burst you expect.</li>
-<li><span class="tt"><a class="el" href="uartbin_8h.html#a02dde34a333b47fcc0bd146757edfeb0" title="Bytes added around each payload: SOF + header + CRC.">UARTBIN_MAX_FRAME_OVERHEAD</a> + max_payload</span> is the largest single frame size.</li>
-<li>If retry is enabled, the retry frame buffer is separate from the TX ring.</li>
-<li>Protect <span class="tt">head</span>/<span class="tt">tail</span> updates from interrupt races.</li>
-<li>Do not store pointers to uartbin's temporary local buffers; always copy bytes. </li>
+<li>Ring boyutunu bekledigin en buyuk burst'e gore sec.</li>
+<li><span class="tt"><a class="el" href="uartbin_8h.html#a02dde34a333b47fcc0bd146757edfeb0" title="Her payload etrafina eklenen byte&#39;lar: SOF + header + CRC.">UARTBIN_MAX_FRAME_OVERHEAD</a> + max_payload</span>, tek cercevenin en buyuk boyudur.</li>
+<li>Retry aciksa retry frame buffer, TX halkasindan ayridir.</li>
+<li><span class="tt">head</span>/<span class="tt">tail</span> guncellemelerini interrupt race durumlarina karsi koru.</li>
+<li>uartbin'in gecici lokal buffer pointer'larini saklama; byte'lari her zaman kopyala. </li>
 </ul>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->

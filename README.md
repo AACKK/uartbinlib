@@ -1,34 +1,37 @@
 # uartbinlib
 
-`uartbinlib` is a small, platform-independent C library for framed binary UART messages. It is designed for embedded targets such as STM32, but the core has no HAL, RTOS, DMA, interrupt, or heap dependency.
+`uartbinlib`, UART gibi byte akislari uzerinden cerceveli binary mesaj tasimak
+icin kucuk ve platformdan bagimsiz bir C kutuphanesidir. STM32 gibi gomulu
+hedefler icin tasarlanmistir, fakat cekirdek kod HAL, RTOS, DMA, interrupt veya
+heap bagimliligi tasimaz.
 
-## Frame Format
+## Cerceve Formati
 
-All multi-byte integers are little-endian.
+Tum cok byte'li tamsayilar little-endian kodlanir.
 
-| Field | Size | Description |
+| Alan | Boyut | Aciklama |
 | --- | ---: | --- |
 | SOF | 2 | `0xA5 0x5A` |
-| Version | 1 | Protocol version, currently `1` |
-| Type | 1 | Application-defined packet type |
-| Flags | 1 | Application-defined flags |
-| Reserved | 1 | Currently `0` |
-| Sequence | 2 | Application-defined sequence number |
-| Payload length | 2 | Payload byte count |
-| Payload | N | User data |
-| CRC16 | 2 | CRC-16/CCITT-FALSE over header and payload |
+| Version | 1 | Protokol surumu, su an `1` |
+| Type | 1 | Uygulama tarafindan tanimlanan mesaj tipi |
+| Flags | 1 | Uygulama tarafindan tanimlanan bayraklar |
+| Ayrilmis | 1 | Su an `0` |
+| Sequence | 2 | Uygulama veya otomatik yardimcilar tarafindan kullanilan sira numarasi |
+| Payload length | 2 | Payload byte sayisi |
+| Payload | N | Kullanici verisi |
+| CRC16 | 2 | Header ve payload uzerinden CRC-16/CCITT-FALSE |
 
-## Design
+## Tasarim
 
-- No dynamic allocation.
-- No platform includes.
-- TX uses a user-provided `write` hook.
-- RX stores the complete payload in a user-provided buffer.
-- `on_packet` is called only after the full frame CRC is verified.
-- Parse errors and timeouts are delivered through `on_error`.
-- Optional request/event retry is driven by `uartbin_poll`.
+- Dinamik bellek kullanmaz.
+- Platform header'i icermez.
+- TX icin kullanici tarafindan verilen `write` hook'unu kullanir.
+- RX tarafinda tam payload'u kullanici buffer'ina kopyalar.
+- `on_packet`, sadece tum cerceve CRC dogrulamasindan gecerse cagrilir.
+- Parser hatalari, zaman asimi ve retry hatalari `on_error` ile bildirilir.
+- Opsiyonel request/event retry mekanizmasi `uartbin_poll` ile surulur.
 
-## Minimal Usage
+## En Kucuk Kullanim
 
 ```c
 #include "uartbin.h"
@@ -36,14 +39,14 @@ All multi-byte integers are little-endian.
 static int uart_write(const uint8_t *data, size_t len, void *user)
 {
     (void)user;
-    /* Send data with your UART driver. Return 0 on success. */
+    /* UART surucun ile tum byte'lari gonder. Basari icin 0 dondur. */
     return 0;
 }
 
 static void on_packet(const uartbin_packet_t *packet, void *user)
 {
     (void)user;
-    /* packet->payload is valid until uartbin_feed/feed_byte is called again. */
+    /* packet->payload, bir sonraki feed/feed_byte cagrimina kadar gecerlidir. */
 }
 
 static void on_error(uartbin_error_t error, void *user)
@@ -82,30 +85,30 @@ void app_send_ping(void)
 }
 ```
 
-## Automatic Sequences
+## Otomatik Sira Numaralari
 
-For request/response/event style protocols, use the automatic helpers instead
-of managing `seq` manually:
+Request/response/event tarzi protokollerde `seq` degerini elle yonetmek yerine
+otomatik yardimcilari kullan:
 
 ```c
-/* Starts a new conversation. The link's internal sequence counter is used. */
+/* Yeni bir konusma baslatir. Link icindeki sira sayaci kullanilir. */
 uartbin_send_request(&link, MSG_GET_CONFIG, 0, NULL, 0);
 
-/* Answers a received packet. The incoming packet sequence is echoed. */
+/* Alinan paketi cevaplar. Gelen sira numarasi aynen geri yazilir. */
 uartbin_send_response(&link, packet, MSG_CONFIG_VALUE, 0, payload, payload_len);
 
-/* Sends an unsolicited message. The link's internal sequence counter is used. */
+/* Kendiliginden olusan bir mesaj gonderir. Link icindeki sira sayaci kullanilir. */
 uartbin_send_event(&link, MSG_SENSOR_EVENT, 0, payload, payload_len);
 ```
 
-Each `uartbin_t` has its own sequence counter, so multiple UART links do not
-share state. The lower-level `uartbin_send()` API is still available when an
-application needs to provide an explicit sequence number.
+Her `uartbin_t` kendi sira sayacini tasir. Bu yuzden birden fazla UART linki
+birbirinin durumunu etkilemez. Daha ozel durumlarda acik `seq` vermek icin
+daha dusuk seviye `uartbin_send()` API'si kullanilabilir.
 
-## Automatic Retry
+## Otomatik Retry
 
-Automatic retry is optional. Enable it by giving each link a static TX retry
-buffer and retry settings:
+Otomatik retry opsiyoneldir. Her link icin statik bir TX retry buffer'i ve retry
+ayarlari vererek etkinlestirilir:
 
 ```c
 static uint8_t rx_payload[256];
@@ -125,65 +128,76 @@ uartbin_config_t cfg = {
 };
 ```
 
-When retry is enabled, `uartbin_send_request()` and `uartbin_send_event()` store
-the encoded frame in the retry buffer. Call `uartbin_poll(&link, now_ms)`
-periodically; if no matching `UARTBIN_FLAG_RESPONSE` packet arrives with the
-same sequence number before the timeout, the frame is transmitted again. When
-the retry limit is reached, `on_error` receives
-`UARTBIN_ERROR_RETRY_EXHAUSTED`.
+Retry acikken `uartbin_send_request()` ve `uartbin_send_event()` kodlanmis
+cerceveyi retry buffer'ina kaydeder. `uartbin_poll(&link, now_ms)` periyodik
+olarak cagrilmalidir. Ayni `seq` degerini tasiyan ve `UARTBIN_FLAG_RESPONSE`
+bayragi olan cevap zaman asimi suresi icinde gelmezse cerceve yeniden gonderilir.
+Retry limiti dolarsa `on_error`, `UARTBIN_ERROR_RETRY_EXHAUSTED` alir.
 
-The retry layer tracks one pending reliable request/event per `uartbin_t`.
-Sending a second reliable request/event before the first response arrives
-returns `UARTBIN_EBUSY`. Use `uartbin_cancel_retry()` if the application wants
-to abandon a pending request manually.
+Retry katmani her `uartbin_t` icin ayni anda bir pending reliable request/event
+tutar. Ilk cevap gelmeden ikinci reliable request/event gonderilirse
+`UARTBIN_EBUSY` doner. Uygulama pending istegi bilincli olarak iptal etmek
+isterse `uartbin_cancel_retry()` kullanabilir.
 
-For bidirectional protocols, both devices use the same pattern:
+Cift yonlu protokollerde iki cihaz da ayni kalibi kullanir:
 
 ```c
-/* Sender starts a reliable operation. */
+/* Gonderen taraf guvenilir bir is baslatir. */
 uartbin_send_request(&link, MSG_DALI_COMMAND, 0, payload, payload_len);
 
-/* Receiver answers after validating or completing the operation. */
+/* Alan taraf dogrulama veya islemi bitirdikten sonra cevap verir. */
 uartbin_send_response(&link, packet, MSG_DALI_RESULT, 0, result, result_len);
 
-/* Either side can also publish an event and expect an ACK-style response. */
+/* Iki taraf da event yayinlayip ACK tarzi cevap bekleyebilir. */
 uartbin_send_event(&link, MSG_DALI_EVENT, 0, event, event_len);
 uartbin_send_response(&link, packet, MSG_ACK, 0, NULL, 0);
 ```
 
-## STM32 Integration Sketch
+## STM32 Entegrasyon Ozeti
 
-Keep STM32-specific code outside the library. Feed RX bytes from an interrupt, DMA idle callback, or task loop with `uartbin_feed_at` / `uartbin_feed_byte_at`.
+STM32'ye ozel kod kutuphane cekirdeginin disinda tutulur. RX byte'larini
+interrupt, DMA idle callback veya task dongusunden `uartbin_feed_at` /
+`uartbin_feed_byte_at` ile besle.
 
-The `write` hook must complete the write or copy the bytes into a TX queue before returning, because `uartbin_send` writes SOF, header, payload, and CRC in separate calls. The examples use blocking `HAL_UART_Transmit` for clarity and safety. If you need non-blocking TX, implement a TX queue in the application adapter.
+`write` hook'u, donmeden once tum byte'lari gondermis veya TX kuyruguna
+kopyalamis olmalidir; cunku `uartbin_send` SOF, header, payload ve CRC icin
+birden fazla write cagrisi yapabilir. Ornekler sadelik ve dogruluk icin
+blocking `HAL_UART_Transmit` kullanir. Non-blocking TX gerekiyorsa uygulama
+adapter'inda TX queue kullan.
 
-See:
+Bak:
 
 - `examples/stm32_hal_interrupt.c`
 - `examples/stm32_hal_dma_idle.c`
 
-## Large Payloads
+## Buyuk Payloadlar
 
-For larger packets, allocate a larger static RX payload buffer. This keeps the API simple and ensures the application sees data only after CRC passes.
+Daha buyuk paketler icin daha buyuk statik RX payload buffer'i ayir. Bu API'yi
+basit tutar ve uygulamanin veriyi sadece CRC basarili olduktan sonra gormesini
+saglar.
 
 ```c
 static uint8_t rx_payload[4096];
 ```
 
-If an incoming frame advertises a payload larger than `rx_payload_capacity`, the parser rejects it with `UARTBIN_ERROR_BAD_LENGTH` and resynchronizes.
+Gelen cerceve `rx_payload_capacity` degerinden buyuk payload ilan ederse parser
+paketi `UARTBIN_ERROR_BAD_LENGTH` ile reddeder ve yeniden senkron aramaya doner.
 
-## Timeout
+## Zaman Asimi
 
-Set `rx_timeout_ms` and call `uartbin_poll(&link, now_ms)` periodically. The `_at` feed functions also check timeout before accepting each byte:
+`rx_timeout_ms` ayarla ve `uartbin_poll(&link, now_ms)` fonksiyonunu periyodik
+cagir. `_at` feed fonksiyonlari da her byte/block kabul etmeden once RX zaman asimi
+kontrolu yapar:
 
 ```c
 uartbin_feed_at(&link, dma_data, dma_len, HAL_GetTick());
 uartbin_poll(&link, HAL_GetTick());
 ```
 
-On STM32 HAL UART errors, reset the parser, abort/restart RX, and keep an error counter. The example adapters show this pattern in their error callback functions.
+STM32 HAL UART hatalarinda parser'i resetle, RX yolunu abort/restart et ve hata
+sayaci tut. Ornek adapter'lar bu kalibi gosterir.
 
-## Build
+## Derleme
 
 ```sh
 cmake -S . -B build
@@ -191,26 +205,25 @@ cmake --build build
 ctest --test-dir build
 ```
 
-For multi-config generators such as Visual Studio, pass the configuration to
-CTest:
+Visual Studio gibi multi-config generator'larda CTest'e config ver:
 
 ```sh
 ctest --test-dir build -C Debug
 ```
 
-## Documentation
+## Dokumantasyon
 
-Generate the HTML documentation with Doxygen:
+HTML dokumantasyonu Doxygen ile uret:
 
 ```sh
 doxygen Doxyfile
 ```
 
-Open `docs/html/index.html` in a browser.
+Tarayicida `docs/html/index.html` dosyasini ac.
 
-Additional Doxygen guide pages:
+Ek Doxygen rehber sayfalari:
 
-- API Usage Guide
-- Porting Guide
-- Ring Buffer TX Port
-- STM32 Interrupt and DMA Usage
+- API Kullanim Rehberi
+- Port Etme Rehberi
+- Halka Buffer TX Portu
+- STM32 Interrupt ve DMA Kullanimi

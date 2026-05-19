@@ -1,10 +1,10 @@
-Start testing: May 19 14:21 Türkiye Standart Saati
+Start testing: May 19 14:42 Türkiye Standart Saati
 ----------------------------------------------------------
 1/1 Testing: uartbin_tests
 1/1 Test: uartbin_tests
 Command: "C:/Users/kurtu/OneDrive/Belgeler/uartbinlib/build/Debug/uartbin_tests.exe"
 Directory: C:/Users/kurtu/OneDrive/Belgeler/uartbinlib/build
-"uartbin_tests" start time: May 19 14:21 Türkiye Standart Saati
+"uartbin_tests" start time: May 19 14:42 Türkiye Standart Saati
 Output:
 ----------------------------------------------------------
 uartbin tests passed
@@ -12,8 +12,8 @@ uartbin tests passed
 Test time =   0.04 sec
 ----------------------------------------------------------
 Test Passed.
-"uartbin_tests" end time: May 19 14:21 Türkiye Standart Saati
+"uartbin_tests" end time: May 19 14:42 Türkiye Standart Saati
 "uartbin_tests" time elapsed: 00:00:00
 ----------------------------------------------------------
 
-End testing: May 19 14:21 Türkiye Standart Saati
+End testing: May 19 14:42 Türkiye Standart Saati

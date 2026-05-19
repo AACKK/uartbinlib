@@ -1,35 +1,34 @@
-\page guide_porting Porting Guide
+\page guide_porting Port Etme Rehberi
 
-# Porting Guide
+# Port Etme Rehberi
 
-uartbinlib is platform independent. A port only needs four things:
+uartbinlib platformdan bagimsizdir. Bir porta yalnizca dort sey gerekir:
 
-- A static `uartbin_t` context.
-- Static RX payload storage.
-- A write hook that accepts all bytes given to it.
-- A way to feed RX bytes/blocks and call `uartbin_poll()`.
+- Statik bir `uartbin_t` context.
+- Statik RX payload alani.
+- Verilen tum byte'lari kabul eden bir write hook.
+- RX byte/block besleme ve `uartbin_poll()` cagirma yolu.
 
-## Porting Checklist
+## Port Etme Kontrol Listesi
 
-1. Allocate one context per UART/protocol link.
-2. Allocate an RX payload buffer large enough for the largest application
-   payload you accept.
-3. Optional: allocate a TX retry frame buffer if you want automatic retry.
-4. Implement `uartbin_write_fn`.
-5. Feed RX bytes with `uartbin_feed_byte_at()` or blocks with
-   `uartbin_feed_at()`.
-6. Call `uartbin_poll()` periodically.
-7. On UART framing/noise/overrun errors, reset the parser with
-   `uartbin_reset()` and restart the platform RX path.
+1. Her UART/protokol linki icin bir context ayir.
+2. Kabul edecegin en buyuk uygulama payload'u icin yeterli RX buffer ayir.
+3. Opsiyonel: otomatik retry istiyorsan TX retry frame buffer ayir.
+4. `uartbin_write_fn` fonksiyonunu uygula.
+5. RX byte'larini `uartbin_feed_byte_at()` ile, bloklari `uartbin_feed_at()`
+   ile besle.
+6. `uartbin_poll()` fonksiyonunu periyodik cagir.
+7. UART framing/noise/overrun hatalarinda parser'i `uartbin_reset()` ile
+   resetle ve platform RX yolunu yeniden baslat.
 
-## Write Hook Contract
+## Write Hook Sozlesmesi
 
-The write hook must either transmit all bytes before returning or copy all bytes
-into an application-owned TX queue. Returning success before the bytes are safe
-can corrupt frames, because the library may call the hook several times for one
-packet.
+Write hook, donmeden once tum byte'lari gondermeli veya uygulama tarafindan
+sahip olunan TX kuyruguna kopyalamalidir. Byte'lar guvende degilken basari
+dondurmek cerceveleri bozabilir; cunku kutuphane tek paket icin hook'u birden
+fazla kez cagirabilir.
 
-Blocking TX is simple:
+Bloklayan TX basittir:
 
 ```c
 static int uart_write(const uint8_t *data, size_t len, void *user)
@@ -41,37 +40,36 @@ static int uart_write(const uint8_t *data, size_t len, void *user)
 }
 ```
 
-Queued TX is better for interrupt/RTOS systems, but the queue push must copy
-the complete byte range before returning.
+Interrupt/RTOS sistemlerinde queued TX daha iyidir, fakat queue push islemi
+donmeden once tum byte araligini kopyalamalidir.
 
-## Timing
+## Zamanlama
 
-Use a monotonic millisecond tick for all `_at` feed calls and `uartbin_poll()`.
-The tick may wrap if unsigned subtraction works correctly on the target.
+Tum `_at` feed cagrilari ve `uartbin_poll()` icin monotonic milisaniye tick
+kullan. Hedefte unsigned subtraction dogru calisiyorsa tick wrap edebilir.
 
 ```c
 uartbin_feed_at(&link, data, len, platform_millis());
 uartbin_poll(&link, platform_millis());
 ```
 
-## Error Handling
+## Hata Yonetimi
 
-Parser and reliable-TX errors arrive through `on_error`:
+Parser ve reliable-TX hatalari `on_error` ile gelir:
 
-- `UARTBIN_ERROR_BAD_VERSION`: unsupported protocol version.
-- `UARTBIN_ERROR_BAD_LENGTH`: payload larger than RX capacity.
-- `UARTBIN_ERROR_CRC`: frame corruption.
-- `UARTBIN_ERROR_RX_OVERFLOW`: no RX payload buffer for non-empty payload.
-- `UARTBIN_ERROR_TIMEOUT`: partial RX frame timed out.
-- `UARTBIN_ERROR_RETRY_EXHAUSTED`: reliable message was not answered in time.
-- `UARTBIN_ERROR_RETRY_WRITE`: retry write hook failed.
+- `UARTBIN_ERROR_BAD_VERSION`: desteklenmeyen protokol surumu.
+- `UARTBIN_ERROR_BAD_LENGTH`: payload RX kapasitesinden buyuk.
+- `UARTBIN_ERROR_CRC`: cerceve bozulmasi.
+- `UARTBIN_ERROR_RX_OVERFLOW`: non-empty payload icin RX payload buffer yok.
+- `UARTBIN_ERROR_TIMEOUT`: yarim RX cercevesi timeout oldu.
+- `UARTBIN_ERROR_RETRY_EXHAUSTED`: reliable mesaj zamaninda cevaplanmadi.
+- `UARTBIN_ERROR_RETRY_WRITE`: retry write hook basarisiz oldu.
 
-Keep protocol errors separate from platform UART errors. Platform errors should
-restart the UART peripheral and call `uartbin_reset()`.
+Protokol hatalarini platform UART hatalarindan ayri tut. Platform hatalari UART
+peripheral'i yeniden baslatmali ve `uartbin_reset()` cagirmalidir.
 
-## Multi-UART Systems
+## Coklu UART Sistemleri
 
-Use one `uartbin_t`, one RX payload buffer, and one optional TX retry buffer per
-UART link. The automatic sequence counter and retry state live inside
-`uartbin_t`, so links do not share state.
-
+Her UART linki icin bir `uartbin_t`, bir RX payload buffer ve opsiyonel bir TX
+retry buffer kullan. Otomatik sira sayaci ve retry durumu `uartbin_t` icinde
+yasadigi icin linkler birbirinin durumunu paylasmaz.

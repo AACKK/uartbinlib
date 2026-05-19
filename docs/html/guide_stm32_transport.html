@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.17.0"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>uartbinlib: STM32 Interrupt and DMA Usage</title>
+<title>uartbinlib: STM32 Interrupt ve DMA Kullanimi</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="dynsections.js"></script>
 <script type="text/javascript" src="codefolding.js"></script>
@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
   <td id="projectalign">
    <div id="projectname">uartbinlib
    </div>
-   <div id="projectbrief">Platform-independent binary UART framing library</div>
+   <div id="projectbrief">Platformdan bagimsiz binary UART cerceveleme kutuphanesi</div>
   </td>
  </tr>
  </tbody>
@@ -117,76 +117,76 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('guide_stm32_tr
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">STM32 Interrupt and DMA Usage </div></div>
+  <div class="headertitle"><div class="title">STM32 Interrupt ve DMA Kullanimi </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
-STM32 Interrupt and DMA Usage</h1>
-<p>The portable library does not depend on STM32 HAL, but the repository includes two adapter examples:</p>
+STM32 Interrupt ve DMA Kullanimi</h1>
+<p>Portable kutuphane STM32 HAL'e bagimli degildir, fakat repo iki adapter ornegi icerir:</p>
 <ul>
-<li><span class="tt"><a class="el" href="stm32__hal__interrupt_8c.html" title="STM32 HAL interrupt-based RX adapter example for uartbinlib.">examples/stm32_hal_interrupt.c</a></span></li>
-<li><span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html" title="STM32 HAL DMA idle-line RX adapter example for uartbinlib.">examples/stm32_hal_dma_idle.c</a></span></li>
+<li><span class="tt"><a class="el" href="stm32__hal__interrupt_8c.html" title="uartbinlib icin STM32 HAL interrupt tabanli RX adapter ornegi.">examples/stm32_hal_interrupt.c</a></span></li>
+<li><span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html" title="uartbinlib icin STM32 HAL DMA idle-line RX adapter ornegi.">examples/stm32_hal_dma_idle.c</a></span></li>
 </ul>
-<p>Use these as patterns, not as mandatory library code.</p>
+<p>Bunlari zorunlu kutuphane kodu gibi degil, kalip olarak kullan.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
 Interrupt RX</h2>
-<p>One-byte interrupt RX is simple and robust:</p>
+<p>Tek byte interrupt RX basit ve guvenilirdir:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> HAL_UART_RxCpltCallback(<a class="code hl_typedef" href="stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590">UART_HandleTypeDef</a> *huart)</div>
 <div class="line">{</div>
 <div class="line">    <a class="code hl_function" href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0">uartbin_feed_byte_at</a>(&amp;link, rx_byte, <a class="code hl_function" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick</a>());</div>
 <div class="line">    <a class="code hl_function" href="stm32__hal__interrupt_8c.html#a131991338c4e48a7a48a5b3c0ba9863a">HAL_UART_Receive_IT</a>(huart, &amp;rx_byte, 1);</div>
 <div class="line">}</div>
-<div class="ttc" id="astm32__hal__dma__idle_8c_html_a28e5a9a61ee3cf68aabda300d2580590"><div class="ttname"><a href="stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590">UART_HandleTypeDef</a></div><div class="ttdeci">struct UART_HandleTypeDef UART_HandleTypeDef</div><div class="ttdoc">STM32 HAL DMA + idle-line RX example.</div><div class="ttdef"><b>Definition</b> <a href="stm32__hal__dma__idle_8c_source.html#l00049">stm32_hal_dma_idle.c:49</a></div></div>
+<div class="ttc" id="astm32__hal__dma__idle_8c_html_a28e5a9a61ee3cf68aabda300d2580590"><div class="ttname"><a href="stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590">UART_HandleTypeDef</a></div><div class="ttdeci">struct UART_HandleTypeDef UART_HandleTypeDef</div><div class="ttdoc">STM32 HAL DMA + idle-line RX ornegi.</div><div class="ttdef"><b>Definition</b> <a href="stm32__hal__dma__idle_8c_source.html#l00050">stm32_hal_dma_idle.c:50</a></div></div>
 <div class="ttc" id="astm32__hal__dma__idle_8c_html_af2c4f03d53e997a54e1fd5e80daa55c4"><div class="ttname"><a href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick</a></div><div class="ttdeci">uint32_t HAL_GetTick(void)</div></div>
 <div class="ttc" id="astm32__hal__interrupt_8c_html_a131991338c4e48a7a48a5b3c0ba9863a"><div class="ttname"><a href="stm32__hal__interrupt_8c.html#a131991338c4e48a7a48a5b3c0ba9863a">HAL_UART_Receive_IT</a></div><div class="ttdeci">int HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *data, uint16_t size)</div></div>
-<div class="ttc" id="auartbin_8h_html_a992904ee32447ec8edd21f131fae72f0"><div class="ttname"><a href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0">uartbin_feed_byte_at</a></div><div class="ttdeci">void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms)</div><div class="ttdoc">Feed one received byte with the current application timestamp.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00533">uartbin.c:533</a></div></div>
-</div><!-- fragment --><p>Recommended behavior:</p>
+<div class="ttc" id="auartbin_8h_html_a992904ee32447ec8edd21f131fae72f0"><div class="ttname"><a href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0">uartbin_feed_byte_at</a></div><div class="ttdeci">void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms)</div><div class="ttdoc">Tek alinan byte&#39;i gecerli uygulama timestamp degeri ile besle.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00533">uartbin.c:533</a></div></div>
+</div><!-- fragment --><p>Onerilen davranis:</p>
 <ul>
-<li>Arm the next byte immediately after feeding the current one.</li>
-<li>Call <span class="tt"><a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Reset only the RX parser state.">uartbin_reset()</a></span> after HAL noise/framing/parity/overrun errors.</li>
-<li>Restart RX after abort/error recovery.</li>
-<li>Call <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a></span> from the main loop or scheduler.</li>
-<li>Let <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a></span> drive retry; RX callbacks only feed received bytes.</li>
+<li>Gecerli byte'i besledikten hemen sonra sonraki byte RX'i arm et.</li>
+<li>HAL noise/framing/parity/overrun hatalarindan sonra <span class="tt"><a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Yalnizca RX parser durumunu resetle.">uartbin_reset()</a></span> cagir.</li>
+<li>Abort/error recovery sonrasinda RX'i yeniden baslat.</li>
+<li><span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> fonksiyonunu main loop veya scheduler icinden cagir.</li>
+<li>Retry'yi <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> sursun; RX callback'leri yalnizca gelen byte'lari beslesin.</li>
 </ul>
-<p>This model is easy to debug and works well at moderate baud rates.</p>
+<p>Bu model debug etmesi kolaydir ve orta baud rate'lerde iyi calisir.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
 DMA Idle-Line RX</h2>
-<p>DMA idle-line RX receives blocks and feeds them to uartbinlib:</p>
+<p>DMA idle-line RX blok alir ve uartbinlib'e besler:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> HAL_UARTEx_RxEventCallback(<a class="code hl_typedef" href="stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590">UART_HandleTypeDef</a> *huart, uint16_t size)</div>
 <div class="line">{</div>
 <div class="line">    <a class="code hl_function" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a>(&amp;link, dma_rx_buffer, size, <a class="code hl_function" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick</a>());</div>
 <div class="line">    <a class="code hl_function" href="stm32__hal__dma__idle_8c.html#a98150413a15ec59e563a22ef71cce8ab">HAL_UARTEx_ReceiveToIdle_DMA</a>(huart, dma_rx_buffer, <span class="keyword">sizeof</span>(dma_rx_buffer));</div>
 <div class="line">}</div>
 <div class="ttc" id="astm32__hal__dma__idle_8c_html_a98150413a15ec59e563a22ef71cce8ab"><div class="ttname"><a href="stm32__hal__dma__idle_8c.html#a98150413a15ec59e563a22ef71cce8ab">HAL_UARTEx_ReceiveToIdle_DMA</a></div><div class="ttdeci">int HAL_UARTEx_ReceiveToIdle_DMA(UART_HandleTypeDef *huart, uint8_t *data, uint16_t size)</div></div>
-<div class="ttc" id="auartbin_8h_html_ab9da003f689bb5d95d54752a907cf19b"><div class="ttname"><a href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a></div><div class="ttdeci">void uartbin_feed_at(uartbin_t *ctx, const uint8_t *data, size_t len, uint32_t now_ms)</div><div class="ttdoc">Feed received bytes with the current application timestamp.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00506">uartbin.c:506</a></div></div>
-</div><!-- fragment --><p>Recommended behavior:</p>
+<div class="ttc" id="auartbin_8h_html_ab9da003f689bb5d95d54752a907cf19b"><div class="ttname"><a href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a></div><div class="ttdeci">void uartbin_feed_at(uartbin_t *ctx, const uint8_t *data, size_t len, uint32_t now_ms)</div><div class="ttdoc">Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00506">uartbin.c:506</a></div></div>
+</div><!-- fragment --><p>Onerilen davranis:</p>
 <ul>
-<li>The DMA buffer does not need to hold a complete uartbin frame.</li>
-<li>Feed only valid newly received bytes.</li>
-<li>Restart <span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html#a98150413a15ec59e563a22ef71cce8ab">HAL_UARTEx_ReceiveToIdle_DMA()</a></span> after each idle event.</li>
-<li>Disable DMA half-transfer interrupts unless your adapter tracks offsets.</li>
-<li>On HAL UART errors, abort/restart DMA and call <span class="tt"><a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Reset only the RX parser state.">uartbin_reset()</a></span>.</li>
+<li>DMA buffer'in tam bir uartbin cercevesi tasimasi gerekmez.</li>
+<li>Yalnizca yeni alinmis gecerli byte'lari besle.</li>
+<li>Her idle event sonrasinda <span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html#a98150413a15ec59e563a22ef71cce8ab">HAL_UARTEx_ReceiveToIdle_DMA()</a></span> yeniden baslat.</li>
+<li>Adapter offset takip etmiyorsa DMA half-transfer interrupt'larini kapat.</li>
+<li>HAL UART hatalarinda DMA'i abort/restart et ve <span class="tt"><a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Yalnizca RX parser durumunu resetle.">uartbin_reset()</a></span> cagir.</li>
 </ul>
-<p>This model is better for high baud rates or bursty traffic.</p>
+<p>Bu model yuksek baud rate veya burst tarzi trafik icin daha uygundur.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
-TX Choices</h2>
-<p>The STM32 examples use blocking <span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html#a41d654999cc15648093057ee0c6f27e4">HAL_UART_Transmit()</a></span> because it satisfies the write hook contract with minimal code. Production projects often replace this with:</p>
+TX Secenekleri</h2>
+<p>STM32 ornekleri blocking <span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html#a41d654999cc15648093057ee0c6f27e4">HAL_UART_Transmit()</a></span> kullanir; cunku bu, write hook sozlesmesini en az kodla saglar. Production projelerde bunu genelde sunlardan biriyle degistirirsin:</p>
 <ul>
-<li>A UART TX ring buffer driven by TX-empty interrupt.</li>
-<li>A DMA TX queue.</li>
-<li>An RTOS stream buffer drained by a UART task.</li>
+<li>TX-empty interrupt ile surulen UART TX ring buffer.</li>
+<li>DMA TX queue.</li>
+<li>UART task tarafindan bosaltilan RTOS stream buffer.</li>
 </ul>
-<p>All three are valid as long as the write hook copies or accepts all bytes before returning success.</p>
+<p>Bu ucu de gecerlidir; tek sart write hook'un basari dondurmeden once tum byte'lari kopyalamasi veya kabul etmesidir.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
-Retry With STM32</h2>
-<p>Automatic retry needs regular calls to <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="Service RX timeout and optional TX retry timing.">uartbin_poll()</a></span>:</p>
+STM32 ile Retry</h2>
+<p>Otomatik retry icin <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> duzenli cagrilmalidir:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> main_loop(<span class="keywordtype">void</span>)</div>
 <div class="line">{</div>
 <div class="line">    <a class="code hl_function" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a>(&amp;link, <a class="code hl_function" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick</a>());</div>
 <div class="line">}</div>
-<div class="ttc" id="auartbin_8h_html_ac772ed6c266ea60e13df4a1c28d9622e"><div class="ttname"><a href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a></div><div class="ttdeci">void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)</div><div class="ttdoc">Service RX timeout and optional TX retry timing.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00517">uartbin.c:517</a></div></div>
-</div><!-- fragment --><p>For RTOS systems, a 1 ms to 10 ms periodic task is usually enough. Choose <span class="tt">tx_retry_timeout_ms</span> larger than the normal round-trip time of the peer plus the expected DALI operation delay if the response is sent after the DALI action completes.</p>
-<p>Do not rely on RX callbacks to drive retry timing. Feed callbacks only service RX parser timeout; TX retry runs from the explicit poll path. </p>
+<div class="ttc" id="auartbin_8h_html_ac772ed6c266ea60e13df4a1c28d9622e"><div class="ttname"><a href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a></div><div class="ttdeci">void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)</div><div class="ttdoc">RX timeout ve opsiyonel TX retry zamanlamasini servis et.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00517">uartbin.c:517</a></div></div>
+</div><!-- fragment --><p>RTOS sistemlerinde 1 ms ile 10 ms arasi periyodik task genelde yeterlidir. <span class="tt">tx_retry_timeout_ms</span> degerini peer'in normal round-trip suresinden ve cevap DALI islemi bittikten sonra gonderiliyorsa beklenen DALI islem gecikmesinden buyuk sec.</p>
+<p>Retry zamanlamasi icin RX callback'lere guvenme. Feed callback'leri yalnizca RX parser timeout kontrolu yapar; TX retry acik poll yolunda calisir. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

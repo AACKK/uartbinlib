@@ -1,12 +1,12 @@
-\page guide_ring_buffer Ring Buffer TX Port
+\page guide_ring_buffer Halka Buffer TX Portu
 
-# Ring Buffer TX Port
+# Halka Buffer TX Portu
 
-A ring buffer is the usual way to make the `write` hook non-blocking. The hook
-copies bytes into a static TX ring and enables the UART TX-empty interrupt or
-DMA transmitter. It returns success only if every byte was accepted.
+Halka buffer, `write` hook'unu non-blocking yapmak icin yaygin yoldur. Hook,
+byte'lari statik TX halkasi icine kopyalar ve UART TX-empty interrupt veya DMA TX
+yolunu etkinlestirir. Basariyi yalnizca her byte kabul edildiyse dondurur.
 
-## Minimal Ring Buffer Shape
+## Minimal Halka Buffer Yapisi
 
 ```c
 #define TX_RING_SIZE 512u
@@ -20,7 +20,7 @@ typedef struct {
 static tx_ring_t tx_ring;
 ```
 
-Keep one slot empty so full and empty are distinct:
+Full ve empty durumlarini ayirmak icin bir slot bos birak:
 
 ```c
 static uint16_t ring_next(uint16_t index)
@@ -44,12 +44,12 @@ static int ring_push_byte(tx_ring_t *ring, uint8_t byte)
 
 ## uartbin Write Hook
 
-The hook must be atomic with respect to the TX interrupt. Disable the relevant
-UART TX interrupt or enter a short critical section while pushing bytes.
+Hook, TX interrupt'a gore atomic olmalidir. Byte kopyalarken ilgili UART TX
+interrupt'unu kapat veya kisa bir critical section kullan.
 
-Check free space before copying so the hook is all-or-nothing. Returning an
-error after only part of a frame was queued can put a corrupted partial frame on
-the wire.
+Kopyalamadan once bos alani kontrol et; hook all-or-nothing davranmalidir.
+Cercevenin yalnizca bir kismini kuyruga alip hata dondurmek hatta bozuk partial
+cerceve cikmasina neden olabilir.
 
 ```c
 static uint16_t ring_used(const tx_ring_t *ring)
@@ -89,13 +89,13 @@ static int uartbin_ring_write(const uint8_t *data, size_t len, void *user)
 }
 ```
 
-If the ring does not have enough space, return non-zero. The send API will
-return `UARTBIN_EWRITE`, or retry logic will report
-`UARTBIN_ERROR_RETRY_WRITE` during retransmission.
+Halka buffer yeterli bos alana sahip degilse non-zero dondur. Send API `UARTBIN_EWRITE`
+dondurur; retry sirasindaki yazma hatasinda ise
+`UARTBIN_ERROR_RETRY_WRITE` bildirilir.
 
-## TX Interrupt Side
+## TX Interrupt Tarafi
 
-In the UART TX-empty interrupt:
+UART TX-empty interrupt icinde:
 
 ```c
 void UART_TX_IRQHandler(void)
@@ -110,10 +110,11 @@ void UART_TX_IRQHandler(void)
 }
 ```
 
-## Practical Notes
+## Pratik Notlar
 
-- Size the ring for the largest burst you expect.
-- `UARTBIN_MAX_FRAME_OVERHEAD + max_payload` is the largest single frame size.
-- If retry is enabled, the retry frame buffer is separate from the TX ring.
-- Protect `head`/`tail` updates from interrupt races.
-- Do not store pointers to uartbin's temporary local buffers; always copy bytes.
+- Ring boyutunu bekledigin en buyuk burst'e gore sec.
+- `UARTBIN_MAX_FRAME_OVERHEAD + max_payload`, tek cercevenin en buyuk boyudur.
+- Retry aciksa retry frame buffer, TX halkasindan ayridir.
+- `head`/`tail` guncellemelerini interrupt race durumlarina karsi koru.
+- uartbin'in gecici lokal buffer pointer'larini saklama; byte'lari her zaman
+  kopyala.

@@ -25,48 +25,48 @@
 var NAVTREE =
 [
   [ "uartbinlib", "index.html", [
-    [ "Frame Format", "index.html#autotoc_md1", null ],
-    [ "Design", "index.html#autotoc_md2", null ],
-    [ "Minimal Usage", "index.html#autotoc_md3", null ],
-    [ "Automatic Sequences", "index.html#autotoc_md4", null ],
-    [ "Automatic Retry", "index.html#autotoc_md5", null ],
-    [ "STM32 Integration Sketch", "index.html#autotoc_md6", null ],
-    [ "Large Payloads", "index.html#autotoc_md7", null ],
-    [ "Timeout", "index.html#autotoc_md8", null ],
-    [ "Build", "index.html#autotoc_md9", null ],
-    [ "Documentation", "index.html#autotoc_md10", null ],
-    [ "API Usage Guide", "guide_api_usage.html", [
-      [ "API Usage Guide", "guide_api_usage.html#autotoc_md11", [
-        [ "Basic Setup", "guide_api_usage.html#autotoc_md12", null ],
-        [ "Sending Messages", "guide_api_usage.html#autotoc_md13", null ],
-        [ "Receiving Bytes", "guide_api_usage.html#autotoc_md14", null ],
-        [ "Reliable Message Rules", "guide_api_usage.html#autotoc_md15", null ],
-        [ "Packet Lifetime", "guide_api_usage.html#autotoc_md16", null ]
+    [ "Cerceve Formati", "index.html#autotoc_md1", null ],
+    [ "Tasarim", "index.html#autotoc_md2", null ],
+    [ "En Kucuk Kullanim", "index.html#autotoc_md3", null ],
+    [ "Otomatik Sira Numaralari", "index.html#autotoc_md4", null ],
+    [ "Otomatik Retry", "index.html#autotoc_md5", null ],
+    [ "STM32 Entegrasyon Ozeti", "index.html#autotoc_md6", null ],
+    [ "Buyuk Payloadlar", "index.html#autotoc_md7", null ],
+    [ "Zaman Asimi", "index.html#autotoc_md8", null ],
+    [ "Derleme", "index.html#autotoc_md9", null ],
+    [ "Dokumantasyon", "index.html#autotoc_md10", null ],
+    [ "API Kullanim Rehberi", "guide_api_usage.html", [
+      [ "API Kullanim Rehberi", "guide_api_usage.html#autotoc_md11", [
+        [ "Temel Kurulum", "guide_api_usage.html#autotoc_md12", null ],
+        [ "Mesaj Gonderme", "guide_api_usage.html#autotoc_md13", null ],
+        [ "Byte Alma", "guide_api_usage.html#autotoc_md14", null ],
+        [ "Guvenilir Mesaj Kurallari", "guide_api_usage.html#autotoc_md15", null ],
+        [ "Packet Omru", "guide_api_usage.html#autotoc_md16", null ]
       ] ]
     ] ],
-    [ "Porting Guide", "guide_porting.html", [
-      [ "Porting Guide", "guide_porting.html#autotoc_md17", [
-        [ "Porting Checklist", "guide_porting.html#autotoc_md18", null ],
-        [ "Write Hook Contract", "guide_porting.html#autotoc_md19", null ],
-        [ "Timing", "guide_porting.html#autotoc_md20", null ],
-        [ "Error Handling", "guide_porting.html#autotoc_md21", null ],
-        [ "Multi-UART Systems", "guide_porting.html#autotoc_md22", null ]
+    [ "Port Etme Rehberi", "guide_porting.html", [
+      [ "Port Etme Rehberi", "guide_porting.html#autotoc_md17", [
+        [ "Port Etme Kontrol Listesi", "guide_porting.html#autotoc_md18", null ],
+        [ "Write Hook Sozlesmesi", "guide_porting.html#autotoc_md19", null ],
+        [ "Zamanlama", "guide_porting.html#autotoc_md20", null ],
+        [ "Hata Yonetimi", "guide_porting.html#autotoc_md21", null ],
+        [ "Coklu UART Sistemleri", "guide_porting.html#autotoc_md22", null ]
       ] ]
     ] ],
-    [ "Ring Buffer TX Port", "guide_ring_buffer.html", [
-      [ "Ring Buffer TX Port", "guide_ring_buffer.html#autotoc_md23", [
-        [ "Minimal Ring Buffer Shape", "guide_ring_buffer.html#autotoc_md24", null ],
+    [ "Halka Buffer TX Portu", "guide_ring_buffer.html", [
+      [ "Halka Buffer TX Portu", "guide_ring_buffer.html#autotoc_md23", [
+        [ "Minimal Halka Buffer Yapisi", "guide_ring_buffer.html#autotoc_md24", null ],
         [ "uartbin Write Hook", "guide_ring_buffer.html#autotoc_md25", null ],
-        [ "TX Interrupt Side", "guide_ring_buffer.html#autotoc_md26", null ],
-        [ "Practical Notes", "guide_ring_buffer.html#autotoc_md27", null ]
+        [ "TX Interrupt Tarafi", "guide_ring_buffer.html#autotoc_md26", null ],
+        [ "Pratik Notlar", "guide_ring_buffer.html#autotoc_md27", null ]
       ] ]
     ] ],
-    [ "STM32 Interrupt and DMA Usage", "guide_stm32_transport.html", [
-      [ "STM32 Interrupt and DMA Usage", "guide_stm32_transport.html#autotoc_md28", [
+    [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html", [
+      [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html#autotoc_md28", [
         [ "Interrupt RX", "guide_stm32_transport.html#autotoc_md29", null ],
         [ "DMA Idle-Line RX", "guide_stm32_transport.html#autotoc_md30", null ],
-        [ "TX Choices", "guide_stm32_transport.html#autotoc_md31", null ],
-        [ "Retry With STM32", "guide_stm32_transport.html#autotoc_md32", null ]
+        [ "TX Secenekleri", "guide_stm32_transport.html#autotoc_md31", null ],
+        [ "STM32 ile Retry", "guide_stm32_transport.html#autotoc_md32", null ]
       ] ]
     ] ],
     [ "Data Structures", "annotated.html", [
