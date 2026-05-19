@@ -32,12 +32,12 @@ static void on_packet(const uartbin_packet_t *packet, void *user)
     (void)user;
 
     switch (packet->type) {
-    case MSG_DALI_COMMAND:
+    case MSG_DEVICE_COMMAND:
         /* Dogrula/isle ve ayni sira numarasi ile cevapla. */
-        uartbin_send_response(&link, packet, MSG_DALI_RESULT, 0, NULL, 0);
+        uartbin_send_response(&link, packet, MSG_DEVICE_RESULT, 0, NULL, 0);
         break;
 
-    case MSG_DALI_EVENT:
+    case MSG_DEVICE_EVENT:
         /* Peer tarafindan event geldi; ACK ile cevapla. */
         uartbin_send_response(&link, packet, MSG_ACK, 0, NULL, 0);
         break;
@@ -79,20 +79,20 @@ void protocol_init(void)
 Bu cihaz peer'dan bir is istiyorsa request kullan:
 
 ```c
-uartbin_send_request(&link, MSG_DALI_SET_LEVEL, 0, payload, payload_len);
+uartbin_send_request(&link, MSG_SET_OUTPUT, 0, payload, payload_len);
 ```
 
 Alinan paketi cevaplarken response kullan:
 
 ```c
-uartbin_send_response(&link, packet, MSG_DALI_RESULT, 0, result, result_len);
+uartbin_send_response(&link, packet, MSG_DEVICE_RESULT, 0, result, result_len);
 ```
 
-Modulun DALI bus event'i raporlamasi gibi kendiliginden olusan veri icin event
+Modulun kendiliginden olusan bir durumu raporlamasi gibi veriler icin event
 kullan:
 
 ```c
-uartbin_send_event(&link, MSG_DALI_BUS_EVENT, 0, event, event_len);
+uartbin_send_event(&link, MSG_DEVICE_EVENT, 0, event, event_len);
 ```
 
 ## Byte Alma

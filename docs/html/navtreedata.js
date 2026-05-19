@@ -25,60 +25,61 @@
 var NAVTREE =
 [
   [ "uartbinlib", "index.html", [
-    [ "Cerceve Formati", "index.html#autotoc_md1", null ],
-    [ "Tasarim", "index.html#autotoc_md2", null ],
-    [ "En Kucuk Kullanim", "index.html#autotoc_md3", null ],
-    [ "Otomatik Sira Numaralari", "index.html#autotoc_md4", null ],
-    [ "Otomatik Retry", "index.html#autotoc_md5", null ],
-    [ "STM32 Entegrasyon Ozeti", "index.html#autotoc_md6", null ],
-    [ "Linux POSIX Serial Ozeti", "index.html#autotoc_md7", null ],
-    [ "Buyuk Payloadlar", "index.html#autotoc_md8", null ],
-    [ "Zaman Asimi", "index.html#autotoc_md9", null ],
-    [ "Derleme", "index.html#autotoc_md10", null ],
-    [ "Dokumantasyon", "index.html#autotoc_md11", null ],
+    [ "Neden uartbinlib?", "index.html#autotoc_md1", null ],
+    [ "Cerceve Formati", "index.html#autotoc_md2", null ],
+    [ "Tasarim", "index.html#autotoc_md3", null ],
+    [ "En Kucuk Kullanim", "index.html#autotoc_md4", null ],
+    [ "Otomatik Sira Numaralari", "index.html#autotoc_md5", null ],
+    [ "Otomatik Retry", "index.html#autotoc_md6", null ],
+    [ "STM32 Entegrasyon Ozeti", "index.html#autotoc_md7", null ],
+    [ "Linux POSIX Serial Ozeti", "index.html#autotoc_md8", null ],
+    [ "Buyuk Payloadlar", "index.html#autotoc_md9", null ],
+    [ "Zaman Asimi", "index.html#autotoc_md10", null ],
+    [ "Derleme", "index.html#autotoc_md11", null ],
+    [ "Dokumantasyon", "index.html#autotoc_md12", null ],
     [ "API Kullanim Rehberi", "guide_api_usage.html", [
-      [ "API Kullanim Rehberi", "guide_api_usage.html#autotoc_md12", [
-        [ "Temel Kurulum", "guide_api_usage.html#autotoc_md13", null ],
-        [ "Mesaj Gonderme", "guide_api_usage.html#autotoc_md14", null ],
-        [ "Byte Alma", "guide_api_usage.html#autotoc_md15", null ],
-        [ "Guvenilir Mesaj Kurallari", "guide_api_usage.html#autotoc_md16", null ],
-        [ "Packet Omru", "guide_api_usage.html#autotoc_md17", null ]
+      [ "API Kullanim Rehberi", "guide_api_usage.html#autotoc_md13", [
+        [ "Temel Kurulum", "guide_api_usage.html#autotoc_md14", null ],
+        [ "Mesaj Gonderme", "guide_api_usage.html#autotoc_md15", null ],
+        [ "Byte Alma", "guide_api_usage.html#autotoc_md16", null ],
+        [ "Guvenilir Mesaj Kurallari", "guide_api_usage.html#autotoc_md17", null ],
+        [ "Packet Omru", "guide_api_usage.html#autotoc_md18", null ]
       ] ]
     ] ],
     [ "Linux POSIX Serial Kullanimi", "guide_linux_usage.html", [
-      [ "Linux POSIX Serial Kullanimi", "guide_linux_usage.html#autotoc_md18", [
-        [ "Serial Port Acma", "guide_linux_usage.html#autotoc_md19", null ],
-        [ "termios Ayari", "guide_linux_usage.html#autotoc_md20", null ],
-        [ "Write Hook", "guide_linux_usage.html#autotoc_md21", null ],
-        [ "RX ve poll Dongusu", "guide_linux_usage.html#autotoc_md22", null ],
-        [ "Otomatik Retry", "guide_linux_usage.html#autotoc_md23", null ],
-        [ "Derleme", "guide_linux_usage.html#autotoc_md24", null ],
-        [ "Mimari Notlar", "guide_linux_usage.html#autotoc_md25", null ]
+      [ "Linux POSIX Serial Kullanimi", "guide_linux_usage.html#autotoc_md19", [
+        [ "Serial Port Acma", "guide_linux_usage.html#autotoc_md20", null ],
+        [ "termios Ayari", "guide_linux_usage.html#autotoc_md21", null ],
+        [ "Write Hook", "guide_linux_usage.html#autotoc_md22", null ],
+        [ "RX ve poll Dongusu", "guide_linux_usage.html#autotoc_md23", null ],
+        [ "Otomatik Retry", "guide_linux_usage.html#autotoc_md24", null ],
+        [ "Derleme", "guide_linux_usage.html#autotoc_md25", null ],
+        [ "Mimari Notlar", "guide_linux_usage.html#autotoc_md26", null ]
       ] ]
     ] ],
     [ "Port Etme Rehberi", "guide_porting.html", [
-      [ "Port Etme Rehberi", "guide_porting.html#autotoc_md26", [
-        [ "Port Etme Kontrol Listesi", "guide_porting.html#autotoc_md27", null ],
-        [ "Write Hook Sozlesmesi", "guide_porting.html#autotoc_md28", null ],
-        [ "Zamanlama", "guide_porting.html#autotoc_md29", null ],
-        [ "Hata Yonetimi", "guide_porting.html#autotoc_md30", null ],
-        [ "Coklu UART Sistemleri", "guide_porting.html#autotoc_md31", null ]
+      [ "Port Etme Rehberi", "guide_porting.html#autotoc_md27", [
+        [ "Port Etme Kontrol Listesi", "guide_porting.html#autotoc_md28", null ],
+        [ "Write Hook Sozlesmesi", "guide_porting.html#autotoc_md29", null ],
+        [ "Zamanlama", "guide_porting.html#autotoc_md30", null ],
+        [ "Hata Yonetimi", "guide_porting.html#autotoc_md31", null ],
+        [ "Coklu UART Sistemleri", "guide_porting.html#autotoc_md32", null ]
       ] ]
     ] ],
     [ "Halka Buffer TX Portu", "guide_ring_buffer.html", [
-      [ "Halka Buffer TX Portu", "guide_ring_buffer.html#autotoc_md32", [
-        [ "Minimal Halka Buffer Yapisi", "guide_ring_buffer.html#autotoc_md33", null ],
-        [ "uartbin Write Hook", "guide_ring_buffer.html#autotoc_md34", null ],
-        [ "TX Interrupt Tarafi", "guide_ring_buffer.html#autotoc_md35", null ],
-        [ "Pratik Notlar", "guide_ring_buffer.html#autotoc_md36", null ]
+      [ "Halka Buffer TX Portu", "guide_ring_buffer.html#autotoc_md33", [
+        [ "Minimal Halka Buffer Yapisi", "guide_ring_buffer.html#autotoc_md34", null ],
+        [ "uartbin Write Hook", "guide_ring_buffer.html#autotoc_md35", null ],
+        [ "TX Interrupt Tarafi", "guide_ring_buffer.html#autotoc_md36", null ],
+        [ "Pratik Notlar", "guide_ring_buffer.html#autotoc_md37", null ]
       ] ]
     ] ],
     [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html", [
-      [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html#autotoc_md37", [
-        [ "Interrupt RX", "guide_stm32_transport.html#autotoc_md38", null ],
-        [ "DMA Idle-Line RX", "guide_stm32_transport.html#autotoc_md39", null ],
-        [ "TX Secenekleri", "guide_stm32_transport.html#autotoc_md40", null ],
-        [ "STM32 ile Retry", "guide_stm32_transport.html#autotoc_md41", null ]
+      [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html#autotoc_md38", [
+        [ "Interrupt RX", "guide_stm32_transport.html#autotoc_md39", null ],
+        [ "DMA Idle-Line RX", "guide_stm32_transport.html#autotoc_md40", null ],
+        [ "TX Secenekleri", "guide_stm32_transport.html#autotoc_md41", null ],
+        [ "STM32 ile Retry", "guide_stm32_transport.html#autotoc_md42", null ]
       ] ]
     ] ],
     [ "Data Structures", "annotated.html", [
@@ -107,7 +108,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e"
+"uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

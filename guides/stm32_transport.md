@@ -80,9 +80,8 @@ void main_loop(void)
 ```
 
 RTOS sistemlerinde 1 ms ile 10 ms arasi periyodik task genelde yeterlidir.
-`tx_retry_timeout_ms` degerini peer'in normal round-trip suresinden ve cevap
-DALI islemi bittikten sonra gonderiliyorsa beklenen DALI islem gecikmesinden
-buyuk sec.
+`tx_retry_timeout_ms` degerini peer'in normal round-trip suresinden ve
+uygulama seviyesindeki beklenen islem gecikmesinden buyuk sec.
 
 Retry zamanlamasi icin RX callback'lere guvenme. Feed callback'leri yalnizca RX
 parser timeout kontrolu yapar; TX retry acik poll yolunda calisir.

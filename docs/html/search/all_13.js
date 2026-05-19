@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['uart_20sistemleri_0',['Coklu UART Sistemleri',['../guide_porting.html#autotoc_md31',1,'']]],
+  ['uart_20sistemleri_0',['Coklu UART Sistemleri',['../guide_porting.html#autotoc_md32',1,'']]],
   ['uart_5fhandletypedef_1',['UART_HandleTypeDef',['../stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590',1,'stm32_hal_dma_idle.c']]],
   ['uartbin_2',['uartbin',['../structuartbin.html',1,'']]],
-  ['uartbin_20write_20hook_3',['uartbin Write Hook',['../guide_ring_buffer.html#autotoc_md34',1,'']]],
+  ['uartbin_20write_20hook_3',['uartbin Write Hook',['../guide_ring_buffer.html#autotoc_md35',1,'']]],
   ['uartbin_2ec_4',['uartbin.c',['../uartbin_8c.html',1,'']]],
   ['uartbin_2eh_5',['uartbin.h',['../uartbin_8h.html',1,'']]],
   ['uartbin_5fbuild_5fframe_6',['uartbin_build_frame',['../uartbin_8c.html#a930afead8f815c7ca29d2a9bf0c413be',1,'uartbin.c']]],
@@ -75,6 +75,6 @@ var searchData=
   ['uartbin_5fversion_72',['UARTBIN_VERSION',['../uartbin_8h.html#aaadad2de473e2ec806bc8fb890cfe75b',1,'uartbin.h']]],
   ['uartbin_5fwrite_5fall_73',['uartbin_write_all',['../uartbin_8c.html#a5b52d166f82db005c2ccf5431d34a906',1,'uartbin.c']]],
   ['uartbin_5fwrite_5ffn_74',['uartbin_write_fn',['../uartbin_8h.html#aa1ad30b8276f1d2ab4a64ce57bb6aed3',1,'uartbin.h']]],
-  ['uartbinlib_75',['uartbinlib',['../index.html',1,'']]],
+  ['uartbinlib_75',['uartbinlib',['../index.html#autotoc_md1',1,'Neden uartbinlib?'],['../index.html',1,'uartbinlib']]],
   ['user_76',['user',['../structuartbin__config.html#a6960d772dfcb45fd0b9a24c6d4f10078',1,'uartbin_config']]]
 ];

@@ -5,6 +5,29 @@ icin kucuk ve platformdan bagimsiz bir C kutuphanesidir. STM32 gibi gomulu
 hedefler icin tasarlanmistir, fakat cekirdek kod HAL, RTOS, DMA, interrupt veya
 heap bagimliligi tasimaz.
 
+## Neden uartbinlib?
+
+Seri hatlarda farkli framing yaklasimlari, PC tarafinda serial port
+kutuphaneleri veya gomulu mesajlasma cozumleri kullanilabilir. `uartbinlib`
+bunlarin yerine "her seyi kendisi bilen dev bir framework" olmak icin degil,
+MCU ile modul arasinda net, kucuk ve guvenilir bir binary haberlesme katmani
+vermek icin tasarlanmistir.
+
+One cikan noktalar:
+
+- Bare-metal C: HAL, RTOS, heap veya isletim sistemi bagimliligi yoktur.
+- Net cerceve yapisi: SOF, version, type, flags, seq, length, payload ve CRC16.
+- Hazir mesaj modeli: request, response ve event akislari icin yardimci API'ler.
+- Otomatik sira numarasi: her `uartbin_t` kendi seq counter'ini tasir.
+- Opsiyonel guvenilir TX: response gelmezse ayarlanabilir timeout/retry mantigi.
+- Iki yonlu kullanim: host MCU, modul, sensor veya gateway gibi rollerde ayni
+  cekirdek API kullanilir.
+- Port etmesi kolay: sadece `write` hook'u, RX feed cagrisi ve zaman bilgisi
+  yeterlidir.
+
+Bu odak sayesinde `uartbinlib`, host ile modul arasindaki komut, cevap ve event
+trafigi gibi kucuk ama saglam protokol ihtiyaclarina dogrudan oturur.
+
 ## Cerceve Formati
 
 Tum cok byte'li tamsayilar little-endian kodlanir.
@@ -143,13 +166,13 @@ Cift yonlu protokollerde iki cihaz da ayni kalibi kullanir:
 
 ```c
 /* Gonderen taraf guvenilir bir is baslatir. */
-uartbin_send_request(&link, MSG_DALI_COMMAND, 0, payload, payload_len);
+uartbin_send_request(&link, MSG_DEVICE_COMMAND, 0, payload, payload_len);
 
 /* Alan taraf dogrulama veya islemi bitirdikten sonra cevap verir. */
-uartbin_send_response(&link, packet, MSG_DALI_RESULT, 0, result, result_len);
+uartbin_send_response(&link, packet, MSG_DEVICE_RESULT, 0, result, result_len);
 
 /* Iki taraf da event yayinlayip ACK tarzi cevap bekleyebilir. */
-uartbin_send_event(&link, MSG_DALI_EVENT, 0, event, event_len);
+uartbin_send_event(&link, MSG_DEVICE_EVENT, 0, event, event_len);
 uartbin_send_response(&link, packet, MSG_ACK, 0, NULL, 0);
 ```
 

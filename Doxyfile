@@ -1,7 +1,8 @@
 # uartbinlib icin Doxygen konfigurasyonu.
 
 PROJECT_NAME           = "uartbinlib"
-PROJECT_BRIEF          = "Platformdan bagimsiz binary UART cerceveleme kutuphanesi"
+PROJECT_BRIEF          = "developed by Ahmet Cemal Kurtulmuş"
+PROJECT_LOGO           = assets/uartbinlib_logo.svg
 OUTPUT_DIRECTORY       = docs
 CREATE_SUBDIRS         = NO
 
@@ -22,6 +23,8 @@ OPTIMIZE_OUTPUT_FOR_C  = YES
 
 GENERATE_HTML          = YES
 HTML_OUTPUT            = html
+HTML_EXTRA_FILES       = assets/uartbinlib_logo.svg
+HTML_EXTRA_STYLESHEET  = assets/uartbinlib_doxygen.css
 HTML_DYNAMIC_SECTIONS  = YES
 GENERATE_TREEVIEW      = YES
 FULL_SIDEBAR           = NO

@@ -23,6 +23,7 @@ const theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark'
 mermaid.initialize({ startOnLoad: true, theme: theme });
 </script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="uartbinlib_doxygen.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div id="top"><!-- do not remove this div, it is closed by doxygen! -->
@@ -30,10 +31,11 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
 <table cellspacing="0" cellpadding="0">
  <tbody>
  <tr id="projectrow">
+  <td id="projectlogo"><img alt="Logo" src="uartbinlib_logo.svg"/></td>
   <td id="projectalign">
    <div id="projectname">uartbinlib
    </div>
-   <div id="projectbrief">Platformdan bagimsiz binary UART cerceveleme kutuphanesi</div>
+   <div id="projectbrief">developed by Ahmet Cemal Kurtulmuş</div>
   </td>
  </tr>
  </tbody>
@@ -123,6 +125,20 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 <div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a></p>
 <p><span class="tt">uartbinlib</span>, UART gibi byte akislari uzerinden cerceveli binary mesaj tasimak icin kucuk ve platformdan bagimsiz bir C kutuphanesidir. STM32 gibi gomulu hedefler icin tasarlanmistir, fakat cekirdek kod HAL, RTOS, DMA, interrupt veya heap bagimliligi tasimaz.</p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
+Neden uartbinlib?</h1>
+<p>Seri hatlarda farkli framing yaklasimlari, PC tarafinda serial port kutuphaneleri veya gomulu mesajlasma cozumleri kullanilabilir. <span class="tt">uartbinlib</span> bunlarin yerine "her seyi kendisi bilen dev bir framework" olmak icin degil, MCU ile modul arasinda net, kucuk ve guvenilir bir binary haberlesme katmani vermek icin tasarlanmistir.</p>
+<p>One cikan noktalar:</p>
+<ul>
+<li>Bare-metal C: HAL, RTOS, heap veya isletim sistemi bagimliligi yoktur.</li>
+<li>Net cerceve yapisi: SOF, version, type, flags, seq, length, payload ve CRC16.</li>
+<li>Hazir mesaj modeli: request, response ve event akislari icin yardimci API'ler.</li>
+<li>Otomatik sira numarasi: her <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> kendi seq counter'ini tasir.</li>
+<li>Opsiyonel guvenilir TX: response gelmezse ayarlanabilir timeout/retry mantigi.</li>
+<li>Iki yonlu kullanim: host MCU, modul, sensor veya gateway gibi rollerde ayni cekirdek API kullanilir.</li>
+<li>Port etmesi kolay: sadece <span class="tt">write</span> hook'u, RX feed cagrisi ve zaman bilgisi yeterlidir.</li>
+</ul>
+<p>Bu odak sayesinde <span class="tt">uartbinlib</span>, host ile modul arasindaki komut, cevap ve event trafigi gibi kucuk ama saglam protokol ihtiyaclarina dogrudan oturur.</p>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
 Cerceve Formati</h1>
 <p>Tum cok byte'li tamsayilar little-endian kodlanir.</p>
 <table class="markdownTable">
@@ -147,7 +163,7 @@ Cerceve Formati</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyNone">CRC16  </td><td class="markdownTableBodyRight">2  </td><td class="markdownTableBodyNone">Header ve payload uzerinden CRC-16/CCITT-FALSE  </td></tr>
 </table>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md2"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
 Tasarim</h1>
 <ul>
 <li>Dinamik bellek kullanmaz.</li>
@@ -158,7 +174,7 @@ Tasarim</h1>
 <li>Parser hatalari, zaman asimi ve retry hatalari <span class="tt">on_error</span> ile bildirilir.</li>
 <li>Opsiyonel request/event retry mekanizmasi <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll</a></span> ile surulur.</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md3"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
 En Kucuk Kullanim</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="uartbin_8h.html">uartbin.h</a>&quot;</span></div>
 <div class="line"> </div>
@@ -217,7 +233,7 @@ En Kucuk Kullanim</h1>
 <div class="ttc" id="auartbin_8h_html_a84d23cbe88d74beb43fa5234dcddb4d1"><div class="ttname"><a href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1">uartbin_t</a></div><div class="ttdeci">struct uartbin uartbin_t</div><div class="ttdoc">Tek uartbin linki icin runtime durum.</div></div>
 <div class="ttc" id="auartbin_8h_html_a992904ee32447ec8edd21f131fae72f0"><div class="ttname"><a href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0">uartbin_feed_byte_at</a></div><div class="ttdeci">void uartbin_feed_byte_at(uartbin_t *ctx, uint8_t byte, uint32_t now_ms)</div><div class="ttdoc">Tek alinan byte&#39;i gecerli uygulama timestamp degeri ile besle.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00533">uartbin.c:533</a></div></div>
 <div class="ttc" id="auartbin_8h_html_aca4d71fa02a9351ae8b2afb910abac2b"><div class="ttname"><a href="uartbin_8h.html#aca4d71fa02a9351ae8b2afb910abac2b">uartbin_packet_t</a></div><div class="ttdeci">struct uartbin_packet uartbin_packet_t</div><div class="ttdoc">Uygulamaya iletilen CRC kontrolunden gecmis paket.</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md4"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
 Otomatik Sira Numaralari</h1>
 <p>Request/response/event tarzi protokollerde <span class="tt">seq</span> degerini elle yonetmek yerine otomatik yardimcilari kullan:</p>
 <div class="fragment"><div class="line"><span class="comment">/* Yeni bir konusma baslatir. Link icindeki sira sayaci kullanilir. */</span></div>
@@ -231,7 +247,7 @@ Otomatik Sira Numaralari</h1>
 <div class="ttc" id="auartbin_8h_html_a8ab7553326a5e1db2c5d8c08dab4f839"><div class="ttname"><a href="uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839">uartbin_send_event</a></div><div class="ttdeci">uartbin_status_t uartbin_send_event(uartbin_t *ctx, uint8_t type, uint8_t flags, const uint8_t *payload, uint16_t payload_len)</div><div class="ttdoc">Otomatik uretilen sira numarasi ile unsolicited event gonder.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00454">uartbin.c:454</a></div></div>
 <div class="ttc" id="auartbin_8h_html_ac592299b63f2ba89764ab4184da2b8b9"><div class="ttname"><a href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9">uartbin_send_response</a></div><div class="ttdeci">uartbin_status_t uartbin_send_response(uartbin_t *ctx, const uartbin_packet_t *request, uint8_t type, uint8_t flags, const uint8_t *payload, uint16_t payload_len)</div><div class="ttdoc">Alinan paketteki sira numarasini kullanarak response gonder.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00435">uartbin.c:435</a></div></div>
 </div><!-- fragment --><p>Her <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> kendi sira sayacini tasir. Bu yuzden birden fazla UART linki birbirinin durumunu etkilemez. Daha ozel durumlarda acik <span class="tt">seq</span> vermek icin daha dusuk seviye <span class="tt"><a class="el" href="uartbin_8h.html#a105423f2609e98a85f2d062df2b84ff4" title="Tek cerceveli paketi olustur ve gonder.">uartbin_send()</a></span> API'si kullanilabilir.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 Otomatik Retry</h1>
 <p>Otomatik retry opsiyoneldir. Her link icin statik bir TX retry buffer'i ve retry ayarlari vererek etkinlestirilir:</p>
 <div class="fragment"><div class="line"><span class="keyword">static</span> uint8_t rx_payload[256];</div>
@@ -256,15 +272,15 @@ Otomatik Retry</h1>
 <p>Retry katmani her <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> icin ayni anda bir pending reliable request/event tutar. Ilk cevap gelmeden ikinci reliable request/event gonderilirse <span class="tt"><a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada6e9ccc2f4f646420f7d069d63ae42860" title="Guvenilir request/event zaten response bekliyor.">UARTBIN_EBUSY</a></span> doner. Uygulama pending istegi bilincli olarak iptal etmek isterse <span class="tt"><a class="el" href="uartbin_8h.html#a0b688936e31a49a78dff08b0040bfb09" title="Pending otomatik retry durumunu iptal et.">uartbin_cancel_retry()</a></span> kullanabilir.</p>
 <p>Cift yonlu protokollerde iki cihaz da ayni kalibi kullanir:</p>
 <div class="fragment"><div class="line"><span class="comment">/* Gonderen taraf guvenilir bir is baslatir. */</span></div>
-<div class="line"><a class="code hl_function" href="uartbin_8h.html#a25f9d1a61c29eebfbf3dc655b0621b2f">uartbin_send_request</a>(&amp;link, MSG_DALI_COMMAND, 0, payload, payload_len);</div>
+<div class="line"><a class="code hl_function" href="uartbin_8h.html#a25f9d1a61c29eebfbf3dc655b0621b2f">uartbin_send_request</a>(&amp;link, MSG_DEVICE_COMMAND, 0, payload, payload_len);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">/* Alan taraf dogrulama veya islemi bitirdikten sonra cevap verir. */</span></div>
-<div class="line"><a class="code hl_function" href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9">uartbin_send_response</a>(&amp;link, packet, MSG_DALI_RESULT, 0, result, result_len);</div>
+<div class="line"><a class="code hl_function" href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9">uartbin_send_response</a>(&amp;link, packet, MSG_DEVICE_RESULT, 0, result, result_len);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">/* Iki taraf da event yayinlayip ACK tarzi cevap bekleyebilir. */</span></div>
-<div class="line"><a class="code hl_function" href="uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839">uartbin_send_event</a>(&amp;link, MSG_DALI_EVENT, 0, event, event_len);</div>
+<div class="line"><a class="code hl_function" href="uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839">uartbin_send_event</a>(&amp;link, MSG_DEVICE_EVENT, 0, event, event_len);</div>
 <div class="line"><a class="code hl_function" href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9">uartbin_send_response</a>(&amp;link, packet, MSG_ACK, 0, NULL, 0);</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
 STM32 Entegrasyon Ozeti</h1>
 <p>STM32'ye ozel kod kutuphane cekirdeginin disinda tutulur. RX byte'larini interrupt, DMA idle callback veya task dongusunden <span class="tt"><a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.">uartbin_feed_at</a></span> / <span class="tt"><a class="el" href="uartbin_8h.html#a992904ee32447ec8edd21f131fae72f0" title="Tek alinan byte&#39;i gecerli uygulama timestamp degeri ile besle.">uartbin_feed_byte_at</a></span> ile besle.</p>
 <p><span class="tt">write</span> hook'u, donmeden once tum byte'lari gondermis veya TX kuyruguna kopyalamis olmalidir; cunku <span class="tt"><a class="el" href="uartbin_8h.html#a105423f2609e98a85f2d062df2b84ff4" title="Tek cerceveli paketi olustur ve gonder.">uartbin_send</a></span> SOF, header, payload ve CRC icin birden fazla write cagrisi yapabilir. Ornekler sadelik ve dogruluk icin blocking <span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html#a41d654999cc15648093057ee0c6f27e4">HAL_UART_Transmit</a></span> kullanir. Non-blocking TX gerekiyorsa uygulama adapter'inda TX queue kullan.</p>
@@ -273,7 +289,7 @@ STM32 Entegrasyon Ozeti</h1>
 <li><span class="tt"><a class="el" href="stm32__hal__interrupt_8c.html" title="uartbinlib icin STM32 HAL interrupt tabanli RX adapter ornegi.">examples/stm32_hal_interrupt.c</a></span></li>
 <li><span class="tt"><a class="el" href="stm32__hal__dma__idle_8c.html" title="uartbinlib icin STM32 HAL DMA idle-line RX adapter ornegi.">examples/stm32_hal_dma_idle.c</a></span></li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 Linux POSIX Serial Ozeti</h1>
 <p>Linux uzerinde STM32 HAL yerine POSIX serial port kullanilir. <span class="tt">termios</span> ile port raw 8N1 moda alinir, RX icin <span class="tt">poll(POLLIN)</span> ve <span class="tt">read()</span>, TX icin <span class="tt">write()</span> veya uygulama kuyrugu kullanilir.</p>
 <p>Bak:</p>
@@ -281,12 +297,12 @@ Linux POSIX Serial Ozeti</h1>
 <li><span class="tt"><a class="el" href="linux__posix__serial_8c.html" title="uartbinlib icin Linux POSIX serial port ornegi.">examples/linux_posix_serial.c</a></span></li>
 <li>Doxygen icinde Linux POSIX Serial Kullanimi</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
 Buyuk Payloadlar</h1>
 <p>Daha buyuk paketler icin daha buyuk statik RX payload buffer'i ayir. Bu API'yi basit tutar ve uygulamanin veriyi sadece CRC basarili olduktan sonra gormesini saglar.</p>
 <div class="fragment"><div class="line"><span class="keyword">static</span> uint8_t rx_payload[4096];</div>
 </div><!-- fragment --><p>Gelen cerceve <span class="tt">rx_payload_capacity</span> degerinden buyuk payload ilan ederse parser paketi <span class="tt"><a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a6036c89d26a87104d29d0fd4c47a01f7" title="Payload uzunlugu ayarlanan RX payload buffer&#39;dan buyuk.">UARTBIN_ERROR_BAD_LENGTH</a></span> ile reddeder ve yeniden senkron aramaya doner.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
 Zaman Asimi</h1>
 <p><span class="tt">rx_timeout_ms</span> ayarla ve <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll</a>(&amp;link, now_ms)</span> fonksiyonunu periyodik cagir. <span class="tt">_at</span> feed fonksiyonlari da her byte/block kabul etmeden once RX zaman asimi kontrolu yapar:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a>(&amp;link, dma_data, dma_len, <a class="code hl_function" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick</a>());</div>
@@ -295,14 +311,14 @@ Zaman Asimi</h1>
 <div class="ttc" id="auartbin_8h_html_ab9da003f689bb5d95d54752a907cf19b"><div class="ttname"><a href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a></div><div class="ttdeci">void uartbin_feed_at(uartbin_t *ctx, const uint8_t *data, size_t len, uint32_t now_ms)</div><div class="ttdoc">Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00506">uartbin.c:506</a></div></div>
 <div class="ttc" id="auartbin_8h_html_ac772ed6c266ea60e13df4a1c28d9622e"><div class="ttname"><a href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a></div><div class="ttdeci">void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)</div><div class="ttdoc">RX timeout ve opsiyonel TX retry zamanlamasini servis et.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00517">uartbin.c:517</a></div></div>
 </div><!-- fragment --><p>STM32 HAL UART hatalarinda parser'i resetle, RX yolunu abort/restart et ve hata sayaci tut. Ornek adapter'lar bu kalibi gosterir.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
 Derleme</h1>
 <div class="fragment"><div class="line">cmake -S . -B build</div>
 <div class="line">cmake --build build</div>
 <div class="line">ctest --test-dir build</div>
 </div><!-- fragment --><p>Visual Studio gibi multi-config generator'larda CTest'e config ver:</p>
 <div class="fragment"><div class="line">ctest --test-dir build -C Debug</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md12"></a>
 Dokumantasyon</h1>
 <p>HTML dokumantasyonu Doxygen ile uret:</p>
 <div class="fragment"><div class="line">doxygen Doxyfile</div>
