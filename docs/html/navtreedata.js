@@ -75,28 +75,39 @@ var NAVTREE =
     ] ],
     [ "Port Etme Rehberi", "guide_porting.html", [
       [ "Port Etme Rehberi", "guide_porting.html#autotoc_md40", [
-        [ "Port Etme Kontrol Listesi", "guide_porting.html#autotoc_md41", null ],
-        [ "Write Hook Sozlesmesi", "guide_porting.html#autotoc_md42", null ],
-        [ "Zamanlama", "guide_porting.html#autotoc_md43", null ],
-        [ "Hata Yonetimi", "guide_porting.html#autotoc_md44", null ],
-        [ "Coklu UART Sistemleri", "guide_porting.html#autotoc_md45", null ]
+        [ "Port Etme Kontrol Listesi", "guide_porting.html#autotoc_md41", [
+          [ "Cekirdek <span class=\"tt\">uartbin_t</span> icin", "guide_porting.html#autotoc_md42", null ],
+          [ "App katmani <span class=\"tt\">uartbin_app_t</span> icin", "guide_porting.html#autotoc_md43", null ]
+        ] ],
+        [ "Write Hook Sozlesmesi", "guide_porting.html#autotoc_md44", null ],
+        [ "Cekirdek Port Iskeleti", "guide_porting.html#autotoc_md45", null ],
+        [ "App Katmani Port Iskeleti", "guide_porting.html#autotoc_md46", null ],
+        [ "Zamanlama", "guide_porting.html#autotoc_md47", null ],
+        [ "RX Baglama Kaliplari", "guide_porting.html#autotoc_md48", [
+          [ "Tek byte interrupt", "guide_porting.html#autotoc_md49", null ],
+          [ "DMA veya blok RX", "guide_porting.html#autotoc_md50", null ]
+        ] ],
+        [ "Hata Yonetimi", "guide_porting.html#autotoc_md51", null ],
+        [ "Buffer Boyutlari", "guide_porting.html#autotoc_md52", null ],
+        [ "Coklu UART Sistemleri", "guide_porting.html#autotoc_md53", null ],
+        [ "Port Dogrulama Kontrol Listesi", "guide_porting.html#autotoc_md54", null ]
       ] ]
     ] ],
     [ "Halka Buffer TX Portu", "guide_ring_buffer.html", [
-      [ "Halka Buffer TX Portu", "guide_ring_buffer.html#autotoc_md46", [
-        [ "Minimal Halka Buffer Yapisi", "guide_ring_buffer.html#autotoc_md47", null ],
-        [ "uartbin Write Hook", "guide_ring_buffer.html#autotoc_md48", null ],
-        [ "TX Interrupt Tarafi", "guide_ring_buffer.html#autotoc_md49", null ],
-        [ "Pratik Notlar", "guide_ring_buffer.html#autotoc_md50", null ]
+      [ "Halka Buffer TX Portu", "guide_ring_buffer.html#autotoc_md55", [
+        [ "Minimal Halka Buffer Yapisi", "guide_ring_buffer.html#autotoc_md56", null ],
+        [ "uartbin Write Hook", "guide_ring_buffer.html#autotoc_md57", null ],
+        [ "TX Interrupt Tarafi", "guide_ring_buffer.html#autotoc_md58", null ],
+        [ "Pratik Notlar", "guide_ring_buffer.html#autotoc_md59", null ]
       ] ]
     ] ],
     [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html", [
-      [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html#autotoc_md51", [
-        [ "Interrupt RX", "guide_stm32_transport.html#autotoc_md52", null ],
-        [ "DMA Idle-Line RX", "guide_stm32_transport.html#autotoc_md53", null ],
-        [ "TX Secenekleri", "guide_stm32_transport.html#autotoc_md54", null ],
-        [ "STM32 ile Retry", "guide_stm32_transport.html#autotoc_md55", null ],
-        [ "STM32 App Katmani", "guide_stm32_transport.html#autotoc_md56", null ]
+      [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html#autotoc_md60", [
+        [ "Interrupt RX", "guide_stm32_transport.html#autotoc_md61", null ],
+        [ "DMA Idle-Line RX", "guide_stm32_transport.html#autotoc_md62", null ],
+        [ "TX Secenekleri", "guide_stm32_transport.html#autotoc_md63", null ],
+        [ "STM32 ile Retry", "guide_stm32_transport.html#autotoc_md64", null ],
+        [ "STM32 App Katmani", "guide_stm32_transport.html#autotoc_md65", null ]
       ] ]
     ] ],
     [ "Data Structures", "annotated.html", [
@@ -125,7 +136,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"structuartbin__config.html"
+"structuartbin__app__config.html#aef7f088e76eb2a5edbbad15359cb8003"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

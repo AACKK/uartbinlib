@@ -4,7 +4,7 @@ var searchData=
   ['last_5frx_5fconfirmed_5ftype_1',['last_rx_confirmed_type',['../structuartbin__app.html#a8d5bd36d565a1dd747c1f9622e8494be',1,'uartbin_app']]],
   ['last_5frx_5fconfirmed_5fvalid_2',['last_rx_confirmed_valid',['../structuartbin__app.html#af516a91f8c137c3030a64fe4f646d817',1,'uartbin_app']]],
   ['last_5frx_5ftime_5fms_3',['last_rx_time_ms',['../structuartbin.html#a396c6db7a4edfe0e92032d29370f3c16',1,'uartbin']]],
-  ['line_20rx_4',['DMA Idle-Line RX',['../guide_stm32_transport.html#autotoc_md53',1,'']]],
+  ['line_20rx_4',['DMA Idle-Line RX',['../guide_stm32_transport.html#autotoc_md62',1,'']]],
   ['link_5',['link',['../structuartbin__app.html#a6f3a0c90a2072453b8b10b336fdf75cd',1,'uartbin_app::link'],['../structlinux__uartbin.html#a4657c51b29a6597f0f64843f4d5362e7',1,'linux_uartbin::link'],['../structstm32__uartbin__dma.html#a4d6532bb56f78b8f644e85d13eae7783',1,'stm32_uartbin_dma::link'],['../structstm32__uartbin__it.html#aa10605cdf41d1af0156534c8d52b06ed',1,'stm32_uartbin_it::link']]],
   ['linux_20app_20katmani_6',['Linux App Katmani',['../guide_linux_usage.html#autotoc_md37',1,'']]],
   ['linux_20posix_20serial_20kullanimi_7',['Linux POSIX Serial Kullanimi',['../guide_linux_usage.html',1,'Linux POSIX Serial Kullanimi'],['../guide_linux_usage.html#autotoc_md31',1,'Linux POSIX Serial Kullanimi']]],
@@ -30,5 +30,5 @@ var searchData=
   ['linux_5fuartbin_5ft_27',['linux_uartbin_t',['../linux__posix__serial_8c.html#a90bd97f6cd2c8fc0cf8d37396c3dbd61',1,'linux_posix_serial.c']]],
   ['linux_5fuartbin_5fwrite_28',['linux_uartbin_write',['../linux__posix__serial_8c.html#aa67ca417e4a883c51056c9081eaf2c97',1,'linux_posix_serial.c']]],
   ['linux_5fusage_2emd_29',['linux_usage.md',['../linux__usage_8md.html',1,'']]],
-  ['listesi_30',['Port Etme Kontrol Listesi',['../guide_porting.html#autotoc_md41',1,'']]]
+  ['listesi_30',['Listesi',['../guide_porting.html#autotoc_md54',1,'Port Dogrulama Kontrol Listesi'],['../guide_porting.html#autotoc_md41',1,'Port Etme Kontrol Listesi']]]
 ];

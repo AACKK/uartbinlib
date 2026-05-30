@@ -8,6 +8,6 @@ var searchData=
   ['mesajlasma_5',['Feedback ve Cift Yonlu Mesajlasma',['../guide_confirmed_app.html#autotoc_md27',1,'']]],
   ['mimari_20notlar_6',['Mimari Notlar',['../guide_linux_usage.html#autotoc_md39',1,'']]],
   ['mimarisi_7',['Katman Mimarisi',['../guide_confirmed_app.html#autotoc_md23',1,'']]],
-  ['minimal_20halka_20buffer_20yapisi_8',['Minimal Halka Buffer Yapisi',['../guide_ring_buffer.html#autotoc_md47',1,'']]],
+  ['minimal_20halka_20buffer_20yapisi_8',['Minimal Halka Buffer Yapisi',['../guide_ring_buffer.html#autotoc_md56',1,'']]],
   ['modeli_9',['Modeli',['../uartbin_8h.html#uartbin_h_no_alloc',1,'Bellek Modeli'],['../uartbin_8h.html#uartbin_h_timing',1,'Zaman Asimi Modeli']]]
 ];

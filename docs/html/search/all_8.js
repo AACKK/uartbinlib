@@ -9,13 +9,13 @@ var searchData=
   ['hal_5fuart_5freceive_5fit_6',['HAL_UART_Receive_IT',['../stm32__app__confirmed_8c.html#a131991338c4e48a7a48a5b3c0ba9863a',1,'HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *data, uint16_t size):&#160;stm32_app_confirmed.c'],['../stm32__hal__interrupt_8c.html#a131991338c4e48a7a48a5b3c0ba9863a',1,'HAL_UART_Receive_IT(UART_HandleTypeDef *huart, uint8_t *data, uint16_t size):&#160;stm32_hal_interrupt.c']]],
   ['hal_5fuart_5ftransmit_7',['HAL_UART_Transmit',['../stm32__app__confirmed_8c.html#a41d654999cc15648093057ee0c6f27e4',1,'HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *data, uint16_t size, uint32_t timeout):&#160;stm32_app_confirmed.c'],['../stm32__hal__dma__idle_8c.html#a41d654999cc15648093057ee0c6f27e4',1,'HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *data, uint16_t size, uint32_t timeout):&#160;stm32_hal_dma_idle.c'],['../stm32__hal__interrupt_8c.html#a41d654999cc15648093057ee0c6f27e4',1,'HAL_UART_Transmit(UART_HandleTypeDef *huart, uint8_t *data, uint16_t size, uint32_t timeout):&#160;stm32_hal_interrupt.c']]],
   ['hal_5fuartex_5freceivetoidle_5fdma_8',['HAL_UARTEx_ReceiveToIdle_DMA',['../stm32__hal__dma__idle_8c.html#a98150413a15ec59e563a22ef71cce8ab',1,'stm32_hal_dma_idle.c']]],
-  ['halka_20buffer_20tx_20portu_9',['Halka Buffer TX Portu',['../guide_ring_buffer.html',1,'Halka Buffer TX Portu'],['../guide_ring_buffer.html#autotoc_md46',1,'Halka Buffer TX Portu']]],
-  ['halka_20buffer_20yapisi_10',['Minimal Halka Buffer Yapisi',['../guide_ring_buffer.html#autotoc_md47',1,'']]],
-  ['hata_20yonetimi_11',['Hata Yonetimi',['../guide_porting.html#autotoc_md44',1,'']]],
+  ['halka_20buffer_20tx_20portu_9',['Halka Buffer TX Portu',['../guide_ring_buffer.html',1,'Halka Buffer TX Portu'],['../guide_ring_buffer.html#autotoc_md55',1,'Halka Buffer TX Portu']]],
+  ['halka_20buffer_20yapisi_10',['Minimal Halka Buffer Yapisi',['../guide_ring_buffer.html#autotoc_md56',1,'']]],
+  ['hata_20yonetimi_11',['Hata Yonetimi',['../guide_porting.html#autotoc_md51',1,'']]],
   ['hdma_5frx_12',['hdma_rx',['../structstm32__uartbin__dma.html#a9e7f971479df6278a5c2ecfe5e45c0c8',1,'stm32_uartbin_dma']]],
   ['header_13',['header',['../structuartbin.html#a8aba05980e9b7a6a37a018cf7884c16f',1,'uartbin']]],
   ['header_5fpos_14',['header_pos',['../structuartbin.html#a9b2168954e88bddcdd2df560da854a22',1,'uartbin']]],
-  ['hook_15',['Hook',['../guide_ring_buffer.html#autotoc_md48',1,'uartbin Write Hook'],['../guide_linux_usage.html#autotoc_md34',1,'Write Hook']]],
-  ['hook_20sozlesmesi_16',['Write Hook Sozlesmesi',['../guide_porting.html#autotoc_md42',1,'']]],
+  ['hook_15',['Hook',['../guide_ring_buffer.html#autotoc_md57',1,'uartbin Write Hook'],['../guide_linux_usage.html#autotoc_md34',1,'Write Hook']]],
+  ['hook_20sozlesmesi_16',['Write Hook Sozlesmesi',['../guide_porting.html#autotoc_md44',1,'']]],
   ['huart_17',['huart',['../structstm32__uartbin__app__it.html#ab28e8a14cc62ed88d2e3a68b9a9ed667',1,'stm32_uartbin_app_it::huart'],['../structstm32__uartbin__dma.html#a110f05945987cfe4e3cb47c3d6bf99a1',1,'stm32_uartbin_dma::huart'],['../structstm32__uartbin__it.html#a7828daef1d1176716e653ae198a60954',1,'stm32_uartbin_it::huart']]]
 ];
