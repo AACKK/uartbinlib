@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['linux_5fposix_5fserial_2ec_0',['linux_posix_serial.c',['../linux__posix__serial_8c.html',1,'']]],
-  ['linux_5fusage_2emd_1',['linux_usage.md',['../linux__usage_8md.html',1,'']]]
+  ['confirmed_5fapp_5flayer_2emd_0',['confirmed_app_layer.md',['../confirmed__app__layer_8md.html',1,'']]]
 ];

@@ -35,7 +35,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
   <td id="projectalign">
    <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.0.0</span>
    </div>
-   <div id="projectbrief">developed by Ahmet Cemal Kurtulmuş</div>
+   <div id="projectbrief">developed by Ahmet Cemal Kurtulmus</div>
   </td>
  </tr>
  </tbody>
@@ -122,15 +122,124 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('guide_api_usag
   <div class="headertitle"><div class="title">API Kullanim Rehberi </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
 API Kullanim Rehberi</h1>
 <p>uartbinlib iki katmandan olusur:</p>
 <ul>
 <li>Cerceve katmani: <span class="tt"><a class="el" href="uartbin_8h.html#a105423f2609e98a85f2d062df2b84ff4" title="Tek cerceveli paketi olustur ve gonder.">uartbin_send()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.">uartbin_feed_at()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span>.</li>
 <li>Guvenilir mesaj katmani: <span class="tt"><a class="el" href="uartbin_8h.html#a25f9d1a61c29eebfbf3dc655b0621b2f" title="Otomatik uretilen sira numarasi ile yeni request gonder.">uartbin_send_request()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9" title="Alinan paketteki sira numarasini kullanarak response gonder.">uartbin_send_response()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839" title="Otomatik uretilen sira numarasi ile unsolicited event gonder.">uartbin_send_event()</a></span>.</li>
+<li>App mesaj katmani: <span class="tt"><a class="el" href="uartbin__app_8h.html#a34d0bbf7ac1afcb97d4fe3a701dd1f72" title="Otomatik ACK/retry ile confirmed app mesaji gonder.">uartbin_app_send_confirmed()</a></span>, <span class="tt"><a class="el" href="uartbin__app_8h.html#a976083e11ed45b691b425735c46fe61b" title="Alinan byte&#39;lari timestamp ile app katmanina besle.">uartbin_app_feed_at()</a></span>, <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span>.</li>
 </ul>
-<p>Cogu uygulama guvenilir yardimcilari kullanmali, <span class="tt"><a class="el" href="uartbin_8h.html#a105423f2609e98a85f2d062df2b84ff4" title="Tek cerceveli paketi olustur ve gonder.">uartbin_send()</a></span> fonksiyonunu yalnizca acik sira numarasi gereken ozel durumlar icin saklamalidir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md15"></a>
+<p>Cogu uygulama, ACK/seq/retry ayrintisini saklayan app katmanini kullanabilir. Alt seviye request/response/event API'leri ozel protokol akislarinda hala dogrudan kullanilabilir.</p>
+<div class="mermaidgraph">
+<pre class="mermaid">
+flowchart TB
+    APP[&quot;Uygulama seviyesi\nuartbin_app.h&quot;]
+    REL[&quot;Guvenilir mesaj yardimcilari\nrequest / response / event&quot;]
+    CORE[&quot;Cerceve cekirdegi\nsend / feed / poll&quot;]
+    UART[&quot;UART transport&quot;]
+
+    APP --&gt; REL --&gt; CORE --&gt; UART</pre>
+</div>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
+App Katmani: Otomatik Confirmed Mesaj</h2>
+<p>Bu katmanda uygulama sadece payload'u API'ye verir. Peer da app katmani kullaniyorsa confirmed mesaj alindiginda ACK otomatik gonderilir. ACK gelmezse <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span> ayni frame'i retry timeout'a gore tekrar gonderir. Duplicate retry frame'i gelirse ACK yeniden gonderilir fakat mesaj uygulamaya ikinci kez teslim edilmez.</p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &quot;<a class="code" href="uartbin__app_8h.html">uartbin_app.h</a>&quot;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <a class="code hl_typedef" href="uartbin__app_8h.html#a46e845184762e14b7c937add19e965ae">uartbin_app_t</a> app;</div>
+<div class="line"><span class="keyword">static</span> uint8_t rx_payload[256];</div>
+<div class="line"><span class="keyword">static</span> uint8_t tx_retry_frame[<a class="code hl_define" href="uartbin_8h.html#a02dde34a333b47fcc0bd146757edfeb0">UARTBIN_MAX_FRAME_OVERHEAD</a> + 256];</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> on_message(<span class="keyword">const</span> <a class="code hl_typedef" href="uartbin__app_8h.html#a57d9e125cd05260103f0fbc2131e54e2">uartbin_app_message_t</a> *message, <span class="keywordtype">void</span> *user)</div>
+<div class="line">{</div>
+<div class="line">    (void)user;</div>
+<div class="line">    <span class="comment">/* Burada yalnizca gercek uygulama mesajlari gorulur, ACK paketleri gorulmez. */</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static</span> <span class="keywordtype">void</span> on_delivery(uint16_t seq, <span class="keywordtype">void</span> *user)</div>
+<div class="line">{</div>
+<div class="line">    (void)seq;</div>
+<div class="line">    (void)user;</div>
+<div class="line">    <span class="comment">/* Gonderdigimiz confirmed mesaj peer tarafindan ACK&#39;lendi. */</span></div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> protocol_init(<span class="keywordtype">void</span>)</div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_typedef" href="uartbin__app_8h.html#a9a980999643b13136f4bfe1d4279820a">uartbin_app_config_t</a> cfg = {</div>
+<div class="line">        .write = uart_write,</div>
+<div class="line">        .on_message = on_message,</div>
+<div class="line">        .on_delivery = on_delivery,</div>
+<div class="line">        .on_error = on_error,</div>
+<div class="line">        .user = NULL,</div>
+<div class="line">        .rx_payload_buffer = rx_payload,</div>
+<div class="line">        .rx_payload_capacity = <span class="keyword">sizeof</span>(rx_payload),</div>
+<div class="line">        .rx_timeout_ms = 50,</div>
+<div class="line">        .tx_retry_buffer = tx_retry_frame,</div>
+<div class="line">        .tx_retry_capacity = <span class="keyword">sizeof</span>(tx_retry_frame),</div>
+<div class="line">        .tx_retry_timeout_ms = <a class="code hl_define" href="uartbin_8h.html#ab47658a8617054b88a7e3fcae065857d">UARTBIN_DEFAULT_RETRY_TIMEOUT_MS</a>,</div>
+<div class="line">        .tx_retry_max_retries = <a class="code hl_define" href="uartbin_8h.html#a6977a0cfc8532504d121983c09148dd3">UARTBIN_DEFAULT_RETRY_MAX_RETRIES</a></div>
+<div class="line">    };</div>
+<div class="line"> </div>
+<div class="line">    <a class="code hl_function" href="uartbin__app_8h.html#a14d31ee8ac4b0da8d25f625147eb5167">uartbin_app_init</a>(&amp;app, &amp;cfg);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> send_payload(<span class="keyword">const</span> uint8_t *payload, uint16_t payload_len)</div>
+<div class="line">{</div>
+<div class="line">    (void)<a class="code hl_function" href="uartbin__app_8h.html#a34d0bbf7ac1afcb97d4fe3a701dd1f72">uartbin_app_send_confirmed</a>(&amp;app, MSG_DATA, 0, payload, payload_len);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> on_uart_rx(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len)</div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_function" href="uartbin__app_8h.html#a976083e11ed45b691b425735c46fe61b">uartbin_app_feed_at</a>(&amp;app, data, len, platform_millis());</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> loop_tick(<span class="keywordtype">void</span>)</div>
+<div class="line">{</div>
+<div class="line">    <a class="code hl_function" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60">uartbin_app_poll</a>(&amp;app, platform_millis());</div>
+<div class="line">}</div>
+<div class="ttc" id="auartbin_8h_html_a02dde34a333b47fcc0bd146757edfeb0"><div class="ttname"><a href="uartbin_8h.html#a02dde34a333b47fcc0bd146757edfeb0">UARTBIN_MAX_FRAME_OVERHEAD</a></div><div class="ttdeci">#define UARTBIN_MAX_FRAME_OVERHEAD</div><div class="ttdoc">Her payload etrafina eklenen byte&#39;lar: SOF + header + CRC.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8h_source.html#l00092">uartbin.h:92</a></div></div>
+<div class="ttc" id="auartbin_8h_html_a6977a0cfc8532504d121983c09148dd3"><div class="ttname"><a href="uartbin_8h.html#a6977a0cfc8532504d121983c09148dd3">UARTBIN_DEFAULT_RETRY_MAX_RETRIES</a></div><div class="ttdeci">#define UARTBIN_DEFAULT_RETRY_MAX_RETRIES</div><div class="ttdoc">Uygulamalarin config icinde kullanabilecegi varsayilan retry sayisi.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8h_source.html#l00101">uartbin.h:101</a></div></div>
+<div class="ttc" id="auartbin_8h_html_ab47658a8617054b88a7e3fcae065857d"><div class="ttname"><a href="uartbin_8h.html#ab47658a8617054b88a7e3fcae065857d">UARTBIN_DEFAULT_RETRY_TIMEOUT_MS</a></div><div class="ttdeci">#define UARTBIN_DEFAULT_RETRY_TIMEOUT_MS</div><div class="ttdoc">Uygulamalarin config icinde kullanabilecegi varsayilan retry timeout.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8h_source.html#l00096">uartbin.h:96</a></div></div>
+<div class="ttc" id="auartbin__app_8h_html"><div class="ttname"><a href="uartbin__app_8h.html">uartbin_app.h</a></div><div class="ttdoc">uartbin uzerinde otomatik ACK/retry yapan app seviyesi mesaj katmani.</div></div>
+<div class="ttc" id="auartbin__app_8h_html_a14d31ee8ac4b0da8d25f625147eb5167"><div class="ttname"><a href="uartbin__app_8h.html#a14d31ee8ac4b0da8d25f625147eb5167">uartbin_app_init</a></div><div class="ttdeci">void uartbin_app_init(uartbin_app_t *app, const uartbin_app_config_t *config)</div><div class="ttdoc">Ust seviye app context&#39;ini baslat.</div><div class="ttdef"><b>Definition</b> <a href="uartbin__app_8c_source.html#l00106">uartbin_app.c:106</a></div></div>
+<div class="ttc" id="auartbin__app_8h_html_a34d0bbf7ac1afcb97d4fe3a701dd1f72"><div class="ttname"><a href="uartbin__app_8h.html#a34d0bbf7ac1afcb97d4fe3a701dd1f72">uartbin_app_send_confirmed</a></div><div class="ttdeci">uartbin_status_t uartbin_app_send_confirmed(uartbin_app_t *app, uint8_t type, uint8_t flags, const uint8_t *payload, uint16_t payload_len)</div><div class="ttdoc">Otomatik ACK/retry ile confirmed app mesaji gonder.</div><div class="ttdef"><b>Definition</b> <a href="uartbin__app_8c_source.html#l00151">uartbin_app.c:151</a></div></div>
+<div class="ttc" id="auartbin__app_8h_html_a46e845184762e14b7c937add19e965ae"><div class="ttname"><a href="uartbin__app_8h.html#a46e845184762e14b7c937add19e965ae">uartbin_app_t</a></div><div class="ttdeci">struct uartbin_app uartbin_app_t</div><div class="ttdoc">Ust seviye otomatik ACK/retry mesajlasma context&#39;i.</div></div>
+<div class="ttc" id="auartbin__app_8h_html_a57d9e125cd05260103f0fbc2131e54e2"><div class="ttname"><a href="uartbin__app_8h.html#a57d9e125cd05260103f0fbc2131e54e2">uartbin_app_message_t</a></div><div class="ttdeci">struct uartbin_app_message uartbin_app_message_t</div><div class="ttdoc">Ust seviye app katmaninin uygulamaya teslim ettigi mesaj.</div></div>
+<div class="ttc" id="auartbin__app_8h_html_a976083e11ed45b691b425735c46fe61b"><div class="ttname"><a href="uartbin__app_8h.html#a976083e11ed45b691b425735c46fe61b">uartbin_app_feed_at</a></div><div class="ttdeci">void uartbin_app_feed_at(uartbin_app_t *app, const uint8_t *data, size_t len, uint32_t now_ms)</div><div class="ttdoc">Alinan byte&#39;lari timestamp ile app katmanina besle.</div><div class="ttdef"><b>Definition</b> <a href="uartbin__app_8c_source.html#l00192">uartbin_app.c:192</a></div></div>
+<div class="ttc" id="auartbin__app_8h_html_a9a980999643b13136f4bfe1d4279820a"><div class="ttname"><a href="uartbin__app_8h.html#a9a980999643b13136f4bfe1d4279820a">uartbin_app_config_t</a></div><div class="ttdeci">struct uartbin_app_config uartbin_app_config_t</div><div class="ttdoc">Ust seviye otomatik ACK/retry mesajlasma katmani konfigurasyonu.</div></div>
+<div class="ttc" id="auartbin__app_8h_html_afa39de928db246c3d977e6c241930f60"><div class="ttname"><a href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60">uartbin_app_poll</a></div><div class="ttdeci">void uartbin_app_poll(uartbin_app_t *app, uint32_t now_ms)</div><div class="ttdoc">RX timeout ve confirmed mesaj retry zamanlamasini servis et.</div><div class="ttdef"><b>Definition</b> <a href="uartbin__app_8c_source.html#l00213">uartbin_app.c:213</a></div></div>
+</div><!-- fragment --><p><span class="tt"><a class="el" href="uartbin__app_8h.html#a4f3d456d4840ad6a86f6175152a9fce7" title="ACK beklemeyen normal app mesaji gonder.">uartbin_app_send()</a></span> ayni app mesaj modelini ACK beklemeden kullanir. <span class="tt"><a class="el" href="uartbin__app_8h.html#a46e845184762e14b7c937add19e965ae" title="Ust seviye otomatik ACK/retry mesajlasma context&#39;i.">uartbin_app_t</a></span> initialize edildikten sonra kopyalanmamalidir; her link icin kalici bir static/global veya sahipligi net bir context kullan.</p>
+<p>App katmani kullanildiginda ayni link icin yalnizca <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span> cagir. <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span> zaten kendi icindeki <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> icin <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> cagirir; ayrica <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll</a>(&amp;app.link, now_ms)</span> cagrisi yapma.</p>
+<div class="mermaidgraph">
+<pre class="mermaid">
+sequenceDiagram
+    participant A as MCU A
+    participant B as MCU B
+
+    A-&gt;&gt;B: CONFIRMED EVENT seq=1 payload
+    B--&gt;&gt;A: automatic ACK RESPONSE seq=1
+    A-&gt;&gt;A: on_delivery(seq=1)</pre>
+</div>
+<p>ACK gelmezse hata send fonksiyonundan gecikmeli olarak donmez. Retry zamanlamasi <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span> icinde calisir; basarisiz sonuc <span class="tt">on_error()</span> callback'i ile bildirilir.</p>
+<div class="mermaidgraph">
+<pre class="mermaid">
+flowchart TD
+    TX[&quot;send_confirmed&quot;]
+    PENDING[&quot;pending confirmed mesaj&quot;]
+    ACK{&quot;ACK geldi mi?&quot;}
+    RETRY{&quot;retry limiti doldu mu?&quot;}
+    RESEND[&quot;tekrar gonder&quot;]
+    OK[&quot;on_delivery&quot;]
+    ERR[&quot;on_error(RETRY_EXHAUSTED)&quot;]
+
+    TX --&gt; PENDING --&gt; ACK
+    ACK -- Evet --&gt; OK
+    ACK -- Hayir, timeout --&gt; RETRY
+    RETRY -- Hayir --&gt; RESEND --&gt; PENDING
+    RETRY -- Evet --&gt; ERR</pre>
+</div>
+<p>Daha ayrintili seq, duplicate ve cift yonlu feedback akislari icin <span class="tt">Confirmed App Katmani</span> rehberine bak.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
 Temel Kurulum</h2>
 <p>Her UART linki icin bir <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> ayir. Her link kendi RX parser durumunu, otomatik TX sira sayacini ve opsiyonel retry durumunu tasir.</p>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <a class="code hl_typedef" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1">uartbin_t</a> link;</div>
@@ -189,16 +298,13 @@ Temel Kurulum</h2>
 <div class="line">    <a class="code hl_function" href="uartbin_8h.html#a09e736b97567456af7144d1eb8f3edec">uartbin_init</a>(&amp;link, &amp;cfg);</div>
 <div class="line">}</div>
 <div class="ttc" id="astructuartbin__packet_html_acedf1ab64a16b37e755aa61c4b6ed568"><div class="ttname"><a href="structuartbin__packet.html#acedf1ab64a16b37e755aa61c4b6ed568">uartbin_packet::type</a></div><div class="ttdeci">uint8_t type</div><div class="ttdoc">Uygulama tarafindan tanimlanan paket tipi.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8h_source.html#l00172">uartbin.h:172</a></div></div>
-<div class="ttc" id="auartbin_8h_html_a02dde34a333b47fcc0bd146757edfeb0"><div class="ttname"><a href="uartbin_8h.html#a02dde34a333b47fcc0bd146757edfeb0">UARTBIN_MAX_FRAME_OVERHEAD</a></div><div class="ttdeci">#define UARTBIN_MAX_FRAME_OVERHEAD</div><div class="ttdoc">Her payload etrafina eklenen byte&#39;lar: SOF + header + CRC.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8h_source.html#l00092">uartbin.h:92</a></div></div>
 <div class="ttc" id="auartbin_8h_html_a09e736b97567456af7144d1eb8f3edec"><div class="ttname"><a href="uartbin_8h.html#a09e736b97567456af7144d1eb8f3edec">uartbin_init</a></div><div class="ttdeci">void uartbin_init(uartbin_t *ctx, const uartbin_config_t *config)</div><div class="ttdoc">uartbin context baslat.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00295">uartbin.c:295</a></div></div>
 <div class="ttc" id="auartbin_8h_html_a107f60d9a8a0f2e59486e389942ff008"><div class="ttname"><a href="uartbin_8h.html#a107f60d9a8a0f2e59486e389942ff008">uartbin_config_t</a></div><div class="ttdeci">struct uartbin_config uartbin_config_t</div><div class="ttdoc">uartbin context baslatmak icin kullanilan konfigurasyon.</div></div>
 <div class="ttc" id="auartbin_8h_html_a2c22b7247ec8a8d95bd0243612d9262f"><div class="ttname"><a href="uartbin_8h.html#a2c22b7247ec8a8d95bd0243612d9262f">uartbin_error_t</a></div><div class="ttdeci">enum uartbin_error uartbin_error_t</div><div class="ttdoc">uartbin_error_fn ile iletilen parser/runtime hatalari.</div></div>
-<div class="ttc" id="auartbin_8h_html_a6977a0cfc8532504d121983c09148dd3"><div class="ttname"><a href="uartbin_8h.html#a6977a0cfc8532504d121983c09148dd3">UARTBIN_DEFAULT_RETRY_MAX_RETRIES</a></div><div class="ttdeci">#define UARTBIN_DEFAULT_RETRY_MAX_RETRIES</div><div class="ttdoc">Uygulamalarin config icinde kullanabilecegi varsayilan retry sayisi.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8h_source.html#l00101">uartbin.h:101</a></div></div>
 <div class="ttc" id="auartbin_8h_html_a84d23cbe88d74beb43fa5234dcddb4d1"><div class="ttname"><a href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1">uartbin_t</a></div><div class="ttdeci">struct uartbin uartbin_t</div><div class="ttdoc">Tek uartbin linki icin runtime durum.</div></div>
-<div class="ttc" id="auartbin_8h_html_ab47658a8617054b88a7e3fcae065857d"><div class="ttname"><a href="uartbin_8h.html#ab47658a8617054b88a7e3fcae065857d">UARTBIN_DEFAULT_RETRY_TIMEOUT_MS</a></div><div class="ttdeci">#define UARTBIN_DEFAULT_RETRY_TIMEOUT_MS</div><div class="ttdoc">Uygulamalarin config icinde kullanabilecegi varsayilan retry timeout.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8h_source.html#l00096">uartbin.h:96</a></div></div>
 <div class="ttc" id="auartbin_8h_html_ac592299b63f2ba89764ab4184da2b8b9"><div class="ttname"><a href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9">uartbin_send_response</a></div><div class="ttdeci">uartbin_status_t uartbin_send_response(uartbin_t *ctx, const uartbin_packet_t *request, uint8_t type, uint8_t flags, const uint8_t *payload, uint16_t payload_len)</div><div class="ttdoc">Alinan paketteki sira numarasini kullanarak response gonder.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00435">uartbin.c:435</a></div></div>
 <div class="ttc" id="auartbin_8h_html_aca4d71fa02a9351ae8b2afb910abac2b"><div class="ttname"><a href="uartbin_8h.html#aca4d71fa02a9351ae8b2afb910abac2b">uartbin_packet_t</a></div><div class="ttdeci">struct uartbin_packet uartbin_packet_t</div><div class="ttdoc">Uygulamaya iletilen CRC kontrolunden gecmis paket.</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md16"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
 Mesaj Gonderme</h2>
 <p>Bu cihaz peer'dan bir is istiyorsa request kullan:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#a25f9d1a61c29eebfbf3dc655b0621b2f">uartbin_send_request</a>(&amp;link, MSG_SET_OUTPUT, 0, payload, payload_len);</div>
@@ -208,7 +314,7 @@ Mesaj Gonderme</h2>
 </div><!-- fragment --><p>Modulun kendiliginden olusan bir durumu raporlamasi gibi veriler icin event kullan:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839">uartbin_send_event</a>(&amp;link, MSG_DEVICE_EVENT, 0, event, event_len);</div>
 <div class="ttc" id="auartbin_8h_html_a8ab7553326a5e1db2c5d8c08dab4f839"><div class="ttname"><a href="uartbin_8h.html#a8ab7553326a5e1db2c5d8c08dab4f839">uartbin_send_event</a></div><div class="ttdeci">uartbin_status_t uartbin_send_event(uartbin_t *ctx, uint8_t type, uint8_t flags, const uint8_t *payload, uint16_t payload_len)</div><div class="ttdoc">Otomatik uretilen sira numarasi ile unsolicited event gonder.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00454">uartbin.c:454</a></div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
 Byte Alma</h2>
 <p>Alinan her byte'i veya blogu monotonic milisaniye timestamp ile parser'a besle:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a>(&amp;link, rx_data, rx_len, platform_millis());</div>
@@ -217,7 +323,7 @@ Byte Alma</h2>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a>(&amp;link, platform_millis());</div>
 <div class="ttc" id="auartbin_8h_html_ac772ed6c266ea60e13df4a1c28d9622e"><div class="ttname"><a href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a></div><div class="ttdeci">void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)</div><div class="ttdoc">RX timeout ve opsiyonel TX retry zamanlamasini servis et.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00517">uartbin.c:517</a></div></div>
 </div><!-- fragment --><p>Feed fonksiyonlari byte kabul etmeden once yalnizca RX parser timeout kontrolu yapar. Pending reliable mesajlari yeniden gondermez. TX retry yazmalarinin UART RX interrupt veya DMA callback icinde beklenmedik sekilde calismamasi icin retry yolunu acik <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> cagrinda tut.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md20"></a>
 Guvenilir Mesaj Kurallari</h2>
 <p>Retry acikken:</p>
 <ul>
@@ -227,7 +333,7 @@ Guvenilir Mesaj Kurallari</h2>
 <li>Her <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> icin ayni anda yalnizca bir reliable request/event pending olabilir; baska bir gonderim <span class="tt"><a class="el" href="uartbin_8h.html#a69fbe7d8d1488b2530eaab2ce3c10cada6e9ccc2f4f646420f7d069d63ae42860" title="Guvenilir request/event zaten response bekliyor.">UARTBIN_EBUSY</a></span> dondurur.</li>
 </ul>
 <p>Peer, reliable request/event paketlerine <span class="tt"><a class="el" href="uartbin_8h.html#ac592299b63f2ba89764ab4184da2b8b9" title="Alinan paketteki sira numarasini kullanarak response gonder.">uartbin_send_response()</a></span> ile cevap vermelidir. Bu fonksiyon gelen sira numarasini otomatik olarak geri yazar.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md21"></a>
 Packet Omru</h2>
 <p><span class="tt">packet-&gt;payload</span>, ayarlanan RX payload buffer'ini isaret eder. Ayni context uzerinde bir sonraki feed, poll, reset veya parser islemine kadar gecerlidir. Daha uzun sure saklanacaksa payload'u <span class="tt">on_packet()</span> icinde kopyala. </p>
 </div></div><!-- contents -->

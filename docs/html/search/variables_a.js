@@ -1,4 +1,12 @@
 var searchData=
 [
-  ['user_0',['user',['../structuartbin__config.html#a6960d772dfcb45fd0b9a24c6d4f10078',1,'uartbin_config']]]
+  ['tx_5fconfirmed_5fpending_0',['tx_confirmed_pending',['../structuartbin__app.html#accb0a1cf92186c1bbb8e393b38c8b782',1,'uartbin_app']]],
+  ['tx_5fconfirmed_5fseq_1',['tx_confirmed_seq',['../structuartbin__app.html#ab266c304cd698d01a9271c4460910946',1,'uartbin_app']]],
+  ['tx_5fretry_5fbuffer_2',['tx_retry_buffer',['../structuartbin__config.html#ab90f35e45d30c7598342ebe37a8ad93d',1,'uartbin_config::tx_retry_buffer'],['../structuartbin__app__config.html#a927201e5610c74d8d5b329071b79d7b9',1,'uartbin_app_config::tx_retry_buffer']]],
+  ['tx_5fretry_5fcapacity_3',['tx_retry_capacity',['../structuartbin__config.html#a1e71034639756ac266531be42344ec21',1,'uartbin_config::tx_retry_capacity'],['../structuartbin__app__config.html#aa286634ac19f17822fc4c2bf708446fd',1,'uartbin_app_config::tx_retry_capacity']]],
+  ['tx_5fretry_5fframe_4',['tx_retry_frame',['../structlinux__uartbin__app.html#ad3d78a67968cc59728587bc336e7237d',1,'linux_uartbin_app::tx_retry_frame'],['../structlinux__uartbin.html#a5e1a41970a42c47e18b360b02b2dbc4c',1,'linux_uartbin::tx_retry_frame'],['../structstm32__uartbin__app__it.html#ad7cfd301ec74e251c9de101ffd04b8e6',1,'stm32_uartbin_app_it::tx_retry_frame']]],
+  ['tx_5fretry_5fmax_5fretries_5',['tx_retry_max_retries',['../structuartbin__config.html#a078449d5d3e56cb5bf112a3fb9f46795',1,'uartbin_config::tx_retry_max_retries'],['../structuartbin__app__config.html#a094f2df9f9f1e9c5b474f58842920301',1,'uartbin_app_config::tx_retry_max_retries']]],
+  ['tx_5fretry_5ftimeout_5fms_6',['tx_retry_timeout_ms',['../structuartbin__config.html#a1e2d699576229d1e22c2a52441be876c',1,'uartbin_config::tx_retry_timeout_ms'],['../structuartbin__app__config.html#adec4c9705f790d306a2e4f074f933aa6',1,'uartbin_app_config::tx_retry_timeout_ms']]],
+  ['tx_5fseq_7',['tx_seq',['../structuartbin.html#ab859bb6a8de1f931045fcd6ec43af538',1,'uartbin']]],
+  ['type_8',['type',['../structuartbin__packet.html#acedf1ab64a16b37e755aa61c4b6ed568',1,'uartbin_packet::type'],['../structuartbin__app__message.html#ab7ba6ddded1a28a3f2bd44be97b69e47',1,'uartbin_app_message::type']]]
 ];

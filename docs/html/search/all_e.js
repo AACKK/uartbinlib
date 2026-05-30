@@ -1,9 +1,13 @@
 var searchData=
 [
-  ['omru_0',['Packet Omru',['../guide_api_usage.html#autotoc_md19',1,'']]],
-  ['on_5ferror_1',['on_error',['../structuartbin__config.html#a3f51883bc38e212b24e86d29c57c4c08',1,'uartbin_config']]],
-  ['on_5fpacket_2',['on_packet',['../structuartbin__config.html#a0232d2ed6c19f7d98f13f70ca6225abf',1,'uartbin_config']]],
-  ['otomatik_20retry_3',['Otomatik Retry',['../index.html#autotoc_md7',1,'Otomatik Retry'],['../guide_linux_usage.html#autotoc_md25',1,'Otomatik Retry']]],
-  ['otomatik_20sira_20numaralari_4',['Otomatik Sira Numaralari',['../index.html#autotoc_md5',1,'']]],
-  ['ozeti_5',['Ozeti',['../index.html#autotoc_md9',1,'Linux POSIX Serial Ozeti'],['../index.html#autotoc_md8',1,'STM32 Entegrasyon Ozeti']]]
+  ['omru_0',['Packet Omru',['../guide_api_usage.html#autotoc_md21',1,'']]],
+  ['on_5fdelivery_1',['on_delivery',['../structuartbin__app__config.html#a25e7a9e24c4bc3da6f16a3a4f4dd2ddc',1,'uartbin_app_config']]],
+  ['on_5ferror_2',['on_error',['../structuartbin__config.html#a3f51883bc38e212b24e86d29c57c4c08',1,'uartbin_config::on_error'],['../structuartbin__app__config.html#ab0a0502de56c249025a15836a666681f',1,'uartbin_app_config::on_error']]],
+  ['on_5fmessage_3',['on_message',['../structuartbin__app__config.html#aef7f088e76eb2a5edbbad15359cb8003',1,'uartbin_app_config']]],
+  ['on_5fpacket_4',['on_packet',['../structuartbin__config.html#a0232d2ed6c19f7d98f13f70ca6225abf',1,'uartbin_config']]],
+  ['ornekler_5',['Ornekler',['../guide_confirmed_app.html#autotoc_md30',1,'']]],
+  ['otomatik_20confirmed_20mesaj_6',['App Katmani: Otomatik Confirmed Mesaj',['../guide_api_usage.html#autotoc_md16',1,'']]],
+  ['otomatik_20retry_7',['Otomatik Retry',['../index.html#autotoc_md8',1,'Otomatik Retry'],['../guide_linux_usage.html#autotoc_md36',1,'Otomatik Retry']]],
+  ['otomatik_20sira_20numaralari_8',['Otomatik Sira Numaralari',['../index.html#autotoc_md6',1,'']]],
+  ['ozeti_9',['Ozeti',['../guide_confirmed_app.html#autotoc_md28',1,'API Ozeti'],['../index.html#autotoc_md10',1,'Linux POSIX Serial Ozeti'],['../index.html#autotoc_md9',1,'STM32 Entegrasyon Ozeti']]]
 ];

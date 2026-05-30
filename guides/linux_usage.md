@@ -130,6 +130,24 @@ Linux tarafinda retry, STM32 ile ayni calisir:
 Linux'ta fd write hatalari daha olasi oldugu icin `UARTBIN_ERROR_RETRY_WRITE`
 hatasini da loglamak faydalidir.
 
+## Linux App Katmani
+
+`uartbin_app.h` kullanildiginda event loop ayni kalir; yalnizca feed ve poll
+cagrilari app context'e yonelir:
+
+```c
+uartbin_app_feed_at(&app, rx, (size_t)n, linux_millis());
+uartbin_app_poll(&app, linux_millis());
+```
+
+`examples/linux_app_confirmed.c`, acilista bir confirmed mesaj gonderen ve
+ACK/retry sonucunu `on_delivery()` / `on_error()` callback'leriyle loglayan
+tam POSIX serial ornegidir.
+
+Ayni serial link app katmani ile calisiyorsa event loop icinde yalnizca
+`uartbin_app_poll(&app, now_ms)` cagir. `uartbin_app_poll()` kendi icinde
+`uartbin_poll(&app.link, now_ms)` yaptigi icin ikinci poll cagrisi gerekmez.
+
 ## Derleme
 
 Tek dosya ornegi su sekilde derlenebilir:
@@ -138,10 +156,17 @@ Tek dosya ornegi su sekilde derlenebilir:
 cc -Iinclude examples/linux_posix_serial.c src/uartbin.c -o linux_uartbin
 ```
 
+App katmani ornegi icin:
+
+```sh
+cc -Iinclude examples/linux_app_confirmed.c src/uartbin.c src/uartbin_app.c -o linux_uartbin_app
+```
+
 Calistirma:
 
 ```sh
 ./linux_uartbin /dev/ttyUSB0
+./linux_uartbin_app /dev/ttyUSB0
 ```
 
 Port yetkisi yoksa kullaniciyi ilgili gruba eklemek gerekebilir. Debian/Ubuntu
@@ -150,8 +175,10 @@ tarzi sistemlerde bu grup genellikle `dialout` olur.
 ## Mimari Notlar
 
 - Linux uygulamasinda her serial fd icin bir `uartbin_t` kullan.
+- App katmani kullaniliyorsa her serial fd icin bir `uartbin_app_t` kullan.
 - Her link icin ayri RX payload buffer ve ayri TX retry buffer ayir.
 - `packet->payload`, callback sonrasi uzun sure saklanacaksa kopyalanmalidir.
-- Event loop icinde `uartbin_poll()` unutulursa retry ve RX timeout calismaz.
+- Cekirdek API'de `uartbin_poll()`, app API'de `uartbin_app_poll()` unutulursa
+  retry ve RX timeout calismaz.
 - `POLLERR` veya `POLLHUP` gorulurse parser'i resetle ve gerekirse portu
   yeniden ac.

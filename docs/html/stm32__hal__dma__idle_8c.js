@@ -5,7 +5,6 @@ var stm32__hal__dma__idle_8c =
     [ "HAL_OK", "stm32__hal__dma__idle_8c.html#a345d4bf6e67fe2036ee84560373dafb7", null ],
     [ "DMA_HandleTypeDef", "stm32__hal__dma__idle_8c.html#a3711e76f78e413e04900cdef931374f4", null ],
     [ "stm32_uartbin_dma_t", "stm32__hal__dma__idle_8c.html#a085b21d0bdb11c49f44d01912579f967", null ],
-    [ "UART_HandleTypeDef", "stm32__hal__dma__idle_8c.html#a28e5a9a61ee3cf68aabda300d2580590", null ],
     [ "__HAL_DMA_DISABLE_IT", "stm32__hal__dma__idle_8c.html#a90204603909714d8e0d4722bc79c5f30", null ],
     [ "HAL_GetTick", "stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4", null ],
     [ "HAL_UART_AbortReceive", "stm32__hal__dma__idle_8c.html#a0a433f9f54ad52ae82580b2327c00996", null ],

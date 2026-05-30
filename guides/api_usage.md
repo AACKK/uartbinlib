@@ -7,9 +7,128 @@ uartbinlib iki katmandan olusur:
 - Cerceve katmani: `uartbin_send()`, `uartbin_feed_at()`, `uartbin_poll()`.
 - Guvenilir mesaj katmani: `uartbin_send_request()`,
   `uartbin_send_response()`, `uartbin_send_event()`.
+- App mesaj katmani: `uartbin_app_send_confirmed()`,
+  `uartbin_app_feed_at()`, `uartbin_app_poll()`.
 
-Cogu uygulama guvenilir yardimcilari kullanmali, `uartbin_send()` fonksiyonunu
-yalnizca acik sira numarasi gereken ozel durumlar icin saklamalidir.
+Cogu uygulama, ACK/seq/retry ayrintisini saklayan app katmanini kullanabilir.
+Alt seviye request/response/event API'leri ozel protokol akislarinda hala
+dogrudan kullanilabilir.
+
+```mermaid
+flowchart TB
+    APP["Uygulama seviyesi\nuartbin_app.h"]
+    REL["Guvenilir mesaj yardimcilari\nrequest / response / event"]
+    CORE["Cerceve cekirdegi\nsend / feed / poll"]
+    UART["UART transport"]
+
+    APP --> REL --> CORE --> UART
+```
+
+## App Katmani: Otomatik Confirmed Mesaj
+
+Bu katmanda uygulama sadece payload'u API'ye verir. Peer da app katmani
+kullaniyorsa confirmed mesaj alindiginda ACK otomatik gonderilir. ACK gelmezse
+`uartbin_app_poll()` ayni frame'i retry timeout'a gore tekrar gonderir.
+Duplicate retry frame'i gelirse ACK yeniden gonderilir fakat mesaj uygulamaya
+ikinci kez teslim edilmez.
+
+```c
+#include "uartbin_app.h"
+
+static uartbin_app_t app;
+static uint8_t rx_payload[256];
+static uint8_t tx_retry_frame[UARTBIN_MAX_FRAME_OVERHEAD + 256];
+
+static void on_message(const uartbin_app_message_t *message, void *user)
+{
+    (void)user;
+    /* Burada yalnizca gercek uygulama mesajlari gorulur, ACK paketleri gorulmez. */
+}
+
+static void on_delivery(uint16_t seq, void *user)
+{
+    (void)seq;
+    (void)user;
+    /* Gonderdigimiz confirmed mesaj peer tarafindan ACK'lendi. */
+}
+
+void protocol_init(void)
+{
+    uartbin_app_config_t cfg = {
+        .write = uart_write,
+        .on_message = on_message,
+        .on_delivery = on_delivery,
+        .on_error = on_error,
+        .user = NULL,
+        .rx_payload_buffer = rx_payload,
+        .rx_payload_capacity = sizeof(rx_payload),
+        .rx_timeout_ms = 50,
+        .tx_retry_buffer = tx_retry_frame,
+        .tx_retry_capacity = sizeof(tx_retry_frame),
+        .tx_retry_timeout_ms = UARTBIN_DEFAULT_RETRY_TIMEOUT_MS,
+        .tx_retry_max_retries = UARTBIN_DEFAULT_RETRY_MAX_RETRIES
+    };
+
+    uartbin_app_init(&app, &cfg);
+}
+
+void send_payload(const uint8_t *payload, uint16_t payload_len)
+{
+    (void)uartbin_app_send_confirmed(&app, MSG_DATA, 0, payload, payload_len);
+}
+
+void on_uart_rx(const uint8_t *data, size_t len)
+{
+    uartbin_app_feed_at(&app, data, len, platform_millis());
+}
+
+void loop_tick(void)
+{
+    uartbin_app_poll(&app, platform_millis());
+}
+```
+
+`uartbin_app_send()` ayni app mesaj modelini ACK beklemeden kullanir.
+`uartbin_app_t` initialize edildikten sonra kopyalanmamalidir; her link icin
+kalici bir static/global veya sahipligi net bir context kullan.
+
+App katmani kullanildiginda ayni link icin yalnizca `uartbin_app_poll()` cagir.
+`uartbin_app_poll()` zaten kendi icindeki `uartbin_t` icin `uartbin_poll()`
+cagirir; ayrica `uartbin_poll(&app.link, now_ms)` cagrisi yapma.
+
+```mermaid
+sequenceDiagram
+    participant A as MCU A
+    participant B as MCU B
+
+    A->>B: CONFIRMED EVENT seq=1 payload
+    B-->>A: automatic ACK RESPONSE seq=1
+    A->>A: on_delivery(seq=1)
+```
+
+ACK gelmezse hata send fonksiyonundan gecikmeli olarak donmez. Retry zamanlamasi
+`uartbin_app_poll()` icinde calisir; basarisiz sonuc `on_error()` callback'i ile
+bildirilir.
+
+```mermaid
+flowchart TD
+    TX["send_confirmed"]
+    PENDING["pending confirmed mesaj"]
+    ACK{"ACK geldi mi?"}
+    RETRY{"retry limiti doldu mu?"}
+    RESEND["tekrar gonder"]
+    OK["on_delivery"]
+    ERR["on_error(RETRY_EXHAUSTED)"]
+
+    TX --> PENDING --> ACK
+    ACK -- Evet --> OK
+    ACK -- Hayir, timeout --> RETRY
+    RETRY -- Hayir --> RESEND --> PENDING
+    RETRY -- Evet --> ERR
+```
+
+Daha ayrintili seq, duplicate ve cift yonlu feedback akislari icin
+`Confirmed App Katmani` rehberine bak.
 
 ## Temel Kurulum
 

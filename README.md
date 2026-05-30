@@ -22,6 +22,7 @@ One cikan noktalar:
 - Bare-metal C: HAL, RTOS, heap veya isletim sistemi bagimliligi yoktur.
 - Net cerceve yapisi: SOF, version, type, flags, seq, length, payload ve CRC16.
 - Hazir mesaj modeli: request, response ve event akislari icin yardimci API'ler.
+- App seviyesi confirmed mesaj API'si: ACK ve retry islemleri otomatik yonetilir.
 - Otomatik sira numarasi: her `uartbin_t` kendi seq counter'ini tasir.
 - Opsiyonel guvenilir TX: response gelmezse ayarlanabilir timeout/retry mantigi.
 - Iki yonlu kullanim: host MCU, modul, sensor veya gateway gibi rollerde ayni
@@ -112,6 +113,84 @@ void app_send_ping(void)
 }
 ```
 
+## App Seviyesi Confirmed Mesaj
+
+Uygulama tarafinin ACK/seq/retry bilmesini istemiyorsan `uartbin_app_t`
+katmanini kullan. `uartbin_app_send_confirmed()` payload'u gonderir, peer app
+katmani mesaj alinca ACK'i otomatik yollar. ACK gelmezse `uartbin_app_poll()`
+ayarlanan timeout/retry degerlerine gore ayni mesaji tekrar iletir.
+
+```mermaid
+flowchart LR
+    APP_A["MCU A uygulama\npayload gonderir"]
+    APP_API_A["uartbin_app_send_confirmed"]
+    CORE_A["uartbin\nseq + retry"]
+    WIRE["UART"]
+    CORE_B["uartbin\nCRC + seq"]
+    APP_API_B["uartbin_app\notomatik ACK"]
+    APP_B["MCU B uygulama\non_message"]
+
+    APP_A --> APP_API_A --> CORE_A --> WIRE --> CORE_B --> APP_API_B --> APP_B
+    APP_API_B -- "ACK response" --> WIRE
+    WIRE -- "ACK seq eslesir" --> CORE_A
+```
+
+```c
+#include "uartbin_app.h"
+
+static uartbin_app_t app;
+static uint8_t rx_payload[256];
+static uint8_t tx_retry_frame[UARTBIN_MAX_FRAME_OVERHEAD + 256];
+
+static void on_message(const uartbin_app_message_t *message, void *user)
+{
+    (void)user;
+    /* ACK paketleri burada gorulmez; yalnizca gercek payload teslim edilir. */
+}
+
+static void on_delivery(uint16_t seq, void *user)
+{
+    (void)seq;
+    (void)user;
+    /* Gonderilen confirmed mesaj ACK aldi. */
+}
+
+void app_protocol_init(void)
+{
+    uartbin_app_config_t cfg = {
+        .write = uart_write,
+        .on_message = on_message,
+        .on_delivery = on_delivery,
+        .on_error = on_error,
+        .user = NULL,
+        .rx_payload_buffer = rx_payload,
+        .rx_payload_capacity = sizeof(rx_payload),
+        .rx_timeout_ms = 50,
+        .tx_retry_buffer = tx_retry_frame,
+        .tx_retry_capacity = sizeof(tx_retry_frame),
+        .tx_retry_timeout_ms = UARTBIN_DEFAULT_RETRY_TIMEOUT_MS,
+        .tx_retry_max_retries = UARTBIN_DEFAULT_RETRY_MAX_RETRIES
+    };
+
+    uartbin_app_init(&app, &cfg);
+}
+
+void app_send_data(const uint8_t *payload, uint16_t payload_len)
+{
+    (void)uartbin_app_send_confirmed(&app, MSG_DATA, 0, payload, payload_len);
+}
+```
+
+Duplicate retry frame'i gelirse app katmani ACK'i tekrar gonderir ama ayni
+mesaji uygulama callback'ine ikinci kez teslim etmez. `uartbin_app_send()` ise
+ACK beklemeyen normal mesaj gonderimi icindir.
+
+App katmani kullanirken ayni link icin sadece `uartbin_app_poll()` cagir.
+Bu fonksiyon alttaki `uartbin_poll()` cagrimini kendi icinde yapar.
+
+Basarili ve timeout'lu akisin ayrintilari icin Doxygen'deki
+`Confirmed App Katmani` rehberine bak.
+
 ## Otomatik Sira Numaralari
 
 Request/response/event tarzi protokollerde `seq` degerini elle yonetmek yerine
@@ -173,6 +252,22 @@ sequenceDiagram
     Device->>Host: EVENT type=STATUS seq=77 payload
     Host->>Host: event'i isle
     Host-->>Device: RESPONSE type=ACK seq=77
+```
+
+App katmaninda ayni akisin ACK bolumu kutuphane tarafindan otomatik yapilir.
+
+```mermaid
+sequenceDiagram
+    participant A as MCU A app
+    participant LA as MCU A uartbin_app
+    participant LB as MCU B uartbin_app
+    participant B as MCU B app
+
+    A->>LA: send_confirmed(MSG_DATA, payload)
+    LA->>LB: CONFIRMED EVENT seq=15
+    LB->>B: on_message(MSG_DATA)
+    LB-->>LA: automatic ACK seq=15
+    LA->>A: on_delivery(seq=15)
 ```
 
 ## Otomatik Retry
@@ -263,6 +358,7 @@ Bak:
 
 - `examples/stm32_hal_interrupt.c`
 - `examples/stm32_hal_dma_idle.c`
+- `examples/stm32_app_confirmed.c`
 
 ## Linux POSIX Serial Ozeti
 
@@ -273,6 +369,7 @@ uygulama kuyrugu kullanilir.
 Bak:
 
 - `examples/linux_posix_serial.c`
+- `examples/linux_app_confirmed.c`
 - Doxygen icinde Linux POSIX Serial Kullanimi
 
 ## Buyuk Payloadlar
@@ -333,3 +430,4 @@ Ek Doxygen rehber sayfalari:
 - Halka Buffer TX Portu
 - STM32 Interrupt ve DMA Kullanimi
 - Linux POSIX Serial Kullanimi
+- Confirmed App Katmani

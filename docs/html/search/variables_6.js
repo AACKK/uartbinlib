@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['payload_0',['payload',['../structuartbin__packet.html#a5c09c77d40b5513cabf7416c4e05e8c8',1,'uartbin_packet']]],
-  ['payload_5flen_1',['payload_len',['../structuartbin__packet.html#a75e1163ff72f8b6c33b694d575726a07',1,'uartbin_packet::payload_len'],['../structuartbin.html#a97d713ad2e943e696248a70297253d2b',1,'uartbin::payload_len']]],
-  ['payload_5fpos_2',['payload_pos',['../structuartbin.html#a90159895d495d5503cb8df3db8cbe032',1,'uartbin']]],
-  ['protocol_5ferrors_3',['protocol_errors',['../structlinux__uartbin.html#a193d24b4951d754ca9e38a9d0a928ec0',1,'linux_uartbin::protocol_errors'],['../structstm32__uartbin__dma.html#acb07ebeeba786749dacb2bb2f1ce97cf',1,'stm32_uartbin_dma::protocol_errors'],['../structstm32__uartbin__it.html#aabba1f1454ea641ef8ecffaf3b2b0dde',1,'stm32_uartbin_it::protocol_errors']]]
+  ['on_5fdelivery_0',['on_delivery',['../structuartbin__app__config.html#a25e7a9e24c4bc3da6f16a3a4f4dd2ddc',1,'uartbin_app_config']]],
+  ['on_5ferror_1',['on_error',['../structuartbin__config.html#a3f51883bc38e212b24e86d29c57c4c08',1,'uartbin_config::on_error'],['../structuartbin__app__config.html#ab0a0502de56c249025a15836a666681f',1,'uartbin_app_config::on_error']]],
+  ['on_5fmessage_2',['on_message',['../structuartbin__app__config.html#aef7f088e76eb2a5edbbad15359cb8003',1,'uartbin_app_config']]],
+  ['on_5fpacket_3',['on_packet',['../structuartbin__config.html#a0232d2ed6c19f7d98f13f70ca6225abf',1,'uartbin_config']]]
 ];

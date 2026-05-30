@@ -2,7 +2,10 @@ cmake_minimum_required(VERSION 3.15)
 
 project(uartbinlib VERSION 1.0.0 LANGUAGES C)
 
-add_library(uartbin STATIC src/uartbin.c)
+add_library(uartbin STATIC
+    src/uartbin.c
+    src/uartbin_app.c
+)
 target_include_directories(uartbin PUBLIC include)
 target_compile_features(uartbin PUBLIC c_std_99)
 
@@ -19,4 +22,7 @@ endif()
 if(UARTBIN_BUILD_EXAMPLES AND UNIX)
     add_executable(uartbin_linux_posix_serial examples/linux_posix_serial.c)
     target_link_libraries(uartbin_linux_posix_serial PRIVATE uartbin)
+
+    add_executable(uartbin_linux_app_confirmed examples/linux_app_confirmed.c)
+    target_link_libraries(uartbin_linux_app_confirmed PRIVATE uartbin)
 endif()

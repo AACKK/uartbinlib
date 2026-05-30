@@ -35,7 +35,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
   <td id="projectalign">
    <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.0.0</span>
    </div>
-   <div id="projectbrief">developed by Ahmet Cemal Kurtulmuş</div>
+   <div id="projectbrief">developed by Ahmet Cemal Kurtulmus</div>
   </td>
  </tr>
  </tbody>
@@ -332,6 +332,8 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="uartbin__app_8c_source.html#l00176">uartbin_app_cancel()</a>.</p>
+
 </div>
 </div>
 <a id="af055a93c142f209e4032034979b1812e" name="af055a93c142f209e4032034979b1812e"></a>
@@ -481,6 +483,8 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00501">uartbin_feed_byte()</a>.</p>
 
+<p class="reference">Referenced by <a class="el" href="uartbin__app_8c_source.html#l00185">uartbin_app_feed()</a>.</p>
+
 </div>
 </div>
 <a id="ab9da003f689bb5d95d54752a907cf19b" name="ab9da003f689bb5d95d54752a907cf19b"></a>
@@ -518,7 +522,7 @@ Functions</h2></td></tr>
     <tr><td class="paramname">ctx</td><td>Baslatilmis context. </td></tr>
     <tr><td class="paramname">data</td><td>Alinan byte buffer'i. </td></tr>
     <tr><td class="paramname">len</td><td>Alinan byte sayisi. </td></tr>
-    <tr><td class="paramname">now_ms</td><td><a class="el" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick()</a> gibi monotonic milisaniye timestamp. </td></tr>
+    <tr><td class="paramname">now_ms</td><td><a class="el" href="stm32__app__confirmed_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick()</a> gibi monotonic milisaniye timestamp. </td></tr>
   </table>
   </dd>
 </dl>
@@ -527,7 +531,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, and <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>, and <a class="el" href="uartbin__app_8c_source.html#l00192">uartbin_app_feed_at()</a>.</p>
 
 </div>
 </div>
@@ -564,7 +568,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00301">uartbin::last_rx_time_ms</a>, and <a class="el" href="uartbin_8c_source.html#l00533">uartbin_feed_byte_at()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00490">uartbin_feed()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin__app_8c_source.html#l00199">uartbin_app_feed_byte()</a>, and <a class="el" href="uartbin_8c_source.html#l00490">uartbin_feed()</a>.</p>
 
 </div>
 </div>
@@ -600,7 +604,7 @@ Functions</h2></td></tr>
   <table class="params">
     <tr><td class="paramname">ctx</td><td>Baslatilmis context. </td></tr>
     <tr><td class="paramname">byte</td><td>Alinan byte. </td></tr>
-    <tr><td class="paramname">now_ms</td><td><a class="el" href="stm32__hal__dma__idle_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick()</a> gibi monotonic milisaniye timestamp. </td></tr>
+    <tr><td class="paramname">now_ms</td><td><a class="el" href="stm32__app__confirmed_8c.html#af2c4f03d53e997a54e1fd5e80daa55c4">HAL_GetTick()</a> gibi monotonic milisaniye timestamp. </td></tr>
   </table>
   </dd>
 </dl>
@@ -609,7 +613,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, <a class="el" href="uartbin_8h_source.html#l00298">uartbin::crc</a>, <a class="el" href="uartbin_8h_source.html#l00292">uartbin::crc_bytes</a>, <a class="el" href="uartbin_8h_source.html#l00295">uartbin::crc_pos</a>, <a class="el" href="uartbin_8h_source.html#l00175">uartbin_packet::flags</a>, <a class="el" href="uartbin_8h_source.html#l00280">uartbin::header</a>, <a class="el" href="uartbin_8h_source.html#l00283">uartbin::header_pos</a>, <a class="el" href="uartbin_8h_source.html#l00301">uartbin::last_rx_time_ms</a>, <a class="el" href="uartbin_8h_source.html#l00229">uartbin_config::on_packet</a>, <a class="el" href="uartbin_8h_source.html#l00181">uartbin_packet::payload</a>, <a class="el" href="uartbin_8h_source.html#l00289">uartbin::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00184">uartbin_packet::payload_len</a>, <a class="el" href="uartbin_8h_source.html#l00286">uartbin::payload_pos</a>, <a class="el" href="uartbin_8h_source.html#l00307">uartbin::retry_active</a>, <a class="el" href="uartbin_8h_source.html#l00316">uartbin::retry_seq</a>, <a class="el" href="uartbin_8h_source.html#l00238">uartbin_config::rx_payload_buffer</a>, <a class="el" href="uartbin_8h_source.html#l00241">uartbin_config::rx_payload_capacity</a>, <a class="el" href="uartbin_8h_source.html#l00178">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00277">uartbin::state</a>, <a class="el" href="uartbin_8h_source.html#l00172">uartbin_packet::type</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00089">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00144">UARTBIN_ERROR_BAD_LENGTH</a>, <a class="el" href="uartbin_8h_source.html#l00141">UARTBIN_ERROR_BAD_VERSION</a>, <a class="el" href="uartbin_8h_source.html#l00147">UARTBIN_ERROR_CRC</a>, <a class="el" href="uartbin_8h_source.html#l00150">UARTBIN_ERROR_RX_OVERFLOW</a>, <a class="el" href="uartbin_8h_source.html#l00108">UARTBIN_FLAG_RESPONSE</a>, <a class="el" href="uartbin_8c_source.html#l00047">uartbin_get_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00086">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>, <a class="el" href="uartbin_8c_source.html#l00089">uartbin_report_error()</a>, <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>, <a class="el" href="uartbin_8h_source.html#l00080">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00083">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8c_source.html#l00038">UARTBIN_STATE_CRC</a>, <a class="el" href="uartbin_8c_source.html#l00032">UARTBIN_STATE_HEADER</a>, <a class="el" href="uartbin_8c_source.html#l00035">UARTBIN_STATE_PAYLOAD</a>, <a class="el" href="uartbin_8c_source.html#l00026">UARTBIN_STATE_SOF0</a>, <a class="el" href="uartbin_8c_source.html#l00029">UARTBIN_STATE_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8h_source.html#l00235">uartbin_config::user</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>, <a class="el" href="uartbin_8c_source.html#l00506">uartbin_feed_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00501">uartbin_feed_byte()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>, <a class="el" href="uartbin__app_8c_source.html#l00206">uartbin_app_feed_byte_at()</a>, <a class="el" href="uartbin_8c_source.html#l00506">uartbin_feed_at()</a>, and <a class="el" href="uartbin_8c_source.html#l00501">uartbin_feed_byte()</a>.</p>
 
 </div>
 </div>
@@ -714,7 +718,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00274">uartbin::cfg</a>, and <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00198">linux_uartbin_init()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00198">linux_uartbin_init()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00164">stm32_uartbin_dma_init()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00162">stm32_uartbin_it_init()</a>, and <a class="el" href="uartbin__app_8c_source.html#l00106">uartbin_app_init()</a>.</p>
 
 </div>
 </div>
@@ -747,7 +751,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00304">uartbin::tx_seq</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, and <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin__app_8c_source.html#l00133">uartbin_app_send()</a>, <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, and <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>.</p>
 
 </div>
 </div>
@@ -784,7 +788,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00244">uartbin_poll_retry()</a>, and <a class="el" href="uartbin_8c_source.html#l00279">uartbin_poll_rx_timeout()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00238">stm32_uartbin_dma_poll()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00235">stm32_uartbin_it_poll()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00238">stm32_uartbin_dma_poll()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00235">stm32_uartbin_it_poll()</a>, and <a class="el" href="uartbin__app_8c_source.html#l00213">uartbin_app_poll()</a>.</p>
 
 </div>
 </div>
@@ -972,7 +976,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00073">uartbin_reset_rx()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00223">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00207">stm32_uartbin_it_error_callback()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__app__confirmed_8c_source.html#l00222">linux_uartbin_app_run()</a>, <a class="el" href="linux__posix__serial_8c_source.html#l00233">linux_uartbin_run()</a>, <a class="el" href="stm32__app__confirmed_8c_source.html#l00201">stm32_uartbin_app_it_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00223">stm32_uartbin_dma_error_callback()</a>, <a class="el" href="stm32__hal__dma__idle_8c_source.html#l00198">stm32_uartbin_dma_rx_event_callback()</a>, <a class="el" href="stm32__hal__interrupt_8c_source.html#l00207">stm32_uartbin_it_error_callback()</a>, and <a class="el" href="stm32__hal__interrupt_8c_source.html#l00190">stm32_uartbin_it_rx_complete_callback()</a>.</p>
 
 </div>
 </div>
@@ -1144,7 +1148,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00320">uartbin_crc16_ccitt()</a>, <a class="el" href="uartbin_8h_source.html#l00089">UARTBIN_CRC_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00086">UARTBIN_HEADER_SIZE</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00058">uartbin_put_u16_le()</a>, <a class="el" href="uartbin_8h_source.html#l00080">UARTBIN_SOF0</a>, <a class="el" href="uartbin_8h_source.html#l00083">UARTBIN_SOF1</a>, <a class="el" href="uartbin_8h_source.html#l00077">UARTBIN_VERSION</a>, and <a class="el" href="uartbin_8c_source.html#l00104">uartbin_write_all()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>, and <a class="el" href="uartbin_8c_source.html#l00435">uartbin_send_response()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="uartbin__app_8c_source.html#l00133">uartbin_app_send()</a>, <a class="el" href="uartbin_8c_source.html#l00454">uartbin_send_event()</a>, <a class="el" href="uartbin_8c_source.html#l00399">uartbin_send_request()</a>, and <a class="el" href="uartbin_8c_source.html#l00435">uartbin_send_response()</a>.</p>
 
 </div>
 </div>
@@ -1200,7 +1204,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8c_source.html#l00187">uartbin_check_retry_start()</a>, <a class="el" href="uartbin_8c_source.html#l00172">uartbin_clear_retry()</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00111">UARTBIN_FLAG_EVENT</a>, <a class="el" href="uartbin_8c_source.html#l00385">uartbin_next_seq()</a>, <a class="el" href="uartbin_8h_source.html#l00118">UARTBIN_OK</a>, <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>, and <a class="el" href="uartbin_8c_source.html#l00205">uartbin_start_retry()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00268">main()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00268">main()</a>, and <a class="el" href="uartbin__app_8c_source.html#l00151">uartbin_app_send_confirmed()</a>.</p>
 
 </div>
 </div>
@@ -1316,7 +1320,7 @@ Functions</h2></td></tr>
 
 <p class="reference">References <a class="el" href="uartbin_8h_source.html#l00178">uartbin_packet::seq</a>, <a class="el" href="uartbin_8h_source.html#l00121">UARTBIN_EINVAL</a>, <a class="el" href="uartbin_8h_source.html#l00108">UARTBIN_FLAG_RESPONSE</a>, and <a class="el" href="uartbin_8c_source.html#l00339">uartbin_send()</a>.</p>
 
-<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>.</p>
+<p class="reference">Referenced by <a class="el" href="linux__posix__serial_8c_source.html#l00167">linux_uartbin_on_packet()</a>, and <a class="el" href="uartbin__app_8c_source.html#l00069">uartbin_app_on_packet()</a>.</p>
 
 </div>
 </div>

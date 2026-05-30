@@ -1,4 +1,5 @@
 #include "uartbin.h"
+#include "uartbin_app.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -9,8 +10,12 @@ typedef struct test_bus {
     uint8_t rx_payload[128];
     uint8_t retry_frame[128];
     uartbin_packet_t last_packet;
+    uartbin_app_message_t last_message;
     uint8_t last_payload[128];
     unsigned packet_count;
+    unsigned message_count;
+    unsigned delivery_count;
+    uint16_t last_delivery_seq;
     unsigned error_count;
     uartbin_error_t last_error;
 } test_bus_t;
@@ -45,6 +50,23 @@ static void test_on_error(uartbin_error_t error, void *user)
     bus->error_count++;
 }
 
+static void test_on_message(const uartbin_app_message_t *message, void *user)
+{
+    test_bus_t *bus = (test_bus_t *)user;
+
+    bus->last_message = *message;
+    memcpy(bus->last_payload, message->payload, message->payload_len);
+    bus->message_count++;
+}
+
+static void test_on_delivery(uint16_t seq, void *user)
+{
+    test_bus_t *bus = (test_bus_t *)user;
+
+    bus->last_delivery_seq = seq;
+    bus->delivery_count++;
+}
+
 static uartbin_t make_link(test_bus_t *bus)
 {
     uartbin_t link;
@@ -62,6 +84,28 @@ static uartbin_t make_link(test_bus_t *bus)
 
     uartbin_init(&link, &cfg);
     return link;
+}
+
+static void init_app(uartbin_app_t *app, test_bus_t *bus)
+{
+    uartbin_app_config_t cfg;
+
+    memset(bus, 0, sizeof(*bus));
+    memset(&cfg, 0, sizeof(cfg));
+    cfg.write = test_write;
+    cfg.on_message = test_on_message;
+    cfg.on_delivery = test_on_delivery;
+    cfg.on_error = test_on_error;
+    cfg.user = bus;
+    cfg.rx_payload_buffer = bus->rx_payload;
+    cfg.rx_payload_capacity = sizeof(bus->rx_payload);
+    cfg.rx_timeout_ms = 0u;
+    cfg.tx_retry_buffer = bus->retry_frame;
+    cfg.tx_retry_capacity = sizeof(bus->retry_frame);
+    cfg.tx_retry_timeout_ms = 50u;
+    cfg.tx_retry_max_retries = 3u;
+
+    uartbin_app_init(app, &cfg);
 }
 
 static int expect(int condition, const char *message)
@@ -368,6 +412,100 @@ static int test_rx_feed_does_not_drive_tx_retry(void)
     return failed;
 }
 
+static int test_app_confirmed_message_auto_acks(void)
+{
+    test_bus_t a_bus;
+    test_bus_t b_bus;
+    uartbin_app_t a;
+    uartbin_app_t b;
+    uint8_t payload[] = { 0x21, 0x22, 0x23 };
+    int failed = 0;
+
+    init_app(&a, &a_bus);
+    init_app(&b, &b_bus);
+
+    failed |= expect(uartbin_app_send_confirmed(&a, 0x90, 0x80, payload, sizeof(payload)) == UARTBIN_OK,
+                     "app confirmed send should succeed");
+    uartbin_app_feed(&b, a_bus.tx, a_bus.tx_len);
+
+    failed |= expect(b_bus.message_count == 1u, "confirmed message should be delivered once");
+    failed |= expect(b_bus.last_message.type == 0x90u, "app message type should match");
+    failed |= expect(b_bus.last_message.confirmed != 0u, "app message should be marked confirmed");
+    failed |= expect((b_bus.last_message.flags & 0x80u) != 0u, "app caller flags should be preserved");
+    failed |= expect(b_bus.last_message.payload_len == sizeof(payload), "app payload length should match");
+    failed |= expect(memcmp(b_bus.last_payload, payload, sizeof(payload)) == 0, "app payload should match");
+    failed |= expect(b_bus.tx_len > 0u, "receiver should send automatic ack");
+
+    uartbin_app_feed(&a, b_bus.tx, b_bus.tx_len);
+    failed |= expect(a_bus.delivery_count == 1u, "sender should get one delivery callback");
+    failed |= expect(a_bus.last_delivery_seq == 1u, "delivery seq should match first app seq");
+    failed |= expect(a.link.retry_active == 0u, "ack should clear app retry state");
+
+    return failed;
+}
+
+static int test_app_unconfirmed_message_does_not_arm_retry(void)
+{
+    test_bus_t a_bus;
+    test_bus_t b_bus;
+    uartbin_app_t a;
+    uartbin_app_t b;
+    uint8_t payload[] = { 0x41, 0x42 };
+    int failed = 0;
+
+    init_app(&a, &a_bus);
+    init_app(&b, &b_bus);
+
+    failed |= expect(uartbin_app_send(&a, 0x92, 0, payload, sizeof(payload)) == UARTBIN_OK,
+                     "app unconfirmed send should succeed");
+    failed |= expect(a.link.retry_active == 0u, "unconfirmed app send should not arm retry");
+    uartbin_app_feed(&b, a_bus.tx, a_bus.tx_len);
+
+    failed |= expect(b_bus.message_count == 1u, "unconfirmed message should be delivered");
+    failed |= expect(b_bus.last_message.confirmed == 0u, "unconfirmed message should not be marked confirmed");
+    failed |= expect(b_bus.tx_len == 0u, "unconfirmed message should not auto ack");
+
+    return failed;
+}
+
+static int test_app_confirmed_retry_duplicate_is_not_redelivered(void)
+{
+    test_bus_t a_bus;
+    test_bus_t b_bus;
+    uartbin_app_t a;
+    uartbin_app_t b;
+    uint8_t payload[] = { 0x31 };
+    size_t first_frame_len;
+    int failed = 0;
+
+    init_app(&a, &a_bus);
+    init_app(&b, &b_bus);
+
+    failed |= expect(uartbin_app_send_confirmed(&a, 0x91, 0, payload, sizeof(payload)) == UARTBIN_OK,
+                     "app confirmed send before duplicate test should succeed");
+    first_frame_len = a_bus.tx_len;
+
+    uartbin_app_feed(&b, a_bus.tx, a_bus.tx_len);
+    failed |= expect(b_bus.message_count == 1u, "first confirmed frame should be delivered");
+
+    b_bus.tx_len = 0u;
+    a_bus.tx_len = 0u;
+    uartbin_app_poll(&a, 100u);
+    uartbin_app_poll(&a, 150u);
+
+    failed |= expect(a_bus.tx_len == first_frame_len, "missing ack should retry app confirmed frame");
+    uartbin_app_feed(&b, a_bus.tx, a_bus.tx_len);
+
+    failed |= expect(b_bus.message_count == 1u, "duplicate confirmed frame should not redeliver");
+    failed |= expect(b_bus.tx_len > 0u, "duplicate confirmed frame should be acked again");
+
+    uartbin_app_feed(&a, b_bus.tx, b_bus.tx_len);
+    failed |= expect(a_bus.delivery_count == 1u, "retry ack should deliver once");
+    failed |= expect(a.link.retry_active == 0u, "retry ack should clear app retry state");
+
+    return failed;
+}
+
 int main(void)
 {
     int failed = 0;
@@ -384,6 +522,9 @@ int main(void)
     failed |= test_reliable_request_busy_until_response();
     failed |= test_retry_config_error_does_not_advance_sequence();
     failed |= test_rx_feed_does_not_drive_tx_retry();
+    failed |= test_app_confirmed_message_auto_acks();
+    failed |= test_app_unconfirmed_message_does_not_arm_retry();
+    failed |= test_app_confirmed_retry_duplicate_is_not_redelivered();
 
     if (failed != 0) {
         return 1;

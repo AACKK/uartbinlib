@@ -1,15 +1,7 @@
 var searchData=
 [
-  ['retry_5factive_0',['retry_active',['../structuartbin.html#a0155be8528ac55178eabf063c63bd609',1,'uartbin']]],
-  ['retry_5fcount_1',['retry_count',['../structuartbin.html#a92b7bbe8cda0c1f63fc640f4eebc64fe',1,'uartbin']]],
-  ['retry_5fframe_5flen_2',['retry_frame_len',['../structuartbin.html#a13bc97e96467888eb1ea46712c78abb3',1,'uartbin']]],
-  ['retry_5flast_5ftx_5ftime_5fms_3',['retry_last_tx_time_ms',['../structuartbin.html#a7694fb72c74c4d81839fcce5f5b233b1',1,'uartbin']]],
-  ['retry_5fseq_4',['retry_seq',['../structuartbin.html#a7af84ee31bb3cf150abc5617f3630576',1,'uartbin']]],
-  ['retry_5ftimer_5fstarted_5',['retry_timer_started',['../structuartbin.html#a0924011a7881b5508851cc2df116c270',1,'uartbin']]],
-  ['rx_5fblock_6',['rx_block',['../structlinux__uartbin.html#a76c7b875ec1d395ae39d66235f36d53a',1,'linux_uartbin']]],
-  ['rx_5fbyte_7',['rx_byte',['../structstm32__uartbin__it.html#a5e82a01184c38249369f502940c2914c',1,'stm32_uartbin_it']]],
-  ['rx_5fpayload_8',['rx_payload',['../structlinux__uartbin.html#ac799b8345162d241e3d6279badffd31c',1,'linux_uartbin::rx_payload'],['../structstm32__uartbin__dma.html#a7c81a0ba62392ca2dab077d7d3732f41',1,'stm32_uartbin_dma::rx_payload'],['../structstm32__uartbin__it.html#a8b925dcb35d13c539c8f8847dd126f0f',1,'stm32_uartbin_it::rx_payload']]],
-  ['rx_5fpayload_5fbuffer_9',['rx_payload_buffer',['../structuartbin__config.html#a9ba07c9627b3932126f96d51d791d78c',1,'uartbin_config']]],
-  ['rx_5fpayload_5fcapacity_10',['rx_payload_capacity',['../structuartbin__config.html#a0c006a1746c4c04842a48a892fedb33a',1,'uartbin_config']]],
-  ['rx_5ftimeout_5fms_11',['rx_timeout_ms',['../structuartbin__config.html#a4966d201d37393c6560120f7af2da53e',1,'uartbin_config']]]
+  ['payload_0',['payload',['../structuartbin__packet.html#a5c09c77d40b5513cabf7416c4e05e8c8',1,'uartbin_packet::payload'],['../structuartbin__app__message.html#a15a7ece7e9939ef763c94ac710bbfcea',1,'uartbin_app_message::payload']]],
+  ['payload_5flen_1',['payload_len',['../structuartbin__packet.html#a75e1163ff72f8b6c33b694d575726a07',1,'uartbin_packet::payload_len'],['../structuartbin.html#a97d713ad2e943e696248a70297253d2b',1,'uartbin::payload_len'],['../structuartbin__app__message.html#a67d4c4f4b67ef2a7a5b4b7e64ef6a7d6',1,'uartbin_app_message::payload_len']]],
+  ['payload_5fpos_2',['payload_pos',['../structuartbin.html#a90159895d495d5503cb8df3db8cbe032',1,'uartbin']]],
+  ['protocol_5ferrors_3',['protocol_errors',['../structlinux__uartbin__app.html#a6cef6bacd1c4e4498828e97b612386e8',1,'linux_uartbin_app::protocol_errors'],['../structlinux__uartbin.html#a193d24b4951d754ca9e38a9d0a928ec0',1,'linux_uartbin::protocol_errors'],['../structstm32__uartbin__app__it.html#a54b32b1b368ae3c0e86cf837eab03432',1,'stm32_uartbin_app_it::protocol_errors'],['../structstm32__uartbin__dma.html#acb07ebeeba786749dacb2bb2f1ce97cf',1,'stm32_uartbin_dma::protocol_errors'],['../structstm32__uartbin__it.html#aabba1f1454ea641ef8ecffaf3b2b0dde',1,'stm32_uartbin_it::protocol_errors']]]
 ];

@@ -7,6 +7,7 @@ icerir:
 
 - `examples/stm32_hal_interrupt.c`
 - `examples/stm32_hal_dma_idle.c`
+- `examples/stm32_app_confirmed.c`
 
 Bunlari zorunlu kutuphane kodu gibi degil, kalip olarak kullan.
 
@@ -85,3 +86,32 @@ uygulama seviyesindeki beklenen islem gecikmesinden buyuk sec.
 
 Retry zamanlamasi icin RX callback'lere guvenme. Feed callback'leri yalnizca RX
 parser timeout kontrolu yapar; TX retry acik poll yolunda calisir.
+
+## STM32 App Katmani
+
+Uygulama kodunun ACK/seq/retry ayrintilariyla ilgilenmesini istemiyorsan
+`uartbin_app.h` katmanini kullan. STM32 tarafinda RX callback'leri
+`uartbin_app_feed_byte_at()` veya `uartbin_app_feed_at()` cagirir; main loop ise
+`uartbin_app_poll()` ile timeout ve retry servis eder.
+
+`examples/stm32_app_confirmed.c`, interrupt RX ile bu kalibi gosterir:
+
+```c
+void main_loop(void)
+{
+    stm32_uartbin_app_it_poll(&g_link);
+}
+
+void send_status(void)
+{
+    (void)stm32_uartbin_app_it_send_status(&g_link, payload, payload_len);
+}
+```
+
+Gelen confirmed mesajlar icin ACK otomatik doner. Uygulama seviyesinde ayrica
+feedback vermek istersen `on_message()` icinden yeni bir
+`uartbin_app_send_confirmed()` cagrisi yapabilirsin.
+
+Ayni link icin hem `uartbin_app_poll(&app, now_ms)` hem de
+`uartbin_poll(&app.link, now_ms)` cagirma. App poll fonksiyonu alt
+`uartbin_poll()` cagrimini kendi icinde yapar.
