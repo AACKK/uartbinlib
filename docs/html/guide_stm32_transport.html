@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="uartbinlib_logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.0.0</span>
+   <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.1.0</span>
    </div>
    <div id="projectbrief">developed by Ahmet Cemal Kurtulmus</div>
   </td>
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('guide_stm32_tr
   <div class="headertitle"><div class="title">STM32 Interrupt ve DMA Kullanimi </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md60"></a>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md63"></a>
 STM32 Interrupt ve DMA Kullanimi</h1>
 <p>Portable kutuphane STM32 HAL'e bagimli degildir, fakat repo iki adapter ornegi icerir:</p>
 <ul>
@@ -131,7 +131,7 @@ STM32 Interrupt ve DMA Kullanimi</h1>
 <li><span class="tt"><a class="el" href="stm32__app__confirmed_8c.html" title="STM32 HAL interrupt RX ile uartbin_app confirmed mesaj ornegi.">examples/stm32_app_confirmed.c</a></span></li>
 </ul>
 <p>Bunlari zorunlu kutuphane kodu gibi degil, kalip olarak kullan.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md61"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
 Interrupt RX</h2>
 <p>Tek byte interrupt RX basit ve guvenilirdir:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> HAL_UART_RxCpltCallback(<a class="code hl_typedef" href="stm32__app__confirmed_8c.html#a28e5a9a61ee3cf68aabda300d2580590">UART_HandleTypeDef</a> *huart)</div>
@@ -152,7 +152,7 @@ Interrupt RX</h2>
 <li>Retry'yi <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> sursun; RX callback'leri yalnizca gelen byte'lari beslesin.</li>
 </ul>
 <p>Bu model debug etmesi kolaydir ve orta baud rate'lerde iyi calisir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md62"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
 DMA Idle-Line RX</h2>
 <p>DMA idle-line RX blok alir ve uartbinlib'e besler:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> HAL_UARTEx_RxEventCallback(<a class="code hl_typedef" href="stm32__app__confirmed_8c.html#a28e5a9a61ee3cf68aabda300d2580590">UART_HandleTypeDef</a> *huart, uint16_t size)</div>
@@ -171,7 +171,7 @@ DMA Idle-Line RX</h2>
 <li>HAL UART hatalarinda DMA'i abort/restart et ve <span class="tt"><a class="el" href="uartbin_8h.html#a4b93b42268b8eeb37a0e9a66b88561e9" title="Yalnizca RX parser durumunu resetle.">uartbin_reset()</a></span> cagir.</li>
 </ul>
 <p>Bu model yuksek baud rate veya burst tarzi trafik icin daha uygundur.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md63"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md66"></a>
 TX Secenekleri</h2>
 <p>STM32 ornekleri blocking <span class="tt"><a class="el" href="stm32__app__confirmed_8c.html#a41d654999cc15648093057ee0c6f27e4">HAL_UART_Transmit()</a></span> kullanir; cunku bu, write hook sozlesmesini en az kodla saglar. Production projelerde bunu genelde sunlardan biriyle degistirirsin:</p>
 <ul>
@@ -180,7 +180,7 @@ TX Secenekleri</h2>
 <li>UART task tarafindan bosaltilan RTOS stream buffer.</li>
 </ul>
 <p>Bu ucu de gecerlidir; tek sart write hook'un basari dondurmeden once tum byte'lari kopyalamasi veya kabul etmesidir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md67"></a>
 STM32 ile Retry</h2>
 <p>Otomatik retry icin <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> duzenli cagrilmalidir:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">void</span> main_loop(<span class="keywordtype">void</span>)</div>
@@ -190,7 +190,7 @@ STM32 ile Retry</h2>
 <div class="ttc" id="auartbin_8h_html_ac772ed6c266ea60e13df4a1c28d9622e"><div class="ttname"><a href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a></div><div class="ttdeci">void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)</div><div class="ttdoc">RX timeout ve opsiyonel TX retry zamanlamasini servis et.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00517">uartbin.c:517</a></div></div>
 </div><!-- fragment --><p>RTOS sistemlerinde 1 ms ile 10 ms arasi periyodik task genelde yeterlidir. <span class="tt">tx_retry_timeout_ms</span> degerini peer'in normal round-trip suresinden ve uygulama seviyesindeki beklenen islem gecikmesinden buyuk sec.</p>
 <p>Retry zamanlamasi icin RX callback'lere guvenme. Feed callback'leri yalnizca RX parser timeout kontrolu yapar; TX retry acik poll yolunda calisir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md68"></a>
 STM32 App Katmani</h2>
 <p>Uygulama kodunun ACK/seq/retry ayrintilariyla ilgilenmesini istemiyorsan <span class="tt"><a class="el" href="uartbin__app_8h.html" title="uartbin uzerinde otomatik ACK/retry yapan app seviyesi mesaj katmani.">uartbin_app.h</a></span> katmanini kullan. STM32 tarafinda RX callback'leri <span class="tt"><a class="el" href="uartbin__app_8h.html#a347b5c706a53520cc0a06a966eaf81dd" title="Tek alinan byte&#39;i timestamp ile app katmanina besle.">uartbin_app_feed_byte_at()</a></span> veya <span class="tt"><a class="el" href="uartbin__app_8h.html#a976083e11ed45b691b425735c46fe61b" title="Alinan byte&#39;lari timestamp ile app katmanina besle.">uartbin_app_feed_at()</a></span> cagirir; main loop ise <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span> ile timeout ve retry servis eder.</p>
 <p><span class="tt"><a class="el" href="stm32__app__confirmed_8c.html" title="STM32 HAL interrupt RX ile uartbin_app confirmed mesaj ornegi.">examples/stm32_app_confirmed.c</a></span>, interrupt RX ile bu kalibi gosterir:</p>
@@ -218,11 +218,13 @@ STM32 App Katmani</h2>
 </div><!-- page-nav-tree -->
 </div><!-- page-nav -->
 </div><!-- container -->
+<!-- HTML footer for doxygen 1.17.0 -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
+<script src="uartbinlib_code_highlight.js"></script>
 </body>
 </html>

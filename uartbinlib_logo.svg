@@ -1,67 +1,53 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="390" height="86" viewBox="0 0 390 86" role="img" aria-labelledby="title desc">
   <title id="title">uartbinlib logo</title>
-  <desc id="desc">Iki MCU arasinda binary bit akisini gosteren uartbinlib logosu.</desc>
+  <desc id="desc">UART dalga izini temsil eden uartbinlib logosu.</desc>
   <defs>
-    <linearGradient id="panel" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#07111f"/>
-      <stop offset="1" stop-color="#0f2535"/>
-    </linearGradient>
-    <linearGradient id="signal" x1="54" y1="0" x2="336" y2="0" gradientUnits="userSpaceOnUse">
+    <linearGradient id="trace" x1="16" y1="0" x2="132" y2="0" gradientUnits="userSpaceOnUse">
       <stop offset="0" stop-color="#2dd4bf"/>
-      <stop offset=".45" stop-color="#22d3ee"/>
+      <stop offset=".54" stop-color="#22d3ee"/>
       <stop offset="1" stop-color="#60a5fa"/>
     </linearGradient>
-    <filter id="soft-glow" x="-20%" y="-70%" width="140%" height="240%">
-      <feGaussianBlur stdDeviation="2.4" result="blur"/>
+    <linearGradient id="word" x1="147" y1="0" x2="368" y2="0" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#4db3ff"/>
+      <stop offset=".55" stop-color="#2f8ff2"/>
+      <stop offset="1" stop-color="#8bdcff"/>
+    </linearGradient>
+    <filter id="traceGlow" x="-25%" y="-80%" width="150%" height="260%">
+      <feGaussianBlur stdDeviation="2.1" result="blur"/>
       <feMerge>
         <feMergeNode in="blur"/>
         <feMergeNode in="SourceGraphic"/>
       </feMerge>
     </filter>
-    <filter id="text-pop" x="-20%" y="-80%" width="140%" height="260%">
-      <feDropShadow dx="0" dy="0" stdDeviation="1.2" flood-color="#38bdf8" flood-opacity=".95"/>
-      <feDropShadow dx="0" dy="1" stdDeviation=".7" flood-color="#000000" flood-opacity=".75"/>
+    <filter id="wordGlow" x="-6%" y="-24%" width="112%" height="150%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.1" flood-color="#2d9cff" flood-opacity=".32"/>
     </filter>
   </defs>
 
-  <rect x="6" y="7" width="378" height="72" rx="14" fill="url(#panel)" stroke="#155e75" stroke-width="2"/>
-
-  <g stroke="#38bdf8" stroke-width="2" fill="#0b1220">
-    <rect x="24" y="25" width="34" height="34" rx="7"/>
-    <rect x="332" y="25" width="34" height="34" rx="7"/>
-  </g>
-  <g stroke="#2dd4bf" stroke-width="1.4" stroke-linecap="round">
-    <path d="M31 20v-6M39 20v-6M47 20v-6M55 20v-6"/>
-    <path d="M31 65v6M39 65v6M47 65v6M55 65v6"/>
-    <path d="M339 20v-6M347 20v-6M355 20v-6M363 20v-6"/>
-    <path d="M339 65v6M347 65v6M355 65v6M363 65v6"/>
-  </g>
-  <g fill="#a7f3d0" font-family="Consolas, Menlo, monospace" font-size="7" font-weight="700" text-anchor="middle">
-    <text x="41" y="39">MCU</text>
-    <text x="41" y="50">TX</text>
-    <text x="349" y="39">MCU</text>
-    <text x="349" y="50">RX</text>
-  </g>
-
-  <path d="M60 42 H95 C108 42 108 24 121 24 H164 C177 24 177 62 190 62 H233 C246 62 246 42 259 42 H330"
-        fill="none" stroke="url(#signal)" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" filter="url(#soft-glow)"/>
-  <g fill="#67e8f9">
-    <circle cx="80" cy="42" r="3"/>
-    <circle cx="142" cy="24" r="3"/>
-    <circle cx="211" cy="62" r="3"/>
-    <circle cx="286" cy="42" r="3"/>
+  <g transform="translate(16 16)">
+    <rect x="0" y="0" width="120" height="54" rx="14" fill="#0b1220" opacity=".92" stroke="#164e63" stroke-width="1.4"/>
+    <path d="M10 36 H20 V18 H31 V36 H43 V18 H59 V36 H70 V18 H87 V36 H110"
+          fill="none"
+          stroke="url(#trace)"
+          stroke-width="5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          filter="url(#traceGlow)"/>
+    <g stroke="#164e63" stroke-width="1" opacity=".42">
+      <path d="M12 10 H108"/>
+      <path d="M12 45 H108"/>
+      <path d="M25 8 V47"/>
+      <path d="M49 8 V47"/>
+      <path d="M73 8 V47"/>
+      <path d="M97 8 V47"/>
+    </g>
   </g>
 
-  <g font-family="Consolas, Menlo, monospace" font-size="10" font-weight="700">
-    <text x="72" y="32" fill="#a7f3d0">10010110</text>
-    <text x="133" y="18" fill="#bfdbfe">0110</text>
-    <text x="197" y="76" fill="#67e8f9">101001</text>
-    <text x="266" y="32" fill="#a7f3d0">1101</text>
-  </g>
-
-  <g font-family="Inter, Segoe UI, Arial, sans-serif">
-    <text x="121" y="45" fill="#f8fafc" font-size="28" font-weight="800">uartbinlib</text>
-    <text x="122" y="61" fill="#e0f2fe" stroke="#082f49" stroke-width="1.8" paint-order="stroke fill"
-          font-size="12" font-weight="900" filter="url(#text-pop)">binary uart framing</text>
-  </g>
+  <text x="150" y="55"
+        fill="url(#word)"
+        filter="url(#wordGlow)"
+        font-family="Segoe UI, Inter, Avenir Next, Arial, sans-serif"
+        font-size="44"
+        font-weight="520"
+        letter-spacing=".4">uartbinlib</text>
 </svg>

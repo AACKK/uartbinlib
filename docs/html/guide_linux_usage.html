@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="uartbinlib_logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.0.0</span>
+   <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.1.0</span>
    </div>
    <div id="projectbrief">developed by Ahmet Cemal Kurtulmus</div>
   </td>
@@ -122,7 +122,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('guide_linux_us
   <div class="headertitle"><div class="title">Linux POSIX Serial Kullanimi </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
 Linux POSIX Serial Kullanimi</h1>
 <p>uartbinlib Linux uzerinde de ayni cekirdek API ile kullanilir. Linux tarafinda STM32 HAL yerine POSIX file descriptor, <span class="tt">termios</span>, <span class="tt">read</span>, <span class="tt">write</span> ve <span class="tt">poll</span> kullanilir.</p>
 <p>Repo icindeki ornek:</p>
@@ -130,12 +130,12 @@ Linux POSIX Serial Kullanimi</h1>
 <li><span class="tt"><a class="el" href="linux__posix__serial_8c.html" title="uartbinlib icin Linux POSIX serial port ornegi.">examples/linux_posix_serial.c</a></span></li>
 </ul>
 <p>Bu ornek zorunlu adapter degil, baslangic kalibidir. Kendi uygulamanda event loop, thread, epoll veya async yapi kullanabilirsin; onemli olan RX byte'larini uartbin'e beslemek ve <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> fonksiyonunu duzenli cagirmaktir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
 Serial Port Acma</h2>
 <p>Linux'ta seri port genellikle <span class="tt">/dev/ttyUSB0</span>, <span class="tt">/dev/ttyACM0</span> veya benzeri bir path ile acilir:</p>
 <div class="fragment"><div class="line"><span class="keywordtype">int</span> fd = open(<span class="stringliteral">&quot;/dev/ttyUSB0&quot;</span>, O_RDWR | O_NOCTTY | O_NONBLOCK);</div>
 </div><!-- fragment --><p><span class="tt">O_NOCTTY</span>, portun controlling terminal olmasini engeller. <span class="tt">O_NONBLOCK</span>, read ve write yollarinda event loop ile calismayi kolaylastirir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
 termios Ayari</h2>
 <p>Raw 8N1 mod tipik baslangictir:</p>
 <div class="fragment"><div class="line"><span class="keyword">struct </span>termios tio;</div>
@@ -153,7 +153,7 @@ termios Ayari</h2>
 <div class="line">cfsetospeed(&amp;tio, B115200);</div>
 <div class="line">tcsetattr(fd, TCSANOW, &amp;tio);</div>
 </div><!-- fragment --><p>Urun protokolun farkli baud rate veya parity istiyorsa bu ayarlari degistir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
 Write Hook</h2>
 <p>Linux write hook'u, basari dondurmeden once tum byte'lari fd'ye kabul ettirmelidir. Non-blocking fd <span class="tt">EAGAIN</span> dondururse <span class="tt">poll(POLLOUT)</span> ile kisa bekleme yapilabilir:</p>
 <div class="fragment"><div class="line"><span class="keyword">static</span> <span class="keywordtype">int</span> <a class="code hl_function" href="linux__posix__serial_8c.html#aa67ca417e4a883c51056c9081eaf2c97">linux_uartbin_write</a>(<span class="keyword">const</span> uint8_t *data, <span class="keywordtype">size_t</span> len, <span class="keywordtype">void</span> *user)</div>
@@ -186,7 +186,7 @@ Write Hook</h2>
 <div class="ttc" id="alinux__posix__serial_8c_html_aa67ca417e4a883c51056c9081eaf2c97"><div class="ttname"><a href="linux__posix__serial_8c.html#aa67ca417e4a883c51056c9081eaf2c97">linux_uartbin_write</a></div><div class="ttdeci">static int linux_uartbin_write(const uint8_t *data, size_t len, void *user)</div><div class="ttdoc">POSIX write kullanan uartbin TX hook.</div><div class="ttdef"><b>Definition</b> <a href="linux__posix__serial_8c_source.html#l00133">linux_posix_serial.c:133</a></div></div>
 <div class="ttc" id="astructlinux__uartbin_html_a54f6c7272bb50a9f0ea49af47726d29b"><div class="ttname"><a href="structlinux__uartbin.html#a54f6c7272bb50a9f0ea49af47726d29b">linux_uartbin::fd</a></div><div class="ttdeci">int fd</div><div class="ttdoc">POSIX serial file descriptor.</div><div class="ttdef"><b>Definition</b> <a href="linux__posix__serial_8c_source.html#l00040">linux_posix_serial.c:40</a></div></div>
 </div><!-- fragment --><p>Bu sozlesme onemlidir; <span class="tt"><a class="el" href="uartbin_8h.html#a105423f2609e98a85f2d062df2b84ff4" title="Tek cerceveli paketi olustur ve gonder.">uartbin_send()</a></span> tek cerceve icin write hook'u birden fazla kez cagirabilir. Hook basari dondurdugu anda verilen byte araligi artik guvende olmalidir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
 RX ve poll Dongusu</h2>
 <p>Linux'ta RX icin <span class="tt">poll(POLLIN)</span> beklenir, gelen blok <span class="tt"><a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.">uartbin_feed_at()</a></span> ile beslenir. Retry ve RX timeout icin <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> periyodik cagrilir:</p>
 <div class="fragment"><div class="line"><span class="keywordflow">for</span> (;;) {</div>
@@ -212,7 +212,7 @@ RX ve poll Dongusu</h2>
 <div class="ttc" id="auartbin_8h_html_ab9da003f689bb5d95d54752a907cf19b"><div class="ttname"><a href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b">uartbin_feed_at</a></div><div class="ttdeci">void uartbin_feed_at(uartbin_t *ctx, const uint8_t *data, size_t len, uint32_t now_ms)</div><div class="ttdoc">Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00506">uartbin.c:506</a></div></div>
 <div class="ttc" id="auartbin_8h_html_ac772ed6c266ea60e13df4a1c28d9622e"><div class="ttname"><a href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e">uartbin_poll</a></div><div class="ttdeci">void uartbin_poll(uartbin_t *ctx, uint32_t now_ms)</div><div class="ttdoc">RX timeout ve opsiyonel TX retry zamanlamasini servis et.</div><div class="ttdef"><b>Definition</b> <a href="uartbin_8c_source.html#l00517">uartbin.c:517</a></div></div>
 </div><!-- fragment --><p><span class="tt">poll()</span> timeout degeri, retry cozunurlugunu belirler. 1 ms ile 10 ms arasi genelde yeterlidir; CPU yukune ve gecikme ihtiyacina gore sec.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
 Otomatik Retry</h2>
 <p>Linux tarafinda retry, STM32 ile ayni calisir:</p>
 <ul>
@@ -222,7 +222,7 @@ Otomatik Retry</h2>
 <li>Limit dolarsa <span class="tt"><a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a197538cd1ce50346e338b55684482dd9" title="Response gelmeden guvenilir TX retry limitine ulasildi.">UARTBIN_ERROR_RETRY_EXHAUSTED</a></span> gelir.</li>
 </ul>
 <p>Linux'ta fd write hatalari daha olasi oldugu icin <span class="tt"><a class="el" href="uartbin_8h.html#a977907c0a33e82e6e0ad0168bab1db27a7ed4d37cc04314e6a6e664f2548236d5" title="Guvenilir TX retry ayarlanan hook ile yazilamadi.">UARTBIN_ERROR_RETRY_WRITE</a></span> hatasini da loglamak faydalidir.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
 Linux App Katmani</h2>
 <p><span class="tt"><a class="el" href="uartbin__app_8h.html" title="uartbin uzerinde otomatik ACK/retry yapan app seviyesi mesaj katmani.">uartbin_app.h</a></span> kullanildiginda event loop ayni kalir; yalnizca feed ve poll cagrilari app context'e yonelir:</p>
 <div class="fragment"><div class="line"><a class="code hl_function" href="uartbin__app_8h.html#a976083e11ed45b691b425735c46fe61b">uartbin_app_feed_at</a>(&amp;app, rx, (<span class="keywordtype">size_t</span>)n, <a class="code hl_function" href="linux__app__confirmed_8c.html#a07858180adb30590846fe690358adc3d">linux_millis</a>());</div>
@@ -231,7 +231,7 @@ Linux App Katmani</h2>
 <div class="ttc" id="auartbin__app_8h_html_afa39de928db246c3d977e6c241930f60"><div class="ttname"><a href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60">uartbin_app_poll</a></div><div class="ttdeci">void uartbin_app_poll(uartbin_app_t *app, uint32_t now_ms)</div><div class="ttdoc">RX timeout ve confirmed mesaj retry zamanlamasini servis et.</div><div class="ttdef"><b>Definition</b> <a href="uartbin__app_8c_source.html#l00213">uartbin_app.c:213</a></div></div>
 </div><!-- fragment --><p><span class="tt"><a class="el" href="linux__app__confirmed_8c.html" title="Linux POSIX serial ile uartbin_app confirmed mesaj ornegi.">examples/linux_app_confirmed.c</a></span>, acilista bir confirmed mesaj gonderen ve ACK/retry sonucunu <span class="tt">on_delivery()</span> / <span class="tt">on_error()</span> callback'leriyle loglayan tam POSIX serial ornegidir.</p>
 <p>Ayni serial link app katmani ile calisiyorsa event loop icinde yalnizca <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll</a>(&amp;app, now_ms)</span> cagir. <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span> kendi icinde <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll</a>(&amp;app.link, now_ms)</span> yaptigi icin ikinci poll cagrisi gerekmez.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md38"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md40"></a>
 Derleme</h2>
 <p>Tek dosya ornegi su sekilde derlenebilir:</p>
 <div class="fragment"><div class="line">cc -Iinclude examples/linux_posix_serial.c src/uartbin.c -o linux_uartbin</div>
@@ -241,7 +241,7 @@ Derleme</h2>
 <div class="fragment"><div class="line">./linux_uartbin /dev/ttyUSB0</div>
 <div class="line">./linux_uartbin_app /dev/ttyUSB0</div>
 </div><!-- fragment --><p>Port yetkisi yoksa kullaniciyi ilgili gruba eklemek gerekebilir. Debian/Ubuntu tarzi sistemlerde bu grup genellikle <span class="tt">dialout</span> olur.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md39"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
 Mimari Notlar</h2>
 <ul>
 <li>Linux uygulamasinda her serial fd icin bir <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> kullan.</li>
@@ -262,11 +262,13 @@ Mimari Notlar</h2>
 </div><!-- page-nav-tree -->
 </div><!-- page-nav -->
 </div><!-- container -->
+<!-- HTML footer for doxygen 1.17.0 -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
+<script src="uartbinlib_code_highlight.js"></script>
 </body>
 </html>

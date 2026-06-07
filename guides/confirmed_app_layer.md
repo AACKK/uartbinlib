@@ -39,6 +39,36 @@ flowchart TB
 ayri bir `uartbin_app_t` ayirmak gerekir. Context initialize edildikten sonra
 kopyalanmamalidir.
 
+## App Katmani Secildiginde Ne Kullanilir?
+
+> **UYARI:** App katmani kullanilan bir linkte disaridan sadece
+> `uartbin_app_*` runtime fonksiyonlarini cagir. Ayni link icin cekirdek
+> `uartbin_init()`, `uartbin_feed_at()` veya `uartbin_poll()` cagrilarini
+> ayrica yapma.
+
+App katmani bir "ikinci engine" degildir; alttaki cekirdek engine'i kendi
+icinde kullanan ust seviye API'dir. Bu yuzden app kullanan bir portta normal
+akis soyledir:
+
+| Adim | Cagir |
+| --- | --- |
+| Init | `uartbin_app_init(&app, &cfg)` |
+| RX byte/block besleme | `uartbin_app_feed_byte_at(&app, byte, now_ms)` veya `uartbin_app_feed_at(&app, data, len, now_ms)` |
+| Periyodik servis | `uartbin_app_poll(&app, now_ms)` |
+| Confirmed mesaj | `uartbin_app_send_confirmed(&app, type, flags, payload, len)` |
+| Unconfirmed mesaj | `uartbin_app_send(&app, type, flags, payload, len)` |
+
+Bu link icin normal port kodunda sunlari cagirma:
+
+```c
+uartbin_init(&app.link, ...);              /* Yanlis: app init zaten kurar. */
+uartbin_feed_at(&app.link, data, len, now);/* Yanlis: app feed zaten besler. */
+uartbin_poll(&app.link, now);              /* Yanlis: app poll zaten cagirir. */
+```
+
+Ayni RX verisini hem app feed'e hem core feed'e vermek frame parser'i ayni
+byte'larla iki kez besler. Bu, CRC/seq/ACK/retry davranisini bozabilir.
+
 ## Basarili Confirmed Mesaj Akisi
 
 MCU A confirmed mesaj gonderdiginde seq degeri otomatik uretilir. MCU B mesaj
@@ -204,6 +234,8 @@ App katmani kullanirken ayni fiziksel link icin ikinci bir poll cagrisi yapma.
 `uartbin_app_poll()` alttaki `app.link` icin `uartbin_poll()` cagrimini zaten
 yapar. Yani `uartbin_app_poll(&app, now_ms)` ile birlikte
 `uartbin_poll(&app.link, now_ms)` cagirmak gerekmez.
+Ayni kural feed icin de gecerlidir: `uartbin_app_feed_at()` kullanilan linkte
+ayni RX byte'larini `uartbin_feed_at()` ile tekrar besleme.
 
 Mesaj gonderimi:
 

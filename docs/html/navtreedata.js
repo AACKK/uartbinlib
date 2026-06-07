@@ -41,73 +41,76 @@ var NAVTREE =
     [ "Dokumantasyon", "index.html#autotoc_md14", null ],
     [ "API Kullanim Rehberi", "guide_api_usage.html", [
       [ "API Kullanim Rehberi", "guide_api_usage.html#autotoc_md15", [
-        [ "App Katmani: Otomatik Confirmed Mesaj", "guide_api_usage.html#autotoc_md16", null ],
-        [ "Temel Kurulum", "guide_api_usage.html#autotoc_md17", null ],
-        [ "Mesaj Gonderme", "guide_api_usage.html#autotoc_md18", null ],
-        [ "Byte Alma", "guide_api_usage.html#autotoc_md19", null ],
-        [ "Guvenilir Mesaj Kurallari", "guide_api_usage.html#autotoc_md20", null ],
-        [ "Packet Omru", "guide_api_usage.html#autotoc_md21", null ]
+        [ "Kritik Kural: Ayni Linkte API Ailelerini Karistirma", "guide_api_usage.html#autotoc_md16", null ],
+        [ "App Katmani: Otomatik Confirmed Mesaj", "guide_api_usage.html#autotoc_md17", null ],
+        [ "Temel Kurulum", "guide_api_usage.html#autotoc_md18", null ],
+        [ "Mesaj Gonderme", "guide_api_usage.html#autotoc_md19", null ],
+        [ "Byte Alma", "guide_api_usage.html#autotoc_md20", null ],
+        [ "Guvenilir Mesaj Kurallari", "guide_api_usage.html#autotoc_md21", null ],
+        [ "Packet Omru", "guide_api_usage.html#autotoc_md22", null ]
       ] ]
     ] ],
     [ "Confirmed App Katmani", "guide_confirmed_app.html", [
-      [ "Confirmed App Katmani", "guide_confirmed_app.html#autotoc_md22", [
-        [ "Katman Mimarisi", "guide_confirmed_app.html#autotoc_md23", null ],
-        [ "Basarili Confirmed Mesaj Akisi", "guide_confirmed_app.html#autotoc_md24", null ],
-        [ "ACK Kaybi ve Retry Akisi", "guide_confirmed_app.html#autotoc_md25", null ],
-        [ "Duplicate Mesaj Davranisi", "guide_confirmed_app.html#autotoc_md26", null ],
-        [ "Feedback ve Cift Yonlu Mesajlasma", "guide_confirmed_app.html#autotoc_md27", null ],
-        [ "API Ozeti", "guide_confirmed_app.html#autotoc_md28", null ],
-        [ "Callback ve Return Kurallari", "guide_confirmed_app.html#autotoc_md29", null ],
-        [ "Ornekler", "guide_confirmed_app.html#autotoc_md30", null ]
+      [ "Confirmed App Katmani", "guide_confirmed_app.html#autotoc_md23", [
+        [ "Katman Mimarisi", "guide_confirmed_app.html#autotoc_md24", null ],
+        [ "App Katmani Secildiginde Ne Kullanilir?", "guide_confirmed_app.html#autotoc_md25", null ],
+        [ "Basarili Confirmed Mesaj Akisi", "guide_confirmed_app.html#autotoc_md26", null ],
+        [ "ACK Kaybi ve Retry Akisi", "guide_confirmed_app.html#autotoc_md27", null ],
+        [ "Duplicate Mesaj Davranisi", "guide_confirmed_app.html#autotoc_md28", null ],
+        [ "Feedback ve Cift Yonlu Mesajlasma", "guide_confirmed_app.html#autotoc_md29", null ],
+        [ "API Ozeti", "guide_confirmed_app.html#autotoc_md30", null ],
+        [ "Callback ve Return Kurallari", "guide_confirmed_app.html#autotoc_md31", null ],
+        [ "Ornekler", "guide_confirmed_app.html#autotoc_md32", null ]
       ] ]
     ] ],
     [ "Linux POSIX Serial Kullanimi", "guide_linux_usage.html", [
-      [ "Linux POSIX Serial Kullanimi", "guide_linux_usage.html#autotoc_md31", [
-        [ "Serial Port Acma", "guide_linux_usage.html#autotoc_md32", null ],
-        [ "termios Ayari", "guide_linux_usage.html#autotoc_md33", null ],
-        [ "Write Hook", "guide_linux_usage.html#autotoc_md34", null ],
-        [ "RX ve poll Dongusu", "guide_linux_usage.html#autotoc_md35", null ],
-        [ "Otomatik Retry", "guide_linux_usage.html#autotoc_md36", null ],
-        [ "Linux App Katmani", "guide_linux_usage.html#autotoc_md37", null ],
-        [ "Derleme", "guide_linux_usage.html#autotoc_md38", null ],
-        [ "Mimari Notlar", "guide_linux_usage.html#autotoc_md39", null ]
+      [ "Linux POSIX Serial Kullanimi", "guide_linux_usage.html#autotoc_md33", [
+        [ "Serial Port Acma", "guide_linux_usage.html#autotoc_md34", null ],
+        [ "termios Ayari", "guide_linux_usage.html#autotoc_md35", null ],
+        [ "Write Hook", "guide_linux_usage.html#autotoc_md36", null ],
+        [ "RX ve poll Dongusu", "guide_linux_usage.html#autotoc_md37", null ],
+        [ "Otomatik Retry", "guide_linux_usage.html#autotoc_md38", null ],
+        [ "Linux App Katmani", "guide_linux_usage.html#autotoc_md39", null ],
+        [ "Derleme", "guide_linux_usage.html#autotoc_md40", null ],
+        [ "Mimari Notlar", "guide_linux_usage.html#autotoc_md41", null ]
       ] ]
     ] ],
     [ "Port Etme Rehberi", "guide_porting.html", [
-      [ "Port Etme Rehberi", "guide_porting.html#autotoc_md40", [
-        [ "Port Etme Kontrol Listesi", "guide_porting.html#autotoc_md41", [
-          [ "Cekirdek <span class=\"tt\">uartbin_t</span> icin", "guide_porting.html#autotoc_md42", null ],
-          [ "App katmani <span class=\"tt\">uartbin_app_t</span> icin", "guide_porting.html#autotoc_md43", null ]
+      [ "Port Etme Rehberi", "guide_porting.html#autotoc_md42", [
+        [ "Onemli Secim: Bir Link Icin Tek API Ailesi", "guide_porting.html#autotoc_md43", null ],
+        [ "Port Etme Kontrol Listesi", "guide_porting.html#autotoc_md44", [
+          [ "Cekirdek <span class=\"tt\">uartbin_t</span> icin", "guide_porting.html#autotoc_md45", null ],
+          [ "App katmani <span class=\"tt\">uartbin_app_t</span> icin", "guide_porting.html#autotoc_md46", null ]
         ] ],
-        [ "Write Hook Sozlesmesi", "guide_porting.html#autotoc_md44", null ],
-        [ "Cekirdek Port Iskeleti", "guide_porting.html#autotoc_md45", null ],
-        [ "App Katmani Port Iskeleti", "guide_porting.html#autotoc_md46", null ],
-        [ "Zamanlama", "guide_porting.html#autotoc_md47", null ],
-        [ "RX Baglama Kaliplari", "guide_porting.html#autotoc_md48", [
-          [ "Tek byte interrupt", "guide_porting.html#autotoc_md49", null ],
-          [ "DMA veya blok RX", "guide_porting.html#autotoc_md50", null ]
+        [ "Write Hook Sozlesmesi", "guide_porting.html#autotoc_md47", null ],
+        [ "Cekirdek Port Iskeleti", "guide_porting.html#autotoc_md48", null ],
+        [ "App Katmani Port Iskeleti", "guide_porting.html#autotoc_md49", null ],
+        [ "Zamanlama", "guide_porting.html#autotoc_md50", null ],
+        [ "RX Baglama Kaliplari", "guide_porting.html#autotoc_md51", [
+          [ "Tek byte interrupt", "guide_porting.html#autotoc_md52", null ],
+          [ "DMA veya blok RX", "guide_porting.html#autotoc_md53", null ]
         ] ],
-        [ "Hata Yonetimi", "guide_porting.html#autotoc_md51", null ],
-        [ "Buffer Boyutlari", "guide_porting.html#autotoc_md52", null ],
-        [ "Coklu UART Sistemleri", "guide_porting.html#autotoc_md53", null ],
-        [ "Port Dogrulama Kontrol Listesi", "guide_porting.html#autotoc_md54", null ]
+        [ "Hata Yonetimi", "guide_porting.html#autotoc_md54", null ],
+        [ "Buffer Boyutlari", "guide_porting.html#autotoc_md55", null ],
+        [ "Coklu UART Sistemleri", "guide_porting.html#autotoc_md56", null ],
+        [ "Port Dogrulama Kontrol Listesi", "guide_porting.html#autotoc_md57", null ]
       ] ]
     ] ],
     [ "Halka Buffer TX Portu", "guide_ring_buffer.html", [
-      [ "Halka Buffer TX Portu", "guide_ring_buffer.html#autotoc_md55", [
-        [ "Minimal Halka Buffer Yapisi", "guide_ring_buffer.html#autotoc_md56", null ],
-        [ "uartbin Write Hook", "guide_ring_buffer.html#autotoc_md57", null ],
-        [ "TX Interrupt Tarafi", "guide_ring_buffer.html#autotoc_md58", null ],
-        [ "Pratik Notlar", "guide_ring_buffer.html#autotoc_md59", null ]
+      [ "Halka Buffer TX Portu", "guide_ring_buffer.html#autotoc_md58", [
+        [ "Minimal Halka Buffer Yapisi", "guide_ring_buffer.html#autotoc_md59", null ],
+        [ "uartbin Write Hook", "guide_ring_buffer.html#autotoc_md60", null ],
+        [ "TX Interrupt Tarafi", "guide_ring_buffer.html#autotoc_md61", null ],
+        [ "Pratik Notlar", "guide_ring_buffer.html#autotoc_md62", null ]
       ] ]
     ] ],
     [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html", [
-      [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html#autotoc_md60", [
-        [ "Interrupt RX", "guide_stm32_transport.html#autotoc_md61", null ],
-        [ "DMA Idle-Line RX", "guide_stm32_transport.html#autotoc_md62", null ],
-        [ "TX Secenekleri", "guide_stm32_transport.html#autotoc_md63", null ],
-        [ "STM32 ile Retry", "guide_stm32_transport.html#autotoc_md64", null ],
-        [ "STM32 App Katmani", "guide_stm32_transport.html#autotoc_md65", null ]
+      [ "STM32 Interrupt ve DMA Kullanimi", "guide_stm32_transport.html#autotoc_md63", [
+        [ "Interrupt RX", "guide_stm32_transport.html#autotoc_md64", null ],
+        [ "DMA Idle-Line RX", "guide_stm32_transport.html#autotoc_md65", null ],
+        [ "TX Secenekleri", "guide_stm32_transport.html#autotoc_md66", null ],
+        [ "STM32 ile Retry", "guide_stm32_transport.html#autotoc_md67", null ],
+        [ "STM32 App Katmani", "guide_stm32_transport.html#autotoc_md68", null ]
       ] ]
     ] ],
     [ "Data Structures", "annotated.html", [
@@ -136,7 +139,7 @@ var NAVTREE =
 var NAVTREEINDEX =
 [
 "annotated.html",
-"structuartbin__app__config.html#aef7f088e76eb2a5edbbad15359cb8003"
+"structuartbin__app__config.html#ab3f3f12946e174e415c96c49fc86c395"
 ];
 
 const SYNCONMSG = 'click to disable panel synchronization';

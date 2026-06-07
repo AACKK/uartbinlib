@@ -33,7 +33,7 @@ mermaid.initialize({ startOnLoad: true, theme: theme });
  <tr id="projectrow">
   <td id="projectlogo"><img alt="Logo" src="uartbinlib_logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.0.0</span>
+   <div id="projectname">uartbinlib<span id="projectnumber">&#160;V1.1.0</span>
    </div>
    <div id="projectbrief">developed by Ahmet Cemal Kurtulmus</div>
   </td>
@@ -124,7 +124,7 @@ document.addEventListener('DOMContentLoaded',() => { initNavTree('index.html',''
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__r_e_a_d_m_e"></a></p>
 <p><span class="tt">uartbinlib</span>, UART gibi byte akislari uzerinden cerceveli binary mesaj tasimak icin kucuk ve platformdan bagimsiz bir C kutuphanesidir. STM32 gibi gomulu hedefler icin tasarlanmistir, fakat cekirdek kod HAL, RTOS, DMA, interrupt veya heap bagimliligi tasimaz.</p>
-<p>Version: <span class="tt">V1.0.0</span></p>
+<p>Version: <span class="tt">V1.1.0</span></p>
 <p>Dokumantasyon: <a href="https://aackk.github.io/uartbinlib/">aackk.github.io/uartbinlib</a></p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md1"></a>
 Neden uartbinlib?</h1>
@@ -307,7 +307,18 @@ flowchart LR
 <div class="ttc" id="auartbin__app_8h_html_a57d9e125cd05260103f0fbc2131e54e2"><div class="ttname"><a href="uartbin__app_8h.html#a57d9e125cd05260103f0fbc2131e54e2">uartbin_app_message_t</a></div><div class="ttdeci">struct uartbin_app_message uartbin_app_message_t</div><div class="ttdoc">Ust seviye app katmaninin uygulamaya teslim ettigi mesaj.</div></div>
 <div class="ttc" id="auartbin__app_8h_html_a9a980999643b13136f4bfe1d4279820a"><div class="ttname"><a href="uartbin__app_8h.html#a9a980999643b13136f4bfe1d4279820a">uartbin_app_config_t</a></div><div class="ttdeci">struct uartbin_app_config uartbin_app_config_t</div><div class="ttdoc">Ust seviye otomatik ACK/retry mesajlasma katmani konfigurasyonu.</div></div>
 </div><!-- fragment --><p>Duplicate retry frame'i gelirse app katmani ACK'i tekrar gonderir ama ayni mesaji uygulama callback'ine ikinci kez teslim etmez. <span class="tt"><a class="el" href="uartbin__app_8h.html#a4f3d456d4840ad6a86f6175152a9fce7" title="ACK beklemeyen normal app mesaji gonder.">uartbin_app_send()</a></span> ise ACK beklemeyen normal mesaj gonderimi icindir.</p>
-<p>App katmani kullanirken ayni link icin sadece <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span> cagir. Bu fonksiyon alttaki <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> cagrimini kendi icinde yapar.</p>
+<blockquote class="doxtable">
+<p><b>Onemli:</b> Ayni fiziksel link icin tek API ailesi sec. App katmani kullaniyorsan init, RX feed ve poll tarafinda <span class="tt">uartbin_app_*</span> fonksiyonlarini kullan; ayni link icin ayrica <span class="tt"><a class="el" href="uartbin_8h.html#a09e736b97567456af7144d1eb8f3edec" title="uartbin context baslat.">uartbin_init()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.">uartbin_feed_at()</a></span> veya <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> cagirma. </p>
+</blockquote>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadNone">Secilen katman  </th><th class="markdownTableHeadNone">Kullan  </th><th class="markdownTableHeadNone">Kullanma  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyNone">Cekirdek <span class="tt"><a class="el" href="uartbin_8h.html" title="Platformdan bagimsiz binary UART cerceveleme kutuphanesi.">uartbin.h</a></span>  </td><td class="markdownTableBodyNone"><span class="tt"><a class="el" href="uartbin_8h.html#a09e736b97567456af7144d1eb8f3edec" title="uartbin context baslat.">uartbin_init()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.">uartbin_feed_at()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span>, <span class="tt">uartbin_send_request/response/event()</span>  </td><td class="markdownTableBodyNone"><span class="tt"><a class="el" href="uartbin__app_8h.html#a14d31ee8ac4b0da8d25f625147eb5167" title="Ust seviye app context&#39;ini baslat.">uartbin_app_init()</a></span>, <span class="tt"><a class="el" href="uartbin__app_8h.html#a976083e11ed45b691b425735c46fe61b" title="Alinan byte&#39;lari timestamp ile app katmanina besle.">uartbin_app_feed_at()</a></span>, <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyNone">App <span class="tt"><a class="el" href="uartbin__app_8h.html" title="uartbin uzerinde otomatik ACK/retry yapan app seviyesi mesaj katmani.">uartbin_app.h</a></span>  </td><td class="markdownTableBodyNone"><span class="tt"><a class="el" href="uartbin__app_8h.html#a14d31ee8ac4b0da8d25f625147eb5167" title="Ust seviye app context&#39;ini baslat.">uartbin_app_init()</a></span>, <span class="tt"><a class="el" href="uartbin__app_8h.html#a976083e11ed45b691b425735c46fe61b" title="Alinan byte&#39;lari timestamp ile app katmanina besle.">uartbin_app_feed_at()</a></span>, <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span>, <span class="tt"><a class="el" href="uartbin__app_8h.html#a34d0bbf7ac1afcb97d4fe3a701dd1f72" title="Otomatik ACK/retry ile confirmed app mesaji gonder.">uartbin_app_send_confirmed()</a></span>  </td><td class="markdownTableBodyNone">Ayni link icin <span class="tt"><a class="el" href="uartbin_8h.html#a09e736b97567456af7144d1eb8f3edec" title="uartbin context baslat.">uartbin_init()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#ab9da003f689bb5d95d54752a907cf19b" title="Alinan byte&#39;lari gecerli uygulama timestamp degeri ile besle.">uartbin_feed_at()</a></span>, <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span>  </td></tr>
+</table>
+<p><span class="tt"><a class="el" href="uartbin__app_8h.html#a46e845184762e14b7c937add19e965ae" title="Ust seviye otomatik ACK/retry mesajlasma context&#39;i.">uartbin_app_t</a></span> icinde bir <span class="tt"><a class="el" href="uartbin_8h.html#a84d23cbe88d74beb43fa5234dcddb4d1" title="Tek uartbin linki icin runtime durum.">uartbin_t</a></span> tasir. Bu nedenle <span class="tt"><a class="el" href="uartbin__app_8h.html#a976083e11ed45b691b425735c46fe61b" title="Alinan byte&#39;lari timestamp ile app katmanina besle.">uartbin_app_feed_at()</a></span> alttaki parser'i, <span class="tt"><a class="el" href="uartbin__app_8h.html#afa39de928db246c3d977e6c241930f60" title="RX timeout ve confirmed mesaj retry zamanlamasini servis et.">uartbin_app_poll()</a></span> da alttaki <span class="tt"><a class="el" href="uartbin_8h.html#ac772ed6c266ea60e13df4a1c28d9622e" title="RX timeout ve opsiyonel TX retry zamanlamasini servis et.">uartbin_poll()</a></span> cagrimini kendi icinde servis eder.</p>
 <p>Basarili ve timeout'lu akisin ayrintilari icin Doxygen'deki <span class="tt">Confirmed App Katmani</span> rehberine bak.</p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
 Otomatik Sira Numaralari</h1>
@@ -485,11 +496,13 @@ Dokumantasyon</h1>
 </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
+<!-- HTML footer for doxygen 1.17.0 -->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="footer">Generated by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.17.0 </li>
   </ul>
 </div>
+<script src="uartbinlib_code_highlight.js"></script>
 </body>
 </html>

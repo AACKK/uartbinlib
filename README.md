@@ -5,7 +5,7 @@ icin kucuk ve platformdan bagimsiz bir C kutuphanesidir. STM32 gibi gomulu
 hedefler icin tasarlanmistir, fakat cekirdek kod HAL, RTOS, DMA, interrupt veya
 heap bagimliligi tasimaz.
 
-Version: `V1.0.0`
+Version: `V1.1.0`
 
 Dokumantasyon: [aackk.github.io/uartbinlib](https://aackk.github.io/uartbinlib/)
 
@@ -185,8 +185,19 @@ Duplicate retry frame'i gelirse app katmani ACK'i tekrar gonderir ama ayni
 mesaji uygulama callback'ine ikinci kez teslim etmez. `uartbin_app_send()` ise
 ACK beklemeyen normal mesaj gonderimi icindir.
 
-App katmani kullanirken ayni link icin sadece `uartbin_app_poll()` cagir.
-Bu fonksiyon alttaki `uartbin_poll()` cagrimini kendi icinde yapar.
+> **Onemli:** Ayni fiziksel link icin tek API ailesi sec. App katmani
+> kullaniyorsan init, RX feed ve poll tarafinda `uartbin_app_*` fonksiyonlarini
+> kullan; ayni link icin ayrica `uartbin_init()`, `uartbin_feed_at()` veya
+> `uartbin_poll()` cagirma.
+
+| Secilen katman | Kullan | Kullanma |
+| --- | --- | --- |
+| Cekirdek `uartbin.h` | `uartbin_init()`, `uartbin_feed_at()`, `uartbin_poll()`, `uartbin_send_request/response/event()` | `uartbin_app_init()`, `uartbin_app_feed_at()`, `uartbin_app_poll()` |
+| App `uartbin_app.h` | `uartbin_app_init()`, `uartbin_app_feed_at()`, `uartbin_app_poll()`, `uartbin_app_send_confirmed()` | Ayni link icin `uartbin_init()`, `uartbin_feed_at()`, `uartbin_poll()` |
+
+`uartbin_app_t` icinde bir `uartbin_t` tasir. Bu nedenle
+`uartbin_app_feed_at()` alttaki parser'i, `uartbin_app_poll()` da alttaki
+`uartbin_poll()` cagrimini kendi icinde servis eder.
 
 Basarili ve timeout'lu akisin ayrintilari icin Doxygen'deki
 `Confirmed App Katmani` rehberine bak.

@@ -14,6 +14,23 @@ Cogu uygulama, ACK/seq/retry ayrintisini saklayan app katmanini kullanabilir.
 Alt seviye request/response/event API'leri ozel protokol akislarinda hala
 dogrudan kullanilabilir.
 
+## Kritik Kural: Ayni Linkte API Ailelerini Karistirma
+
+> **UYARI:** Bir fiziksel UART linki icin tek runtime API ailesi sec. App
+> katmani kullaniyorsan ayni linki cekirdek `uartbin_*` feed/poll/init
+> fonksiyonlariyla tekrar servis etme.
+
+| Ne yapmak istiyorsun? | Kullanilacak API | Kullanilmayacak API |
+| --- | --- | --- |
+| Frame, CRC, seq ve request/response/event seviyesinde calismak | `uartbin_init()`, `uartbin_feed_at()`, `uartbin_feed_byte_at()`, `uartbin_poll()`, `uartbin_send_request()`, `uartbin_send_response()`, `uartbin_send_event()` | `uartbin_app_init()`, `uartbin_app_feed_at()`, `uartbin_app_poll()` |
+| Uygulama seviyesinde confirmed mesaj, otomatik ACK ve retry kullanmak | `uartbin_app_init()`, `uartbin_app_feed_at()`, `uartbin_app_feed_byte_at()`, `uartbin_app_poll()`, `uartbin_app_send_confirmed()`, `uartbin_app_send()` | Ayni link icin `uartbin_init()`, `uartbin_feed_at()`, `uartbin_feed_byte_at()`, `uartbin_poll()` |
+
+`uartbin_app_t` icinde bir cekirdek `uartbin_t` bulunur. Bu nedenle
+`uartbin_app_feed_at()` zaten altta `uartbin_feed_at()` yolunu,
+`uartbin_app_poll()` ise altta `uartbin_poll()` yolunu servis eder. Ayni RX
+verisini iki API ailesine birden vermek parser'i ayni byte'larla iki kez
+beslemek anlamina gelir.
+
 ```mermaid
 flowchart TB
     APP["Uygulama seviyesi\nuartbin_app.h"]
@@ -95,6 +112,8 @@ kalici bir static/global veya sahipligi net bir context kullan.
 App katmani kullanildiginda ayni link icin yalnizca `uartbin_app_poll()` cagir.
 `uartbin_app_poll()` zaten kendi icindeki `uartbin_t` icin `uartbin_poll()`
 cagirir; ayrica `uartbin_poll(&app.link, now_ms)` cagrisi yapma.
+Ayni sekilde RX tarafinda `uartbin_app_feed_at()` kullaniyorsan ayni veri icin
+`uartbin_feed_at(&app.link, ...)` cagrisi yapma.
 
 ```mermaid
 sequenceDiagram

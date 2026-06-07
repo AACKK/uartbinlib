@@ -19,6 +19,34 @@ Port islemi iki seviyede yapilabilir:
 Iki seviye ayni transport hook'larini kullanir; fark, uygulama callback'lerinin
 ve poll/feed fonksiyonlarinin hangi context'e yonlendirildigidir.
 
+## Onemli Secim: Bir Link Icin Tek API Ailesi
+
+> **UYARI:** Ayni fiziksel UART linki icin ya cekirdek `uartbin_*` API ailesini
+> ya da app `uartbin_app_*` API ailesini kullan. Ayni RX byte'larini ve ayni
+> zaman servisini iki aileye birden verme.
+
+App katmani secildiginde `uartbin_app_t` kendi icinde bir `uartbin_t` tasir.
+Bu nedenle `uartbin_app_init()`, `uartbin_app_feed_at()` ve
+`uartbin_app_poll()` cagrilari alttaki cekirdek engine'i zaten kullanir.
+App portunda ayrica `uartbin_init()`, `uartbin_feed_at()` veya
+`uartbin_poll()` cagirmak ayni linki iki kez servis etmek anlamina gelir.
+
+| Port hedefi | Kullan | Kullanma |
+| --- | --- | --- |
+| Sadece frame/CRC/seq/request/response/event istiyorsan | `uartbin_init()`, `uartbin_feed_at()`, `uartbin_feed_byte_at()`, `uartbin_poll()`, `uartbin_send_request()`, `uartbin_send_response()`, `uartbin_send_event()` | `uartbin_app_init()`, `uartbin_app_feed_at()`, `uartbin_app_poll()`, app callback'leri |
+| Otomatik ACK/retry confirmed app mesaji istiyorsan | `uartbin_app_init()`, `uartbin_app_feed_at()`, `uartbin_app_feed_byte_at()`, `uartbin_app_poll()`, `uartbin_app_send_confirmed()`, `uartbin_app_send()` | Ayni link icin `uartbin_init()`, `uartbin_feed_at()`, `uartbin_feed_byte_at()`, `uartbin_poll()` |
+
+Kisa kural:
+
+```text
+Core port  = uartbin_t     + uartbin_*()
+App port   = uartbin_app_t + uartbin_app_*()
+```
+
+`app.link` alt context'i app katmaninin ic detayi gibi dusunulmelidir. Normal
+port kodu bu context'i dogrudan beslemez ve poll etmez. Yalnizca ileri seviye
+debug veya bilincli reset gibi ozel durumlarda alt context'e inilmelidir.
+
 ## Port Etme Kontrol Listesi
 
 ### Cekirdek `uartbin_t` icin
@@ -46,6 +74,10 @@ ve poll/feed fonksiyonlarinin hangi context'e yonlendirildigidir.
 7. Main loop veya task icinden yalnizca `uartbin_app_poll()` cagir.
 8. Ayni link icin ayrica `uartbin_poll(&app.link, now_ms)` cagirma; app poll
    bunu kendi icinde yapar.
+
+> **Dikkat:** App kontrol listesi secildiyse cekirdek kontrol listesini ayni
+> link icin ayrica uygulama. App init, feed ve poll cagrilari cekirdek engine'e
+> kendi icinden iner.
 
 ## Write Hook Sozlesmesi
 
