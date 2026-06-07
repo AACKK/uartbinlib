@@ -9,6 +9,32 @@ Version: `V1.1.0`
 
 Dokumantasyon: [aackk.github.io/uartbinlib](https://aackk.github.io/uartbinlib/)
 
+## Release Notu: V1.1.0
+
+`V1.1.0`, `uartbinlib` icin onerilen guncel surumdur. Bu surumda cekirdek
+`uartbin.h` API'si korunurken kutuphaneye yeni bir ust seviye app katmani
+eklendi: `uartbin_app.h`. Bu katman confirmed mesajlasma, otomatik ACK,
+seq eslestirme, retry ve duplicate mesaj filtreleme gibi isleri uygulama
+kodundan ayirir.
+
+Mevcut `V1.0.0` kullanimlari bozulacak sekilde degistirilmedi. Daha once
+`uartbin_init()`, `uartbin_feed_at()`, `uartbin_poll()` ve
+`uartbin_send_request/response/event()` fonksiyonlariyla kurulan yapilar ayni
+sekilde calismaya devam eder. Yani yalnizca temel framing, CRC dogrulama,
+parser ve request/response/event yardimcilari gerekiyorsa eski entegrasyon
+modelini degistirmek zorunda degilsin.
+
+Yeni projelerde veya uygulama seviyesinde "mesaj gitti mi, ACK geldi mi, timeout
+olursa tekrar dene" akisini kutuphanenin yonetmesini istiyorsan son surumu ve
+`uartbin_app_*` fonksiyonlarini kullanman onerilir. Bu durumda ayni fiziksel
+link icin tek katman secilmeli: ya cekirdek `uartbin_*` API ailesi ya da app
+katmani `uartbin_app_*` API ailesi.
+
+Onceki davranisa bire bir bagli kalmak isteyenler `V1.0.0` tag'ini cekebilir.
+Yeni fonksiyonlardan yararlanmak isteyenler ise `V1.1.0` veya `main` uzerindeki
+son surumu kullanabilir. `V1.1.0` bir protokol kirilmasi degil, mevcut cekirdek
+yapinin uzerine eklenen daha rahat bir mesajlasma katmani olarak dusunulmelidir.
+
 ## Neden uartbinlib?
 
 Seri hatlarda farkli framing yaklasimlari, PC tarafinda serial port
